@@ -1,0 +1,73 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        minSdkVersion 28
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$junitAndroidVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    api "com.google.android.material:material:$materialVersion"
+    api "androidx.appcompat:appcompat:$appcompatVersion"
+    api "androidx.legacy:legacy-support-v4:$supportVersion"
+    api "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
+    api "androidx.annotation:annotation:$annotationVersion"
+    api "androidx.recyclerview:recyclerview:$recyclerviewVersion"
+    api "androidx.startup:startup-runtime:$startupVersion"
+    api "androidx.room:room-common:$roomVersion"
+    api "androidx.room:room-runtime:$roomVersion"
+    api "androidx.room:room-rxjava2:$roomVersion"
+    api "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    api "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
+    api "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
+    api "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    api "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    api "com.squareup.retrofit2:converter-scalars:$retrofitVersion"
+    api "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    api "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    api "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanaryVersion"
+    api "com.google.code.gson:gson:$gsonVersion"
+    api "com.github.bumptech.glide:glide:$glideVersion"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    api "androidx.activity:activity-ktx:$activityKtxVersion"
+    api "androidx.fragment:fragment-ktx:$fragmentKtxVersion"
+    implementation "com.facebook.stetho:stetho:$stethoVersion"
+    implementation "com.facebook.stetho:stetho-okhttp3:$stethoVersion"
+    api "com.jakewharton.timber:timber:$timberVersion"
+}

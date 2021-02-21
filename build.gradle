@@ -1,0 +1,77 @@
+buildscript {
+
+    ext {
+        compileSdkVersion = 28
+        minSdkVersion = 21
+        targetSdkVersion = 28
+        versionCode = 1
+        versionName = "1.0.0"
+        androidPluginVersion = '4.1.2'
+        kotlinVersion = '1.4.21'
+        espressoVersion = "3.3.0"
+        junitVersion = "4.13.1"
+        junitAndroidVersion = "1.1.2"
+        arouterCompilerVersion = "1.2.2"
+        okdownloadVersion = "1.0.7"
+        workVersion = "2.3.4"
+        startupVersion = "1.0.0"
+        roomVersion = "2.2.5"
+        glideVersion = "4.11.0"
+        constraintlayoutVersion = "2.0.4"
+        annotationVersion = "1.1.0"
+        materialVersion = "1.2.1"
+        appcompatVersion = "1.2.0"
+        supportVersion = "1.0.0"
+        recyclerviewVersion = "1.1.0"
+        retrofitVersion = "2.9.0"
+        okhttpVersion="4.8.1"
+        gsonVersion="2.8.6"
+        rxjavaVersion="2.2.19"
+        rxandroidVersion="2.1.1"
+        lifecycleVersion="2.2.0"
+        stethoVersion="1.5.1"
+        leakcanaryVersion = "2.4"
+        arouterVersion = "1.5.1"
+        arouterRegisterVersion = "1.0.2"
+        timberVersion = "4.7.1"
+        activityKtxVersion = "1.1.0"
+        fragmentKtxVersion = "1.2.5"
+        kotlinStdlibVersion = "1.3.0"
+        miVersion = "1.0.0"
+        kotlin_version = "1.3.72"
+    }
+
+    repositories {
+        google()
+        jcenter()
+        maven  { url  "http://nexus.corp.youdao.com/nexus/content/repositories/luna-android-release/" }
+        maven  { url  "http://nexus.corp.youdao.com/nexus/content/repositories/luna-android-snapshot/" }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven {url 'http://developer.huawei.com/repo/'}
+        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
+        maven { url 'http://mvn.hz.netease.com/artifactory/libs-releases' }
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$androidPluginVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "com.youdao.luna:mi-plugin:$miVersion"
+        classpath "com.alibaba:arouter-register:$arouterRegisterVersion"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven  { url  "http://nexus.corp.youdao.com/nexus/content/repositories/luna-android-release/" }
+        maven  { url  "http://nexus.corp.youdao.com/nexus/content/repositories/luna-android-snapshot/" }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven {url 'http://developer.huawei.com/repo/'}
+        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
+        maven { url 'http://mvn.hz.netease.com/artifactory/libs-releases' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

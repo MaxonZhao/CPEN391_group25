@@ -1,0 +1,4 @@
+include ':appBase'
+include ':appBase'
+include ':app'
+rootProject.name = "flappyBird"
