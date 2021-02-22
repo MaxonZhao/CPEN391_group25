@@ -15,19 +15,19 @@ This repo is our term project for CPEN 391 hardware/software integration project
     <scope> is optional
 
     Example  <br />
-    feat: add hat wobble   <br />
-    ^--^  ^------------^    <br />
-    |     |                  <br />
-    |     +-> Summary in present tense.   <br />
-    |            <br />
-    +-------> Type: chore, docs, feat, fix, refactor, style, or test.    <br />
-    More Examples:   <br />
+    feat: add hat wobble   
+    ^--^  ^------------^  
+    |     |                 
+    |     +-> Summary in present tense.  
+    |            
+    +-------> Type: chore, docs, feat, fix, refactor, style, or test.  
+    More Examples:  
 
-    feat: (new feature for the user, not a new feature for build script)     <br />
-    fix: (bug fix for the user, not a fix to a build script)     <br />
-    docs: (changes to the documentation)     <br />
-    style: (formatting, missing semi colons, etc; no production code change)     <br />
-    refactor: (refactoring production code, eg. renaming a variable)     <br />
-    test: (adding missing tests, refactoring tests; no production code change)   <br />
-    chore: (updating grunt tasks etc; no production code change)     <br />
+    feat: (new feature for the user, not a new feature for build script)     
+    fix: (bug fix for the user, not a fix to a build script)   
+    docs: (changes to the documentation)    
+    style: (formatting, missing semi colons, etc; no production code change)   
+    refactor: (refactoring production code, eg. renaming a variable)     
+    test: (adding missing tests, refactoring tests; no production code change)   
+    chore: (updating grunt tasks etc; no production code change)    
     
