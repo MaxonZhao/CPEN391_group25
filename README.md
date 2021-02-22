@@ -16,7 +16,7 @@ This repo is our term project for CPEN 391 hardware/software integration project
 
     <scope> is optional
 
-    Example  <br />
+    Example 
     feat: add hat wobble   
     ^--^  ^------------^  
     |     |                 
