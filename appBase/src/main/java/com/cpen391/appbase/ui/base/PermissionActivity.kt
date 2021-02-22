@@ -22,7 +22,7 @@ abstract class PermissionActivity<T : ViewBinding> : BaseBindingActivity<T>(),
         needPermissions
     }
 
-    //判断是否需要检测，防止无限弹框申请权限
+    //check if testing is needed to prevent it from keeping popping up tip dialogs
     private var isNeedCheckPermission = true
     private val settingDialogTipPart: String
         get() {
@@ -43,7 +43,7 @@ abstract class PermissionActivity<T : ViewBinding> : BaseBindingActivity<T>(),
     }
 
     /**
-     * 检查是否所有必须权限已经授予并且申请所有未授权的权限
+     * check if all required permissions are granted and apply for all permissions have not granted
      */
     protected fun checkAllNeedPermissions() {
         Timber.i("checkAllNeedPermissions")
@@ -59,10 +59,10 @@ abstract class PermissionActivity<T : ViewBinding> : BaseBindingActivity<T>(),
     }
 
     /**
-     * 获取`permissions`中需要申请的列表
+     * request all permissions  in `permissions` list
      *
-     * @param permissions 需要检测的权限列表
-     * @return 需要申请的权限列表
+     * @param permissions list of permissions to check
+     * @return list of permissions to apply
      */
     private fun getDeniedPermissions(permissions: Array<String>?): List<String>? {
         if (permissions.isNullOrEmpty()) {
@@ -111,7 +111,7 @@ abstract class PermissionActivity<T : ViewBinding> : BaseBindingActivity<T>(),
     }
 
     /**
-     * 检测权限申请授予结果，返回是否全部授权
+     * check status of all permissions and return true if so
      *
      * @param grantResults
      * @return
@@ -126,14 +126,14 @@ abstract class PermissionActivity<T : ViewBinding> : BaseBindingActivity<T>(),
     }
 
     /**
-     * 显示提示对话框
+     * display tip dialog
      */
     protected fun showSettingDialog() {
-        AlertDialog.Builder(this).setTitle("提示信息")
-            .setMessage("当前应用缺少" + settingDialogTipPart + "权限，该功能暂时无法使用。如若需要，请单击【确定】按钮前往设置中心进行权限授权。")
-            .setNegativeButton("取消") { dialog: DialogInterface?, which: Int ->
+        AlertDialog.Builder(this).setTitle("reminder")
+            .setMessage("Current application needs" + settingDialogTipPart + ", this functionality cannot be applied. Please click OK to go setting")
+            .setNegativeButton("Cancel") { dialog: DialogInterface?, which: Int ->
                 finish()
-            }.setPositiveButton("确定") { dialog: DialogInterface?, which: Int ->
+            }.setPositiveButton("OK") { dialog: DialogInterface?, which: Int ->
                 startAppSettings()
                 isNeedCheckPermission = true
             }.show()

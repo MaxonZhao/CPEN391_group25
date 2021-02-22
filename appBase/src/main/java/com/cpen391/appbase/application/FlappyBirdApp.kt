@@ -4,7 +4,7 @@ import android.app.Application
 import android.util.Log
 import timber.log.Timber
 
-class FlappyBirdApp: Application() {
+open class FlappyBirdApp: Application() {
 
     override fun onCreate() {
         super.onCreate()
