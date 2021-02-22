@@ -1,6 +1,6 @@
 # CPEN391_group25
 
-**Intro**
+**Intro**  <br />
 This repo is our term project for CPEN 391 hardware/software integration project course at the University of British Columbia. In this project, we decided to make a system for a 2D classic video game -- flappy bird. We'll be building the hardware system around DE1-Soc and software systerm around Android Studio
 
 **User and Market Identification / Requirements** : https://docs.google.com/document/d/1CRTjfYoFU6QCdAgMC4xa2jlrsJbFYTVXUVGYWTVS8T0/edit#heading=h.rbc5tuolvkpq <br />
