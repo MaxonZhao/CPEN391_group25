@@ -10,9 +10,9 @@ This repo is our term project for CPEN 391 hardware/software integration project
 **Semantic Commit Messages**  <br />
     See how a minor change to your commit message style can make you a better programmer.  <br />
 
-    Format: <type>(<scope>): <subject>  <br />
+    Format: <type>(<scope>): <subject>       
 
-    <scope> is optional  <br />
+    <scope> is optional
 
     Example  <br />
     feat: add hat wobble   <br />
