@@ -6,6 +6,7 @@ This repo is our term project for CPEN 391 hardware/software integration project
 **User and Market Identification / Requirements** : https://docs.google.com/document/d/1CRTjfYoFU6QCdAgMC4xa2jlrsJbFYTVXUVGYWTVS8T0/edit#heading=h.rbc5tuolvkpq <br />
 **Project proposal** : https://docs.google.com/document/d/1gVvW9zaobuA3PuE6qjYUZc527RUlL7IK8UYBDAM2uTE/edit?usp=sharing  <br />
 **Module 1 presentation**: https://docs.google.com/presentation/d/1N-KbHIBOo025mihlCebthLW5nnXklokRk4PkHTm-4xo/edit#slide=id.gb99e425958_1_5  <br />
+**Proposed deadline/milestone**: https://docs.google.com/document/d/17961GYNaB43AgVEKN6IgE4RatUANeCZU1hv-a5ca1v8/edit
 
 
 
