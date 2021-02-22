@@ -1,0 +1,21 @@
+﻿  GameState.cpp
+  MainMenuState.cpp
+  Pipe.cpp
+C:\Users\patri\OneDrive - The University Of British Columbia\project\SFML Group\SFML Template\SFML Template\Pipe.cpp(13,45): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\patri\OneDrive - The University Of British Columbia\project\SFML Group\SFML Template\SFML Template\Pipe.cpp(23,49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\patri\OneDrive - The University Of British Columbia\project\SFML Group\SFML Template\SFML Template\Pipe.cpp(23,45): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\patri\OneDrive - The University Of British Columbia\project\SFML Group\SFML Template\SFML Template\Pipe.cpp(30,45): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+  Generating Code...
+  SFML Template.vcxproj -> C:\Users\patri\OneDrive - The University Of British Columbia\project\SFML Group\SFML Template\Debug\SFML Template.exe
