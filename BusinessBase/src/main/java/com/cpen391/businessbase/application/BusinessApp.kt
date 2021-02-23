@@ -1,6 +1,8 @@
 package com.cpen391.businessbase.application
 
 import com.cpen391.appbase.application.FlappyBirdApp
+import com.cpen391.appbase.network.ServiceCreator
+import com.cpen391.businessbase.consts.HttpConst
 
 class BusinessApp : FlappyBirdApp() {
 
@@ -10,6 +12,6 @@ class BusinessApp : FlappyBirdApp() {
     }
 
     private fun initNetwork() {
-        //TODO: initialize network
+        ServiceCreator.initBaseURL(HttpConst.BASE_URL)
     }
 }
