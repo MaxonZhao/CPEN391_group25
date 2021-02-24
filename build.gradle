@@ -2,7 +2,7 @@ buildscript {
 
     ext {
         compileSdkVersion = 28
-        minSdkVersion = 28
+        minSdkVersion = 27
         targetSdkVersion = 28
         versionCode = 1
         versionName = "1.0.0"
@@ -44,17 +44,10 @@ buildscript {
     repositories {
         google()
         jcenter()
-        maven  { url  "http://nexus.corp.youdao.com/nexus/content/repositories/luna-android-release/" }
-        maven  { url  "http://nexus.corp.youdao.com/nexus/content/repositories/luna-android-snapshot/" }
-        maven { url 'https://dl.bintray.com/umsdk/release' }
-        maven {url 'http://developer.huawei.com/repo/'}
-        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
-        maven { url 'http://mvn.hz.netease.com/artifactory/libs-releases' }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$androidPluginVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath "com.youdao.luna:mi-plugin:$miVersion"
         classpath "com.alibaba:arouter-register:$arouterRegisterVersion"
     }
 }
@@ -63,12 +56,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven  { url  "http://nexus.corp.youdao.com/nexus/content/repositories/luna-android-release/" }
-        maven  { url  "http://nexus.corp.youdao.com/nexus/content/repositories/luna-android-snapshot/" }
-        maven { url 'https://dl.bintray.com/umsdk/release' }
-        maven {url 'http://developer.huawei.com/repo/'}
-        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
-        maven { url 'http://mvn.hz.netease.com/artifactory/libs-releases' }
     }
 }
 

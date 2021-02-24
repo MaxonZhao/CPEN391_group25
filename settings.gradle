@@ -1,3 +1,6 @@
+include ':moduleDemo'
+include ':moduleApp:moduleDemoApp'
+include ':moduleApp'
 rootProject.name = "flappyBird"
 include ':businessBase'
 include ':appBase'
