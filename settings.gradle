@@ -1,6 +1,4 @@
-include ':BusinessBase'
-include ':BussinessBase'
-include ':appBase'
+rootProject.name = "flappyBird"
+include ':businessBase'
 include ':appBase'
 include ':app'
-rootProject.name = "flappyBird"
