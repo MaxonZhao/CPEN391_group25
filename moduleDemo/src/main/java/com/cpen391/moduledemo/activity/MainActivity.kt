@@ -6,10 +6,6 @@ import com.cpen391.moduledemo.R
 import com.cpen391.moduledemo.databinding.ActivityMainBinding
 
 class MainActivity : MvvmActivity<ActivityMainBinding>() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
 
     override fun initObserver() {
 
