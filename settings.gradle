@@ -1,3 +1,5 @@
+include ':moduleApp:flappyAccountApp'
+include ':flappyAccount'
 include ':moduleDemo'
 include ':moduleApp:moduleDemoApp'
 include ':moduleApp'

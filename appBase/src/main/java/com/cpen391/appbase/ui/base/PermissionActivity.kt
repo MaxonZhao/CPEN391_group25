@@ -22,6 +22,7 @@ abstract class PermissionActivity<T : ViewBinding> : BaseBindingActivity<T>(),
         needPermissions
     }
 
+
     //check if testing is needed to prevent it from keeping popping up tip dialogs
     private var isNeedCheckPermission = true
     private val settingDialogTipPart: String

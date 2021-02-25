@@ -14,7 +14,9 @@
             <option value="$PROJECT_DIR$/BusinessBase" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/appBase" />
+            <option value="$PROJECT_DIR$/flappyAccount" />
             <option value="$PROJECT_DIR$/moduleApp" />
+            <option value="$PROJECT_DIR$/moduleApp/flappyAccountApp" />
             <option value="$PROJECT_DIR$/moduleApp/moduleDemoApp" />
             <option value="$PROJECT_DIR$/moduleDemo" />
           </set>
