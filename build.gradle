@@ -51,7 +51,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:$androidPluginVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "com.alibaba:arouter-register:$arouterRegisterVersion"
-        classpath 'com.google.gms:google-services:4.3.5'
+//        classpath 'com.google.gms:google-services:4.3.5'
     }
 }
 

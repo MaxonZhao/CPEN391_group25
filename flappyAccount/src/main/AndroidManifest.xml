@@ -3,7 +3,12 @@
     package="com.cpen391.flappyaccount">
 
     <application>
-        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.SignUpActivity"></activity>
+        <activity android:name=".activity.LoginActivity" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
