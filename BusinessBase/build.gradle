@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -57,9 +58,11 @@ repositories {
 }
 
 dependencies {
+
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$junitAndroidVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    implementation "com.google.firebase:firebase-database:$firebase_version"
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api project(':appBase')
 }

@@ -40,6 +40,7 @@ buildscript {
         miVersion = "1.0.0"
         kotlin_version = '1.4.21'
         material_version = '1.0.0'
+        firebase_version = '19.6.0'
     }
 
     repositories {
@@ -50,6 +51,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:$androidPluginVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "com.alibaba:arouter-register:$arouterRegisterVersion"
+        classpath 'com.google.gms:google-services:4.3.5'
     }
 }
 
