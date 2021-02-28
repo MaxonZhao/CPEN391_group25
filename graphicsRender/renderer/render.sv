@@ -25,17 +25,17 @@ module render(input logic clk, input logic rst_n,
 
     // The video driver has active high reset!
     video_driver #(.WIDTH(320), .HEIGHT(240))
-		v1 (.clk(clk), .reset(~rst_n), .x(x), .y(y), .r(red_out), .g(green_out), .b(blue_out),
+		v1 (.clk(clk), .reset(~rst_n), .x(x), .y(y), .r({red_out, 6'd0}), .g({green_out, 6'd0}), .b({blue_out, 6'd0}),
 			 .VGA_R(VGA_R), .VGA_G(VGA_G), .VGA_B(VGA_B), .VGA_BLANK_N(VGA_BLANK_N),
 			 .VGA_CLK(VGA_CLK), .VGA_HS(VGA_HS), .VGA_SYNC_N(VGA_SYNC_N), .VGA_VS(VGA_VS));
 
     // Frame data: video driver constantly writes this frame to screen
-    // Data: RRRR_GGGG_BBBB, first index: x-coordinate, second index: y-coordinate
-    reg [11:0] frame_out [0:639][0:479]; 
+    // Data: RR_GGBB, first index: x-coordinate, second index: y-coordinate
+    reg [5:0] frame_out [0:319][0:239]; 
 
     // Frame buffer: where we "draw" our pixels to
     // Same format as frame_out
-    reg [11:0] frame_buffer [0:639][0:479]; 
+    reg [5:0] frame_buffer [0:319][0:239]; 
 
 
     // Constantly flush frame data to VGA pins
@@ -51,11 +51,34 @@ module render(input logic clk, input logic rst_n,
             if (x_prev != x || y_prev != y) begin
                 x_prev <= x;
                 y_prev <= y;
-                red_out <= frame_out[x][y][11:8];
-                green_out <= frame_out[x][y][7:4];
-                blue_out <= frame_out[x][y][3:0];
+                red_out <= frame_out[x][y][5:4];
+                green_out <= frame_out[x][y][3:2];
+                blue_out <= frame_out[x][y][1:0];
             end
         end
+    end
+
+    // Texture arrays
+    
+    // MOVE TO ON CHIP RAM? IF SO DELETE THIS AND MAKE MEM INIT FILE
+    // TODO: Determine size
+    reg [5:0] pipe [0:][0:][0:1]    // 2 types of pipes, one up one down
+    reg [5:0] bird [0:][0:][0:3]    // 4 birds, for animation
+    reg [5:0] char [0:][0:][0:13]   // 14 letters (for words "flappy", "bird", and "connected") + 10 numbers
+
+    // Initialize textures
+    initial begin
+        // Pipe texture:
+        pipe[0][0][0] = {0, 0, 0};
+        // Add the rest, generate with python
+
+        // Bird texture:
+        bird[0][0][0] = {0, 0, 0};
+        // Add the rest, generate with python
+
+        // Texture for characters:
+        char[0][0][0] = {0, 0, 0};
+        // Add the rest, generate with python
     end
 
     // Variables for displaying and flushing frame buffer
@@ -69,8 +92,9 @@ module render(input logic clk, input logic rst_n,
     // Variables for plotting textures
     reg [12:0] tex_code, prev_tex_code;
     reg [17:0] coordinates, prev_coor;
-    reg multiplayer;
+    reg multiplayer;        // Not much difference in final output: just a line down the middle of the screen
     reg dummy;
+    reg plotting;
 
     // Always block for main logic
     // 50Mhz clock and 30fps output, so 1,666,666 cycles per frame
@@ -88,6 +112,7 @@ module render(input logic clk, input logic rst_n,
             prev_coor <= 0;
             multiplayer <= 0;
             dummy <= 0;
+            plotting <= 0;
 
             slave_waitrequest <= 0;
             slave_readdata <= 0;
@@ -125,30 +150,38 @@ module render(input logic clk, input logic rst_n,
             end
             // Other operation
             else begin
+                // Plot texture
+                if (plotting) begin
+                    // TODO
+                    // Use case statement to determine size of texture
+                    case (tex_code)
+                        
+                    endcase
+                    
+                end
+
                 // For configring module (singleplayer/multiplayer)
-                if (slave_write) begin
+                else if (slave_write) begin
                     case (slave_address)
                         0: multiplayer <= slave_writedata;
                         1: coordinates <= slave_writedata;
                         2: tex_code <= slave_writedata;
 
-                        // PLOT TEXTURE HERE
+                        // Initiate texture plotting
                         4: begin
-                            
+                            slave_waitrequest <= 1;
+                            plotting <= 1;
                         end
                         default: dummy <= dummy;
                     endcase
                 end
-                // Response to availability check
+
+                // Response to same frame check
                 else if (slave_read && slave_address == 3) begin
                     slave_readdata <= frame_plot_odd;
                 end
             end
         end
     end
-
-    // TEXTURES
-    // Texture format: see google doc!
-
 
 endmodule: render
