@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyaccount.databinding.ActivitySignupBinding
 import com.cpen391.flappyaccount.model.bean.User
+import com.google.firebase.FirebaseApp
 import com.google.firebase.database.*
 import timber.log.Timber
 
@@ -35,7 +36,7 @@ class SignUpActivity : MvvmActivity<ActivitySignupBinding>() {
             "15618219971",
             "Maxon1418"
         )
-        myRef.setValue(user1)
+        myRef.setValue("TestUser1")
 
     }
     override fun initObserver() {
