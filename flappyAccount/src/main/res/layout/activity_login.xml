@@ -88,7 +88,7 @@
             android:textColor="#fff" />
 
         <Button
-            android:id="@+id/register_button"
+            android:id="@+id/signup_button"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="right"

@@ -16,7 +16,7 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
 
-        binding.registerButton.setOnClickListener {
+        binding.signupButton.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
     }
