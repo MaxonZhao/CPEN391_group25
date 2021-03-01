@@ -31,7 +31,7 @@ module render(input logic clk, input logic rst_n,
 
     // Frame data: video driver constantly writes this frame to screen
     // Data: RR_GGBB, first index: x-coordinate, second index: y-coordinate
-    reg [5:0] frame_out [0:319][0:239]; 
+    reg [5:0] frame_out [0:319][0:239];
 
     // Frame buffer: where we "draw" our pixels to
     // Same format as frame_out
@@ -58,28 +58,33 @@ module render(input logic clk, input logic rst_n,
         end
     end
 
-    // Texture arrays
+    // Texture memory modules instantiations
+    // Pipe (both up and down): width: 16px, height: 86px
+    // Bird (all 4): width: 18px, height: 12px
+    // Letter/number: width: 24px, height: 24px
     
-    // MOVE TO ON CHIP RAM? IF SO DELETE THIS AND MAKE MEM INIT FILE
-    // TODO: Determine size
-    reg [5:0] pipe [0:][0:][0:1]    // 2 types of pipes, one up one down
-    reg [5:0] bird [0:][0:][0:3]    // 4 birds, for animation
-    reg [5:0] char [0:][0:][0:13]   // 14 letters (for words "flappy", "bird", and "connected") + 10 numbers
+    // TODO: REMAKE MEMORY MODULES
+    // Pipe memory module
+    reg [11:0] pipe_tex_addr;
+    reg [5:0] pipe_tex_q;
+    localparam [4:0] PIPE_MAX_X=17;
+    localparam [6:0] PIPE_MAX_Y=87;
+    pipes pipe_tex (.address(pipe_tex_addr), .clock(clk), .q(pipe_tex_q));
 
-    // Initialize textures
-    initial begin
-        // Pipe texture:
-        pipe[0][0][0] = {0, 0, 0};
-        // Add the rest, generate with python
+    // Bird memory module
+    reg [9:0] bird_tex_addr;
+    reg [5:0] bird_tex_q;
+    localparam [4:0] BIRD_MAX_X=18;
+    localparam [3:0] BIRD_MAX_Y=13;
+    birds bird_tex (.address(bird_tex_addr), .clock(clk), .q(bird_tex_q));
 
-        // Bird texture:
-        bird[0][0][0] = {0, 0, 0};
-        // Add the rest, generate with python
+    // Letter/number memory module
+    reg [13:0] char_tex_addr;
+    reg [5:0] char_tex_q;
+    localparam [4:0] BIRD_MAX_X=25;
+    localparam [4:0] BIRD_MAX_Y=25;
+    chars char_tex (.address(char_tex_addr), .clock(clk), .q(char_tex_q));
 
-        // Texture for characters:
-        char[0][0][0] = {0, 0, 0};
-        // Add the rest, generate with python
-    end
 
     // Variables for displaying and flushing frame buffer
     reg [31:0] fps_clock_count;
@@ -89,12 +94,20 @@ module render(input logic clk, input logic rst_n,
     reg frame_plot_odd;
 
 
-    // Variables for plotting textures
-    reg [12:0] tex_code, prev_tex_code;
+    // Variables for plotting
+    reg [6:0] tex_code, prev_tex_code;
     reg [17:0] coordinates, prev_coor;
     reg multiplayer;        // Not much difference in final output: just a line down the middle of the screen
     reg dummy;
     reg plotting;
+    reg [8:0] curr_x;
+    reg [7:0] curr_y;
+
+    // Variables for filling frame with one color
+    reg fill_init;
+
+    // Variables for plotting textures
+    reg plot_init;
 
     // Always block for main logic
     // 50Mhz clock and 30fps output, so 1,666,666 cycles per frame
@@ -107,19 +120,18 @@ module render(input logic clk, input logic rst_n,
             frame_plot_odd <= 0;
 
             tex_code <= 0;
-            prev_tex_code <= 0;
             coordinates <= 0;
-            prev_coor <= 0;
             multiplayer <= 0;
             dummy <= 0;
             plotting <= 0;
+
+            fill_init <= 0;
+            plot_init <= 0;
 
             slave_waitrequest <= 0;
             slave_readdata <= 0;
         end
         else begin
-            fps_clock_count <= fps_clock_count + 1;
-
             // Flush to frame buffer for 30fps display (1666666 - 320*240 - 240 = 1589626)
             if (fps_clock_count == 1589865) begin
                 if (flushing) begin
@@ -148,29 +160,82 @@ module render(input logic clk, input logic rst_n,
                 end
 
             end
-            // Other operation
+            // Main logic
             else begin
+                // Increment clock count no matter what
+                fps_clock_count <= fps_clock_count + 1;
+
+
                 // Plot texture
                 if (plotting) begin
-                    // TODO
-                    // Use case statement to determine size of texture
-                    case (tex_code)
-                        
-                    endcase
+                    // Plot entire frame to color specified
+                    if (tex_code[6]) begin
+                        if (fill_init) begin
+                            curr_x <= 0;
+                            curr_y <= 0;
+                            fill_init <= 0;
+                        end
+                        else begin
+                            // Plot top down first, then increment from left to right
+                            if (curr_x < 320 && curr_y < 240) begin
+                                curr_y <= curr_y + 1;
+                                frame_buffer[curr_x][curr_y] <= tex_code[5:0];
+                            end
+                            // Increment to next x
+                            else if (curr_x < 320 && curr_y >= 240) begin
+                                curr_x <= curr_x + 1;
+                                curr_y <= 0;
+                            end
+                            // End plot
+                            else begin
+                                plotting <= 0;
+                                slave_waitrequest <= 0;
+                            end
+                        end
+                    end
                     
+                    // Plot texture onto frame
+                    else begin
+                        // Not using a case statement because range of texture codes share same size
+                        if (plot_init) begin
+                            // TODO
+                        end
+                        else begin
+                            // Plot bird
+                            if (tex_code[5:0] >= 1 && tex_code[5:0] <= 4) begin
+                                // TODO
+                            end
+
+                            // Plot pipe
+                            else if (tex_code[5:0] == 5 || tex_code[5:0] == 6) begin
+                                // TODO
+                            end
+
+                            // Plot letter/characters
+                            else if (tex_code[5:0] >= 7 && tex_code[5:0] <= 30) begin
+                                // TODO
+                            end
+                        end
+                        
+                    end
                 end
 
-                // For configring module (singleplayer/multiplayer)
+                // Module config (singleplayer/multiplayer)
                 else if (slave_write) begin
                     case (slave_address)
-                        0: multiplayer <= slave_writedata;
-                        1: coordinates <= slave_writedata;
-                        2: tex_code <= slave_writedata;
+                        0: multiplayer <= slave_writedata[0];
+                        1: coordinates <= slave_writedata[17:0];
+                        2: tex_code <= slave_writedata[6:0];
 
                         // Initiate texture plotting
                         4: begin
                             slave_waitrequest <= 1;
                             plotting <= 1;
+                            plot_init <= 1;
+                            fill_init <= 1;
+
+                            prev_tex_code <= tex_code;
+                            prev_coor <= coordinate;
                         end
                         default: dummy <= dummy;
                     endcase
