@@ -3,8 +3,9 @@
     package="com.cpen391.flappyaccount">
 
     <application>
-        <activity android:name=".activity.StartActivity"></activity>
-        <activity android:name=".activity.ResetPasswordActivity"></activity>
+        <activity android:name=".activity.ForgetPasswordActivity"></activity>
+        <activity android:name=".activity.StartActivity" />
+        <activity android:name=".activity.ResetPasswordActivity" />
         <activity android:name=".activity.SignUpActivity" />
         <activity android:name=".activity.LoginActivity" />
 
