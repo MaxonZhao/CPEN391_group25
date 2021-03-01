@@ -69,7 +69,7 @@ abstract class PermissionActivity<T : ViewBinding> : BaseBindingActivity<T>(),
         if (permissions.isNullOrEmpty()) {
             return null
         }
-        val needRequestPermissionList: MutableList<String> =
+        val needRequestPermissionList: MutableList< String> =
             ArrayList()
         for (permission in permissions) {
             Timber.i(

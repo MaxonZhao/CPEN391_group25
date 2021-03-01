@@ -60,7 +60,10 @@ class SignUpActivity : MvvmActivity<ActivitySignupBinding>() {
                 phoneNo,
                 password
             )
-            mUserRef.child(user.userName).setValue(user)
+            mUserRef.child(user.userName).setValue(user).addOnSuccessListener {
+                Toast.makeText(this, "You are registered!", Toast.LENGTH_LONG).show()
+                finish()
+            }
         }
         else Timber.d("failed to register this user")
     }
