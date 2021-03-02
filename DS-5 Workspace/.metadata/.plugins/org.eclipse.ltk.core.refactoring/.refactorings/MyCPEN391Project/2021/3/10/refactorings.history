@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;MyCPEN391Project/bluetooth.h&apos; to &apos;serial.h&apos;" description="Rename resource &apos;bluetooth.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="bluetooth.h" name="serial.h" stamp="1614664853353" updateReferences="true"/>
+</session>

@@ -1,0 +1,49 @@
+/*
+ * RS232.c
+ *
+ *  Created on: Feb 28, 2021
+ *      Author: zoeyli
+ */
+#include <stdio.h>
+
+#define RS232_ReceiverFifo       (*(volatile unsigned char *)(0xFF210200))
+#define RS232_TransmitterFifo    (*(volatile unsigned char *)(0xFF210200))
+#define RS232_InterruptEnableReg (*(volatile unsigned char *)(0xFF210202))
+#define RS232_InterruptIdentificationReg        (*(volatile unsigned char *)(0xFF210204))
+#define RS232_FifoControlReg                    (*(volatile unsigned char *)(0xFF210204))
+#define RS232_LineControlReg                    (*(volatile unsigned char *)(0xFF210206))
+#define RS232_ModemControlReg                   (*(volatile unsigned char *)(0xFF210208))
+#define RS232_LineStatusReg                     (*(volatile unsigned char *)(0xFF21020A))
+#define RS232_ModemStatusReg                    (*(volatile unsigned char *)(0xFF21020C))
+#define RS232_ScratchReg                        (*(volatile unsigned char *)(0xFF21020E))
+#define RS232_DivisorLatchLSB                   (*(volatile unsigned char *)(0xFF210200))
+#define RS232_DivisorLatchMSB                   (*(volatile unsigned char *)(0xFF210202))
+
+/**************************************************************************
+/*  Subroutine to initialise the RS232 Port by writing some data
+**  to the internal registers.
+**  Call this function at the start of the program before you attempt
+**  to read or write to data via the RS232 port
+**
+**  Refer to UARTdata sheet for details of registers and programming
+***************************************************************************/
+
+voidInit_RS232(void){
+    // set bit 7 of Line Control Register to 1, to gainaccess to the baud rate registers
+    RS232_LineControlReg = RS232_LineControlReg | 0x80;
+    // set Divisor latch (LSB and MSB) with correct value for required baud rate
+    //baud rate divisor value=freq of BR_clk/ (desired buad rate*16)
+    //here buad rate = 9600
+    RS232_DivisorLatchLSB = 0x45;
+    RS232_DivisorLatchMSB = 0x01;
+    // set bit 7 of Line control register back to 0 and
+    RS232_LineControlReg = RS232_LineControlReg & 0x7F;
+    // program other bits in that reg for 8 bit data, 1 stop bit, no parity etc
+    //bit 1-0 = 11, bit 2 =0, bit 3 = 0
+    RS232_LineControlReg = RS232_LineControlReg | 0x3;
+    // Reset the Fifo’s in the FiFo Control Reg by setting bits 1 & 2 to 1
+    RS232_FifoControlReg = 0x6;
+    // Now Clear all bits in the FiFo control registers
+    RS232_FifoControlReg = 0x0;
+
+}

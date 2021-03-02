@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;MyCPEN391Project/RS232.c&apos; to &apos;bluetooth.c&apos;" description="Rename resource &apos;RS232.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="RS232.c" name="bluetooth.c" stamp="1614554602169" updateReferences="true"/>
+</session>

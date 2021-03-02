@@ -1,0 +1,118 @@
+/*
+ * bluetooth.c
+ *
+ *  Created on: Feb 28, 2021
+ *      Author: zoeyli
+ */
+#include <stdio.h>
+
+#define BT_ReceiverFifo       (*(volatile unsigned char *)(0xFF210220))
+#define BT_TransmitterFifo    (*(volatile unsigned char *)(0xFF210220))
+#define BT_InterruptEnableReg (*(volatile unsigned char *)(0xFF210222))
+#define BT_InterruptIdentificationReg        (*(volatile unsigned char *)(0xFF210224))
+#define BT_FifoControlReg                    (*(volatile unsigned char *)(0xFF210224))
+#define BT_LineControlReg                    (*(volatile unsigned char *)(0xFF210226))
+#define BT_ModemControlReg                   (*(volatile unsigned char *)(0xFF210228))
+#define BT_LineStatusReg                     (*(volatile unsigned char *)(0xFF21022A))
+#define BT_ModemStatusReg                    (*(volatile unsigned char *)(0xFF21022C))
+#define BT_ScratchReg                        (*(volatile unsigned char *)(0xFF21022E))
+#define BT_DivisorLatchLSB                   (*(volatile unsigned char *)(0xFF210220))
+#define BT_DivisorLatchMSB                   (*(volatile unsigned char *)(0xFF210222))
+
+/**************************************************************************
+**  Subroutine to initialize the BT Port by writing some data
+**  to the internal registers.
+**  Call this function at the start of the program before you attempt
+**  to read or write to data via the BT port
+**
+**  Refer to UARTdata sheet for details of registers and programming
+***************************************************************************/
+
+void Init_BT(void){
+    // set bit 7 of Line Control Register to 1, to gain access to the baud rate registers
+    BT_LineControlReg = 0x80;
+    // set Divisor latch (LSB and MSB) with correct value for required baud rate
+    //baud rate divisor value=freq of BR_clk/ (desired buad rate*16)
+    //here buad rate = 9600
+    BT_DivisorLatchLSB = 0x45;
+    BT_DivisorLatchMSB = 0x01;
+    // set bit 7 of Line control register back to 0 and
+    // program other bits in that reg for 8 bit data, 1 stop bit, no parity etc
+    //bit 1-0 = 11, bit 2 =0, bit 3 = 0
+    BT_LineControlReg = 0x3;
+    // Reset the Fifo�s in the FiFo Control Reg by setting bits 1 & 2 to 1
+    BT_FifoControlReg = 0x6;
+    // Now Clear all bits in the FiFo control registers
+    BT_FifoControlReg = 0x0;
+
+}
+
+int putcharBT(int c){
+    // wait for Transmitter Holding Register bit (5) of line status register to be '1'
+    // indicating we can write to the device
+    while((BT_LineStatusReg & 0x20) != 0x20){
+
+    }
+
+    // write character to Transmitter fifo register
+    BT_TransmitterFifo = c;
+    // return the character we printed
+    return c;
+}
+
+int getcharBT( void){
+    // wait for Data Ready bit (0) of line status register to be '1'
+    while((BT_LineStatusReg & 0x1) != 0x1){}
+    // read new character from ReceiverFiFo register
+    // return new character
+    return BT_ReceiverFifo;
+}
+
+
+// the following function polls the UART to determine if any character
+// has been received. It doesn't wait for one,or read it, it simply tests
+// to see if one is available to read from the FIFO
+
+int BTTestForReceivedData(void){
+    // if BT_LineStatusReg bit 0 is set to 1
+    //return TRUE, otherwise return FALSE
+    if((BT_LineStatusReg & 0x1) == 0x1){
+        return 1;
+    }
+    else return 0;
+
+}
+
+//
+// Remove/flush the UART receiver buffer by removing any unread characters
+//
+void BTFlush(void){
+    char unreadChar;
+    // while bit 0 of Line Status Register == �1�
+    while((BT_LineStatusReg & 0x1) != 0x1){
+        // read unwanted char out of fifo receiver buffer
+        unreadChar = BT_ReceiverFifo;
+    }
+
+    return;
+    // no more characters so return
+}
+
+int main(void){
+    //testing
+    Init_BT();
+
+    char data_t = putcharBT(30);
+    while (BTTestForReceivedData()!= 1){};
+    char data_r = getcharBT();
+
+    //check if match
+    if(data_t == data_r){
+        printf("matched. send:%c, receive: %c\n",data_t, data_r);
+    }
+    else printf("Error! didn't match. send:%c, receive: %c\n",data_t, data_r);
+
+    BTFlush();
+
+    return 0;
+}
