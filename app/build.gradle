@@ -45,6 +45,8 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
     }
+    buildToolsVersion buildToolsVersion
+    ndkVersion ndkVersion
 
 }
 

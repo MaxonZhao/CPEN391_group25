@@ -1,3 +1,8 @@
+ext {
+    ndkVersion = ndkVersion
+    buildToolsVersion = '29.0.2'
+    ndkVersion1 = ndkVersion
+}
 buildscript {
 
     ext {
@@ -42,6 +47,7 @@ buildscript {
         kotlin_version = '1.4.21'
         material_version = '1.0.0'
         firebase_version = '19.6.0'
+        ndkVersion = '21.1.6352462'
     }
 
     repositories {

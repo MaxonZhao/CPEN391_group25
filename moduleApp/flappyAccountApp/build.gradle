@@ -4,8 +4,8 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-
     defaultConfig {
+        ndkVersion = "21.1.6352462"
         applicationId "com.cpen391.flappyBird.flappyAccountApp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -47,6 +47,8 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
     }
+    buildToolsVersion buildToolsVersion
+    ndkVersion ndkVersion
 
 }
 
