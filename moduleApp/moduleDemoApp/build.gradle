@@ -5,6 +5,7 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
+        ndkVersion = "21.3.6528147"
         applicationId "com.cpen391.flappyBird.moduleDemoApp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -45,6 +46,7 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
     }
+    buildToolsVersion '29.0.2'
 
 }
 
