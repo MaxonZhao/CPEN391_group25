@@ -1,6 +1,11 @@
 package com.cpen391.appbase.ui.mvvm
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.viewbinding.ViewBinding
 import com.cpen391.appbase.ui.base.PermissionActivity
 

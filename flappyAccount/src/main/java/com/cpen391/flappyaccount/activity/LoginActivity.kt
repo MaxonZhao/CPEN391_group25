@@ -31,7 +31,7 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
         }
 
         binding.resetBtn.setOnClickListener {
-            startActivity(Intent(this, ResetPasswordActivity::class.java))
+            startActivity(Intent(this, ForgetPasswordActivity::class.java))
         }
 
         binding.loginBtn.setOnClickListener {
@@ -43,6 +43,7 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
     }
 
     fun loginUser() {
+//        val isValid: Boolean = true
         if (!validateUserName() || !validatePassword()) {
             return
         } else {

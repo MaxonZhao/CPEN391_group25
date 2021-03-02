@@ -1,6 +1,6 @@
 package com.cpen391.flappyaccount.activity
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
@@ -11,6 +11,10 @@ class ResetPasswordActivity : MvvmActivity<ActivityResetPasswordBinding>() {
         super.onCreate(savedInstanceState)
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
+
+        binding.resetBtn.setOnClickListener {
+            startActivity(Intent(this, ResetPasswordSuccessActivity::class.java))
+        }
     }
 
     override fun initObserver() {

@@ -1,3 +1,6 @@
+include ':flappyBluetooth'
+include ':flappyBluetooth'
+include ':moduleApp:flappyBluetoothApp'
 include ':moduleApp:flappyAccountApp'
 include ':flappyAccount'
 include ':moduleDemo'

@@ -82,8 +82,9 @@
             android:layout_margin="5dp"
             android:background="#00000000"
             android:elevation="0dp"
+            android:textColor="#9F9B9B"
             android:text="Forget Password?"
-            android:textColor="#000" />
+            />
 
         <Button
             android:id="@+id/login_btn"
