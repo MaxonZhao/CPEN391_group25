@@ -2,7 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cpen391.flappybluetooth">
 
-<!--    <uses-permission android:name="android.permission.BLUETOOTH" />-->
+    <!--    permissions for bluetooth connection module-->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
+    <!--    permission to access user's location-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
     <application>
         <activity android:name=".activity.HomeActivity"></activity>
     </application>
