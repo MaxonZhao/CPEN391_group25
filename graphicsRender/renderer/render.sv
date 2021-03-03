@@ -18,7 +18,7 @@ module render(input logic clk, input logic rst_n,
 
     wire [9:0] x;
     wire [8:0] y;
-    reg [7:0] red_out, green_out, blue_out;
+    reg [1:0] red_out, green_out, blue_out;
 
     // The video driver has active high reset!
     video_driver #(.WIDTH(320), .HEIGHT(240))
@@ -220,20 +220,20 @@ module render(input logic clk, input logic rst_n,
                                 // Avoid repeating code for all birds, since only difference is where the texture location starts
                                 // Use base texture code of birds (1) as reference and incrementing by size of bird texture (216)
                                 bird_tex_addr <= 216 * (tex_code[5:0] - 1);
-                                curr_x <= mid_x - BIRD_MAX_X >> 1;
-                                curr_y <= mid_y - BIRD_MAX_Y >> 1;
+                                curr_x <= mid_x - (BIRD_MAX_X >> 1);
+                                curr_y <= mid_y - (BIRD_MAX_Y >> 1);
                             end
                             else begin
-                                if (curr_x < mid_x + BIRD_MAX_X >> 1 && curr_y < mid_y + BIRD_MAX_Y >> 1) begin
+                                if (curr_x < mid_x + (BIRD_MAX_X >> 1) && curr_y < mid_y + (BIRD_MAX_Y >> 1)) begin
                                     bird_tex_addr <= bird_tex_addr + 1;
                                     curr_y <= curr_y + 1;
                                     if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240) begin
                                         frame_buffer[curr_x][curr_y] <= bird_tex_q;
                                     end
                                 end
-                                else if (curr_x < mid_x + BIRD_MAX_X >> 1 && curr_y >= mid_y + BIRD_MAX_Y >> 1) begin
+                                else if (curr_x < mid_x + (BIRD_MAX_X >> 1) && curr_y >= mid_y + (BIRD_MAX_Y >> 1)) begin
                                     curr_x <= curr_x + 1;
-                                    curr_y <= mid_y - BIRD_MAX_Y >> 1;
+                                    curr_y <= mid_y - (BIRD_MAX_Y >> 1);
                                 end
                                 else begin
                                     plotting <= 0;
@@ -248,20 +248,20 @@ module render(input logic clk, input logic rst_n,
                                 plot_init <= 0;
                                 // Avoid extra code by same method, only that base texture code is 5 and pipe texture size is 1376
                                 bird_tex_addr <= 1376 * (tex_code[5:0] - 5);
-                                curr_x <= mid_x - PIPE_MAX_X >> 1;
-                                curr_y <= mid_y - PIPE_MAX_Y >> 1;
+                                curr_x <= mid_x - (PIPE_MAX_X >> 1);
+                                curr_y <= mid_y - (PIPE_MAX_Y >> 1);
                             end
                             else begin
-                                if (curr_x < mid_x + PIPE_MAX_X >> 1 && curr_y < mid_y + PIPE_MAX_Y >> 1) begin
+                                if (curr_x < mid_x + (PIPE_MAX_X >> 1) && curr_y < mid_y + (PIPE_MAX_Y >> 1)) begin
                                     bird_tex_addr <= bird_tex_addr + 1;
                                     curr_y <= curr_y + 1;
                                     if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240) begin
                                         frame_buffer[curr_x][curr_y] <= bird_tex_q;
                                     end
                                 end
-                                else if (curr_x < mid_x + PIPE_MAX_X >> 1 && curr_y >= mid_y + PIPE_MAX_Y >> 1) begin
+                                else if (curr_x < mid_x + (PIPE_MAX_X >> 1) && curr_y >= mid_y + (PIPE_MAX_Y >> 1)) begin
                                     curr_x <= curr_x + 1;
-                                    curr_y <= mid_y - PIPE_MAX_Y >> 1;
+                                    curr_y <= mid_y - (PIPE_MAX_Y >> 1);
                                 end
                                 else begin
                                     plotting <= 0;
@@ -276,20 +276,20 @@ module render(input logic clk, input logic rst_n,
                                 plot_init <= 0;
                                 // Avoid extra code by same method, only that base texture code is 7 and pipe texture size is 576
                                 bird_tex_addr <= 576 * (tex_code[5:0] - 7);
-                                curr_x <= mid_x - CHAR_MAX_X >> 1;
-                                curr_y <= mid_y - CHAR_MAX_Y >> 1;
+                                curr_x <= mid_x - (CHAR_MAX_X >> 1);
+                                curr_y <= mid_y - (CHAR_MAX_Y >> 1);
                             end
                             else begin
-                                if (curr_x < mid_x + CHAR_MAX_X >> 1 && curr_y < mid_y + CHAR_MAX_Y >> 1) begin
+                                if (curr_x < mid_x + (CHAR_MAX_X >> 1) && curr_y < mid_y + (CHAR_MAX_Y >> 1)) begin
                                     bird_tex_addr <= bird_tex_addr + 1;
                                     curr_y <= curr_y + 1;
                                     if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240) begin
                                         frame_buffer[curr_x][curr_y] <= bird_tex_q;
                                     end
                                 end
-                                else if (curr_x < mid_x + CHAR_MAX_X >> 1 && curr_y >= mid_y + CHAR_MAX_Y >> 1) begin
+                                else if (curr_x < mid_x + (CHAR_MAX_X >> 1) && curr_y >= mid_y + (CHAR_MAX_Y >> 1)) begin
                                     curr_x <= curr_x + 1;
-                                    curr_y <= mid_y - CHAR_MAX_Y >> 1;
+                                    curr_y <= mid_y - (CHAR_MAX_Y >> 1);
                                 end
                                 else begin
                                     plotting <= 0;
@@ -345,7 +345,7 @@ module render(input logic clk, input logic rst_n,
                             pipe_tex_addr <= 0;
                             char_tex_addr <= 0;
                         end
-                        default: dummy <= dummy;
+                        default: dummy <= ~dummy;
                     endcase
                 end
 
