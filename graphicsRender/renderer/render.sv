@@ -124,6 +124,8 @@ module render(input logic clk, input logic rst_n,
             multiplayer <= 0;
             dummy <= 0;
             plotting <= 0;
+            curr_x <= 0;
+            curr_y <= 0;
 
             fill_init <= 0;
             plot_init <= 0;
@@ -133,6 +135,7 @@ module render(input logic clk, input logic rst_n,
         end
         else begin
             // Flush to frame buffer for 30fps display (1666666 - 320*240 - 240 = 1589626)
+            // THIS IS APPROXIMATE, will adjust this parameter based on performance
             if (fps_clock_count == 1589865) begin
                 if (flushing) begin
                     if (x_flush < 320) begin
@@ -289,7 +292,10 @@ module render(input logic clk, input logic rst_n,
                 else if (slave_write) begin
                     case (slave_address)
                         0: multiplayer <= slave_writedata[0];
-                        1: mid_x <= slave_writedata[8:0];
+                        1: mid_x <= begin 
+                                        if (negative_coordinates) -1 * slave_writedata[8:0]; 
+                                        else slave_writedata[8:0]; 
+                                    end
                         2: mid_y <= slave_writedata[7:0];
                         3: negative_coordinates <= slave_writedata[0];
                         4: tex_code <= slave_writedata[6:0];
