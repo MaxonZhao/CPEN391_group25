@@ -372,17 +372,17 @@ module MyComputer_Verilog (
 				 
 				 // Real World Signals brought out to Header connections
 				 
-				 .RS232_RxData					(GPIO_1[16]),
-				 .RS232_TxData					(GPIO_1[17]),
+				 .RS232_RxData					(GPIO_1[17]),
+				 .RS232_TxData					(GPIO_1[16]),
 
-				 .BlueTooth_RxData 			(GPIO_1[19]),
-				 .BlueTooth_TxData 			(GPIO_1[18]),
+				 .BlueTooth_RxData 			(GPIO_1[18]),
+				 .BlueTooth_TxData 			(GPIO_1[19]),
 				 
-				 .Wifi_RxData 					(GPIO_0[15]),
-				 .Wifi_TxData 					(GPIO_0[14]),
+				 .Wifi_RxData 					(GPIO_0[14]),
+				 .Wifi_TxData 					(GPIO_0[15]),
 				 
-				 .BlueTooth2_RxData 			(GPIO_0[19]),
-				 .BlueTooth2_TxData 			(GPIO_0[18])
+				 .BlueTooth2_RxData 			(GPIO_0[18]),
+				 .BlueTooth2_TxData 			(GPIO_0[19])
 		);
 		
 		// Map 16 bit memory upper and lower data byte strobes to individual wires

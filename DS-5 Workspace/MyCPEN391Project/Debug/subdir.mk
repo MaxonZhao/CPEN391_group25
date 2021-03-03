@@ -6,17 +6,23 @@
 C_SRCS += \
 ../RS232.c \
 ../bluetooth.c \
-../ledAndSwitch.c 
+../ledAndSwitch.c \
+../main.c \
+../wifi.c 
 
 OBJS += \
 ./RS232.o \
 ./bluetooth.o \
-./ledAndSwitch.o 
+./ledAndSwitch.o \
+./main.o \
+./wifi.o 
 
 C_DEPS += \
 ./RS232.d \
 ./bluetooth.d \
-./ledAndSwitch.d 
+./ledAndSwitch.d \
+./main.d \
+./wifi.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

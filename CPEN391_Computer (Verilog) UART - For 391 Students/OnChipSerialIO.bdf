@@ -185,9 +185,9 @@ agreement for further details.
 )
 (pin
 	(input)
-	(rect 1440 1320 1635 1336)
+	(rect 1440 1320 1631 1336)
 	(text "INPUT" (rect 7 0 35 10)(font "Arial" (font_size 6)))
-	(text "BLueTooth2_RxData" (rect 88 0 189 12)(font "Arial" ))
+	(text "BlueTooth2_RxData" (rect 88 0 185 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 76 12)(pt 51 12))
@@ -282,9 +282,9 @@ agreement for further details.
 )
 (pin
 	(output)
-	(rect 1440 1296 1635 1312)
+	(rect 1440 1296 1631 1312)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "BLueTooth2_TxData" (rect 90 0 189 12)(font "Arial" ))
+	(text "BlueTooth2_TxData" (rect 90 0 185 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -1767,14 +1767,6 @@ agreement for further details.
 	(pt 1440 976)
 )
 (connector
-	(pt 1136 1304)
-	(pt 1440 1304)
-)
-(connector
-	(pt 1136 1104)
-	(pt 1136 1304)
-)
-(connector
 	(pt 768 -128)
 	(pt 808 -128)
 )
@@ -1876,6 +1868,14 @@ agreement for further details.
 (connector
 	(pt 856 1328)
 	(pt 1440 1328)
+)
+(connector
+	(pt 1136 1304)
+	(pt 1440 1304)
+)
+(connector
+	(pt 1136 1104)
+	(pt 1136 1304)
 )
 (junction (pt 880 208))
 (junction (pt 880 224))

@@ -955,243 +955,247 @@ set_instance_assignment -name PACKAGE_SKEW_COMPENSATION OFF -to HPS_DDR3_RESET_N
 set_instance_assignment -name PACKAGE_SKEW_COMPENSATION OFF -to HPS_DDR3_CK_P
 set_instance_assignment -name PACKAGE_SKEW_COMPENSATION OFF -to HPS_DDR3_CK_N
 set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to VGA_*
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_slave_a32_wi4.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_slave_a32_wi1.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_slave_a32.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_slave_a24_d16.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_slave_a16_d16.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_read_20w.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_read_20lw.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_read_10w.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_read_10lw.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_read_5w.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_read_5lw.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_cs20w_20a.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_cs20w_16a.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_cs20w_12a.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_cs20lw_28a.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_cs20lw_24a.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_xor_bus.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_shift_reg_sr.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_shift_reg_se_sl.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_shift_reg_PL_SLR.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_shift_reg_PL_sl.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_shift_reg_PL.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_shift_reg.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_register_ce.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_register.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_MUX_16to1_bus.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_MUX_8to1_bus.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_MUX_4to1_bus.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_MUX_4to1.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_MUX_2to1_bus.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_MUX_2to1.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_latch.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_jkff.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_DFF.VHD"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_DECODE_4to16.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_DECODE_3to8.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_DECODE_2to4.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_compare_BMM_s.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_compare_BMM.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_compare_ABS_reg.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_compare_ABS.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_compare.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_4096.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_3072.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_2048.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_1536.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_1024.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_768.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_512.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_256.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_128.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_64.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_32.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_sram_1wp_2rp_sc.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_sram_1wp_2rp.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_sram.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fifo_sync_sr.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fifo_sync_rrd_sr.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fifo_async_uswf.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fifo_async_usrf.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fifo_async_sr_wf.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fifo_async_sr.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fifo_async_rrd_sr_wf.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fifo_async_rrd_sr.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fasm_1wp_2rp_r.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fasm_1wp_2rp.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fasm.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_4byte_dpram_x32.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_4byte_dpram_x16_le.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_4byte_dpram_x16_be.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_4byte_dpram_x8_le.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_4byte_dpram_x8_be.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/rz_DivArrUns.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_scaling_mult.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_random_number.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_ran_scale_par.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_ran_scale.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_ip_usus_mg.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_ip_usus_ab.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_ip_usus.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_ip_sus_ab.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_ip_sus.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_ip_ss.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_gus.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_gs.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_g18_sc.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_g18.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_g16.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_MAC_ld.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_MAC_16bit_ld.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_MAC_16bit.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_lfsr_PROG_32.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_lfsr_PROG_16.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_lfsr_gfb4_ld.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_lfsr_gfb4.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_lfsr_64.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_lfsr_48.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_lfsr_36.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_lfsr_24.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_ssb_mult_2cm_xrsp.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_ssb_mult_2cm.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_ssb_mult.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_scaling_mult_2cm.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_scaling_mult.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_mult_3m.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_mult_2cm_xrsp.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_mult_2cm_3m_xrsp.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_mult_2cm_3m.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_mult_2cm.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_mult.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_add.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_casr_37.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_attenuation_10.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_atten_rom_10.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_ACC_ld.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_ACC.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sweep_generator_a.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sweep_generator.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sincos_rom_16_4.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sincos_rom_16_2.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sincos_rom_16.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sincos_rom_14_4.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sincos_rom_12_4.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sincos_rom_12_2.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sincos_rom_12.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sincos_a.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sincos.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_r_2_polar_a.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_r_2_polar_28.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_r_2_polar.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nsincos_rom_16_4.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nsincos_rom_16.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nsincos_rom_14_4.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nsincos_rom_12_4.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nsincos_rom_12.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nsincos_28.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nco_phase_a.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nco_phase.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nco_lut_16p.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nco_lut_14p.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nco_lut_12p.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nco_a.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nco.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_frequency_sweep_wpp.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_frequency_sweep.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_Freq_ACCp.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_Freq_ACC16.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_Freq_ACC8p.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_Freq_ACC8.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_Freq_ACC4p.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_Freq_ACC4.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_Freq_ACC2p.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_Freq_ACC2.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_Freq_ACC.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_CORDIC_vectoring_28.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_CORDIC_vectoring.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_CORDIC_rotation_28.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_CORDIC_rotation.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_CORDIC.VHD"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_TVFD_filter_w.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_TVFD_filter.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_tvfd_coef_prom.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_fir_pfilter_ot_ns.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_fir_pfilter_ot.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_fir_pfilter_nsc.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_fir_pfilter_ns.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_fir_pfilter.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_FIR_pcoef_prom.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_FIR_filter_fg.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_FIR_filter.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_FIR_coef_prom.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_filter_compensation_6dB.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_filter_compensation_4dB.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_filter_compensation_2dB.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_filter_AB_interpolation.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_CIC_interpolation_m2.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_CIC_interpolation_m1.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_CIC_interpolation.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_CIC_filter.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_CIC_decimation_m2.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_CIC_decimation_m1.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_wdt_programmable.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_wdt.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_stretch_programmable_low.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_stretch_programmable.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_stretch_low.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_stretch.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_register_control_ce.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_PWM.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_pw_wTOA.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_Pulse_Generator.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_parity_gen_Serial.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_gray2binary.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_edge_det_XCD.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_edge_det.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_delay_programmable_bus.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_delay_programmable_255_bus.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_delay_programmable_255.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_delay_programmable_127.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_delay_programmable_63.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_delay_programmable_31.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_delay_programmable_15.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_delay_bus.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_delay.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_debounce.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_data_mux.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_data_demux.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_clk_mirror.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_clk_ce_div.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_Burst_Generator.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_binary2gray.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_baud_rate_gen.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_4byte_gpio_32.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_4byte_control_reg_256.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_4byte_control_reg_128.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_4byte_control_reg_64.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_4byte_control_reg_32.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_up_sr_ce.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_up_ce_tc.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_up_ce_ld_tc.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_up_ce_ld.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_up_ce.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_modulo.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_integer_up.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_integer_down.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_fr.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_down_one.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_down_ce_ld_tc.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_down_ce_ld.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_uart_Tx_8bit.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_uart_Rx_8bit.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_uart_16550_wb_wrapper.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_uart_16550_amba_apb_wrapper.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_uart_16550.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_fifo_async16_sr.vhd"
-set_global_assignment -name VHDL_FILE "../tutorial/CPEN391_Computer (Verilog) UART - For 391 Students/UART_16550_Files/gh_fifo_async16_rcsr_wf.vhd"
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_slave_a32_wi4.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_slave_a32_wi1.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_slave_a32.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_slave_a24_d16.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_slave_a16_d16.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_read_20w.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_read_20lw.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_read_10w.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_read_10lw.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_read_5w.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_read_5lw.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_cs20w_20a.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_cs20w_16a.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_cs20w_12a.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_cs20lw_28a.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/VMEbus/gh_vme_cs20lw_24a.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_xor_bus.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_shift_reg_sr.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_shift_reg_se_sl.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_shift_reg_PL_SLR.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_shift_reg_PL_sl.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_shift_reg_PL.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_shift_reg.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_register_ce.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_register.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_MUX_16to1_bus.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_MUX_8to1_bus.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_MUX_4to1_bus.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_MUX_4to1.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_MUX_2to1_bus.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_MUX_2to1.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_latch.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_jkff.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_DFF.VHD
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_DECODE_4to16.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_DECODE_3to8.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_DECODE_2to4.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_compare_BMM_s.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_compare_BMM.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_compare_ABS_reg.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_compare_ABS.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_compare.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_4096.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_3072.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_2048.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_1536.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_1024.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_768.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_512.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_256.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_128.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_64.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/registers_gates/gh_4byte_reg_32.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_sram_1wp_2rp_sc.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_sram_1wp_2rp.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_sram.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fifo_sync_sr.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fifo_sync_rrd_sr.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fifo_async_uswf.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fifo_async_usrf.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fifo_async_sr_wf.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fifo_async_sr.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fifo_async_rrd_sr_wf.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fifo_async_rrd_sr.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fasm_1wp_2rp_r.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fasm_1wp_2rp.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_fasm.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_4byte_dpram_x32.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_4byte_dpram_x16_le.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_4byte_dpram_x16_be.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_4byte_dpram_x8_le.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/memory/gh_4byte_dpram_x8_be.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/rz_DivArrUns.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_scaling_mult.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_random_number.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_ran_scale_par.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_ran_scale.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_ip_usus_mg.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_ip_usus_ab.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_ip_usus.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_ip_sus_ab.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_ip_sus.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_ip_ss.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_gus.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_gs.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_g18_sc.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_g18.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_mult_g16.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_MAC_ld.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_MAC_16bit_ld.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_MAC_16bit.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_lfsr_PROG_32.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_lfsr_PROG_16.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_lfsr_gfb4_ld.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_lfsr_gfb4.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_lfsr_64.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_lfsr_48.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_lfsr_36.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_lfsr_24.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_ssb_mult_2cm_xrsp.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_ssb_mult_2cm.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_ssb_mult.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_scaling_mult_2cm.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_scaling_mult.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_mult_3m.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_mult_2cm_xrsp.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_mult_2cm_3m_xrsp.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_mult_2cm_3m.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_mult_2cm.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_mult.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_complex_add.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_casr_37.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_attenuation_10.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_atten_rom_10.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_ACC_ld.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/math/gh_ACC.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sweep_generator_a.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sweep_generator.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sincos_rom_16_4.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sincos_rom_16_2.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sincos_rom_16.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sincos_rom_14_4.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sincos_rom_12_4.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sincos_rom_12_2.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sincos_rom_12.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sincos_a.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_sincos.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_r_2_polar_a.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_r_2_polar_28.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_r_2_polar.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nsincos_rom_16_4.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nsincos_rom_16.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nsincos_rom_14_4.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nsincos_rom_12_4.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nsincos_rom_12.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nsincos_28.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nco_phase_a.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nco_phase.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nco_lut_16p.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nco_lut_14p.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nco_lut_12p.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nco_a.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_nco.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_frequency_sweep_wpp.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_frequency_sweep.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_Freq_ACCp.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_Freq_ACC16.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_Freq_ACC8p.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_Freq_ACC8.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_Freq_ACC4p.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_Freq_ACC4.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_Freq_ACC2p.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_Freq_ACC2.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_Freq_ACC.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_CORDIC_vectoring_28.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_CORDIC_vectoring.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_CORDIC_rotation_28.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_CORDIC_rotation.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/Frequency_Synthesis/gh_CORDIC.VHD
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_TVFD_filter_w.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_TVFD_filter.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_tvfd_coef_prom.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_fir_pfilter_ot_ns.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_fir_pfilter_ot.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_fir_pfilter_nsc.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_fir_pfilter_ns.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_fir_pfilter.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_FIR_pcoef_prom.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_FIR_filter_fg.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_FIR_filter.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_FIR_coef_prom.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_filter_compensation_6dB.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_filter_compensation_4dB.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_filter_compensation_2dB.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_filter_AB_interpolation.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_CIC_interpolation_m2.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_CIC_interpolation_m1.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_CIC_interpolation.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_CIC_filter.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_CIC_decimation_m2.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/filters/gh_CIC_decimation_m1.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_wdt_programmable.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_wdt.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_stretch_programmable_low.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_stretch_programmable.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_stretch_low.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_stretch.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_register_control_ce.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_PWM.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_pw_wTOA.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_Pulse_Generator.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_parity_gen_Serial.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_gray2binary.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_edge_det_XCD.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_edge_det.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_delay_programmable_bus.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_delay_programmable_255_bus.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_delay_programmable_255.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_delay_programmable_127.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_delay_programmable_63.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_delay_programmable_31.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_delay_programmable_15.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_delay_bus.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_delay.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_debounce.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_data_mux.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_data_demux.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_clk_mirror.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_clk_ce_div.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_Burst_Generator.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_binary2gray.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_baud_rate_gen.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_4byte_gpio_32.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_4byte_control_reg_256.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_4byte_control_reg_128.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_4byte_control_reg_64.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/custom_MSI/gh_4byte_control_reg_32.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_up_sr_ce.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_up_ce_tc.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_up_ce_ld_tc.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_up_ce_ld.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_up_ce.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_modulo.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_integer_up.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_integer_down.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_fr.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_down_one.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_down_ce_ld_tc.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter_down_ce_ld.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_vhdl_lib_v3_48/counters/gh_counter.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_uart_Tx_8bit.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_uart_Rx_8bit.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_uart_16550_wb_wrapper.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_uart_16550_amba_apb_wrapper.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_uart_16550.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_fifo_async16_sr.vhd
+set_global_assignment -name VHDL_FILE UART_16550_Files/gh_fifo_async16_rcsr_wf.vhd
 set_global_assignment -name SDC_FILE CPEN391_Soc.sdc
 set_global_assignment -name VHDL_FILE HexTo7SegmentDisplay.vhd
 set_global_assignment -name VHDL_FILE ColourPallette_2PortRam.vhd
@@ -1212,8 +1216,4 @@ set_global_assignment -name VERILOG_FILE MyComputer_Verilog.v
 set_global_assignment -name VERILOG_FILE SerialIODecoder_Verilog.v
 set_global_assignment -name BDF_FILE OnChipSerialIO.bdf
 set_global_assignment -name VERILOG_FILE SerialIODecoder.v
-set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
-set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
-set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
-set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

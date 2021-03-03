@@ -6,7 +6,7 @@
  */
 
 #include "serial.h"
-
+#include <string.h>
 void Init_WIFI(void){
     // set bit 7 of Line Control Register to 1, to gain access to the baud rate registers
     WIFI_LineControlReg = WIFI_LineControlReg | 0x80;
