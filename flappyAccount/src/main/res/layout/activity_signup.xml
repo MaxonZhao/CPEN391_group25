@@ -11,6 +11,7 @@
 
     <ImageView
         android:id="@+id/imageView"
+        android:layout_gravity="center"
         android:layout_width="159dp"
         android:layout_height="116dp"
 
@@ -19,17 +20,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="Welcome"
 
         android:fontFamily="@font/bungee"
         android:textSize="35sp" />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign up to start your new Journey"
-        android:textSize="18sp" />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Sign up to start your new Journey"-->
+<!--        android:textSize="18sp" />-->
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -84,19 +86,40 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/phoneNo"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone No">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
+            android:orientation="horizontal" >
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/country_code"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="phone"/>
 
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_gravity="center_vertical"
+                app:ccp_textSize="16sp"
+                app:ccp_autoDetectCountry="true"
+                app:ccp_showNameCode="true"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phoneNo"
+
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="Phone No">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/password"

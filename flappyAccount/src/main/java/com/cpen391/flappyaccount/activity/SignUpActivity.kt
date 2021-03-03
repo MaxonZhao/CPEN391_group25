@@ -47,12 +47,12 @@ class SignUpActivity : MvvmActivity<ActivitySignupBinding>() {
                     validatePassword()
 
         if (isValidated) {
-            Timber.d("ready to register user")
             val fullName = binding.fullName.editText!!.text.toString()
             val username = binding.username.editText!!.text.toString()
             val email = binding.email.editText!!.text.toString()
-            val phoneNo = binding.phoneNo.editText!!.text.toString()
             val password = binding.password.editText!!.text.toString()
+            val countryCode = binding.countryCode.fullNumber
+            val phoneNo = countryCode + binding.phoneNo.editText!!.text.toString()
             val user: User = User(
                 fullName,
                 username,
@@ -82,7 +82,7 @@ class SignUpActivity : MvvmActivity<ActivitySignupBinding>() {
 
     fun validateUserName(): Boolean {
         val name: String = binding.username.editText?.text.toString()
-        val noWhitSpace: String = "^([a-zA-Z0-9!@#\$%^&*()-_=+;:'\"|~`<>?/{}]{3,16})\$"
+        val noWhitSpace: String = "^([a-zA-Z0-9!@#\$%^&*()-_=+;:'\"|~`<>?/{}]{1,16})\$"
         val regex: Regex = Regex(noWhitSpace)
 
         if (name == null || name.isEmpty()) {
