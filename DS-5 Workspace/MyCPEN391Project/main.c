@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "serial.h"
+#include "bluetooth.h"
+
 int main(void){
 	int count = 0;
     Init_RS232(BT_LineControlReg, BT_DivisorLatchLSB, BT_DivisorLatchMSB, BT_FifoControlReg);
@@ -30,3 +32,16 @@ int main(void){
 
 
 }
+
+//int main(void){
+//	Init_RS232(BT_LineControlReg, BT_DivisorLatchLSB, BT_DivisorLatchMSB, BT_FifoControlReg);
+//	RS232_Flush(BT_ReceiverFifo, BT_LineStatusReg);
+//	Init_RS232(BT2_LineControlReg, BT2_DivisorLatchLSB, BT2_DivisorLatchMSB, BT2_FifoControlReg);
+//	RS232_Flush(BT2_ReceiverFifo, BT2_LineStatusReg);
+//
+//	printf("Bluetooth initialized\n");
+//
+//	BT_setName("FlapyBirdGame_1", BT_LineStatusReg, BT_TransmitterFifo);
+//	BT_setName("FlapyBirdGame_2", BT2_LineStatusReg, BT2_TransmitterFifo);
+//
+//}

@@ -25,8 +25,9 @@ void Init_RS232(volatile unsigned char* LineControlReg, volatile unsigned char* 
 
     // set Divisor latch (LSB and MSB) with correct value for required baud rate
     //baud rate divisor value=freq of BR_clk/ (desired buad rate*16)
-    //here buad rate = 115200
-	*DivisorLatchLSB = 0x1B;
+    //here buad rate = 57600 (0x1B and 0x00 for 115200)
+
+	*DivisorLatchLSB = 0x36;
 	*DivisorLatchMSB = 0x00;
 
     // set bit 7 of Line control register back to 0 and
@@ -94,10 +95,16 @@ void RS232_Flush(volatile unsigned char* ReceiverFifo, volatile unsigned char* L
 
 
 void sendMessage(char* message, volatile unsigned char* LineStatusReg, volatile unsigned char* TransmitterFifo){
+	sendMultiChar(message,LineStatusReg,TransmitterFifo);
+
+	putcharRS232('\r', LineStatusReg,TransmitterFifo);
+	putcharRS232('\n', LineStatusReg,TransmitterFifo);
+}
+
+void sendMultiChar(char* message, volatile unsigned char* LineStatusReg, volatile unsigned char* TransmitterFifo){
 	printf("send:%s\n",message);
 	for(int i = 0; i < strlen(message); i ++){
 		int c = putcharRS232((int)message[i], LineStatusReg,TransmitterFifo );
 	}
-	putcharRS232('\r', LineStatusReg,TransmitterFifo);
-	putcharRS232('\n', LineStatusReg,TransmitterFifo);
+
 }

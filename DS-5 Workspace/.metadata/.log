@@ -9082,3 +9082,387 @@ Asynchronously called from thread Worker-27
 	at com.arm.debugger.control.CommandTask.run(CommandTask.java:45)
 	at com.arm.debugger.control.ConnectionController$5.run(ConnectionController.java:1388)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+!SESSION 2021-03-03 10:26:10.823 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_60
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product com.arm.ds.default
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.arm.ds.default
+
+!ENTRY com.arm.newsfeed 4 0 2021-03-03 10:26:55.101
+!MESSAGE Error when reading RSS feed "http://community.arm.com/view-browse-feed.jspa?containerType=700&userID=-1&browseSite=place-content&filterID=contentstatus[published]~objecttype~objecttype[blogpost]&browseViewID=placeContent&containerID=1060"
+!STACK 0
+java.net.UnknownHostException: community.arm.com
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:178)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:579)
+	at java.net.Socket.connect(Socket.java:528)
+	at sun.net.NetworkClient.doConnect(NetworkClient.java:180)
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:432)
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:527)
+	at sun.net.www.http.HttpClient.<init>(HttpClient.java:211)
+	at sun.net.www.http.HttpClient.New(HttpClient.java:308)
+	at sun.net.www.http.HttpClient.New(HttpClient.java:326)
+	at sun.net.www.protocol.http.HttpURLConnection.getNewHttpClient(HttpURLConnection.java:996)
+	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:932)
+	at sun.net.www.protocol.http.HttpURLConnection.connect(HttpURLConnection.java:850)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1300)
+	at com.sun.syndication.io.XmlReader.<init>(XmlReader.java:174)
+	at com.sun.syndication.io.XmlReader.<init>(XmlReader.java:151)
+	at com.arm.newsfeed.rss.AggregatedFeed.fetch(AggregatedFeed.java:226)
+	at com.arm.newsfeed.rss.AggregatedFeed.access$3(AggregatedFeed.java:222)
+	at com.arm.newsfeed.rss.AggregatedFeed$3.run(AggregatedFeed.java:201)
+
+!ENTRY org.eclipse.jface 2 0 2021-03-03 10:36:55.743
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-03-03 10:36:55.743
+!MESSAGE A conflict occurred for ALT+CTRL+I:
+Binding(ALT+CTRL+I,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.include.browser,Open Include Browser,
+		Open an include browser on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@3444e2c4,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+CTRL+I,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.include.browser,Open Include Browser,
+		Open an include browser on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@3444e2c4,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-03-03 10:36:55.743
+!MESSAGE A conflict occurred for ALT+SHIFT+R:
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.text.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.cdt.ui.category.refactoring,Refactor - C++,C/C++ Refactorings,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1683ccab,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.text.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.cdt.ui.category.refactoring,Refactor - C++,C/C++ Refactorings,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1683ccab,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.jdt.ui.category.refactoring,Refactor - Java,Java Refactoring Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@26f1fa19,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-03-03 10:36:55.743
+!MESSAGE A conflict occurred for F3:
+Binding(F3,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.opendecl,Open Declaration,
+		Open an editor on the selected element's declaration(s),
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@585a9348,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(F3,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.opendecl,Open Declaration,
+		Open an editor on the selected element's declaration(s),
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@585a9348,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+Binding(F3,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.open.editor,Open Declaration,
+		Open an editor on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@227b8949,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-03-03 10:36:55.743
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.opentype,Open Element,
+		Open an element in an Editor,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5c72294e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.opentype,Open Element,
+		Open an element in an Editor,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5c72294e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4af5ef4c,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-03-03 10:36:55.743
+!MESSAGE A conflict occurred for F4:
+Binding(F4,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.type.hierarchy,Open Type Hierarchy,
+		Open a type hierarchy on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@58318d06,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(F4,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.type.hierarchy,Open Type Hierarchy,
+		Open a type hierarchy on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@58318d06,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+Binding(F4,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.open.type.hierarchy,Open Type Hierarchy,
+		Open a type hierarchy on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1d21b226,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-03-03 10:36:55.744
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@f36ebbb,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@f36ebbb,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.declarations.in.workspace,Declaration in Workspace,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5eae49ca,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-03-03 10:36:55.744
+!MESSAGE A conflict occurred for CTRL+SHIFT+G:
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.findrefs,References,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@46e9d56,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.findrefs,References,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@46e9d56,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.references.in.workspace,References in Workspace,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7a1b7b5f,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-03-03 10:36:55.744
+!MESSAGE A conflict occurred for ALT+CTRL+H:
+Binding(ALT+CTRL+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.call.hierarchy,Open Call Hierarchy,
+		Open the call hierarchy for the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2240d89a,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+CTRL+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.call.hierarchy,Open Call Hierarchy,
+		Open the call hierarchy for the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2240d89a,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+Binding(ALT+CTRL+H,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.open.call.hierarchy,Open Call Hierarchy,
+		Open a call hierarchy on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4f4c7807,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-03-03 10:36:55.744
+!MESSAGE A conflict occurred for CTRL+SHIFT+H:
+Binding(CTRL+SHIFT+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.open.type.in.hierarchy,Open Type in Hierarchy,
+		Open a type in the type hierarchy view,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@255c3c3d,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+SHIFT+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.open.type.in.hierarchy,Open Type in Hierarchy,
+		Open a type in the type hierarchy view,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@255c3c3d,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+Binding(CTRL+SHIFT+H,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type.in.hierarchy,Open Type in Hierarchy,
+		Open a type in the type hierarchy view,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4a76dbf4,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.cdt.ui 2 0 2021-03-03 10:53:46.288
+!MESSAGE Default project not found in New C/C++ Project Wizard
+
+!ENTRY com.arm.debugger.ux 4 0 2021-03-03 11:02:15.174
+!MESSAGE Image "C:\Users\zoeyli\cpen391\CPEN391_group25\DS-5 Workspace\MyCPEN391Project\Debug\MyCPEN391Project.axf" does not exist
+!STACK 0
+com.arm.debug.interpreter.ds.DSException: Image "C:\Users\zoeyli\cpen391\CPEN391_group25\DS-5 Workspace\MyCPEN391Project\Debug\MyCPEN391Project.axf" does not exist
+	at com.arm.debug.interpreter.ds.commands.file.ReloadSymbolFileCommand.execute(ReloadSymbolFileCommand.java:37)
+	at com.arm.debug.interpreter.ds.commands.file.ReloadSymbolFileCommand.execute(ReloadSymbolFileCommand.java:1)
+	at com.arm.debug.interpreter.ds.DSInterpreter$3.run(DSInterpreter.java:414)
+	at com.arm.debug.interpreter.ds.DSInterpreter$3.run(DSInterpreter.java:1)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager$QueuedTask.run(ConnectionEventManager.java:102)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager.processTask(ConnectionEventManager.java:314)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager.access$8(ConnectionEventManager.java:312)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager$2.run(ConnectionEventManager.java:217)
+	at com.arm.debugger.control.CommandTask.fillInStackTrace(CommandTask.java:53)
+	at com.arm.debugger.control.ConnectionController.execute(ConnectionController.java:1247)
+	at com.arm.debugger.api.AbstractCommands.execute(AbstractCommands.java:114)
+	at com.arm.debugger.api.Commands.reloadSymbolFile(Commands.java:410)
+	at com.arm.debugger.control.ConnectionController.observeEvent(ConnectionController.java:1725)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.arm.debugger.control.PriorityEventSender.fireEvents(PriorityEventSender.java:379)
+	at com.arm.debugger.control.PriorityEventSender.queueEvent(PriorityEventSender.java:287)
+	at com.arm.debugger.control.PriorityEventSender.observeEvent(PriorityEventSender.java:226)
+	at com.arm.debugger.control.ConnectionEventManager$1.observeEvent(ConnectionEventManager.java:80)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager.processEvent(ConnectionEventManager.java:377)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager.access$7(ConnectionEventManager.java:320)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager$2.run(ConnectionEventManager.java:215)
+Asynchronously called from thread Worker-10
+	at com.arm.debug.service.proxy.SingleThreader.execute(SingleThreader.java:157)
+	at com.arm.debug.service.proxy.DebugServiceWrapper.invoke(DebugServiceWrapper.java:78)
+	at com.sun.proxy.$Proxy26.reloadSymbolsFile(Unknown Source)
+	at com.arm.debugger.api.commands.ReloadSymbolFile.execute(ReloadSymbolFile.java:26)
+	at com.arm.debugger.api.commands.ReloadSymbolFile.execute(ReloadSymbolFile.java:1)
+	at com.arm.debugger.api.AbstractDebugCommand.call(AbstractDebugCommand.java:38)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at com.arm.debugger.control.CommandTask.run(CommandTask.java:45)
+	at com.arm.debugger.control.ConnectionController$5.run(ConnectionController.java:1388)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY com.arm.debugger.ux 4 0 2021-03-03 11:10:05.224
+!MESSAGE Image "C:\Users\zoeyli\cpen391\CPEN391_group25\DS-5 Workspace\MyCPEN391Project\Debug\MyCPEN391Project.axf" does not exist
+!STACK 0
+com.arm.debug.interpreter.ds.DSException: Image "C:\Users\zoeyli\cpen391\CPEN391_group25\DS-5 Workspace\MyCPEN391Project\Debug\MyCPEN391Project.axf" does not exist
+	at com.arm.debug.interpreter.ds.commands.file.ReloadSymbolFileCommand.execute(ReloadSymbolFileCommand.java:37)
+	at com.arm.debug.interpreter.ds.commands.file.ReloadSymbolFileCommand.execute(ReloadSymbolFileCommand.java:1)
+	at com.arm.debug.interpreter.ds.DSInterpreter$3.run(DSInterpreter.java:414)
+	at com.arm.debug.interpreter.ds.DSInterpreter$3.run(DSInterpreter.java:1)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager$QueuedTask.run(ConnectionEventManager.java:102)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager.processTask(ConnectionEventManager.java:314)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager.access$8(ConnectionEventManager.java:312)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager$2.run(ConnectionEventManager.java:217)
+	at com.arm.debugger.control.CommandTask.fillInStackTrace(CommandTask.java:53)
+	at com.arm.debugger.control.ConnectionController.execute(ConnectionController.java:1247)
+	at com.arm.debugger.api.AbstractCommands.execute(AbstractCommands.java:114)
+	at com.arm.debugger.api.Commands.reloadSymbolFile(Commands.java:410)
+	at com.arm.debugger.control.ConnectionController.observeEvent(ConnectionController.java:1725)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.arm.debugger.control.PriorityEventSender.fireEvents(PriorityEventSender.java:379)
+	at com.arm.debugger.control.PriorityEventSender.queueEvent(PriorityEventSender.java:287)
+	at com.arm.debugger.control.PriorityEventSender.observeEvent(PriorityEventSender.java:226)
+	at com.arm.debugger.control.ConnectionEventManager$1.observeEvent(ConnectionEventManager.java:80)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager.processEvent(ConnectionEventManager.java:377)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager.access$7(ConnectionEventManager.java:320)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager$2.run(ConnectionEventManager.java:215)
+Asynchronously called from thread Worker-11
+	at com.arm.debug.service.proxy.SingleThreader.execute(SingleThreader.java:157)
+	at com.arm.debug.service.proxy.DebugServiceWrapper.invoke(DebugServiceWrapper.java:78)
+	at com.sun.proxy.$Proxy26.reloadSymbolsFile(Unknown Source)
+	at com.arm.debugger.api.commands.ReloadSymbolFile.execute(ReloadSymbolFile.java:26)
+	at com.arm.debugger.api.commands.ReloadSymbolFile.execute(ReloadSymbolFile.java:1)
+	at com.arm.debugger.api.AbstractDebugCommand.call(AbstractDebugCommand.java:38)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at com.arm.debugger.control.CommandTask.run(CommandTask.java:45)
+	at com.arm.debugger.control.ConnectionController$5.run(ConnectionController.java:1388)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY com.arm.debugger.ux 4 0 2021-03-03 11:37:16.108
+!MESSAGE Image "C:\Users\zoeyli\cpen391\CPEN391_group25\DS-5 Workspace\MyCPEN391Project\Debug\MyCPEN391Project.axf" does not exist
+!STACK 0
+com.arm.debug.interpreter.ds.DSException: Image "C:\Users\zoeyli\cpen391\CPEN391_group25\DS-5 Workspace\MyCPEN391Project\Debug\MyCPEN391Project.axf" does not exist
+	at com.arm.debug.interpreter.ds.commands.file.ReloadSymbolFileCommand.execute(ReloadSymbolFileCommand.java:37)
+	at com.arm.debug.interpreter.ds.commands.file.ReloadSymbolFileCommand.execute(ReloadSymbolFileCommand.java:1)
+	at com.arm.debug.interpreter.ds.DSInterpreter$3.run(DSInterpreter.java:414)
+	at com.arm.debug.interpreter.ds.DSInterpreter$3.run(DSInterpreter.java:1)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager$QueuedTask.run(ConnectionEventManager.java:102)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager.processTask(ConnectionEventManager.java:314)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager.access$8(ConnectionEventManager.java:312)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager$2.run(ConnectionEventManager.java:217)
+	at com.arm.debugger.control.CommandTask.fillInStackTrace(CommandTask.java:53)
+	at com.arm.debugger.control.ConnectionController.execute(ConnectionController.java:1247)
+	at com.arm.debugger.api.AbstractCommands.execute(AbstractCommands.java:114)
+	at com.arm.debugger.api.Commands.reloadSymbolFile(Commands.java:410)
+	at com.arm.debugger.control.ConnectionController.observeEvent(ConnectionController.java:1725)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.arm.debugger.control.PriorityEventSender.fireEvents(PriorityEventSender.java:379)
+	at com.arm.debugger.control.PriorityEventSender.queueEvent(PriorityEventSender.java:287)
+	at com.arm.debugger.control.PriorityEventSender.observeEvent(PriorityEventSender.java:226)
+	at com.arm.debugger.control.ConnectionEventManager$1.observeEvent(ConnectionEventManager.java:80)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager.processEvent(ConnectionEventManager.java:377)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager.access$7(ConnectionEventManager.java:320)
+	at com.arm.debug.core.engine.connection.ConnectionEventManager$2.run(ConnectionEventManager.java:215)
+Asynchronously called from thread Worker-15
+	at com.arm.debug.service.proxy.SingleThreader.execute(SingleThreader.java:157)
+	at com.arm.debug.service.proxy.DebugServiceWrapper.invoke(DebugServiceWrapper.java:78)
+	at com.sun.proxy.$Proxy26.reloadSymbolsFile(Unknown Source)
+	at com.arm.debugger.api.commands.ReloadSymbolFile.execute(ReloadSymbolFile.java:26)
+	at com.arm.debugger.api.commands.ReloadSymbolFile.execute(ReloadSymbolFile.java:1)
+	at com.arm.debugger.api.AbstractDebugCommand.call(AbstractDebugCommand.java:38)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at com.arm.debugger.control.CommandTask.run(CommandTask.java:45)
+	at com.arm.debugger.control.ConnectionController$5.run(ConnectionController.java:1388)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)

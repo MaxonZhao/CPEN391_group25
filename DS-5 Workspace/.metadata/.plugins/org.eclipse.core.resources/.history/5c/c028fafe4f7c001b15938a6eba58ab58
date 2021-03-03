@@ -1,0 +1,43 @@
+/*
+ * bluetooth.c
+ *
+ *  Created on: Feb 28, 2021
+ *      Author: zoeyli
+ */
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#include "serial.h"
+#define USLEEP_SEC 1000000
+void BT_setName(char *name, volatile unsigned char* LineStatusReg, volatile unsigned char* TransmitterFifo) {
+	// wait a second before and after entering command mode
+	usleep(USLEEP_SEC);
+	sendMessage("$$$", LineStatusReg, TransmitterFifo);
+	usleep(USLEEP_SEC);
+
+	// send the command to change the name
+	char command[25] = "SN,";
+	strcat(command, name);
+	strcat(command, "\r\n");
+
+	sendMessage(command,LineStatusReg, TransmitterFifo);
+
+}
+
+void BT_setName(char *password,  volatile unsigned char* LineStatusReg, volatile unsigned char* TransmitterFifo) {
+	// wait a second before and after entering command mode
+	usleep(USLEEP_SEC);
+	sendMessage("$$$",LineStatusReg, TransmitterFifo);
+	usleep(USLEEP_SEC);
+
+
+	// send the command to change the name
+	char command[25] = "SP,";
+	strcat(command, password);
+	strcat(command, "\r\n");
+
+	sendMessage(command,LineStatusReg, TransmitterFifo);
+
+}
+

@@ -1,12 +1,12 @@
 /*
- * bluetooth.h
+ * serial.h
  *
  *  Created on: Mar 1, 2021
  *      Author: zoeyli
  */
 
-#ifndef BLUETOOTH_H_
-#define BLUETOOTH_H_
+#ifndef SERIAL_H_
+#define SERIAL_H_
 
 #define RS232_ReceiverFifo       (*(volatile unsigned char *)(0xFF210200))
 #define RS232_TransmitterFifo    (*(volatile unsigned char *)(0xFF210200))
@@ -69,5 +69,5 @@ int putcharRS232(int, volatile unsigned char*,  volatile unsigned char* );
 int getcharRS232(volatile unsigned char* , volatile unsigned char* );
 void RS232_Flush(volatile unsigned char* , volatile unsigned char* );
 void sendMessage(char* ,volatile unsigned char* ,volatile unsigned char* );
-
-#endif /* BLUETOOTH_H_ */
+void sendMultiChar(char* ,volatile unsigned char* ,volatile unsigned char* );
+#endif /* SERIAL_H_ */

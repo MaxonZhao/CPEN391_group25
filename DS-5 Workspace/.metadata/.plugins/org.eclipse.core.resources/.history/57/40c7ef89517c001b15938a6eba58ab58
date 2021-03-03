@@ -1,0 +1,44 @@
+/*
+ * bluetooth.c
+ *
+ *  Created on: Feb 28, 2021
+ *      Author: zoeyli
+ */
+#define _BSD_SOURCE
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+
+#include "serial.h"
+#define HALF_SEC 500,000,000
+void BT_setName(char *name, volatile unsigned char* LineStatusReg, volatile unsigned char* TransmitterFifo) {
+	// wait a second before and after entering command mode
+	nanosleep(HALF_SEC);
+	sendMessage("$$$", LineStatusReg, TransmitterFifo);
+	nanosleep(HALF_SEC);
+
+	// send the command to change the name
+	char command[25] = "SN,";
+	strcat(command, name);
+	strcat(command, "\r\n");
+
+	sendMessage(command,LineStatusReg, TransmitterFifo);
+
+}
+
+void BT_setPassword(char *password,  volatile unsigned char* LineStatusReg, volatile unsigned char* TransmitterFifo) {
+	// wait a second before and after entering command mode
+	nanosleep(HALF_SEC);
+	sendMessage("$$$",LineStatusReg, TransmitterFifo);
+	nanosleep(HALF_SEC);
+
+
+	// send the command to change the name
+	char command[25] = "SP,";
+	strcat(command, password);
+	strcat(command, "\r\n");
+
+	sendMessage(command,LineStatusReg, TransmitterFifo);
+
+}
+
