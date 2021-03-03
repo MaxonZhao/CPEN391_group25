@@ -20,6 +20,8 @@ namespace Patrick {
 
 		void RandomizedPipeOffset();
 
+		const std::vector<sf::Sprite>& GetSprtes() const;
+
 	private:
 		GameDataRef _data;
 		std::vector<sf::Sprite> PipeSprites;

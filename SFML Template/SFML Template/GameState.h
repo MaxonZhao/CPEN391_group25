@@ -7,10 +7,12 @@
 #include "DEFINITIONS.h"
 #include "Land.h"
 #include "Bird.h"
+#include "Collision.h"
 
 
 #include <iostream>
 #include <Windows.h>
+
 
 namespace Patrick {
 	class GameState : public State
@@ -33,6 +35,8 @@ namespace Patrick {
 
 		Pipe* pipe;
 		Land* land;
+		Collision Collision;
+		int _gameState;
 
 		sf::Clock clock;
 		Bird* bird;

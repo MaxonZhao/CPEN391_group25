@@ -61,5 +61,10 @@ namespace Patrick {
 	void Pipe::RandomizedPipeOffset() {
 		_pipeSpawnYOffset = rand() % (_landHeight + 1);
 	}
+
+
+	const std::vector<sf::Sprite>& Pipe::GetSprtes() const {
+		return PipeSprites;
+	}
 	
 }

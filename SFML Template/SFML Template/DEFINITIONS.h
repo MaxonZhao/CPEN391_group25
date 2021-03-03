@@ -46,6 +46,13 @@
 
 #define ROTATION_SPEED 100.0f
 
+enum GameStates
+{
+	eReady,
+	ePlaying,
+	eGameOver
+};
+
 
 
 

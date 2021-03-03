@@ -31,6 +31,8 @@ namespace Patrick {
 
 		_background.setTexture(this->_data->assets
 			.GetTexture("Game_Background"));
+
+		_gameState = GameStates::eReady;
 	}
 	void GameState::HandleInput() {
 		sf::Event event;
@@ -42,29 +44,52 @@ namespace Patrick {
 
 			if (GetKeyState('E') & 0x8000)
 			{
-				bird->Tap();
+				if (GameStates::eGameOver != _gameState) {
+					_gameState = GameStates::ePlaying;
+					bird->Tap();
+				}
+				
 			}
 
 		}
 	}
 
 	void GameState::Update(float dt) {
-		pipe->MovePipes(dt);
-		land->MoveLand(dt);
-
-		if (clock.getElapsedTime().asSeconds() > PIPE_SPAWN_FREQUENCY) {
-			pipe->RandomizedPipeOffset();
-
-			pipe->SpawnInvisiblePipe();
-			pipe->SpawnBottomPipe();
-			pipe->SpawnTopPipe();
-
-
-			clock.restart();
+		if (GameStates::eGameOver != _gameState) {
+			bird->Animate(dt);
+			land->MoveLand(dt);
 		}
+		if (_gameState == GameStates::ePlaying) {
+			pipe->MovePipes(dt);
+			if (clock.getElapsedTime().asSeconds() > PIPE_SPAWN_FREQUENCY) {
+				pipe->RandomizedPipeOffset();
 
-		bird->Animate(dt);
-		bird->Update(dt);
+				pipe->SpawnInvisiblePipe();
+				pipe->SpawnBottomPipe();
+				pipe->SpawnTopPipe();
+
+
+				clock.restart();
+			}
+
+			bird->Update(dt);
+			std::vector<sf::Sprite> landSprites = land->GetSprites();
+			for (sf::Sprite sp : landSprites) {
+				if (Collision.CheckSpriteCollistion(bird->GetSprite(), 0.7f,
+					sp, 1.0f)) {
+					_gameState = GameStates::eGameOver;
+				}
+			}
+
+			std::vector<sf::Sprite> pipeSprites = pipe->GetSprtes();
+			for (sf::Sprite pp : pipeSprites) {
+				if (Collision.CheckSpriteCollistion(bird->GetSprite(), 0.625f,
+					pp, 1.0f)) {
+					_gameState = GameStates::eGameOver;
+				}
+			}
+		}
+		
 	}
 
 	void GameState::Draw(float dt) {
