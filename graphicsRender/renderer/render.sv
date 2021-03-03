@@ -4,20 +4,17 @@ module render(input logic clk, input logic rst_n,
            input logic [3:0] slave_address,
            input logic slave_read, output logic [31:0] slave_readdata,
            input logic slave_write, input logic [31:0] slave_writedata,
-           // master (memory-facing)
-           input logic master_waitrequest,
-           output logic [31:0] master_address,
-           output logic master_read, input logic [31:0] master_readdata, input logic master_readdatavalid,
-           output logic master_write, output logic [31:0] master_writedata
+
+        //    // master (memory-facing) (REMOVE IF SDRAM NOT USED AT THE END)
+        //    input logic master_waitrequest,
+        //    output logic [31:0] master_address,
+        //    output logic master_read, input logic [31:0] master_readdata, input logic master_readdatavalid,
+        //    output logic master_write, output logic [31:0] master_writedata
            
            // VGA pins
             output logic [7:0] VGA_R, output logic [7:0] VGA_G,  output logic [7:0] VGA_B,   
             output logic VGA_BLANK_N, output logic VGA_CLK,
             output logic VGA_HS, output logic VGA_SYNC_N, output logic VGA_VS);
-
-    // We don't need to write to master here!
-    assign master_write = 0;
-    assign master_writedata = 0;
 
     wire [9:0] x;
     wire [8:0] y;
@@ -63,45 +60,46 @@ module render(input logic clk, input logic rst_n,
     // Bird (all 4): width: 18px, height: 12px
     // Letter/number: width: 24px, height: 24px
     
-    // TODO: REMAKE MEMORY MODULES
     // Pipe memory module
     reg [11:0] pipe_tex_addr;
     reg [5:0] pipe_tex_q;
-    localparam [4:0] PIPE_MAX_X=17;
-    localparam [6:0] PIPE_MAX_Y=87;
+    localparam [4:0] PIPE_MAX_X=16;
+    localparam [6:0] PIPE_MAX_Y=86;
     pipes pipe_tex (.address(pipe_tex_addr), .clock(clk), .q(pipe_tex_q));
 
     // Bird memory module
     reg [9:0] bird_tex_addr;
     reg [5:0] bird_tex_q;
     localparam [4:0] BIRD_MAX_X=18;
-    localparam [3:0] BIRD_MAX_Y=13;
+    localparam [3:0] BIRD_MAX_Y=12;
     birds bird_tex (.address(bird_tex_addr), .clock(clk), .q(bird_tex_q));
 
     // Letter/number memory module
     reg [13:0] char_tex_addr;
     reg [5:0] char_tex_q;
-    localparam [4:0] BIRD_MAX_X=25;
-    localparam [4:0] BIRD_MAX_Y=25;
+    localparam [4:0] CHAR_MAX_X=24;
+    localparam [4:0] CHAR_MAX_Y=24;
     chars char_tex (.address(char_tex_addr), .clock(clk), .q(char_tex_q));
 
 
     // Variables for displaying and flushing frame buffer
     reg [31:0] fps_clock_count;
     reg flushing;
-    reg [9:0] x_flush;
-    reg [8:0] y_flush;
+    reg [8:0] x_flush;
+    reg [7:0] y_flush;
     reg frame_plot_odd;
 
 
     // Variables for plotting
-    reg [6:0] tex_code, prev_tex_code;
-    reg [17:0] coordinates, prev_coor;
+    reg [6:0] tex_code;
+    reg signed [9:0] mid_x;
+    reg signed [8:0] mid_y;
+    reg negative_coordinates;
     reg multiplayer;        // Not much difference in final output: just a line down the middle of the screen
     reg dummy;
     reg plotting;
-    reg [8:0] curr_x;
-    reg [7:0] curr_y;
+    reg signed [9:0] curr_x;
+    reg signed [8:0] curr_y;
 
     // Variables for filling frame with one color
     reg fill_init;
@@ -120,7 +118,9 @@ module render(input logic clk, input logic rst_n,
             frame_plot_odd <= 0;
 
             tex_code <= 0;
-            coordinates <= 0;
+            mid_x <= 0;
+            mid_y <= 0;
+            negative_coordinates <= 0;
             multiplayer <= 0;
             dummy <= 0;
             plotting <= 0;
@@ -165,7 +165,6 @@ module render(input logic clk, input logic rst_n,
                 // Increment clock count no matter what
                 fps_clock_count <= fps_clock_count + 1;
 
-
                 // Plot texture
                 if (plotting) begin
                     // Plot entire frame to color specified
@@ -196,53 +195,121 @@ module render(input logic clk, input logic rst_n,
                     
                     // Plot texture onto frame
                     else begin
-                        // Not using a case statement because range of texture codes share same size
-                        if (plot_init) begin
-                            // TODO
+                        // Plot birds
+                        if (tex_code[5:0] >= 1 && tex_code[5:0] <= 4) begin
+                            if (plot_init) begin
+                                plot_init <= 0;
+                                // Avoid repeating code for all birds, since only difference is where the texture location starts
+                                // Use base texture code of birds (1) as reference and incrementing by size of bird texture (216)
+                                bird_tex_addr <= 216 * (tex_code[5:0] - 1);
+                                curr_x <= mid_x - BIRD_MAX_X >> 1;
+                                curr_y <= mid_y - BIRD_MAX_Y >> 1;
+                            end
+                            else begin
+                                if (curr_x < mid_x + BIRD_MAX_X >> 1 && curr_y < mid_y + BIRD_MAX_Y >> 1) begin
+                                    bird_tex_addr <= bird_tex_addr + 1;
+                                    curr_y <= curr_y + 1;
+                                    if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240) begin
+                                        frame_buffer[curr_x][curr_y] <= bird_tex_q;
+                                    end
+                                end
+                                else if (curr_x < mid_x + BIRD_MAX_X >> 1 && curr_y >= mid_y + BIRD_MAX_Y >> 1) begin
+                                    curr_x <= curr_x + 1;
+                                    curr_y <= mid_y - BIRD_MAX_Y >> 1;
+                                end
+                                else begin
+                                    plotting <= 0;
+                                    slave_waitrequest <= 0;
+                                end
+                            end
                         end
-                        else begin
-                            // Plot bird
-                            if (tex_code[5:0] >= 1 && tex_code[5:0] <= 4) begin
-                                // TODO
-                            end
 
-                            // Plot pipe
-                            else if (tex_code[5:0] == 5 || tex_code[5:0] == 6) begin
-                                // TODO
+                        // Plot pipe
+                        else if (tex_code[5:0] == 5 || tex_code[5:0] == 6) begin
+                            if (plot_init) begin
+                                plot_init <= 0;
+                                // Avoid extra code by same method, only that base texture code is 5 and pipe texture size is 1376
+                                bird_tex_addr <= 1376 * (tex_code[5:0] - 5);
+                                curr_x <= mid_x - PIPE_MAX_X >> 1;
+                                curr_y <= mid_y - PIPE_MAX_Y >> 1;
                             end
-
-                            // Plot letter/characters
-                            else if (tex_code[5:0] >= 7 && tex_code[5:0] <= 30) begin
-                                // TODO
+                            else begin
+                                if (curr_x < mid_x + PIPE_MAX_X >> 1 && curr_y < mid_y + PIPE_MAX_Y >> 1) begin
+                                    bird_tex_addr <= bird_tex_addr + 1;
+                                    curr_y <= curr_y + 1;
+                                    if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240) begin
+                                        frame_buffer[curr_x][curr_y] <= bird_tex_q;
+                                    end
+                                end
+                                else if (curr_x < mid_x + PIPE_MAX_X >> 1 && curr_y >= mid_y + PIPE_MAX_Y >> 1) begin
+                                    curr_x <= curr_x + 1;
+                                    curr_y <= mid_y - PIPE_MAX_Y >> 1;
+                                end
+                                else begin
+                                    plotting <= 0;
+                                    slave_waitrequest <= 0;
+                                end
                             end
                         end
+
+                        // Plot letter/characters
+                        else if (tex_code[5:0] >= 7 && tex_code[5:0] <= 30) begin
+                            if (plot_init) begin
+                                plot_init <= 0;
+                                // Avoid extra code by same method, only that base texture code is 7 and pipe texture size is 576
+                                bird_tex_addr <= 576 * (tex_code[5:0] - 7);
+                                curr_x <= mid_x - CHAR_MAX_X >> 1;
+                                curr_y <= mid_y - CHAR_MAX_Y >> 1;
+                            end
+                            else begin
+                                if (curr_x < mid_x + CHAR_MAX_X >> 1 && curr_y < mid_y + CHAR_MAX_Y >> 1) begin
+                                    bird_tex_addr <= bird_tex_addr + 1;
+                                    curr_y <= curr_y + 1;
+                                    if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240) begin
+                                        frame_buffer[curr_x][curr_y] <= bird_tex_q;
+                                    end
+                                end
+                                else if (curr_x < mid_x + CHAR_MAX_X >> 1 && curr_y >= mid_y + CHAR_MAX_Y >> 1) begin
+                                    curr_x <= curr_x + 1;
+                                    curr_y <= mid_y - CHAR_MAX_Y >> 1;
+                                end
+                                else begin
+                                    plotting <= 0;
+                                    slave_waitrequest <= 0;
+                                end
+                            end
+                        end
+
+                        // Do nothing if bogus texture code
                         
                     end
                 end
 
-                // Module config (singleplayer/multiplayer)
+                // Module config
                 else if (slave_write) begin
                     case (slave_address)
                         0: multiplayer <= slave_writedata[0];
-                        1: coordinates <= slave_writedata[17:0];
-                        2: tex_code <= slave_writedata[6:0];
+                        1: mid_x <= slave_writedata[8:0];
+                        2: mid_y <= slave_writedata[7:0];
+                        3: negative_coordinates <= slave_writedata[0];
+                        4: tex_code <= slave_writedata[6:0];
 
                         // Initiate texture plotting
-                        4: begin
+                        6: begin
                             slave_waitrequest <= 1;
                             plotting <= 1;
                             plot_init <= 1;
                             fill_init <= 1;
-
-                            prev_tex_code <= tex_code;
-                            prev_coor <= coordinate;
+                            bird_tex_addr <= 0;
+                            pipe_tex_addr <= 0;
+                            char_tex_addr <= 0;
                         end
                         default: dummy <= dummy;
                     endcase
                 end
 
                 // Response to same frame check
-                else if (slave_read && slave_address == 3) begin
+                else if (slave_read && slave_address == 5) begin
                     slave_readdata <= frame_plot_odd;
                 end
             end
