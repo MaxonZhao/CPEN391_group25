@@ -40,6 +40,10 @@ module render(input logic clk, input logic rst_n,
     reg [7:0] y_prev;
     always_ff @(posedge clk, negedge rst_n) begin
         if (~rst_n) begin
+            red_out <= 0;
+            green_out <= 0;
+            blue_out <= 0;
+
             x_prev = 10'b1111111111;
             y_prev = 9'b111111111;
         end
@@ -62,21 +66,21 @@ module render(input logic clk, input logic rst_n,
     
     // Pipe memory module
     reg [11:0] pipe_tex_addr;
-    reg [5:0] pipe_tex_q;
+    wire [5:0] pipe_tex_q;
     localparam [4:0] PIPE_MAX_X=16;
     localparam [6:0] PIPE_MAX_Y=86;
     pipes pipe_tex (.address(pipe_tex_addr), .clock(clk), .q(pipe_tex_q));
 
     // Bird memory module
     reg [9:0] bird_tex_addr;
-    reg [5:0] bird_tex_q;
+    wire [5:0] bird_tex_q;
     localparam [4:0] BIRD_MAX_X=18;
     localparam [3:0] BIRD_MAX_Y=12;
     birds bird_tex (.address(bird_tex_addr), .clock(clk), .q(bird_tex_q));
 
     // Letter/number memory module
     reg [13:0] char_tex_addr;
-    reg [5:0] char_tex_q;
+    wire [5:0] char_tex_q;
     localparam [4:0] CHAR_MAX_X=24;
     localparam [4:0] CHAR_MAX_Y=24;
     chars char_tex (.address(char_tex_addr), .clock(clk), .q(char_tex_q));
@@ -88,6 +92,7 @@ module render(input logic clk, input logic rst_n,
     reg [8:0] x_flush;
     reg [7:0] y_flush;
     reg frame_plot_odd;
+    reg flush_now;
 
 
     // Variables for plotting
@@ -95,7 +100,6 @@ module render(input logic clk, input logic rst_n,
     reg signed [9:0] mid_x;
     reg signed [8:0] mid_y;
     reg negative_coordinates;
-    reg multiplayer;        // Not much difference in final output: just a line down the middle of the screen
     reg dummy;
     reg plotting;
     reg signed [9:0] curr_x;
@@ -111,17 +115,24 @@ module render(input logic clk, input logic rst_n,
     // 50Mhz clock and 30fps output, so 1,666,666 cycles per frame
     always_ff @(posedge clk, negedge rst_n) begin
         if (~rst_n) begin
+            frame_buffer <= '{default:0};
+            frame_out <= '{default:0};
+
+            bird_tex_addr <= 0;
+            pipe_tex_addr <= 0;
+            char_tex_addr <= 0;
+
             fps_clock_count <= 0;
             flushing <= 0;
             x_flush <= 0;
             y_flush <= 0;
             frame_plot_odd <= 0;
+            flush_now <= 0;
 
             tex_code <= 0;
             mid_x <= 0;
             mid_y <= 0;
             negative_coordinates <= 0;
-            multiplayer <= 0;
             dummy <= 0;
             plotting <= 0;
             curr_x <= 0;
@@ -135,8 +146,8 @@ module render(input logic clk, input logic rst_n,
         end
         else begin
             // Flush to frame buffer for 30fps display (1666666 - 320*240 - 240 = 1589626)
-            // THIS IS APPROXIMATE, will adjust this parameter based on performance
-            if (fps_clock_count == 1589865) begin
+            // THIS IS APPROXIMATE (should be good enough), will adjust this parameter based on performance (if change, change below as well)
+            if (fps_clock_count >= 1589865 && ~slave_waitrequest || flush_now) begin
                 if (flushing) begin
                     if (x_flush < 320) begin
                         if (y_flush < 240) begin
@@ -153,6 +164,7 @@ module render(input logic clk, input logic rst_n,
                         flushing <= 0;
                         fps_clock_count <= 0;
                         slave_waitrequest <= 0;
+                        flush_now <= 0;
                     end
                 end
                 else begin
@@ -165,11 +177,14 @@ module render(input logic clk, input logic rst_n,
             end
             // Main logic
             else begin
-                // Increment clock count no matter what
-                fps_clock_count <= fps_clock_count + 1;
+                // Increment clock count no matter what (except when it is already scheduled)
+                if (~flush_now) fps_clock_count <= fps_clock_count + 1;
 
                 // Plot texture
                 if (plotting) begin
+                    // Flush to frame buffer after plotting this texture
+                    if (fps_clock_count == 1589865) flush_now <= 1;
+
                     // Plot entire frame to color specified
                     if (tex_code[6]) begin
                         if (fill_init) begin
@@ -283,20 +298,40 @@ module render(input logic clk, input logic rst_n,
                             end
                         end
 
+                        // Plot splitscreen line
+                        else if (tex_code[5:0] == 31) begin
+                            if (plot_init) begin
+                                plot_init <= 0;
+                                curr_x <= 159;
+                                curr_y <= 0;
+                            end
+                            else begin
+                                if (curr_y < 240) begin
+                                    curr_y <= curr_y + 1;
+                                    frame_buffer[curr_x][curr_y] <= 'b000000;   // Make splitscreen black for now
+                                end
+                                else begin
+                                    plotting <= 0;
+                                    slave_waitrequest <= 0;
+                                end
+                            end
+                        end
+
                         // Do nothing if bogus texture code
-                        
                     end
                 end
 
                 // Module config
                 else if (slave_write) begin
                     case (slave_address)
-                        0: multiplayer <= slave_writedata[0];
-                        1: mid_x <= begin 
-                                        if (negative_coordinates) -1 * slave_writedata[8:0]; 
-                                        else slave_writedata[8:0]; 
-                                    end
-                        2: mid_y <= slave_writedata[7:0];
+                        1:  begin 
+                                if (negative_coordinates) mid_x <= -1 * slave_writedata[8:0]; 
+                                else mid_x <= slave_writedata[8:0]; 
+                            end
+                        2:  begin
+                                if (negative_coordinates) mid_y <= -1 * slave_writedata[7:0];
+                                else mid_y <= slave_writedata[7:0];
+                            end
                         3: negative_coordinates <= slave_writedata[0];
                         4: tex_code <= slave_writedata[6:0];
 
