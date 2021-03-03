@@ -52,7 +52,7 @@ class SignUpActivity : MvvmActivity<ActivitySignupBinding>() {
             val email = binding.email.editText!!.text.toString()
             val password = binding.password.editText!!.text.toString()
             val countryCode = binding.countryCode.fullNumber
-            val phoneNo = countryCode + binding.phoneNo.editText!!.text.toString()
+            val phoneNo = "+" + countryCode + binding.phoneNo.editText!!.text.toString()
             val user: User = User(
                 fullName,
                 username,

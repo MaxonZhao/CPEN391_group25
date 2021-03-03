@@ -37,6 +37,10 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
         binding.loginBtn.setOnClickListener {
             loginUser()
         }
+
+        binding.guestBtn.setOnClickListener {
+            startActivity(Intent(this, StartActivity::class.java))
+        }
     }
 
     override fun initObserver() {
