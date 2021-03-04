@@ -52,6 +52,9 @@ module render(
     // Pipe (both up and down): width: 16px, height: 86px
     // Bird (all 4): width: 18px, height: 12px
     // Letter/number: width: 24px, height: 24px
+    // TODO: Support transparency, do by:
+    //      Adding 1 bit to texture RGB values: T_RR_GG_BB, T for transparency
+    //      1: Plot color, 0: Transparent
     
     // Pipe memory module
     reg [12:0] pipe_tex_addr;
