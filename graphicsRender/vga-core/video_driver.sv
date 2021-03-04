@@ -1,7 +1,7 @@
 module video_driver
 	#(parameter WIDTH = 640, parameter HEIGHT = 480)
-	(CLOCK_50, reset, x, y, r, g, b, VGA_R, VGA_G, VGA_B, VGA_BLANK_N, VGA_CLK, VGA_HS, VGA_SYNC_N, VGA_VS); 
-	input CLOCK_50;
+	(clk, reset, x, y, r, g, b, VGA_R, VGA_G, VGA_B, VGA_BLANK_N, VGA_CLK, VGA_HS, VGA_SYNC_N, VGA_VS); 
+	input clk;
 	input reset;
 	output reg [9:0] x;
 	output reg [8:0] y;
@@ -25,6 +25,13 @@ module video_driver
 	localparam integer X_STOP = X_START + X_SPAN;
 	localparam integer Y_STOP = Y_START + Y_SPAN;
 	localparam integer BLOCK_STOP = BLOCK - 1;
+
+	wire [9:0] vga_r_10;
+	wire [9:0] vga_g_10;
+	wire [9:0] vga_b_10;
+	assign VGA_R = vga_r_10[9:2];
+	assign VGA_G = vga_g_10[9:2];
+	assign VGA_B = vga_b_10[9:2];
 	
 	wire read_enable;
 	wire end_of_active_frame;
@@ -36,7 +43,8 @@ module video_driver
 	wire vga_data_enable;
 	
 	reg read_enable_last;
-	wire CLOCK_25;
+	// wire CLOCK_25;
+	reg CLOCK_25 = 0;
 	wire locked; // ignore - is PLL locked?
 	reg [9:0] xt;
 	reg [8:0] yt;
@@ -44,9 +52,9 @@ module video_driver
 	reg [8:0] yd;
 	
 	// Use the PLL (a clock generator) for normal operation.  To simulate, use the line below that.
-	CLOCK25_PLL c25_gen (.refclk(CLOCK_50), .rst(reset), .outclk_0(CLOCK_25), .locked);	
-	//always @(posedge CLOCK_50)
-	//	CLOCK_25 <= ~CLOCK_25;
+	CLOCK25_PLL c25_gen (.refclk(clk), .rst(reset), .outclk_0(CLOCK_25), .locked);	
+	// always @(posedge clk)
+	// 	CLOCK_25 <= ~CLOCK_25;
 	
 	always @(posedge CLOCK_25) begin
 		if(reset) begin
@@ -140,9 +148,9 @@ module video_driver
 		.vga_h_sync,				//	VGA H_SYNC
 		.vga_v_sync,				//	VGA V_SYNC
 		.vga_data_enable,			// VGA DEN
-		.vga_red(VGA_R),			//	VGA Red[9:0]
-		.vga_green(VGA_G),	 	//	VGA Green[9:0]
-		.vga_blue(VGA_B),	   	//	VGA Blue[9:0]
+		.vga_red(vga_r_10),			//	VGA Red[9:0]
+		.vga_green(vga_g_10),	 	//	VGA Green[9:0]
+		.vga_blue(vga_b_10),	   	//	VGA Blue[9:0]
 		.vga_color_data()	   	//	VGA Color[9:0] for TRDB_LCM
 	);
 endmodule

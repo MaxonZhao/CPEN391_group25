@@ -5,15 +5,15 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 	input logic [3:0] KEY;
 	input logic [9:0] SW;
 
-	input CLOCK_50;
-	output [7:0] VGA_R;
-	output [7:0] VGA_G;
-	output [7:0] VGA_B;
-	output VGA_BLANK_N;
-	output VGA_CLK;
-	output VGA_HS;
-	output VGA_SYNC_N;
-	output VGA_VS;
+	input logic CLOCK_50;
+	output logic [7:0] VGA_R;
+	output logic [7:0] VGA_G;
+	output logic [7:0] VGA_B;
+	output logic VGA_BLANK_N;
+	output logic VGA_CLK;
+	output logic VGA_HS;
+	output logic VGA_SYNC_N;
+	output logic VGA_VS;
 
 	wire slave_waitrequest;
 	reg [3:0] slave_address;
@@ -21,7 +21,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 	wire [31:0] slave_readdata;
 	reg [31:0] slave_writedata;
 	
-	render renderer (.clk(CLOCK_50), .rst_n(~KEY[0]),
+	render renderer (.clk(CLOCK_50), .rst_n(KEY[0]),
 
 			.slave_waitrequest(slave_waitrequest), .slave_address(slave_address),
 			.slave_read(slave_read), .slave_readdata(slave_readdata),
@@ -36,7 +36,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 	reg [4:0] done_micro;
 	reg drawing;
 	
-	always_ff @(posedge CLOCK_50) begin
+	always_ff @(posedge CLOCK_50, negedge KEY[0]) begin
 		if (~KEY[0]) begin
 			macro_state <= 0;
 			micro_state <= 0;
@@ -46,7 +46,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 			// Default VGA screen is black
 		end
 		else begin
-			if (KEY[1] && ~drawing) begin
+			if (~KEY[1] && ~drawing) begin
 				drawing <= 1;
 				macro_state <= macro_state + 1;
 				micro_state <= 0;
@@ -61,7 +61,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 						if (~slave_waitrequest && done_micro == 31) begin
 							slave_address <= 4;
 							slave_write <= 1;
-							slave_writedata <= 'b111100;
+							slave_writedata <= 'b110_1010;
 							done_micro <= 0;
 						end
 						else if (done_micro == 0) begin
@@ -96,7 +96,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 						if (~slave_waitrequest && done_micro == 31) begin
 							slave_address <= 4;
 							slave_write <= 1;
-							slave_writedata <= 'b0000101;
+							slave_writedata <= 'b000_0101;
 							done_micro <= 0;
 						end
 						else if (done_micro == 0) begin
@@ -152,15 +152,145 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 					end
 				endcase
 			end
+
+			// Plot 1st bird at side of screen
+			else if (macro_state == 3 && drawing) begin
+				case (micro_state)
+					// Write texture code
+					0: begin
+						if (~slave_waitrequest && done_micro == 31) begin
+							slave_address <= 4;
+							slave_write <= 1;
+							slave_writedata <= 'b000_0001;
+							done_micro <= 0;
+						end
+						else if (done_micro == 0) begin
+							slave_write <= 0;
+							micro_state <= 1;
+						end
+					end
+
+					// Write x coordinate
+					1: begin
+						if (~slave_waitrequest && done_micro == 0) begin
+							slave_address <= 1;
+							slave_write <= 1;
+							slave_writedata <= 0;
+							done_micro <= 1;
+						end
+						else if (done_micro == 1) begin
+							slave_write <= 0;
+							micro_state <= 2;
+						end
+					end
+
+					// Write y coordinate
+					2: begin
+						if (~slave_waitrequest && done_micro == 1) begin
+							slave_address <= 2;
+							slave_write <= 1;
+							slave_writedata <= 119;
+							done_micro <= 2;
+						end
+						else if (done_micro == 2) begin
+							slave_write <= 0;
+							micro_state <= 3;
+						end
+					end
+
+					// Plot
+					3: begin
+						if (~slave_waitrequest && done_micro == 2) begin
+							slave_address <= 6;
+							slave_write <= 1;
+							done_micro <= 3;
+						end
+						else if (done_micro == 3) begin
+							slave_write <= 0;
+							micro_state <= 4;
+						end
+					end
+
+					// Done
+					4: begin
+						drawing <= 0;
+					end
+				endcase
+			end
+
+			// Plot letter a at bottom of screen
+			else if (macro_state == 4 && drawing) begin
+				case (micro_state)
+					// Write texture code
+					0: begin
+						if (~slave_waitrequest && done_micro == 31) begin
+							slave_address <= 4;
+							slave_write <= 1;
+							slave_writedata <= 'b000_1001;
+							done_micro <= 0;
+						end
+						else if (done_micro == 0) begin
+							slave_write <= 0;
+							micro_state <= 1;
+						end
+					end
+
+					// Write x coordinate
+					1: begin
+						if (~slave_waitrequest && done_micro == 0) begin
+							slave_address <= 1;
+							slave_write <= 1;
+							slave_writedata <= 159;
+							done_micro <= 1;
+						end
+						else if (done_micro == 1) begin
+							slave_write <= 0;
+							micro_state <= 2;
+						end
+					end
+
+					// Write y coordinate
+					2: begin
+						if (~slave_waitrequest && done_micro == 1) begin
+							slave_address <= 2;
+							slave_write <= 1;
+							slave_writedata <= 239;
+							done_micro <= 2;
+						end
+						else if (done_micro == 2) begin
+							slave_write <= 0;
+							micro_state <= 3;
+						end
+					end
+
+					// Plot
+					3: begin
+						if (~slave_waitrequest && done_micro == 2) begin
+							slave_address <= 6;
+							slave_write <= 1;
+							done_micro <= 3;
+						end
+						else if (done_micro == 3) begin
+							slave_write <= 0;
+							micro_state <= 4;
+						end
+					end
+
+					// Done
+					4: begin
+						drawing <= 0;
+					end
+				endcase
+			end
 		end
 	end
 	
-	assign HEX0 = 7'b0100001;
+	assign HEX0 = 7'b1000010;
 	assign HEX1 = 7'b1000001;
 	assign HEX2 = 7'b0000000;
-	assign HEX3 = 7'b0110000;
-	assign HEX4 = 7'b0000001;
+	assign HEX3 = 7'b0000110;
+	assign HEX4 = 7'b1000000;
 	assign LEDR = 10'b0101010101;
-	assign HEX5 = 7'b1;
+	assign HEX5 = 7'b1111111;
 	
 endmodule

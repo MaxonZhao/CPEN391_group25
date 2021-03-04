@@ -1,5 +1,5 @@
 `timescale 1ns / 1ns
-module render_test();
+module render_tb();
 
     logic clk, rst_n;
 
@@ -9,16 +9,16 @@ module render_test();
 	reg slave_read, slave_write;
 	reg [31:0] slave_writedata;
 
-    logic [7:0] VGA_R;
-	logic [7:0] VGA_G;
-	logic [7:0] VGA_B;
+    logic [9:0] VGA_R;
+	logic [9:0] VGA_G;
+	logic [9:0] VGA_B;
 	logic VGA_BLANK_N;
 	logic VGA_CLK;
 	logic VGA_HS;
 	logic VGA_SYNC_N;
 	logic VGA_VS;
 	
-	render (.clk(clk), .rst_n(rst_n),
+	render renderer (.clk(clk), .rst_n(rst_n),
 
 			.slave_waitrequest(slave_waitrequest), .slave_address(slave_address),
 			.slave_read(slave_read), .slave_readdata(slave_readdata),
@@ -41,7 +41,7 @@ module render_test();
         rst_n <= 1;
         #20;
         rst_n <= 0;
-        #20;
+        #60;
         rst_n <= 1;
         #20;
 
@@ -103,7 +103,7 @@ module render_test();
         wait(~slave_waitrequest);
 
         //---------------------------------------------------------------------------
-        // Plot pipe
+        // Plot pipe (down)
         slave_address <= 4;
         slave_writedata <= 'b0_00_0110;     // texture code
         #20;
