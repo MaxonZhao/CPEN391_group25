@@ -54,7 +54,7 @@ module video_driver
 	// Use the PLL (a clock generator) for normal operation.  To simulate, use the line below that.
 	CLOCK25_PLL c25_gen (.refclk(clk), .rst(reset), .outclk_0(CLOCK_25), .locked);	
 	// always @(posedge clk)
-	// 	CLOCK_25 <= ~CLOCK_25;
+		CLOCK_25 <= ~CLOCK_25;
 	
 	always @(posedge CLOCK_25) begin
 		if(reset) begin
