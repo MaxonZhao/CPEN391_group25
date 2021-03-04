@@ -1,11 +1,13 @@
-module render(input logic clk, input logic rst_n,
+module render(
+            input logic clk, input logic rst_n,
+
            // slave (CPU-facing)
            output logic slave_waitrequest,
            input logic [3:0] slave_address,
            input logic slave_read, output logic [31:0] slave_readdata,
            input logic slave_write, input logic [31:0] slave_writedata,
 
-        //    // master (memory-facing) (REMOVE IF SDRAM NOT USED AT THE END)
+        //    // master (memory-facing) (REMOVE IF NOT USED AT THE END)
         //    input logic master_waitrequest,
         //    output logic [31:0] master_address,
         //    output logic master_read, input logic [31:0] master_readdata, input logic master_readdatavalid,
@@ -14,7 +16,9 @@ module render(input logic clk, input logic rst_n,
            // VGA pins
             output logic [7:0] VGA_R, output logic [7:0] VGA_G,  output logic [7:0] VGA_B,   
             output logic VGA_BLANK_N, output logic VGA_CLK,
-            output logic VGA_HS, output logic VGA_SYNC_N, output logic VGA_VS);
+            output logic VGA_HS, output logic VGA_SYNC_N, output logic VGA_VS
+
+            );
 
     wire [9:0] x;
     wire [8:0] y;
@@ -22,42 +26,26 @@ module render(input logic clk, input logic rst_n,
 
     // The video driver has active high reset!
     video_driver #(.WIDTH(320), .HEIGHT(240))
-		v1 (.clk(clk), .reset(~rst_n), .x(x), .y(y), .r({red_out, 6'd0}), .g({green_out, 6'd0}), .b({blue_out, 6'd0}),
+		v1 (.CLOCK_50(clk), .reset(~rst_n), .x(x), .y(y), .r({red_out, 6'd0}), .g({green_out, 6'd0}), .b({blue_out, 6'd0}),
 			 .VGA_R(VGA_R), .VGA_G(VGA_G), .VGA_B(VGA_B), .VGA_BLANK_N(VGA_BLANK_N),
 			 .VGA_CLK(VGA_CLK), .VGA_HS(VGA_HS), .VGA_SYNC_N(VGA_SYNC_N), .VGA_VS(VGA_VS));
 
     // Frame data: video driver constantly writes this frame to screen
     // Data: RR_GGBB, first index: x-coordinate, second index: y-coordinate
-    reg [5:0] frame_out [0:319][0:239];
+    wire [16:0] frame_out_addr_real;
+    reg [16:0] frame_out_addr;
+    reg [5:0] frame_out_data;
+    reg frame_out_wren;
+    reg [5:0] frame_out_q;
+    frame frame_out (.address(frame_out_addr_real), .clock(clk), .data(frame_out_data), .wren(frame_out_wren), .q(frame_out_q));
 
     // Frame buffer: where we "draw" our pixels to
     // Same format as frame_out
-    reg [5:0] frame_buffer [0:319][0:239]; 
-
-
-    // Constantly flush frame data to VGA pins
-    reg [8:0] x_prev;
-    reg [7:0] y_prev;
-    always_ff @(posedge clk, negedge rst_n) begin
-        if (~rst_n) begin
-            red_out <= 0;
-            green_out <= 0;
-            blue_out <= 0;
-
-            x_prev = 10'b1111111111;
-            y_prev = 9'b111111111;
-        end
-        else begin
-            // Set new color when color for new coordinate requested
-            if (x_prev != x || y_prev != y) begin
-                x_prev <= x;
-                y_prev <= y;
-                red_out <= frame_out[x][y][5:4];
-                green_out <= frame_out[x][y][3:2];
-                blue_out <= frame_out[x][y][1:0];
-            end
-        end
-    end
+    reg [16:0] frame_buffer_addr;
+    reg [5:0] frame_buffer_data;
+    reg frame_buffer_wren;
+    reg [5:0] frame_buffer_q;
+    frame frame_buffer (.address(frame_buffer_addr), .clock(clk), .data(frame_buffer_data), .wren(frame_buffer_wren), .q(frame_buffer_q));
 
     // Texture memory modules instantiations
     // Pipe (both up and down): width: 16px, height: 86px
@@ -89,8 +77,6 @@ module render(input logic clk, input logic rst_n,
     // Variables for displaying and flushing frame buffer
     reg [31:0] fps_clock_count;
     reg flushing;
-    reg [8:0] x_flush;
-    reg [7:0] y_flush;
     reg frame_plot_odd;
     reg flush_now;
 
@@ -105,27 +91,56 @@ module render(input logic clk, input logic rst_n,
     reg signed [9:0] curr_x;
     reg signed [8:0] curr_y;
 
+    // Constantly flush frame data to VGA pins
+    reg [8:0] x_prev;
+    reg [7:0] y_prev;
+    reg reading;
+    always_ff @(posedge clk, negedge rst_n) begin
+        if (~rst_n) begin
+            red_out <= 0;
+            green_out <= 0;
+            blue_out <= 0;
+            reading <= 0;
+
+            x_prev = 10'b1111111111;
+            y_prev = 9'b111111111;
+        end
+        else if (~flushing) begin
+            // Set new color when color for new coordinate requested
+            // DONT UPDATE WHEN FRAME BUFFER IS FLUSHING
+            if (x_prev != x || y_prev != y) begin
+                x_prev <= x;
+                y_prev <= y;
+                reading <= 1;
+            end
+            else if (reading) begin
+                red_out <= frame_out_q[5:4];
+                green_out <= frame_out_q[3:2];
+                blue_out <= frame_out_q[1:0];
+                reading <= 0;
+            end
+        end
+    end
+
     // Variables for filling frame with one color
     reg fill_init;
 
     // Variables for plotting textures
     reg plot_init;
 
+    // Use different register for address for different case
+    assign frame_out_addr_real = flushing ? frame_out_addr : x * 240 + y;
+
     // Always block for main logic
     // 50Mhz clock and 30fps output, so 1,666,666 cycles per frame
     always_ff @(posedge clk, negedge rst_n) begin
         if (~rst_n) begin
-            frame_buffer <= '{default:0};
-            frame_out <= '{default:0};
-
             bird_tex_addr <= 0;
             pipe_tex_addr <= 0;
             char_tex_addr <= 0;
 
             fps_clock_count <= 0;
             flushing <= 0;
-            x_flush <= 0;
-            y_flush <= 0;
             frame_plot_odd <= 0;
             flush_now <= 0;
 
@@ -147,17 +162,14 @@ module render(input logic clk, input logic rst_n,
         else begin
             // Flush to frame buffer for 30fps display (1666666 - 320*240 - 240 = 1589626)
             // THIS IS APPROXIMATE (should be good enough), will adjust this parameter based on performance (if change, change below as well)
-            if (fps_clock_count >= 1589865 && ~slave_waitrequest || flush_now) begin
+            if ((fps_clock_count >= 1589865 && ~slave_waitrequest) || flush_now) begin
                 if (flushing) begin
-                    if (x_flush < 320) begin
-                        if (y_flush < 240) begin
-                            frame_out[x_flush][y_flush] <= frame_buffer[x_flush][y_flush];
-                            y_flush <= y_flush + 1;
-                        end
-                        else begin
-                            x_flush <= x_flush + 1;
-                            y_flush <= 0;
-                        end
+                    if (frame_buffer_addr < 76800) begin
+                        frame_out_wren <= 1;
+                        frame_out_data <= frame_buffer_q;
+                        frame_buffer_addr <= frame_buffer_addr + 1;
+
+                        if (frame_buffer_addr != 0) frame_out_addr <= frame_out_addr + 1;
                     end
                     else begin
                         frame_plot_odd <= ~frame_plot_odd;
@@ -165,13 +177,16 @@ module render(input logic clk, input logic rst_n,
                         fps_clock_count <= 0;
                         slave_waitrequest <= 0;
                         flush_now <= 0;
+
+                        frame_out_wren <= 0;
+                        frame_buffer_addr <= 0;     // NOTE: UNKNOWN BEHAVIOR WHEN EXCEEDING MEMORY RANGE
                     end
                 end
                 else begin
                     slave_waitrequest <= 1;
                     flushing <= 1;
-                    x_flush <= 0;
-                    y_flush <= 0;
+                    frame_out_addr <= 0;
+                    frame_buffer_addr <= 0;
                 end
 
             end
@@ -188,23 +203,20 @@ module render(input logic clk, input logic rst_n,
                     // Plot entire frame to color specified
                     if (tex_code[6]) begin
                         if (fill_init) begin
-                            curr_x <= 0;
-                            curr_y <= 0;
+                            frame_buffer_addr <= 0;
+                            frame_buffer_wren <= 1;
+                            frame_buffer_data <= tex_code[5:0];
                             fill_init <= 0;
                         end
                         else begin
-                            // Plot top down first, then increment from left to right
-                            if (curr_x < 320 && curr_y < 240) begin
-                                curr_y <= curr_y + 1;
-                                frame_buffer[curr_x][curr_y] <= tex_code[5:0];
-                            end
-                            // Increment to next x
-                            else if (curr_x < 320 && curr_y >= 240) begin
-                                curr_x <= curr_x + 1;
-                                curr_y <= 0;
+                            if (frame_buffer_addr < 76800) begin
+                                frame_buffer_addr <= frame_buffer_addr + 1;
                             end
                             // End plot
                             else begin
+                                frame_buffer_wren <= 0;
+                                frame_buffer_addr <= 0;     // NOTE: UNKNOWN BEHAVIOR WHEN EXCEEDING MEMORY RANGE
+
                                 plotting <= 0;
                                 slave_waitrequest <= 0;
                             end
@@ -228,12 +240,18 @@ module render(input logic clk, input logic rst_n,
                                     bird_tex_addr <= bird_tex_addr + 1;
                                     curr_y <= curr_y + 1;
                                     if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240) begin
-                                        frame_buffer[curr_x][curr_y] <= bird_tex_q;
+                                        frame_buffer_data <= bird_tex_q;
+                                        frame_buffer_addr <= curr_x * 240 + y;
+                                        frame_buffer_wren <= 1;
+                                    end
+                                    else begin
+                                        frame_buffer_wren <= 0;
                                     end
                                 end
                                 else if (curr_x < mid_x + (BIRD_MAX_X >> 1) && curr_y >= mid_y + (BIRD_MAX_Y >> 1)) begin
                                     curr_x <= curr_x + 1;
                                     curr_y <= mid_y - (BIRD_MAX_Y >> 1);
+                                    frame_buffer_wren <= 0;
                                 end
                                 else begin
                                     plotting <= 0;
@@ -254,14 +272,19 @@ module render(input logic clk, input logic rst_n,
                             else begin
                                 if (curr_x < mid_x + (PIPE_MAX_X >> 1) && curr_y < mid_y + (PIPE_MAX_Y >> 1)) begin
                                     bird_tex_addr <= bird_tex_addr + 1;
-                                    curr_y <= curr_y + 1;
                                     if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240) begin
-                                        frame_buffer[curr_x][curr_y] <= bird_tex_q;
+                                        frame_buffer_data <= bird_tex_q;
+                                        frame_buffer_addr <= curr_x * 240 + y;
+                                        frame_buffer_wren <= 1;
+                                    end
+                                    else begin
+                                        frame_buffer_wren <= 0;
                                     end
                                 end
                                 else if (curr_x < mid_x + (PIPE_MAX_X >> 1) && curr_y >= mid_y + (PIPE_MAX_Y >> 1)) begin
                                     curr_x <= curr_x + 1;
                                     curr_y <= mid_y - (PIPE_MAX_Y >> 1);
+                                    frame_buffer_wren <= 0;
                                 end
                                 else begin
                                     plotting <= 0;
@@ -284,12 +307,18 @@ module render(input logic clk, input logic rst_n,
                                     bird_tex_addr <= bird_tex_addr + 1;
                                     curr_y <= curr_y + 1;
                                     if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240) begin
-                                        frame_buffer[curr_x][curr_y] <= bird_tex_q;
+                                        frame_buffer_data <= bird_tex_q;
+                                        frame_buffer_addr <= curr_x * 240 + y;
+                                        frame_buffer_wren <= 1;
+                                    end
+                                    else begin
+                                        frame_buffer_wren <= 0;
                                     end
                                 end
                                 else if (curr_x < mid_x + (CHAR_MAX_X >> 1) && curr_y >= mid_y + (CHAR_MAX_Y >> 1)) begin
                                     curr_x <= curr_x + 1;
                                     curr_y <= mid_y - (CHAR_MAX_Y >> 1);
+                                    frame_buffer_wren <= 0;
                                 end
                                 else begin
                                     plotting <= 0;
@@ -302,15 +331,18 @@ module render(input logic clk, input logic rst_n,
                         else if (tex_code[5:0] == 31) begin
                             if (plot_init) begin
                                 plot_init <= 0;
-                                curr_x <= 159;
+                                // curr_x <= 159;   // Don't need this: use 38160 directly below
                                 curr_y <= 0;
+                                frame_buffer_data <= 'b000000;
                             end
                             else begin
                                 if (curr_y < 240) begin
                                     curr_y <= curr_y + 1;
-                                    frame_buffer[curr_x][curr_y] <= 'b000000;   // Make splitscreen black for now
+                                    frame_buffer_wren <= 1;
+                                    frame_buffer_addr <= 38160 + y;
                                 end
                                 else begin
+                                    frame_buffer_wren <= 0;
                                     plotting <= 0;
                                     slave_waitrequest <= 0;
                                 end

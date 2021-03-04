@@ -21,7 +21,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 	wire [31:0] slave_readdata;
 	reg [31:0] slave_writedata;
 	
-	render (.clk(CLOCK_50), .rst_n(~KEY[0]),
+	render renderer (.clk(CLOCK_50), .rst_n(~KEY[0]),
 
 			.slave_waitrequest(slave_waitrequest), .slave_address(slave_address),
 			.slave_read(slave_read), .slave_readdata(slave_readdata),
