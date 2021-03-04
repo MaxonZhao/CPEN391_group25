@@ -4,159 +4,142 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
+import com.cpen391.appbase.network.SimpleObserver
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
+import com.cpen391.flappyaccount.Injection
+import com.cpen391.flappyaccount.consts.*
 import com.cpen391.flappyaccount.databinding.ActivitySignupBinding
 import com.cpen391.flappyaccount.model.bean.User
 import com.cpen391.flappyaccount.viewmodel.SignUpViewModel
-import com.google.firebase.FirebaseApp
 import com.google.firebase.database.*
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 
 class SignUpActivity : MvvmActivity<ActivitySignupBinding>() {
 
     private val signUpViewModel by viewModels<SignUpViewModel>()
-    private val mDatabase = FirebaseDatabase.getInstance()
-    private val mUserRef: DatabaseReference = mDatabase.getReference("User")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
+    }
 
+    override fun initView() {
+        super.initView()
         binding.registerButton.setOnClickListener{
             registerUser()
         }
-
-
-
-        Timber.d(mUserRef.toString() + " hello there")
-
-
     }
+
     override fun initObserver() {
+        val owner = this
+        signUpViewModel.apply {
+            registerResult.observe(owner, {
+                onRegisterResult(it)
+            })
 
+            fullNameHasError.observe(owner, {
+                displayFullNameErrorState(it)
+            })
+
+            usernameHasError.observe(owner,{
+                displayUsernameErrorState(it)
+            })
+
+            emailHasError.observe(owner, {
+                displayEmailErrorState(it)
+            })
+
+            phoneNoHasError.observe(owner, {
+                displayPhoneNoErrorState(it)
+            })
+
+            passwordHasError.observe(owner, {
+                displayPasswordErrorState(it)
+            })
+        }
     }
 
-    fun registerUser() {
-        val isValidated: Boolean =
-            validateFullName()    &&
-            validateUserName()    &&
-            validateEmail()       &&
-            validatePhoneNumber() &&
-                    validatePassword()
 
-        if (isValidated) {
-            val fullName = binding.fullName.editText!!.text.toString()
-            val username = binding.username.editText!!.text.toString()
-            val email = binding.email.editText!!.text.toString()
-            val password = binding.password.editText!!.text.toString()
-            val countryCode = binding.countryCode.fullNumber
-            val phoneNo = "+" + countryCode + binding.phoneNo.editText!!.text.toString()
-            val user: User = User(
-                fullName,
-                username,
-                email,
-                phoneNo,
-                password
-            )
-            mUserRef.child(user.userName).setValue(user).addOnSuccessListener {
-                Toast.makeText(this, "You are registered!", Toast.LENGTH_LONG).show()
-                finish()
+    private fun onRegisterResult(success: Boolean) {
+        if (success) {
+            Toast.makeText(applicationContext, "You are registered!", Toast.LENGTH_SHORT).show()
+            finish()
+        } else {
+            Toast.makeText(applicationContext, "something went wrong", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun registerUser() {
+        val fullName = binding.fullName.editText!!.text.toString()
+        val username = binding.username.editText!!.text.toString()
+        val email = binding.email.editText!!.text.toString()
+        val password = binding.password.editText!!.text.toString()
+        val countryCode = binding.countryCode.fullNumber
+        val phoneNo = binding.phoneNo.editText!!.text.toString()
+        signUpViewModel.registerUser(fullName,  username, email, phoneNo, password, countryCode)
+    }
+
+
+
+    private fun displayFullNameErrorState(error: Boolean) {
+        when (error) {
+            true -> binding.fullName?.error = "Field cannot be Empty"
+            false -> {
+                binding.fullName?.error = null
+                binding.fullName?.isErrorEnabled = false
             }
         }
-        else Timber.d("failed to register this user")
-    }
-    fun validateFullName(): Boolean {
-       val name: String = binding.fullName.editText?.text.toString()
-
-       if (name == null || name.isEmpty()) {
-           binding.fullName?.error = "Field cannot be Empty"
-           return false
-       } else {
-           binding.fullName?.error = null
-           binding.fullName?.isErrorEnabled = false
-           return true
-       }
     }
 
-    fun validateUserName(): Boolean {
-        val name: String = binding.username.editText?.text.toString()
-        val noWhitSpace: String = "^([a-zA-Z0-9!@#\$%^&*()-_=+;:'\"|~`<>?/{}]{1,16})\$"
-        val regex: Regex = Regex(noWhitSpace)
-
-        if (name == null || name.isEmpty()) {
-            binding.username?.error = "Field cannot be Empty"
-            return false
-        } else if (name.length >= 15) {
-            binding.username?.error = "Username too long"
-            return false
-        } else if (!name.matches(regex)) {
-            binding.username?.error = "White Spaces are not allowed"
-            return false
-        } else {
-            binding.username?.error = null
-            binding.username?.isErrorEnabled = false
-            return true
+    private fun displayUsernameErrorState(error: String) {
+        when (error) {
+            USERNAME_EMPTY -> binding.username.error = "Field cannot be Empty"
+            USERNAME_TOO_LONG -> binding.username.error = "Username too long"
+            USERNAME_HAS_WHITE_SPACE -> binding.username.error = "Username has white space"
+            USERNAME_VALID -> {
+                binding.username?.error = null
+                binding.username?.isErrorEnabled = false
+            }
         }
     }
 
-    fun validateEmail(): Boolean {
-        val emailAddr: String = binding.email.editText?.text.toString()
-        val emailPattern: String = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
-        val regex: Regex = Regex(emailPattern)
-
-        if (emailAddr == null || emailAddr.isEmpty()) {
-            binding.email?.error = "Field cannot be Empty"
-            return false
-        } else if (!emailAddr.matches(regex)) {
-            binding.email?.error = "Invalid email Address"
-            return false
-        } else {
-            binding.email?.error = null
-            return true
+    private fun displayEmailErrorState(error: String) {
+        when (error) {
+            EMAIL_EMPTY -> binding.email.error = "Field cannot be Empty"
+            EMAIL_INVALID -> binding.email.error = "Invalid email address"
+            EMAIL_VALID -> {
+                binding.email.error = null
+                binding.email.isErrorEnabled = false
+            }
         }
     }
 
-    fun validatePhoneNumber(): Boolean {
-        // todo: validate phone number according to country code
-        val phoneNo: String = binding.phoneNo.editText?.text.toString()
-
-        if (phoneNo == null || phoneNo.isEmpty()) {
-            binding.phoneNo?.error = "Field cannot be Empty"
-            return false
-        } else {
-            binding.phoneNo?.error = null
-            return true
+    private fun displayPhoneNoErrorState(error: Boolean) {
+        when (error) {
+            true -> binding.phoneNo.error = "Field cannot be Empty"
+            false -> {
+                binding.phoneNo.error = null
+                binding.phoneNo.isErrorEnabled = false
+            }
         }
     }
 
-    fun validatePassword(): Boolean {
-        val password: String = binding.password.editText?.text.toString()
-        val passwordVal: String = "^" +
-//            "(?=.*[0-9])" +             // at least 1 digit
-//            "(?=.*[a-z])" +             // at least 1 lower case letter
-//            "(?=.*[A-Z])" +             // at least 1 upper case letter
-            "[a-zA-Z]{4,}" +                                // any 4 or more letter
-            "(?=.*[!@#\$%^&+=]).*"      +                                     // at least 1 special character
-            "[a-zA-Z0-9!@#\$%^&*()-_=+;:'\"|~`<>?/{}]*"   +                   // no white space
-            "$"
-
-        val regex: Regex = Regex(passwordVal)
-
-
-        if (password == null || password.isEmpty()) {
-            binding.password?.error = "Field cannot be Empty"
-            return false
-        } else if (!password.matches(regex)) {
-            binding.password?.error = "Password is too weak"
-            return false
-        } else {
-            binding.password?.error = null
-            binding.password?.isErrorEnabled = false
-            return true
+    private fun displayPasswordErrorState(error: String) {
+        when (error) {
+            PASSWORD_EMPTY -> binding.password.error = "Field cannot be Empty"
+            PASSWORD_TOO_WEAK -> binding.password.error = "password is too weak"
+            PASSWORD_VALID -> {
+                binding.password.error = null
+                binding.password.isErrorEnabled = false
+            }
         }
     }
+
 
     override fun bind(): ActivitySignupBinding {
         return ActivitySignupBinding.inflate(layoutInflater)

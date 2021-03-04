@@ -59,6 +59,7 @@ repositories {
 
 dependencies {
 
+    implementation 'com.google.firebase:firebase-database-ktx:19.6.0'
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$junitAndroidVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"

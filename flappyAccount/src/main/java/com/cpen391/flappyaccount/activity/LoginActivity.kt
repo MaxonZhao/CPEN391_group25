@@ -1,128 +1,120 @@
 package com.cpen391.flappyaccount.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
+import com.cpen391.flappyaccount.consts.*
 import com.cpen391.flappyaccount.databinding.ActivityLoginBinding
-import com.cpen391.flappyaccount.model.bean.User
 import com.cpen391.flappyaccount.viewmodel.LoginViewModel
-import com.google.firebase.database.*
-import com.google.firebase.database.ktx.getValue
 import timber.log.Timber
 
 class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
 
+    private val context: Context = this
     private val loginViewModel by viewModels<LoginViewModel>()
-    private val mDatabase = FirebaseDatabase.getInstance()
-    private val mUserRef: DatabaseReference = mDatabase.getReference("User")
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
+    }
 
-        binding.signupBtn.setOnClickListener {
-            startActivity(Intent(this, SignUpActivity::class.java))
-        }
+    /*
+      init buttons for directing pages
+     */
+    override fun initView() {
+        super.initView()
+        binding.apply {
+            signupBtn.setOnClickListener {
+                startActivity(Intent(context, SignUpActivity::class.java))
+            }
 
-        binding.resetBtn.setOnClickListener {
-            startActivity(Intent(this, ForgetPasswordActivity::class.java))
-        }
+            resetBtn.setOnClickListener {
+                startActivity(Intent(context, ForgetPasswordActivity::class.java))
+            }
 
-        binding.loginBtn.setOnClickListener {
-            loginUser()
-        }
+            loginBtn.setOnClickListener {
+                val userEnteredUserName = binding.username.editText!!.text.toString().trim()
+                val userEnteredPassword = binding.password.editText!!.text.toString().trim()
+                loginViewModel.login(userEnteredUserName, userEnteredPassword)
+            }
 
-        binding.guestBtn.setOnClickListener {
-            startActivity(Intent(this, StartActivity::class.java))
+            guestBtn.setOnClickListener {
+                startActivity(Intent(context, StartActivity::class.java))
+            }
         }
     }
 
     override fun initObserver() {
-    }
+        val owner = this
+        loginViewModel.apply {
 
-    fun loginUser() {
-//        val isValid: Boolean = true
-        if (!validateUserName() || !validatePassword()) {
-            return
-        } else {
-            doLogin()
+            loginResult.observe(owner, {
+                onLoginResult(it)
+            })
+
+            usernameHasError.observe(owner, {
+                displayUsernameErrorState(it)
+            })
+
+            passwordHasError.observe(owner, {
+                displayPasswordErrorState(it)
+            })
+
         }
+
     }
 
-    fun doLogin() {
-        val userEnteredUserName = binding.username.editText!!.text.toString().trim()
-        val userEnteredPassword = binding.password.editText!!.text.toString().trim()
 
-        val checkUser: Query = mUserRef.orderByChild("userName").equalTo(userEnteredUserName)
-        Timber.d(checkUser.toString() + " emmm")
+    private fun onLoginResult(status: String) {
+        when (status) {
+            LOGIN_SUCCEED -> {
+                Timber.d("login success")
+                Toast.makeText(applicationContext, "Login successful", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(context, StartActivity::class.java))
+            }
 
-
-        checkUser.addListenerForSingleValueEvent (object:ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    Timber.d("hello")
-//                    val user = snapshot.child(userEnteredUserName).value
-//                    Timber.d(snapshot.child(userEnteredUserName).value)
-                    val passwordFromDB = snapshot.child(userEnteredUserName).child("password").value
-
-                    Timber.d("fetched password is: " + passwordFromDB)
-                    if (passwordFromDB!!.equals(userEnteredPassword)) {
-                        Timber.d("login success")
-                        Toast.makeText(applicationContext, "Login successful", Toast.LENGTH_SHORT).show()
-                        startStartActivity()
-                    } else {
-                        binding.password.setError("Wrong Password")
-                        binding.password.requestFocus()
-                    }
-                } else {
-                    binding.username.setError("No such user")
-                    binding.username.requestFocus()
+            LOGIN_INCORRECT_PASSWORD -> {
+                binding.apply {
+                    password.error = "Incorrect Password"
+                    password.requestFocus()
                 }
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                Timber.w(error.toException())
+            LOGIN_USERNOTFOUND -> {
+                binding.apply {
+                    username?.error = "Incorrect username"
+                    username.requestFocus()
+                }
             }
-
-        })
-
-    }
-    fun startStartActivity() {
-        startActivity(Intent(this, StartActivity::class.java))
-    }
-
-    fun validateUserName(): Boolean {
-        val name: String = binding.username.editText?.text.toString()
-
-        if (name == null || name.isEmpty()) {
-            binding.username?.error = "Field cannot be Empty"
-            return false
-        } else {
-            binding.username?.error = null
-            binding.username?.isErrorEnabled = false
-            return true
         }
     }
 
-    fun validatePassword(): Boolean {
-        val password: String = binding.password.editText?.text.toString()
 
-
-        if (password == null || password.isEmpty()) {
-            binding.password?.error = "Field cannot be Empty"
-            return false
-        } else {
-            binding.password?.error = null
-            binding.password?.isErrorEnabled = false
-            return true
+    private fun displayUsernameErrorState(error: Boolean) {
+        when (error) {
+            true -> binding.username?.error = "Field cannot be Empty"
+            false -> {
+                binding.username?.error = null
+                binding.username?.isErrorEnabled = false
+            }
         }
     }
+
+    private fun displayPasswordErrorState(error: Boolean) {
+        when (error) {
+            true -> binding.password?.error = "Field cannot be Empty"
+            false -> {
+                binding.password?.error = null
+                binding.password?.isErrorEnabled = false
+            }
+        }
+    }
+
 
     override fun bind(): ActivityLoginBinding {
         return ActivityLoginBinding.inflate(layoutInflater)
