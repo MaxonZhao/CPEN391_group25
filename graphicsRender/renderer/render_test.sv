@@ -282,6 +282,71 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 					end
 				endcase
 			end
+
+			// Plot a bird at top left of screen
+			else if (macro_state == 5 && drawing) begin
+				case (micro_state)
+					// Write texture code
+					0: begin
+						if (~slave_waitrequest && done_micro == 31) begin
+							slave_address <= 4;
+							slave_write <= 1;
+							slave_writedata <= 'b000_0010;
+							done_micro <= 0;
+						end
+						else if (done_micro == 0) begin
+							slave_write <= 0;
+							micro_state <= 1;
+						end
+					end
+
+					// Write x coordinate
+					1: begin
+						if (~slave_waitrequest && done_micro == 0) begin
+							slave_address <= 1;
+							slave_write <= 1;
+							slave_writedata <= 19;
+							done_micro <= 1;
+						end
+						else if (done_micro == 1) begin
+							slave_write <= 0;
+							micro_state <= 2;
+						end
+					end
+
+					// Write y coordinate
+					2: begin
+						if (~slave_waitrequest && done_micro == 1) begin
+							slave_address <= 2;
+							slave_write <= 1;
+							slave_writedata <= 13;
+							done_micro <= 2;
+						end
+						else if (done_micro == 2) begin
+							slave_write <= 0;
+							micro_state <= 3;
+						end
+					end
+
+					// Plot
+					3: begin
+						if (~slave_waitrequest && done_micro == 2) begin
+							slave_address <= 6;
+							slave_write <= 1;
+							done_micro <= 3;
+						end
+						else if (done_micro == 3) begin
+							slave_write <= 0;
+							micro_state <= 4;
+						end
+					end
+
+					// Done
+					4: begin
+						drawing <= 0;
+					end
+				endcase
+			end
 		end
 	end
 	

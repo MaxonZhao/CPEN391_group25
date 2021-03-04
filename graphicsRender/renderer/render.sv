@@ -56,22 +56,22 @@ module render(
     // Pipe memory module
     reg [12:0] pipe_tex_addr;
     wire [5:0] pipe_tex_q;
-    localparam [4:0] PIPE_MAX_X=16;
-    localparam [7:0] PIPE_MAX_Y=180;
+    localparam signed [5:0] PIPE_MAX_X=16;
+    localparam signed [8:0] PIPE_MAX_Y=180;
     pipes pipe_tex (.address(pipe_tex_addr), .clock(clk), .q(pipe_tex_q));
 
     // Bird memory module
     reg [9:0] bird_tex_addr;
     wire [5:0] bird_tex_q;
-    localparam [4:0] BIRD_MAX_X=18;
-    localparam [3:0] BIRD_MAX_Y=12;
+    localparam signed [5:0] BIRD_MAX_X=18;
+    localparam signed [4:0] BIRD_MAX_Y=12;
     birds bird_tex (.address(bird_tex_addr), .clock(clk), .q(bird_tex_q));
 
     // Letter/number memory module
     reg [13:0] char_tex_addr;
     wire [5:0] char_tex_q;
-    localparam [4:0] CHAR_MAX_X=24;
-    localparam [4:0] CHAR_MAX_Y=24;
+    localparam signed [5:0] CHAR_MAX_X=24;
+    localparam signed [5:0] CHAR_MAX_Y=24;
     chars char_tex (.address(char_tex_addr), .clock(clk), .q(char_tex_q));
 
 
@@ -80,17 +80,19 @@ module render(
     reg flushing;
     reg frame_plot_odd;
     reg flush_now;
+    reg [1:0] flush_wait;
 
 
     // Variables for plotting
     reg [6:0] tex_code;
     reg signed [9:0] mid_x;
-    reg signed [8:0] mid_y;
+    reg signed [9:0] mid_y;
     reg negative_coordinates;
     reg dummy;
     reg plotting;
     reg signed [9:0] curr_x;
-    reg signed [8:0] curr_y;
+    reg signed [9:0] curr_y;
+    reg plot_wait;
 
     // Constantly write pixel data to video adapter
     reg [8:0] x_prev;
@@ -150,6 +152,7 @@ module render(
             flushing <= 0;
             frame_plot_odd <= 0;
             flush_now <= 0;
+            flush_wait <= 0;
 
             tex_code <= 0;
             mid_x <= 0;
@@ -159,6 +162,7 @@ module render(
             plotting <= 0;
             curr_x <= 0;
             curr_y <= 0;
+            plot_wait <= 0;
 
             fill_init <= 0;
             plot_init <= 0;
@@ -172,12 +176,17 @@ module render(
             // save: 1589865
             if ((fps_clock_count >= 100000 && ~slave_waitrequest) || flushing || (flush_now && ~plotting)) begin
                 if (flushing) begin
-                    if (frame_buffer_addr < 76800) begin
+                    if (flush_wait != 0) begin
+                        flush_wait <= flush_wait - 1;
+                        frame_buffer_addr <= frame_buffer_addr + 1;
+                        frame_out_data <= frame_buffer_q;
+                        if (flush_wait == 1) frame_out_wren <= 1;
+                    end
+                    else if (frame_buffer_addr < 76801) begin
                         frame_out_wren <= 1;
                         frame_out_data <= frame_buffer_q;
                         frame_buffer_addr <= frame_buffer_addr + 1;
-
-                        if (frame_buffer_addr != 0) frame_out_wraddr <= frame_out_wraddr + 1;
+                        frame_out_wraddr <= frame_out_wraddr + 1;
                     end
                     else begin
                         frame_plot_odd <= ~frame_plot_odd;
@@ -197,6 +206,7 @@ module render(
                     frame_buffer_addr <= 0;
                     frame_out_wren <= 0;
                     frame_buffer_wren <= 0;
+                    flush_wait <= 2;
                 end
 
             end
@@ -245,6 +255,9 @@ module render(
                                 curr_x <= mid_x - (BIRD_MAX_X >> 1);
                                 curr_y <= mid_y - (BIRD_MAX_Y >> 1);
                             end
+                            else if (plot_wait) begin
+                                plot_wait <= 0;
+                            end
                             else begin
                                 if (curr_x < mid_x + (BIRD_MAX_X >> 1) && curr_y < mid_y + (BIRD_MAX_Y >> 1)) begin
                                     bird_tex_addr <= bird_tex_addr + 1;
@@ -275,9 +288,12 @@ module render(
                             if (plot_init) begin
                                 plot_init <= 0;
                                 // Avoid extra code by same method, only that base texture code is 5 and pipe texture size is 1376
-                                pipe_tex_addr <= 1376 * (tex_code[5:0] - 5);
+                                pipe_tex_addr <= 2880 * (tex_code[5:0] - 5);
                                 curr_x <= mid_x - (PIPE_MAX_X >> 1);
                                 curr_y <= mid_y - (PIPE_MAX_Y >> 1);
+                            end
+                            else if (plot_wait) begin
+                                plot_wait <= 0;
                             end
                             else begin
                                 if (curr_x < mid_x + (PIPE_MAX_X >> 1) && curr_y < mid_y + (PIPE_MAX_Y >> 1)) begin
@@ -312,6 +328,9 @@ module render(
                                 char_tex_addr <= 576 * (tex_code[5:0] - 7);
                                 curr_x <= mid_x - (CHAR_MAX_X >> 1);
                                 curr_y <= mid_y - (CHAR_MAX_Y >> 1);
+                            end
+                            else if (plot_wait) begin
+                                plot_wait <= 0;
                             end
                             else begin
                                 if (curr_x < mid_x + (CHAR_MAX_X >> 1) && curr_y < mid_y + (CHAR_MAX_Y >> 1)) begin
@@ -387,6 +406,7 @@ module render(
                             bird_tex_addr <= 0;
                             pipe_tex_addr <= 0;
                             char_tex_addr <= 0;
+                            plot_wait <= 1;
                         end
                         default: dummy <= ~dummy;
                     endcase

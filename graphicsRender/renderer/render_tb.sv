@@ -123,7 +123,7 @@ module render_tb();
 
         wait(~slave_waitrequest);
         slave_address <= 2;
-        slave_writedata <= 119;      // midpoint y coordinate
+        slave_writedata <= 230;      // midpoint y coordinate
         slave_write <= 1;
         #20;
         slave_write <= 0;
@@ -171,7 +171,7 @@ module render_tb();
 
         wait(~slave_waitrequest);
         slave_address <= 1;
-        slave_writedata <= 307;      // midpoint x coordinate
+        slave_writedata <= 159;      // midpoint x coordinate
         slave_write <= 1;
         #20;
         slave_write <= 0;
@@ -179,7 +179,7 @@ module render_tb();
 
         wait(~slave_waitrequest);
         slave_address <= 2;
-        slave_writedata <= 119;      // midpoint y coordinate
+        slave_writedata <= 239;      // midpoint y coordinate
         slave_write <= 1;
         #20;
         slave_write <= 0;
