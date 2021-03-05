@@ -1,6 +1,6 @@
 package com.cpen391.flappyaccount.model.bean
 
-import com.google.firebase.database.PropertyName
+import java.io.Serializable
 
 data class User(
 
@@ -13,8 +13,11 @@ data class User(
     var phoneNo: String,
 
     var password: String,
-    var current_score: Int = 0,
-    var top_three_scores: List<Int> = listOf(1,2,3)
-) {
-    constructor() : this("", "", "", "", "")
+    var current_score: Long = 0,
+    var top_three_scores: List<Long> = listOf(1,2,3)
+) : Serializable {
+    constructor() : this("", "", "", "", "", 0, listOf(1,2,3))
+    fun isNullUser() : Boolean {
+        return this.userName == "" && this.password == ""
+    }
 }

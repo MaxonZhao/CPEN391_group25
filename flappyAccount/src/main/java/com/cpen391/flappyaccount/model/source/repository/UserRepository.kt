@@ -21,6 +21,10 @@ class UserRepository private constructor(
         return remoteUserDataSource.registerUser(user)
     }
 
+    override fun findUser(username: String): Observable<User> {
+        return remoteUserDataSource.findUser(username)
+    }
+
     companion object {
         private lateinit var INSTANCE: UserRepository
 

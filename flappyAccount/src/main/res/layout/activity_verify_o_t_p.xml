@@ -42,9 +42,10 @@
             android:layout_gravity="center"/>
 
         <TextView
+            android:id="@+id/hint_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enter one time sent on +8615618219971"
+            android:text="Enter one time code sent on +8615618219971"
             android:textSize="16sp"
             android:textColor="#000"
             android:fontFamily="@font/muli"

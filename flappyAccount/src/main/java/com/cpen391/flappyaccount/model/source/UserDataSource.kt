@@ -8,4 +8,6 @@ interface UserDataSource {
     fun login(username: String, password: String) : Observable<LoginStatus>
 
     fun registerUser(user: User) : Observable<Boolean>
+
+    fun findUser(username: String) : Observable<User>
 }

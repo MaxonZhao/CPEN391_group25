@@ -69,4 +69,39 @@ object UserAPI {
             }
         }
     }
+
+
+    fun findUser(username: String) : Observable<User> {
+        var user: User? = null
+        return Observable.create { emitter: ObservableEmitter<User> ->
+            val checkUser: Query = UserEntity.mUserRef.orderByChild("userName").equalTo(username)
+            checkUser.addListenerForSingleValueEvent (object: ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+
+                        snapshot.child(username).apply {
+                            val email = child("email").value as String
+                            val fullName = child("fullName").value as String
+                            val password = child("password").value as String
+                            val phoneNo = child("phoneNo").value as String
+                            val currentScore: Long = child("current_score").value as Long
+                            val topThreeScores: List<Long> = child("top_three_scores").value as List<Long>
+                            user = User(fullName, username, email, phoneNo, password, currentScore, topThreeScores)
+                            emitter.onNext(user!!)
+                        }
+                    } else {
+                        emitter.onNext(User())
+                    }
+                    emitter.onComplete()
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Timber.w(error.toException())
+                    emitter.onNext(User())
+                    emitter.onComplete()
+                }
+
+            })
+        }
+    }
 }

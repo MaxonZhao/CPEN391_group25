@@ -20,4 +20,8 @@ class RemoteUserDataSource : UserDataSource {
     override fun registerUser(user: User): Observable<Boolean> {
         return UserAPI.registerUser(user)
     }
+
+    override fun findUser(username: String): Observable<User> {
+        return UserAPI.findUser(username)
+    }
 }
