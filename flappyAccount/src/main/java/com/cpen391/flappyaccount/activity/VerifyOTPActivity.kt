@@ -27,10 +27,7 @@ class VerifyOTPActivity : MvvmActivity<ActivityVerifyOTPBinding>() {
 
     private val verifyOTPViewModel by viewModels<VerifyOTPViewModel>()
     private lateinit var userFound: User
-    var mCallback: PhoneAuthProvider.OnVerificationStateChangedCallbacks? = null
 
-
-    private lateinit var task: Task<Void>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         userFound = intent.getSerializableExtra("User") as User
@@ -55,16 +52,12 @@ class VerifyOTPActivity : MvvmActivity<ActivityVerifyOTPBinding>() {
     }
 
 
-    private fun startReset() {
-        startActivity(Intent(this, ResetPasswordActivity::class.java))
-    }
 
     override fun initObserver() {
         val owner = this
         verifyOTPViewModel.apply {
             verificationCompleted.observe(owner, {
                 ResetPasswordActivity.actionStart(owner, userFound)
-//                startActivity(Intent(owner, ResetPasswordActivity::class.java))
             })
         }
     }

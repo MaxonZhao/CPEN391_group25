@@ -65,6 +65,13 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
                 displayPasswordErrorState(it)
             })
 
+            userFoundByUsername.observe(owner, {
+                if (!it.isNullUser()) {
+                    val intent = Intent(owner, StartActivity::class.java)
+                    intent.putExtra("User", it)
+                    startActivity(intent)
+                }
+            })
         }
 
     }
@@ -75,7 +82,8 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
             LOGIN_SUCCEED -> {
                 Timber.d("login success")
                 Toast.makeText(applicationContext, "Login successful", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(context, StartActivity::class.java))
+
+                loginViewModel.findUser(binding.username.editText!!.text.toString().trim())
             }
 
             LOGIN_INCORRECT_PASSWORD -> {
