@@ -24,6 +24,7 @@ const val EMAIL_VALID = "email address is valid"
 const val PASSWORD_EMPTY = "password is empty"
 const val PASSWORD_TOO_WEAK = "password is too weak"
 const val PASSWORD_VALID = "password is valid"
+const val PASSWORD_NOT_MATCH = "does not match with new password"
 
 
 

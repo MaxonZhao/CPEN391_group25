@@ -104,4 +104,10 @@ object UserAPI {
             })
         }
     }
+
+
+    fun resetPassword(user: User, newPassword: String): Observable<Boolean> {
+        user.password = newPassword
+        return registerUser(user)
+    }
 }

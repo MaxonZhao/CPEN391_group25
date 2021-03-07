@@ -3,13 +3,23 @@
     package="com.cpen391.flappyaccount">
 
     <application>
-        <activity android:name=".activity.VerifyOTPActivity"></activity>
-        <activity android:name=".activity.ResetPasswordSuccessActivity" />
-        <activity android:name=".activity.ForgetPasswordActivity" />
-        <activity android:name=".activity.StartActivity" />
-        <activity android:name=".activity.ResetPasswordActivity" />
-        <activity android:name=".activity.SignUpActivity" />
-        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.VerifyOTPActivity"
+            android:launchMode="singleTop">
+
+        </activity>
+        <activity android:name=".activity.ResetPasswordSuccessActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".activity.ForgetPasswordActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".activity.StartActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".activity.ResetPasswordActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".activity.SignUpActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:launchMode="singleTop"/>
 
         <meta-data
             android:name="preloaded_fonts"

@@ -10,4 +10,6 @@ interface UserDataSource {
     fun registerUser(user: User) : Observable<Boolean>
 
     fun findUser(username: String) : Observable<User>
+
+    fun resetPassword(user: User, newPassword: String) : Observable<Boolean>
 }

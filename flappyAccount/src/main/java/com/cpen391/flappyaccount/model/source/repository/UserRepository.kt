@@ -25,6 +25,10 @@ class UserRepository private constructor(
         return remoteUserDataSource.findUser(username)
     }
 
+    override fun resetPassword(user: User, newPassword: String): Observable<Boolean> {
+        return remoteUserDataSource.resetPassword(user, newPassword)
+    }
+
     companion object {
         private lateinit var INSTANCE: UserRepository
 

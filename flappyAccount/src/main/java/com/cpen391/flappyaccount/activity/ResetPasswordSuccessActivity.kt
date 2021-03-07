@@ -14,6 +14,14 @@ class ResetPasswordSuccessActivity : MvvmActivity<ActivityResetPasswordSuccessBi
         super.onCreate(savedInstanceState)
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
+
+    }
+
+    override fun initView() {
+        super.initView()
+        binding.loginButton.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
     }
 
     override fun initObserver() {

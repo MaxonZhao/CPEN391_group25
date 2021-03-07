@@ -36,9 +36,10 @@ class ForgetPasswordActivity : MvvmActivity<ActivityForgetPasswordBinding>() {
     override fun initObserver() {
         val owner = this
         forgetPasswordViewModel.userFoundByUsername.observe(owner, {
-            if (it!!.isNullUser() == true) {
+            if (it!!.isNullUser()) {
                 Toast.makeText(owner, "cannot find user", Toast.LENGTH_SHORT).show()
             } else {
+//                ResetPasswordActivity.actionStart(owner, it)
                 VerifyOTPActivity.actionStart(owner, it!!)
             }
         })

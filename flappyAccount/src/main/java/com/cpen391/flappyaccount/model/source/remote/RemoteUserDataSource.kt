@@ -24,4 +24,8 @@ class RemoteUserDataSource : UserDataSource {
     override fun findUser(username: String): Observable<User> {
         return UserAPI.findUser(username)
     }
+
+    override fun resetPassword(user: User, newPassword: String): Observable<Boolean> {
+        return UserAPI.resetPassword(user, newPassword)
+    }
 }
