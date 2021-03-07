@@ -49,7 +49,7 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
             }
 
             guestBtn.setOnClickListener {
-                startActivity(Intent(context, StartActivity::class.java))
+                startActivity(Intent(context, SelectGameModeActivity::class.java))
             }
         }
     }

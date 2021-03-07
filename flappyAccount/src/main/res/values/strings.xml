@@ -1,1 +1,9 @@
-<resources></resources>
+<resources>
+    <string name="app_name">flappyBird</string>
+    <string name="selected_item">Selected item:</string>
+
+    <string-array name="ControlWay">
+        <item>Voice</item>
+        <item>Screen Tapping</item>
+    </string-array>
+</resources>
