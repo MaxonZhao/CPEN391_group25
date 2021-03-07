@@ -11,7 +11,6 @@ import com.cpen391.flappyaccount.model.bean.User
 import timber.log.Timber
 
 class StartActivity : MvvmActivity<ActivityStartBinding>() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val actionBar: ActionBar = supportActionBar!!
