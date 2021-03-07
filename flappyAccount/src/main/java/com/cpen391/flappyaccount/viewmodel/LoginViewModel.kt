@@ -66,13 +66,13 @@ class LoginViewModel : BaseViewModel() {
 
 
     private fun validateUsername(username: String): Boolean {
-        usernameHasError.value = username == null || username.isEmpty()
-        return !(username == null || username.isEmpty())
+        usernameHasError.value = false || username.isEmpty()
+        return !(username.isEmpty())
     }
 
     private fun validatePassword(password: String): Boolean {
-        passwordHasError.value = password == null || password.isEmpty()
-        return !(password == null || password.isEmpty())
+        passwordHasError.value = false || password.isEmpty()
+        return !(password.isEmpty())
     }
 
 }

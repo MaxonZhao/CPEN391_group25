@@ -28,20 +28,21 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/bungee"
         android:text="Select control way:"
-        android:textSize = "20dp" />
+        android:textSize="20dp" />
     <RadioGroup
+        android:id="@+id/radio_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/voice_control_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             android:text="Voice Control" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/tapping_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tapping" />
