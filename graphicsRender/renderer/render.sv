@@ -22,11 +22,13 @@ module render(
 
     wire [9:0] x;
     wire [8:0] y;
-    reg [1:0] red_out, green_out, blue_out;
+    reg [7:0] red_out, green_out, blue_out;
+
+    // TODO: Set proper color ouptut: multiply X_out by 85 (255/3 = 85)
 
     // The video driver has active high reset!
     video_driver #(.WIDTH(320), .HEIGHT(240))
-		v1 (.clk(clk), .reset(~rst_n), .x(x), .y(y), .r({red_out, 6'd0}), .g({green_out, 6'd0}), .b({blue_out, 6'd0}),
+		v1 (.clk(clk), .reset(~rst_n), .x(x), .y(y), .r(red_out), .g(green_out), .b(blue_out),
 			 .VGA_R(VGA_R), .VGA_G(VGA_G), .VGA_B(VGA_B), .VGA_BLANK_N(VGA_BLANK_N),
 			 .VGA_CLK(VGA_CLK), .VGA_HS(VGA_HS), .VGA_SYNC_N(VGA_SYNC_N), .VGA_VS(VGA_VS));
 
@@ -52,27 +54,26 @@ module render(
     // Pipe (both up and down): width: 16px, height: 86px
     // Bird (all 4): width: 18px, height: 12px
     // Letter/number: width: 24px, height: 24px
-    // TODO: Support transparency, do by:
-    //      Adding 1 bit to texture RGB values: T_RR_GG_BB, T for transparency
+    // Texture RGB values: T_RR_GG_BB, T for transparency
     //      1: Plot color, 0: Transparent
     
     // Pipe memory module
     reg [12:0] pipe_tex_addr;
-    wire [5:0] pipe_tex_q;
+    wire [6:0] pipe_tex_q;
     localparam signed [5:0] PIPE_MAX_X=16;
     localparam signed [8:0] PIPE_MAX_Y=180;
     pipes pipe_tex (.address(pipe_tex_addr), .clock(clk), .q(pipe_tex_q));
 
     // Bird memory module
     reg [9:0] bird_tex_addr;
-    wire [5:0] bird_tex_q;
+    wire [6:0] bird_tex_q;
     localparam signed [5:0] BIRD_MAX_X=18;
     localparam signed [4:0] BIRD_MAX_Y=12;
     birds bird_tex (.address(bird_tex_addr), .clock(clk), .q(bird_tex_q));
 
     // Letter/number memory module
     reg [13:0] char_tex_addr;
-    wire [5:0] char_tex_q;
+    wire [6:0] char_tex_q;
     localparam signed [5:0] CHAR_MAX_X=24;
     localparam signed [5:0] CHAR_MAX_Y=24;
     chars char_tex (.address(char_tex_addr), .clock(clk), .q(char_tex_q));
@@ -95,7 +96,8 @@ module render(
     reg plotting;
     reg signed [9:0] curr_x;
     reg signed [9:0] curr_y;
-    reg plot_wait;
+    reg do_plot;
+    reg [16:0] buf_addr_save;
 
     // Constantly write pixel data to video adapter
     reg [8:0] x_prev;
@@ -119,9 +121,9 @@ module render(
                 reading <= 1;
             end
             else if (reading) begin
-                red_out <= frame_out_q[5:4];
-                green_out <= frame_out_q[3:2];
-                blue_out <= frame_out_q[1:0];
+                red_out <= frame_out_q[5:4] * 85;
+                green_out <= frame_out_q[3:2] * 85;
+                blue_out <= frame_out_q[1:0] * 85;
                 reading <= 0;
             end
         end
@@ -165,7 +167,8 @@ module render(
             plotting <= 0;
             curr_x <= 0;
             curr_y <= 0;
-            plot_wait <= 0;
+            do_plot <= 0;
+            buf_addr_save <= 0;
 
             fill_init <= 0;
             plot_init <= 0;
@@ -250,6 +253,13 @@ module render(
                     else begin
                         // Plot birds
                         if (tex_code[5:0] >= 1 && tex_code[5:0] <= 4) begin
+                            if (do_plot && bird_tex_q[6]) begin
+                                frame_buffer_data <= bird_tex_q[5:0];
+                                frame_buffer_addr <= buf_addr_save;
+                                frame_buffer_wren <= 1;
+                            end
+                            else frame_buffer_wren <= 0;
+
                             if (plot_init) begin
                                 plot_init <= 0;
                                 // Avoid repeating code for all birds, since only difference is where the texture location starts
@@ -258,26 +268,23 @@ module render(
                                 curr_x <= mid_x - (BIRD_MAX_X >> 1);
                                 curr_y <= mid_y - (BIRD_MAX_Y >> 1);
                             end
-                            else if (plot_wait) begin
-                                plot_wait <= 0;
-                            end
                             else begin
                                 if (curr_x < mid_x + (BIRD_MAX_X >> 1) && curr_y < mid_y + (BIRD_MAX_Y >> 1)) begin
                                     bird_tex_addr <= bird_tex_addr + 1;
                                     curr_y <= curr_y + 1;
+                                    // Add condition to check if bird_tex_q[6] is high or not
                                     if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240) begin
-                                        frame_buffer_data <= bird_tex_q;
-                                        frame_buffer_addr <= curr_x * 240 + curr_y;
-                                        frame_buffer_wren <= 1;
+                                        do_plot <= 1;
+                                        buf_addr_save <= curr_x * 240 + curr_y;
                                     end
                                     else begin
-                                        frame_buffer_wren <= 0;
+                                        do_plot <= 0;
                                     end
                                 end
                                 else if (curr_x < mid_x + (BIRD_MAX_X >> 1) && curr_y >= mid_y + (BIRD_MAX_Y >> 1)) begin
                                     curr_x <= curr_x + 1;
                                     curr_y <= mid_y - (BIRD_MAX_Y >> 1);
-                                    frame_buffer_wren <= 0;
+                                    do_plot <= 0;
                                 end
                                 else begin
                                     plotting <= 0;
@@ -295,15 +302,15 @@ module render(
                                 curr_x <= mid_x - (PIPE_MAX_X >> 1);
                                 curr_y <= mid_y - (PIPE_MAX_Y >> 1);
                             end
-                            else if (plot_wait) begin
-                                plot_wait <= 0;
+                            else if (do_plot) begin
+                                do_plot <= 0;
                             end
                             else begin
                                 if (curr_x < mid_x + (PIPE_MAX_X >> 1) && curr_y < mid_y + (PIPE_MAX_Y >> 1)) begin
                                     pipe_tex_addr <= pipe_tex_addr + 1;
                                     curr_y <= curr_y + 1;
-                                    if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240) begin
-                                        frame_buffer_data <= pipe_tex_q;
+                                    if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240 && pipe_tex_q[6]) begin
+                                        frame_buffer_data <= pipe_tex_q[5:0];
                                         frame_buffer_addr <= curr_x * 240 + curr_y;
                                         frame_buffer_wren <= 1;
                                     end
@@ -332,15 +339,15 @@ module render(
                                 curr_x <= mid_x - (CHAR_MAX_X >> 1);
                                 curr_y <= mid_y - (CHAR_MAX_Y >> 1);
                             end
-                            else if (plot_wait) begin
-                                plot_wait <= 0;
+                            else if (do_plot) begin
+                                do_plot <= 0;
                             end
                             else begin
                                 if (curr_x < mid_x + (CHAR_MAX_X >> 1) && curr_y < mid_y + (CHAR_MAX_Y >> 1)) begin
                                     char_tex_addr <= char_tex_addr + 1;
                                     curr_y <= curr_y + 1;
-                                    if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240) begin
-                                        frame_buffer_data <= char_tex_q;
+                                    if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240 && char_tex_q[6]) begin
+                                        frame_buffer_data <= char_tex_q[5:0];
                                         frame_buffer_addr <= curr_x * 240 + curr_y;
                                         frame_buffer_wren <= 1;
                                     end
@@ -409,7 +416,7 @@ module render(
                             bird_tex_addr <= 0;
                             pipe_tex_addr <= 0;
                             char_tex_addr <= 0;
-                            plot_wait <= 1;
+                            do_plot <= 0;
                         end
                         default: dummy <= ~dummy;
                     endcase

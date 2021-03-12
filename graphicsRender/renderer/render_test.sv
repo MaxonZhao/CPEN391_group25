@@ -48,7 +48,16 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 		else begin
 			if (~KEY[1] && ~drawing) begin
 				drawing <= 1;
-				macro_state <= macro_state + 1;
+				if (macro_state < 5 ) macro_state <= macro_state + 1;
+				else if (macro_state > 5) macro_state <= 0;
+				micro_state <= 0;
+				done_micro <= 31;
+			end
+
+			else if (~KEY[2] && ~drawing) begin
+				drawing <= 1;
+				if (macro_state < 6) macro_state <= 6;
+				else if (macro_state > 5 && macro_state < 7) macro_state <= macro_state + 1;
 				micro_state <= 0;
 				done_micro <= 31;
 			end
@@ -175,7 +184,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 						if (~slave_waitrequest && done_micro == 0) begin
 							slave_address <= 1;
 							slave_write <= 1;
-							slave_writedata <= 0;
+							slave_writedata <= 10;
 							done_micro <= 1;
 						end
 						else if (done_micro == 1) begin
@@ -343,6 +352,41 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 
 					// Done
 					4: begin
+						drawing <= 0;
+					end
+				endcase
+			end
+
+			// Make background green
+			else if (macro_state == 6 && drawing) begin
+				case (micro_state)
+					// Write texture code
+					0: begin
+						if (~slave_waitrequest && done_micro == 31) begin
+							slave_address <= 4;
+							slave_write <= 1;
+							slave_writedata <= 'b100_1100;
+							done_micro <= 0;
+						end
+						else if (done_micro == 0) begin
+							slave_write <= 0;
+							micro_state <= 1;
+						end
+					end
+					// Plot background
+					1: begin
+						if (~slave_waitrequest && done_micro == 0) begin
+							slave_address <= 6;
+							slave_write <= 1;
+							done_micro <= 1;
+						end
+						else if (done_micro == 1) begin
+							slave_write <= 0;
+							micro_state <= 2;
+						end
+					end
+					// Ready for next action
+					2: begin
 						drawing <= 0;
 					end
 				endcase
