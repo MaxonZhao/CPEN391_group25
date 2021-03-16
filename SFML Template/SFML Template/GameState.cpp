@@ -4,7 +4,6 @@
 
 namespace Patrick {
 	GameState::GameState(GameDataRef data) : _data(data) {
-
 	}
 
 	void GameState::Init() {
