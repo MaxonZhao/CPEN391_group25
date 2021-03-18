@@ -71,12 +71,19 @@ module render(
     localparam signed [4:0] BIRD_MAX_Y=12;
     birds bird_tex (.address(bird_tex_addr), .clock(clk), .q(bird_tex_q));
 
-    // Letter/number memory module
+    // Numbers memory module
     reg [13:0] char_tex_addr;
     wire [6:0] char_tex_q;
     localparam signed [5:0] CHAR_MAX_X=24;
     localparam signed [5:0] CHAR_MAX_Y=24;
     chars char_tex (.address(char_tex_addr), .clock(clk), .q(char_tex_q));
+
+    // Memory module with other textures
+    reg [13:0] custom_tex_addr;
+    wire [6:0] custom_tex_q;
+    reg  signed [8:0] custom_max_x;
+    reg signed [6:0] custom_max_y;
+    custom custom_tex (.address(custom_tex_addr), .clock(clk), .q(custom_tex_q));
 
 
     // Variables for displaying and flushing frame buffer
@@ -152,6 +159,9 @@ module render(
             bird_tex_addr <= 0;
             pipe_tex_addr <= 0;
             char_tex_addr <= 0;
+            custom_tex_addr <= 0;
+            custom_max_x <= 0;
+            custom_max_y <= 0;
 
             fps_clock_count <= 0;
             flushing <= 0;
@@ -295,6 +305,13 @@ module render(
 
                         // Plot pipe
                         else if (tex_code[5:0] == 5 || tex_code[5:0] == 6) begin
+                            if (do_plot && pipe_tex_q[6]) begin
+                                frame_buffer_data <= pipe_tex_q[5:0];
+                                frame_buffer_addr <= buf_addr_save;
+                                frame_buffer_wren <= 1;
+                            end
+                            else frame_buffer_wren <= 0;
+
                             if (plot_init) begin
                                 plot_init <= 0;
                                 // Avoid extra code by same method, only that base texture code is 5 and pipe texture size is 1376
@@ -302,26 +319,22 @@ module render(
                                 curr_x <= mid_x - (PIPE_MAX_X >> 1);
                                 curr_y <= mid_y - (PIPE_MAX_Y >> 1);
                             end
-                            else if (do_plot) begin
-                                do_plot <= 0;
-                            end
                             else begin
                                 if (curr_x < mid_x + (PIPE_MAX_X >> 1) && curr_y < mid_y + (PIPE_MAX_Y >> 1)) begin
                                     pipe_tex_addr <= pipe_tex_addr + 1;
                                     curr_y <= curr_y + 1;
-                                    if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240 && pipe_tex_q[6]) begin
-                                        frame_buffer_data <= pipe_tex_q[5:0];
-                                        frame_buffer_addr <= curr_x * 240 + curr_y;
-                                        frame_buffer_wren <= 1;
+                                    if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240) begin
+                                        do_plot <= 1;
+                                        buf_addr_save <= curr_x * 240 + curr_y;
                                     end
                                     else begin
-                                        frame_buffer_wren <= 0;
+                                        do_plot <= 0;
                                     end
                                 end
                                 else if (curr_x < mid_x + (PIPE_MAX_X >> 1) && curr_y >= mid_y + (PIPE_MAX_Y >> 1)) begin
                                     curr_x <= curr_x + 1;
                                     curr_y <= mid_y - (PIPE_MAX_Y >> 1);
-                                    frame_buffer_wren <= 0;
+                                    do_plot <= 0;
                                 end
                                 else begin
                                     plotting <= 0;
@@ -330,8 +343,15 @@ module render(
                             end
                         end
 
-                        // Plot letter/characters
-                        else if (tex_code[5:0] >= 7 && tex_code[5:0] <= 30) begin
+                        // Plot numbers
+                        else if (tex_code[5:0] >= 7 && tex_code[5:0] <= 16) begin
+                            if (do_plot && char_tex_q[6]) begin
+                                frame_buffer_data <= char_tex_q[5:0];
+                                frame_buffer_addr <= buf_addr_save;
+                                frame_buffer_wren <= 1;
+                            end
+                            else frame_buffer_wren <= 0;
+
                             if (plot_init) begin
                                 plot_init <= 0;
                                 // Avoid extra code by same method, only that base texture code is 7 and pipe texture size is 576
@@ -339,26 +359,93 @@ module render(
                                 curr_x <= mid_x - (CHAR_MAX_X >> 1);
                                 curr_y <= mid_y - (CHAR_MAX_Y >> 1);
                             end
-                            else if (do_plot) begin
-                                do_plot <= 0;
-                            end
                             else begin
                                 if (curr_x < mid_x + (CHAR_MAX_X >> 1) && curr_y < mid_y + (CHAR_MAX_Y >> 1)) begin
                                     char_tex_addr <= char_tex_addr + 1;
                                     curr_y <= curr_y + 1;
-                                    if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240 && char_tex_q[6]) begin
-                                        frame_buffer_data <= char_tex_q[5:0];
-                                        frame_buffer_addr <= curr_x * 240 + curr_y;
-                                        frame_buffer_wren <= 1;
+                                    if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240) begin
+                                        do_plot <= 1;
+                                        buf_addr_save <= curr_x * 240 + curr_y;
                                     end
                                     else begin
-                                        frame_buffer_wren <= 0;
+                                        do_plot <= 0;
                                     end
                                 end
                                 else if (curr_x < mid_x + (CHAR_MAX_X >> 1) && curr_y >= mid_y + (CHAR_MAX_Y >> 1)) begin
                                     curr_x <= curr_x + 1;
                                     curr_y <= mid_y - (CHAR_MAX_Y >> 1);
-                                    frame_buffer_wren <= 0;
+                                    do_plot <= 0;
+                                end
+                                else begin
+                                    plotting <= 0;
+                                    if (~flush_now) slave_waitrequest <= 0;
+                                end
+                            end
+                        end
+
+                        // Plot custom textures
+                        else if (tex_code[5:0] >= 17 && tex_code[5:0] <= 20) begin
+                            if (do_plot && custom_tex_q[6]) begin
+                                frame_buffer_data <= custom_tex_q[5:0];
+                                frame_buffer_addr <= buf_addr_save;
+                                frame_buffer_wren <= 1;
+                            end
+                            else frame_buffer_wren <= 0;
+
+                            if (plot_init) begin
+                                plot_init <= 0;
+                                
+                                case(tex_code[5:0])
+                                    // Values for gold medal
+                                    17: begin
+                                        custom_tex_addr <= 0;
+                                        custom_max_x <= 28;
+                                        custom_max_y <= 28;
+                                        curr_x <= mid_x - 14;
+                                        curr_y <= mid_y - 14;
+                                    end
+                                    // Values for silver medal
+                                    18: begin
+                                        custom_tex_addr <= 784;
+                                        custom_max_x <= 28;
+                                        custom_max_y <= 28;
+                                        curr_x <= mid_x - 14;
+                                        curr_y <= mid_y - 14;
+                                    end
+                                    // Values for title texture
+                                    19: begin
+                                        custom_tex_addr <= 1568;
+                                        custom_max_x <= 150;
+                                        custom_max_y <= 40;
+                                        curr_x <= mid_x - 75;
+                                        curr_y <= mid_y - 20;
+                                    end
+                                    // Values for game over texture
+                                    20: begin
+                                        custom_tex_addr <= 7568;
+                                        custom_max_x <= 134;
+                                        custom_max_y <= 30;
+                                        curr_x <= mid_x - 67;
+                                        curr_y <= mid_y - 15;
+                                    end
+                                endcase
+                            end
+                            else begin
+                                if (curr_x < mid_x + (custom_max_x >> 1) && curr_y < mid_y + (custom_max_y >> 1)) begin
+                                    custom_tex_addr <= custom_tex_addr + 1;
+                                    curr_y <= curr_y + 1;
+                                    if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240) begin
+                                        do_plot <= 1;
+                                        buf_addr_save <= curr_x * 240 + curr_y;
+                                    end
+                                    else begin
+                                        do_plot <= 0;
+                                    end
+                                end
+                                else if (curr_x < mid_x + (custom_max_x >> 1) && curr_y >= mid_y + (custom_max_y >> 1)) begin
+                                    curr_x <= curr_x + 1;
+                                    curr_y <= mid_y - (custom_max_y >> 1);
+                                    do_plot <= 0;
                                 end
                                 else begin
                                     plotting <= 0;
@@ -416,6 +503,7 @@ module render(
                             bird_tex_addr <= 0;
                             pipe_tex_addr <= 0;
                             char_tex_addr <= 0;
+                            custom_tex_addr <= 0;
                             do_plot <= 0;
                         end
                         default: dummy <= ~dummy;

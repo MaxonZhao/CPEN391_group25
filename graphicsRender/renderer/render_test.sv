@@ -105,7 +105,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 						if (~slave_waitrequest && done_micro == 31) begin
 							slave_address <= 4;
 							slave_write <= 1;
-							slave_writedata <= 'b000_0101;
+							slave_writedata <= 'b000_0110;
 							done_micro <= 0;
 						end
 						else if (done_micro == 0) begin
@@ -170,7 +170,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 						if (~slave_waitrequest && done_micro == 31) begin
 							slave_address <= 4;
 							slave_write <= 1;
-							slave_writedata <= 'b000_0001;
+							slave_writedata <= 'b001_0001;
 							done_micro <= 0;
 						end
 						else if (done_micro == 0) begin
@@ -184,7 +184,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 						if (~slave_waitrequest && done_micro == 0) begin
 							slave_address <= 1;
 							slave_write <= 1;
-							slave_writedata <= 10;
+							slave_writedata <= 20;
 							done_micro <= 1;
 						end
 						else if (done_micro == 1) begin
@@ -227,7 +227,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 				endcase
 			end
 
-			// Plot letter a at bottom of screen
+			// Plot game over title at bottom of screen
 			else if (macro_state == 4 && drawing) begin
 				case (micro_state)
 					// Write texture code
@@ -235,7 +235,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 						if (~slave_waitrequest && done_micro == 31) begin
 							slave_address <= 4;
 							slave_write <= 1;
-							slave_writedata <= 'b000_1001;
+							slave_writedata <= 'b001_0100;
 							done_micro <= 0;
 						end
 						else if (done_micro == 0) begin
@@ -292,7 +292,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 				endcase
 			end
 
-			// Plot a bird at top left of screen
+			// Plot silver medal at top left of screen
 			else if (macro_state == 5 && drawing) begin
 				case (micro_state)
 					// Write texture code
@@ -300,7 +300,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 						if (~slave_waitrequest && done_micro == 31) begin
 							slave_address <= 4;
 							slave_write <= 1;
-							slave_writedata <= 'b000_0010;
+							slave_writedata <= 'b001_0010;
 							done_micro <= 0;
 						end
 						else if (done_micro == 0) begin

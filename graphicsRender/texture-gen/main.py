@@ -1,6 +1,6 @@
 from PIL import Image
 
-def texture_gen(filename):
+def texture_gen(filename, startAddr):
     im = Image.open(filename, mode="r")
     pixelArray = im.load()
     xMax = im.size[0]
@@ -11,14 +11,28 @@ def texture_gen(filename):
     for x in range(xMax):
         for y in range (yMax):
             currPixel = pixelArray[x, y]
-            red = currPixel[0] // 85
-            green = currPixel[1] // 85
-            blue = currPixel[2] // 85
-            alpha = int(currPixel[3] > 10)
+            red = currPixel[0] / 85
+            if red * 10 % 10 < 5:
+                red = int(red)
+            else:
+                red = int(red) + 1
 
-            processedString.append("    " + str(format(y + x * yMax, "03d")) + " : " + str(alpha) + str(format(red, "02b")) + str(format(green, "02b")) + str(format(blue, "02b")) + ";")
+            green = currPixel[1] / 85
+            if green * 10 % 10 < 5:
+                green = int(green)
+            else:
+                green = int(green) + 1
+
+            blue = currPixel[2] / 85
+            if blue * 10 % 10 < 5:
+                blue = int(blue)
+            else:
+                blue = int(blue) + 1
+            alpha = int(currPixel[3] > 127)
+
+            processedString.append("    " + str(format(startAddr + y + x * yMax, "05d")) + " : " + str(alpha) + str(format(red, "02b")) + str(format(green, "02b")) + str(format(blue, "02b")) + ";")
 
     for i in range(len(processedString)):
         print(processedString[i])
 
-texture_gen("bird-01.png")
+texture_gen("Gold-Medal.png", 7568)
