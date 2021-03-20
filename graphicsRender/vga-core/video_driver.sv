@@ -43,8 +43,7 @@ module video_driver
 	wire vga_data_enable;
 	
 	reg read_enable_last;
-	// wire CLOCK_25;
-	reg CLOCK_25 = 0;
+	wire CLOCK_25;
 	wire locked; // ignore - is PLL locked?
 	reg [9:0] xt;
 	reg [8:0] yt;
@@ -52,9 +51,9 @@ module video_driver
 	reg [8:0] yd;
 	
 	// Use the PLL (a clock generator) for normal operation.  To simulate, use the line below that.
-	// CLOCK25_PLL c25_gen (.refclk(clk), .rst(reset), .outclk_0(CLOCK_25), .locked);	
-	always @(posedge clk)
-		CLOCK_25 <= ~CLOCK_25;
+	CLOCK25_PLL c25_gen (.refclk(clk), .rst(reset), .outclk_0(CLOCK_25), .locked);	
+	// always @(posedge clk)
+	// 	CLOCK_25 <= ~CLOCK_25;
 	
 	always @(posedge CLOCK_25) begin
 		if(reset) begin
