@@ -1,5 +1,11 @@
 #pragma once
+
 #include "Game.h"
+#include "State.h"
+#include <memory>
+#include "StateMachine.h"
+#include "GameState.h"
+#include "DEFINITION.h"
 
 namespace GameLogic {
 	class MainMenuState: public State
@@ -18,6 +24,9 @@ namespace GameLogic {
 	private:
 		GameDataRef _data;
 
+
+		//TODO: WE ****DON"T **** need a clock for this state, but just for the purpose of testing
+		clock_t _clock;
 	};
 }
 

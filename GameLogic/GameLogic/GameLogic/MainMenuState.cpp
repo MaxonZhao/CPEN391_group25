@@ -17,6 +17,9 @@ namespace GameLogic {
 
 	void MainMenuState::Update(float dt) {
 		// there is nothing to be update in the mainmenu state.
+		if (this->_clock + SPLASH_STATE_SHOW_TIME < clock()) {
+			_data->machine.AddState(StateRef(new GameState(_data)));
+		}
 	}
 
 	void MainMenuState::Draw(float dt) {
