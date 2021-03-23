@@ -10,14 +10,10 @@ import timber.log.Timber
 
 class StartActivity : MvvmActivity<ActivityStartBinding>() {
 
-    private lateinit var userFound: User
     override fun onCreate(savedInstanceState: Bundle?) {
-        userFound = intent.getSerializableExtra("User") as User
         super.onCreate(savedInstanceState)
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
-
-        Timber.d("login user $userFound")
     }
 
     override fun initObserver() {
