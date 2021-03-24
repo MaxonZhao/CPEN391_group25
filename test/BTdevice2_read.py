@@ -1,5 +1,5 @@
 import serial
-ser = serial.Serial("/dev/tty.hc01comHC-05-DevB-1",115200)
+ser = serial.Serial("/dev/tty.FLAPPY-BIRD-2-DevB",115200)
 print(ser.name)
 print("serial port is open:",ser.isOpen())
 

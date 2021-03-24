@@ -1,0 +1,59 @@
+/*
+ * main.c
+ *
+ *  Created on: Mar 1, 2021
+ *      Author: zoeyli
+ */
+#include <stdio.h>
+#include <string.h>
+#include "serial.h"
+#include "wifi.h"
+//int main(void){
+//	int count = 0;
+//    Init_RS232(BT_LineControlReg, BT_DivisorLatchLSB, BT_DivisorLatchMSB, BT_FifoControlReg);
+//    RS232_Flush(BT_ReceiverFifo, BT_LineStatusReg);
+//    Init_RS232(BT2_LineControlReg, BT2_DivisorLatchLSB, BT2_DivisorLatchMSB, BT2_FifoControlReg);
+//    RS232_Flush(BT2_ReceiverFifo, BT2_LineStatusReg);
+//
+//    printf("Bluetooth initialized\n");
+//
+//    sendMessage("Hello from arm to device 1",BT_LineStatusReg, BT_TransmitterFifo);
+//    sendMessage("Hello from arm to device 2",BT2_LineStatusReg, BT2_TransmitterFifo);
+//
+//	while(1){
+//		count++;
+//		char data_r1 = getcharRS232(BT_ReceiverFifo,BT_LineStatusReg);
+//		printf("%d receive from device 1 in ascii:(hex) %X,(char) %c\n",count, data_r1,data_r1);
+//		char data_r2 = getcharRS232(BT2_ReceiverFifo,BT2_LineStatusReg);
+//		printf("%d receive from device 2 in ascii:(hex) %X,(char) %c\n",count, data_r2,data_r2);
+//
+//	}
+//
+//
+//}
+
+int main(void){
+
+
+	Init_RS232(WIFI_LineControlReg, WIFI_DivisorLatchLSB, WIFI_DivisorLatchMSB, WIFI_FifoControlReg);
+    //RS232_Flush(WIFI_ReceiverFifo, WIFI_LineStatusReg);
+//	sendMultiChar( "dofile(\"databaseTest.lua\")\r\n",WIFI_LineStatusReg, WIFI_TransmitterFifo);
+//	const char* receivedData2 = receiveBuffer(WIFI_ReceiverFifo, WIFI_LineStatusReg);
+
+//	char buf[1024] = "";
+//
+//	printf("Starting send text routine\n");
+//	int res;
+//	res = runLUAScript("\r", buf,WIFI_LineStatusReg,WIFI_TransmitterFifo,WIFI_ReceiverFifo);
+//	res = runLUAScript("\r", buf,WIFI_LineStatusReg,WIFI_TransmitterFifo,WIFI_ReceiverFifo);
+//	res = runLUAScript("print(\"hello\")\r", buf,WIFI_LineStatusReg,WIFI_TransmitterFifo,WIFI_ReceiverFifo);
+	sendMessage("print(\"hello\")",WIFI_LineStatusReg, WIFI_TransmitterFifo);
+	while(1){
+
+		char data_r1 = getcharRS232(WIFI_ReceiverFifo,WIFI_LineStatusReg);
+		printf("receive in ascii:(hex) %X,(char) %c\n", data_r1,data_r1);
+
+	}
+//	int res = runLUAScript("dofile(\"databaseTest.lua\")", buf,WIFI_LineStatusReg,WIFI_TransmitterFifo,WIFI_ReceiverFifo);
+//	printf("%s\n", buf);
+}

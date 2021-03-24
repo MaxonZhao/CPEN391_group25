@@ -384,7 +384,9 @@ module MyComputer_Verilog (
 				 .BlueTooth2_RxData 			(GPIO_0[18]),
 				 .BlueTooth2_TxData 			(GPIO_0[19])
 		);
-		
+		assign GPIO_0[10] = 1'b1;
+	
+	
 		// Map 16 bit memory upper and lower data byte strobes to individual wires
 		
 		assign DRAM_UDQM = Temp_SDRAM_DQM[1];

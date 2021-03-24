@@ -1,6 +1,6 @@
 ConnectionManager.savedConnections=<?xml version\="1.0" encoding\="UTF-8"?>\n<connections>\n\t<connection current\="yes" mode\="debug" type\="com.arm.debugger.launcher2">de1Soc</connection>\n</connections>\n
 PreferredTargetHasBeenSet=true
-UXContextManager.savedContexts=<?xml version\="1.0" encoding\="UTF-8"?>\n<contexts>\n\t<context color\="32896">Connection|1aoaplyw44\:pfwxzyc6hkvc|1614797774208|workspace\:\:de1Soc|de1Soc</context>\n</contexts>\n
+UXContextManager.savedContexts=<?xml version\="1.0" encoding\="UTF-8"?>\n<contexts>\n\t<context color\="32896">Connection|1aoaplyw44\:pfwxzyc6hkvc|1614824568654|workspace\:\:de1Soc|de1Soc</context>\n</contexts>\n
 com.arm.debugger.ux.scripts.favorites.new=script.file.tag\=C\:\\altera\\15.0\\embedded\\ds-5\\sw\\debugger\\configdb\\Scripts\\altera_target_check.py\nscript.verbose.tag\=false\n
 debugger.should.auto.reload.symbols.preference=always
 eclipse.preferences.version=1
