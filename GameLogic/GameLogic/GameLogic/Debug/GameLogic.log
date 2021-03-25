@@ -1,0 +1,56 @@
+﻿  Game.cpp
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\Pipe.h(10,7): error C2061: syntax error: identifier 'GameDataRef'
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\Pipe.h(21,20): error C3646: '_data': unknown override specifier
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\Pipe.h(21,20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\GameState.h(10,12): error C2061: syntax error: identifier 'GameDataRef'
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\GameState.h(21,20): error C3646: '_data': unknown override specifier
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\GameState.h(21,20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\MainMenuState.h(14,16): error C2061: syntax error: identifier 'GameDataRef'
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\MainMenuState.h(25,20): error C3646: '_data': unknown override specifier
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\MainMenuState.h(25,20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\SplashState.h(14,14): error C2061: syntax error: identifier 'GameDataRef'
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\SplashState.h(22,20): error C3646: '_data': unknown override specifier
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\SplashState.h(22,20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\Game.cpp(8,70): error C2664: 'GameLogic::SplashState::SplashState(const GameLogic::SplashState &)': cannot convert argument 1 from 'GameLogic::GameDataRef' to 'const GameLogic::SplashState &'
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\Game.cpp(8,70): message : Reason: cannot convert from 'GameLogic::GameDataRef' to 'const GameLogic::SplashState'
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\Game.cpp(8,62): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\SplashState.h(26,2): message : see declaration of 'GameLogic::SplashState::SplashState'
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\Game.cpp(16,21): warning C4244: 'initializing': conversion from 'clock_t' to 'float', possible loss of data
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\Game.cpp(24,19): warning C4244: '=': conversion from 'clock_t' to 'float', possible loss of data
+  GameState.cpp
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\MainMenuState.h(14,16): error C2061: syntax error: identifier 'GameDataRef'
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\MainMenuState.h(25,20): error C3646: '_data': unknown override specifier
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\MainMenuState.h(25,20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\SplashState.h(14,14): error C2061: syntax error: identifier 'GameDataRef'
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\SplashState.h(22,20): error C3646: '_data': unknown override specifier
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\SplashState.h(22,20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  Main.cpp
+  MainMenuState.cpp
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\SplashState.h(14,14): error C2061: syntax error: identifier 'GameDataRef'
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\SplashState.h(22,20): error C3646: '_data': unknown override specifier
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\SplashState.h(22,20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\MainMenuState.cpp(5,49): error C2084: function 'GameLogic::MainMenuState::MainMenuState(GameLogic::GameDataRef)' already has a body
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\MainMenuState.h(14): message : see previous definition of '{ctor}'
+  Pipe.cpp
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\GameState.h(10,12): error C2061: syntax error: identifier 'GameDataRef'
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\GameState.h(21,20): error C3646: '_data': unknown override specifier
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\GameState.h(21,20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\GameState.h(27,7): error C2143: syntax error: missing ';' before '*'
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\GameState.h(27,7): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\GameState.h(27,13): error C2238: unexpected token(s) preceding ';'
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\MainMenuState.h(14,16): error C2061: syntax error: identifier 'GameDataRef'
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\MainMenuState.h(25,20): error C3646: '_data': unknown override specifier
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\MainMenuState.h(25,20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\SplashState.h(14,14): error C2061: syntax error: identifier 'GameDataRef'
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\SplashState.h(22,20): error C3646: '_data': unknown override specifier
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\SplashState.h(22,20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\Pipe.cpp(26,42): warning C4244: '-=': conversion from 'float' to '_Ty1', possible loss of data
+          with
+          [
+              _Ty1=int
+          ]
+  SplashState.cpp
+  StateMachine.cpp
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\StateMachine.cpp(6,68): error C2572: 'GameLogic::StateMachine::AddState': redefinition of default argument: parameter 1
+C:\Users\patri\OneDrive - The University Of British Columbia\project\CPEN391\GameLogic\GameLogic\GameLogic\StateMachine.h(16): message : see declaration of 'GameLogic::StateMachine::AddState'
+  Generating Code...
