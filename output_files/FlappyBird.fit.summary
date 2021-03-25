@@ -1,0 +1,20 @@
+Fitter Status : Failed - Sun Mar 21 18:54:25 2021
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : FlappyBird
+Top-level Entity Name : MyComputer_Verilog
+Family : Cyclone V
+Device : 5CSEMA5F31C6
+Timing Models : Final
+Logic utilization (in ALMs) : 5,552 / 32,070 ( 17 % )
+Total registers : 6490
+Total pins : 338 / 457 ( 74 % )
+Total virtual pins : 0
+Total block memory bits : 1,125,372 / 4,065,280 ( 28 % )
+Total RAM Blocks : 0 / 397 ( 0 % )
+Total DSP Blocks : 5 / 87 ( 6 % )
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 2 / 6 ( 33 % )
+Total DLLs : 1 / 4 ( 25 % )

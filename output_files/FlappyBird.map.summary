@@ -1,0 +1,17 @@
+Analysis & Synthesis Status : Successful - Sun Mar 21 18:50:35 2021
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : FlappyBird
+Top-level Entity Name : MyComputer_Verilog
+Family : Cyclone V
+Logic utilization (in ALMs) : N/A
+Total registers : 6490
+Total pins : 338
+Total virtual pins : 0
+Total block memory bits : 1,125,372
+Total DSP Blocks : 5
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 2
+Total DLLs : 1

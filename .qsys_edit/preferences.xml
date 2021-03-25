@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences>
+ <debug showDebugMenu="0" />
+ <systemtable filter="All Interfaces">
+  <columns>
+   <connections preferredWidth="159" />
+   <irq preferredWidth="47" />
+   <inputclock preferredWidth="214" />
+   <name preferredWidth="173" />
+  </columns>
+ </systemtable>
+ <library
+   expandedCategories="Library/Basic Functions,Project,Library/Basic Functions/Simulation; Debug and Verification/Debug and Performance,Library,Library/Basic Functions/Simulation; Debug and Verification" />
+ <window width="2901" height="1526" x="579" y="477" />
+ <generation path="_PROJECT_NAME_" />
+</preferences>
