@@ -72,7 +72,7 @@ module render(
     birds bird_tex (.address(bird_tex_addr), .clock(clk), .q(bird_tex_q));
 
     // Numbers memory module
-    reg [13:0] char_tex_addr;
+    reg [12:0] char_tex_addr;
     wire [6:0] char_tex_q;
     localparam signed [5:0] CHAR_MAX_X=24;
     localparam signed [5:0] CHAR_MAX_Y=24;

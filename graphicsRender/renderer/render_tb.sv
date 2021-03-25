@@ -9,16 +9,16 @@ module render_tb();
 	reg slave_read, slave_write;
 	reg [31:0] slave_writedata;
 
-    logic [9:0] VGA_R;
-	logic [9:0] VGA_G;
-	logic [9:0] VGA_B;
+    logic [7:0] VGA_R;
+	logic [7:0] VGA_G;
+	logic [7:0] VGA_B;
 	logic VGA_BLANK_N;
 	logic VGA_CLK;
 	logic VGA_HS;
 	logic VGA_SYNC_N;
 	logic VGA_VS;
 	
-	render renderer (.clk(clk), .rst_n(rst_n),
+	render dut (.clk(clk), .rst_n(rst_n),
 
 			.slave_waitrequest(slave_waitrequest), .slave_address(slave_address),
 			.slave_read(slave_read), .slave_readdata(slave_readdata),
