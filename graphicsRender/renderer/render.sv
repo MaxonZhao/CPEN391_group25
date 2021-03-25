@@ -187,9 +187,7 @@ module render(
             slave_readdata <= 0;
         end
         else begin
-            // Flush to frame buffer for 30fps display (1666666 - 320*240 - 240 = 1589626)
-            // THIS IS APPROXIMATE (should be good enough), will adjust this parameter based on performance (if change, change below as well)
-            // save: 1589865
+            // Flush to frame buffer at set intervals
             if ((fps_clock_count >= 100000 && ~slave_waitrequest) || flushing || (flush_now && ~plotting)) begin
                 if (flushing) begin
                     if (flush_wait != 0) begin
@@ -234,7 +232,7 @@ module render(
                 // Plot texture
                 if (plotting) begin
                     // Flush to frame buffer after plotting this texture
-                    if (fps_clock_count == 100000) flush_now <= 1;
+                    if (fps_clock_count == 400000) flush_now <= 1;
 
                     // Plot entire frame to color specified
                     if (tex_code[6]) begin
