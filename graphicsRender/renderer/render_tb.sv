@@ -385,7 +385,21 @@ module render_tb();
         assert (dut.frame_out.altsyncram_component.m_default.altsyncram_inst.mem_data[0] == 'b011100) 
         else   $error("BAD OUTPUT");
 
-        wait(dut.x == 319 && dut.y == 239);
+        #20;
+
+        force dut.x = 0;
+        force dut.y = 0;
+
+        #20;
+
+        force dut.x = 1;
+        force dut.y = 1;
+
+        #20;
+
+        force dut.x = 319;
+        force dut.y = 239;
+
         #20;
 
         assert (dut.x_prev == 319 && dut.y_prev == 239) 
@@ -393,7 +407,7 @@ module render_tb();
 
         #20;
 
-        assert (dut.reading == 0 && dut.frame_out_q == 'b011100) 
+        assert (dut.reading == 0 && dut.frame_out_q == 'b111100) 
         else   $error("BAD VIDEO VALUE");
 
         $display("TESTS DONE!");
