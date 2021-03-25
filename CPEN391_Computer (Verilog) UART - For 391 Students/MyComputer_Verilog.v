@@ -237,7 +237,18 @@ module MyComputer_Verilog (
 			.hps_io_hps_io_gpio_inst_GPIO53  (HPS_LED),  							//                     .hps_io_gpio_inst_GPIO53
 			.hps_io_hps_io_gpio_inst_GPIO54  (HPS_KEY),  							//                     .hps_io_gpio_inst_GPIO54
 			.hps_io_hps_io_gpio_inst_GPIO61  (HPS_GSENSOR_INT),  					//                     .hps_io_gpio_inst_GPIO61
-
+			
+			// ADDED FOR VGA
+			.vga_vga_r						 (VGA_R),
+			.vga_vga_g						 (VGA_G),
+			.vga_vga_b						 (VGA_B),
+			.vga_vga_blank_n				 (VGA_BLANK_N),
+			.vga_vga_clk					 (VGA_CLK),
+			.vga_vga_hs						 (VGA_HS),
+			.vga_vga_sync_n					 (VGA_SYNC_N),
+			.vga_vga_vs						 (VGA_VS),
+			
+			
 			// IO Bridge Connections to wires
 			.io_acknowledge  						(IO_ACK_WIRE),	
 			.io_irq          						(IO_IRQ_WIRE),
@@ -325,32 +336,7 @@ module MyComputer_Verilog (
 			.Display1(HEX5)		// output of the component connect to HEX displays 4 and 5 on the DE1
 		);	
 
-	  ///////////////////////////////////////////////////////////////////////////////////////////////
-	  // Instantiate an instance of the graphics and video controller circuit drawn as a schematic
-	  ///////////////////////////////////////////////////////////////////////////////////////////////
-			
-		Graphics_and_Video_Controller		GraphicsController1 ( 
-				.Reset_L							(RESET_L_WIRE),
-				.Clock_50Mhz 					(CLOCK_50),
-				.Address 						(IO_Address_WIRE),
-				.DataIn 							(IO_Write_Data_WIRE),
-				.DataOut 						(IO_Read_Data_WIRE),
-				.IOEnable_L 					(IO_Enable_L_WIRE),
-				.UpperByteSelect_L 			(IO_UpperByte_Select_L_WIRE),
-				.LowerByteSelect_L 			(IO_LowerByte_Select_L_WIRE),
-				.WriteEnable_L 				(IO_RW_WIRE),
-				.GraphicsCS_L 					(IO_Enable_L_WIRE),
-				
-				.VGA_Clock						(VGA_CLK),
-				.VGA_Blue 						(VGA_B),
-				.VGA_Green 						(VGA_G),
-				.VGA_Red							(VGA_R),
-				.VGA_HSync 						(VGA_HS),
-				.VGA_VSync						(VGA_VS),
-				.VGA_Blanking 					(VGA_BLANK_N),
-				.VGA_SYNC						(VGA_SYNC_N)
-		 );
-		
+
 	
 		///////////////////////////////////////////////////////////////////////////////////////////////
 		// create an instance of the IO port with serial ports

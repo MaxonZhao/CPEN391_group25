@@ -12,29 +12,29 @@
 <stringAttribute key="FILES.DEBUG_RESIDENT_ANDROID.RESOURCES.0.VALUE" value=""/>
 <intAttribute key="FILES.DEBUG_RESIDENT_ANDROID.RESOURCES.COUNT" value="1"/>
 <listAttribute key="FILES.DEBUG_RESIDENT_APP"/>
-<stringAttribute key="FILES.DEBUG_RESIDENT_APP.RESOURCES.0.TYPE" value="APPLICATION_ON_TARGET"/>
+<stringAttribute key="FILES.DEBUG_RESIDENT_APP.RESOURCES.0.TYPE" value="TARGET_WORKING_DIR"/>
 <stringAttribute key="FILES.DEBUG_RESIDENT_APP.RESOURCES.0.VALUE" value=""/>
-<stringAttribute key="FILES.DEBUG_RESIDENT_APP.RESOURCES.1.TYPE" value="TARGET_WORKING_DIR"/>
+<stringAttribute key="FILES.DEBUG_RESIDENT_APP.RESOURCES.1.TYPE" value="APPLICATION_ON_TARGET"/>
 <stringAttribute key="FILES.DEBUG_RESIDENT_APP.RESOURCES.1.VALUE" value=""/>
 <intAttribute key="FILES.DEBUG_RESIDENT_APP.RESOURCES.COUNT" value="2"/>
 <listAttribute key="FILES.DOWNLOAD_AND_DEBUG"/>
-<stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.0.TYPE" value="TARGET_DOWNLOAD_DIR"/>
+<stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.0.TYPE" value="TARGET_WORKING_DIR"/>
 <stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.0.VALUE" value=""/>
 <stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.1.OPTION.ALSO_LOAD_SYMBOLS" value="true"/>
 <stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.1.OPTION.ON_DEMAND_LOAD" value="true"/>
 <stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.1.TYPE" value="APP_ON_HOST_TO_DOWNLOAD"/>
 <stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.1.VALUE" value=""/>
-<stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.2.TYPE" value="TARGET_WORKING_DIR"/>
+<stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.2.TYPE" value="TARGET_DOWNLOAD_DIR"/>
 <stringAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.2.VALUE" value=""/>
 <intAttribute key="FILES.DOWNLOAD_AND_DEBUG.RESOURCES.COUNT" value="3"/>
 <listAttribute key="FILES.DOWNLOAD_DEBUG"/>
-<stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.0.TYPE" value="TARGET_DOWNLOAD_DIR"/>
+<stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.0.TYPE" value="TARGET_WORKING_DIR"/>
 <stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.0.VALUE" value=""/>
 <stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.1.OPTION.ALSO_LOAD_SYMBOLS" value="true"/>
 <stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.1.OPTION.ON_DEMAND_LOAD" value="true"/>
 <stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.1.TYPE" value="APP_ON_HOST_TO_DOWNLOAD"/>
 <stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.1.VALUE" value=""/>
-<stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.2.TYPE" value="TARGET_WORKING_DIR"/>
+<stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.2.TYPE" value="TARGET_DOWNLOAD_DIR"/>
 <stringAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.2.VALUE" value=""/>
 <intAttribute key="FILES.DOWNLOAD_DEBUG.RESOURCES.COUNT" value="3"/>
 <intAttribute key="FILES.DOWNLOAD_DEBUG_ANDROID.RESOURCES.COUNT" value="0"/>
@@ -44,10 +44,10 @@
 <stringAttribute key="FILES.ICE_DEBUG.RESOURCES.0.OPTION.ALSO_LOAD_SYMBOLS" value="true"/>
 <stringAttribute key="FILES.ICE_DEBUG.RESOURCES.0.OPTION.ON_DEMAND_LOAD" value="true"/>
 <stringAttribute key="FILES.ICE_DEBUG.RESOURCES.0.TYPE" value="APP_ON_HOST_TO_DOWNLOAD"/>
-<stringAttribute key="FILES.ICE_DEBUG.RESOURCES.0.VALUE" value="${workspace_loc:/MyCPEN391Project/Debug/MyCPEN391Project.axf}"/>
+<stringAttribute key="FILES.ICE_DEBUG.RESOURCES.0.VALUE" value="${workspace_loc:/cpen391_integrate/Debug/cpen391_integrate.axf}"/>
 <stringAttribute key="FILES.ICE_DEBUG.RESOURCES.1.OPTION.ON_DEMAND_LOAD" value="true"/>
 <stringAttribute key="FILES.ICE_DEBUG.RESOURCES.1.TYPE" value="SYMBOLS_FILE"/>
-<stringAttribute key="FILES.ICE_DEBUG.RESOURCES.1.VALUE" value="${workspace_loc:/MyCPEN391Project/Debug/MyCPEN391Project.axf}"/>
+<stringAttribute key="FILES.ICE_DEBUG.RESOURCES.1.VALUE" value="${workspace_loc:/cpen391_integrate/Debug/cpen391_integrate.axf}"/>
 <intAttribute key="FILES.ICE_DEBUG.RESOURCES.COUNT" value="2"/>
 <listAttribute key="FILES.ICE_DEBUG_WITH_ETB_TRACE">
 <listEntry value="ON_DEMAND_LOAD"/>

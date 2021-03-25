@@ -126,7 +126,7 @@
       }
       datum sopceditor_expanded
       {
-         value = "0";
+         value = "1";
          type = "boolean";
       }
    }
@@ -312,6 +312,14 @@
          type = "boolean";
       }
    }
+   element renderer_0
+   {
+      datum _sortIndex
+      {
+         value = "19";
+         type = "int";
+      }
+   }
 }
 ]]></parameter>
  <parameter name="clockCrossingAdapter" value="HANDSHAKE" />
@@ -391,6 +399,7 @@
    internal="System_PLL.ref_reset"
    type="reset"
    dir="end" />
+ <interface name="vga" internal="renderer_0.conduit" type="conduit" dir="end" />
  <module name="ARM_A9_HPS" kind="altera_hps" version="15.0" enabled="1">
   <parameter name="ABSTRACT_REAL_COMPARE_TEST" value="false" />
   <parameter name="ABS_RAM_MEM_INIT_FILENAME" value="meminit" />
@@ -1086,7 +1095,7 @@
    version="15.0"
    enabled="1">
   <parameter name="allowInSystemMemoryContentEditor" value="false" />
-  <parameter name="autoInitializationFileName">$${FILENAME}_Onchip_SRAM</parameter>
+  <parameter name="autoInitializationFileName">CPEN391_Computer_Onchip_SRAM</parameter>
   <parameter name="blockType" value="AUTO" />
   <parameter name="copyInitFile" value="false" />
   <parameter name="dataWidth" value="32" />
@@ -1141,7 +1150,7 @@
   <parameter name="casLatency" value="3" />
   <parameter name="clockRate" value="50000000" />
   <parameter name="columnWidth" value="10" />
-  <parameter name="componentName" value="$${FILENAME}_SDRAM" />
+  <parameter name="componentName">CPEN391_Computer_SDRAM</parameter>
   <parameter name="dataWidth" value="16" />
   <parameter name="generateSimulationModel" value="true" />
   <parameter name="initNOPDelay" value="0.0" />
@@ -1198,6 +1207,7 @@
   <parameter name="other_boards" value="None" />
  </module>
  <module name="bit_flipper_0" kind="bit_flipper" version="1.0" enabled="1" />
+ <module name="renderer_0" kind="renderer" version="1.1" enabled="1" />
  <connection
    kind="avalon"
    version="15.0"
@@ -1336,6 +1346,15 @@
  <connection
    kind="avalon"
    version="15.0"
+   start="ARM_A9_HPS.h2f_lw_axi_master"
+   end="renderer_0.slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x2080" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="15.0"
    start="JTAG_To_FPGA_Bridge.master"
    end="IO_Bridge.avalon_slave">
   <parameter name="arbitrationPriority" value="1" />
@@ -1460,6 +1479,15 @@
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
+   kind="avalon"
+   version="15.0"
+   start="JTAG_To_FPGA_Bridge.master"
+   end="renderer_0.slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0xff202080" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
    kind="clock"
    version="15.0"
    start="System_PLL.sys_clk"
@@ -1540,6 +1568,11 @@
    version="15.0"
    start="System_PLL.sys_clk"
    end="bit_flipper_0.clock" />
+ <connection
+   kind="clock"
+   version="15.0"
+   start="System_PLL.sys_clk"
+   end="renderer_0.clock" />
  <connection
    kind="clock"
    version="15.0"
@@ -1674,6 +1707,11 @@
    kind="reset"
    version="15.0"
    start="ARM_A9_HPS.h2f_reset"
+   end="renderer_0.reset" />
+ <connection
+   kind="reset"
+   version="15.0"
+   start="ARM_A9_HPS.h2f_reset"
    end="Onchip_SRAM.reset1" />
  <connection
    kind="reset"
@@ -1755,6 +1793,11 @@
    version="15.0"
    start="System_PLL.reset_source"
    end="LCD_0.reset" />
+ <connection
+   kind="reset"
+   version="15.0"
+   start="System_PLL.reset_source"
+   end="renderer_0.reset" />
  <connection
    kind="reset"
    version="15.0"

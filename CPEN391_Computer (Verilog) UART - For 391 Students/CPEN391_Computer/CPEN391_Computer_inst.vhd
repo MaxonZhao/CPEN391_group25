@@ -98,7 +98,15 @@
 			sdram_clk_clk                   : out   std_logic;                                        -- clk
 			slider_switches_export          : in    std_logic_vector(9 downto 0)  := (others => 'X'); -- export
 			system_pll_ref_clk_clk          : in    std_logic                     := 'X';             -- clk
-			system_pll_ref_reset_reset      : in    std_logic                     := 'X'              -- reset
+			system_pll_ref_reset_reset      : in    std_logic                     := 'X';             -- reset
+			vga_vga_r                       : out   std_logic_vector(7 downto 0);                     -- vga_r
+			vga_vga_g                       : out   std_logic_vector(7 downto 0);                     -- vga_g
+			vga_vga_b                       : out   std_logic_vector(7 downto 0);                     -- vga_b
+			vga_vga_blank_n                 : out   std_logic;                                        -- vga_blank_n
+			vga_vga_clk                     : out   std_logic;                                        -- vga_clk
+			vga_vga_hs                      : out   std_logic;                                        -- vga_hs
+			vga_vga_sync_n                  : out   std_logic;                                        -- vga_sync_n
+			vga_vga_vs                      : out   std_logic                                         -- vga_vs
 		);
 	end component CPEN391_Computer;
 
@@ -202,6 +210,14 @@
 			sdram_clk_clk                   => CONNECTED_TO_sdram_clk_clk,                   --            sdram_clk.clk
 			slider_switches_export          => CONNECTED_TO_slider_switches_export,          --      slider_switches.export
 			system_pll_ref_clk_clk          => CONNECTED_TO_system_pll_ref_clk_clk,          --   system_pll_ref_clk.clk
-			system_pll_ref_reset_reset      => CONNECTED_TO_system_pll_ref_reset_reset       -- system_pll_ref_reset.reset
+			system_pll_ref_reset_reset      => CONNECTED_TO_system_pll_ref_reset_reset,      -- system_pll_ref_reset.reset
+			vga_vga_r                       => CONNECTED_TO_vga_vga_r,                       --                  vga.vga_r
+			vga_vga_g                       => CONNECTED_TO_vga_vga_g,                       --                     .vga_g
+			vga_vga_b                       => CONNECTED_TO_vga_vga_b,                       --                     .vga_b
+			vga_vga_blank_n                 => CONNECTED_TO_vga_vga_blank_n,                 --                     .vga_blank_n
+			vga_vga_clk                     => CONNECTED_TO_vga_vga_clk,                     --                     .vga_clk
+			vga_vga_hs                      => CONNECTED_TO_vga_vga_hs,                      --                     .vga_hs
+			vga_vga_sync_n                  => CONNECTED_TO_vga_vga_sync_n,                  --                     .vga_sync_n
+			vga_vga_vs                      => CONNECTED_TO_vga_vga_vs                       --                     .vga_vs
 		);
 

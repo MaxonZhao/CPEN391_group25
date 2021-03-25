@@ -13,12 +13,12 @@ PLLJITTER	NA
 PLLSPEmax	NA
 PLLSPEmin	NA
 
-PLL_Name	Graphics_and_Video_Controller:GraphicsController1|VGA_CLOCK_GEN:inst12|VGA_CLOCK_GEN_0002:vga_clock_gen_inst|altera_pll:altera_pll_i|general[0].gpll~FRACTIONAL_PLL
+PLL_Name	CPEN391_Computer:u0|render:renderer_0|video_driver:v1|CLOCK25_PLL:c25_gen|CLOCK25_PLL_0002:clock25_pll_inst|altera_pll:altera_pll_i|general[0].gpll~FRACTIONAL_PLL
 PLLJITTER	27
 PLLSPEmax	100
 PLLSPEmin	-100
 
-PLL_Name	Graphics_and_Video_Controller:GraphicsController1|VGA_CLOCK_GEN:inst12|VGA_CLOCK_GEN_0002:vga_clock_gen_inst|altera_pll:altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER
+PLL_Name	CPEN391_Computer:u0|render:renderer_0|video_driver:v1|CLOCK25_PLL:c25_gen|CLOCK25_PLL_0002:clock25_pll_inst|altera_pll:altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER
 PLLJITTER	NA
 PLLSPEmax	NA
 PLLSPEmin	NA

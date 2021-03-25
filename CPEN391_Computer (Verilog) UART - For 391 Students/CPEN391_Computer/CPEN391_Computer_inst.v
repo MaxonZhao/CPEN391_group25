@@ -97,6 +97,14 @@
 		.sdram_clk_clk                   (<connected-to-sdram_clk_clk>),                   //            sdram_clk.clk
 		.slider_switches_export          (<connected-to-slider_switches_export>),          //      slider_switches.export
 		.system_pll_ref_clk_clk          (<connected-to-system_pll_ref_clk_clk>),          //   system_pll_ref_clk.clk
-		.system_pll_ref_reset_reset      (<connected-to-system_pll_ref_reset_reset>)       // system_pll_ref_reset.reset
+		.system_pll_ref_reset_reset      (<connected-to-system_pll_ref_reset_reset>),      // system_pll_ref_reset.reset
+		.vga_vga_r                       (<connected-to-vga_vga_r>),                       //                  vga.vga_r
+		.vga_vga_g                       (<connected-to-vga_vga_g>),                       //                     .vga_g
+		.vga_vga_b                       (<connected-to-vga_vga_b>),                       //                     .vga_b
+		.vga_vga_blank_n                 (<connected-to-vga_vga_blank_n>),                 //                     .vga_blank_n
+		.vga_vga_clk                     (<connected-to-vga_vga_clk>),                     //                     .vga_clk
+		.vga_vga_hs                      (<connected-to-vga_vga_hs>),                      //                     .vga_hs
+		.vga_vga_sync_n                  (<connected-to-vga_vga_sync_n>),                  //                     .vga_sync_n
+		.vga_vga_vs                      (<connected-to-vga_vga_vs>)                       //                     .vga_vs
 	);
 

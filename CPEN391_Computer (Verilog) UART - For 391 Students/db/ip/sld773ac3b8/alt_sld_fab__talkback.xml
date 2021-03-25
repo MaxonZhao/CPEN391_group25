@@ -11,27 +11,27 @@
    <SOPCModuleParameter>
     <C>2</C>
     <Name>DESIGN_HASH</Name>
-    <Value>55ffe151cd14f2845980</Value>
+    <Value>28bd4af6c51d31dae1a2</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
     <C>3</C>
     <Name>NODE_COUNT</Name>
-    <Value>4</Value>
+    <Value>9</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
     <C>4</C>
     <Name>MAX_WIDTH</Name>
-    <Value>26</Value>
+    <Value>28</Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
     <C>5</C>
     <Name>SETTINGS</Name>
-    <Value>{fabric sld dir agent mfr_code 110 type_code 128 version 1 instance -1 ir_width 1 prefer_host { } psig f63706bb} {fabric sld dir agent mfr_code 110 type_code 128 version 1 instance -1 ir_width 1 prefer_host { } psig f63706bb} {fabric sld dir agent mfr_code 110 type_code 132 version 1 instance 0 ir_width 3 psig f63706bb} {fabric sld dir agent mfr_code 110 type_code 132 version 1 instance 1 ir_width 3 psig f63706bb} </Value>
+    <Value>{fabric sld dir agent mfr_code 110 type_code 128 version 1 instance -1 ir_width 1 prefer_host { } psig f63706bb} {fabric sld dir agent mfr_code 110 type_code 128 version 1 instance -1 ir_width 1 prefer_host { } psig f63706bb} {fabric sld dir agent mfr_code 110 type_code 132 version 1 instance 0 ir_width 3 psig f63706bb} {fabric sld dir agent mfr_code 110 type_code 132 version 1 instance 1 ir_width 3 psig f63706bb} {fabric sld dir agent mfr_code 110 type_code 3 version 1 instance 0 ir_width 5 psig f63706bb} {fabric sld dir agent mfr_code 110 type_code 3 version 1 instance 1 ir_width 5 psig f63706bb} {fabric sld dir agent mfr_code 110 type_code 3 version 1 instance 2 ir_width 5 psig f63706bb} {fabric sld dir agent mfr_code 110 type_code 3 version 1 instance 3 ir_width 5 psig f63706bb} {fabric sld dir agent mfr_code 110 type_code 3 version 1 instance 4 ir_width 5 psig f63706bb} </Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
     <C>6</C>
     <Name>CLOCKS</Name>
-    <Value>{id {} } {id {} } {id {} } {id {} } </Value>
+    <Value>{id {} } {id {} } {id {} } {id {} } {id {} } {id {} } {id {} } {id {} } {id {} } </Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
     <C>7</C>
@@ -41,7 +41,7 @@
    <SOPCModuleParameter>
     <C>8</C>
     <Name>EP_INFOS</Name>
-    <Value>{hpath {CPEN391_Computer:u0|CPEN391_Computer_JTAG_UART_for_ARM_0:jtag_uart_for_arm_0|alt_jtag_atlantic:CPEN391_Computer_JTAG_UART_for_ARM_0_alt_jtag_atlantic|altera_sld_agent_endpoint:inst|altera_fabric_endpoint:ep} } {hpath {CPEN391_Computer:u0|CPEN391_Computer_JTAG_UART_for_ARM_0:jtag_uart_for_arm_1|alt_jtag_atlantic:CPEN391_Computer_JTAG_UART_for_ARM_0_alt_jtag_atlantic|altera_sld_agent_endpoint:inst|altera_fabric_endpoint:ep} } {hpath {CPEN391_Computer:u0|CPEN391_Computer_JTAG_To_FPGA_Bridge:jtag_to_fpga_bridge|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_sld_node:node|sld_virtual_jtag_basic:sld_virtual_jtag_component|sld_virtual_jtag_impl:sld_virtual_jtag_impl_inst} } {hpath {CPEN391_Computer:u0|CPEN391_Computer_JTAG_To_FPGA_Bridge:jtag_to_hps_bridge|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_sld_node:node|sld_virtual_jtag_basic:sld_virtual_jtag_component|sld_virtual_jtag_impl:sld_virtual_jtag_impl_inst} } </Value>
+    <Value>{hpath {CPEN391_Computer:u0|CPEN391_Computer_JTAG_UART_for_ARM_0:jtag_uart_for_arm_0|alt_jtag_atlantic:CPEN391_Computer_JTAG_UART_for_ARM_0_alt_jtag_atlantic|altera_sld_agent_endpoint:inst|altera_fabric_endpoint:ep} } {hpath {CPEN391_Computer:u0|CPEN391_Computer_JTAG_UART_for_ARM_0:jtag_uart_for_arm_1|alt_jtag_atlantic:CPEN391_Computer_JTAG_UART_for_ARM_0_alt_jtag_atlantic|altera_sld_agent_endpoint:inst|altera_fabric_endpoint:ep} } {hpath {CPEN391_Computer:u0|CPEN391_Computer_JTAG_To_FPGA_Bridge:jtag_to_fpga_bridge|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_sld_node:node|sld_virtual_jtag_basic:sld_virtual_jtag_component|sld_virtual_jtag_impl:sld_virtual_jtag_impl_inst} } {hpath {CPEN391_Computer:u0|CPEN391_Computer_JTAG_To_FPGA_Bridge:jtag_to_hps_bridge|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_sld_node:node|sld_virtual_jtag_basic:sld_virtual_jtag_component|sld_virtual_jtag_impl:sld_virtual_jtag_impl_inst} } {hpath {CPEN391_Computer:u0|render:renderer_0|frame:frame_buffer|altsyncram:altsyncram_component|altsyncram_24q1:auto_generated|sld_mod_ram_rom:mgl_prim2} } {hpath {CPEN391_Computer:u0|render:renderer_0|pipes:pipe_tex|altsyncram:altsyncram_component|altsyncram_0rk1:auto_generated|sld_mod_ram_rom:mgl_prim2} } {hpath {CPEN391_Computer:u0|render:renderer_0|birds:bird_tex|altsyncram:altsyncram_component|altsyncram_jok1:auto_generated|sld_mod_ram_rom:mgl_prim2} } {hpath {CPEN391_Computer:u0|render:renderer_0|chars:char_tex|altsyncram:altsyncram_component|altsyncram_0qk1:auto_generated|sld_mod_ram_rom:mgl_prim2} } {hpath {CPEN391_Computer:u0|render:renderer_0|custom:custom_tex|altsyncram:altsyncram_component|altsyncram_ctk1:auto_generated|sld_mod_ram_rom:mgl_prim2} } </Value>
    </SOPCModuleParameter>
    <SOPCModuleParameter>
     <C>9</C>
@@ -69,7 +69,7 @@
     <Value>Unknown</Value>
    </SOPCModuleParameter>
   </SOPCModule>
-  <SystemID>1371242834</SystemID>
+  <SystemID>1728639263</SystemID>
  </SOPCSystem>
  <SchemaVersion>schema_2013-01-18</SchemaVersion>
 </ProgramExecution>
