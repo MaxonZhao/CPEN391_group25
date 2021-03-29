@@ -40,6 +40,13 @@
         android:layout_below="@+id/btnStartConnection"
         android:layout_marginTop="15dp" />
 
+    <ListView
+        android:id="@+id/paired_devices_view"
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/lvNewDevices" />
+
 
     <Button
         android:id="@+id/btnStartConnection"
@@ -53,8 +60,10 @@
         android:id="@+id/editText"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lvNewDevices"
+        android:layout_below="@id/paired_devices_view"
         android:layout_alignParentStart="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="99dp"
         android:hint="Enter Text Here" />
 
     <Button
@@ -62,6 +71,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lvNewDevices"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="254dp"
         android:layout_toRightOf="@+id/editText"
         android:text="SEND" />
 
