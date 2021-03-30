@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     BluetoothAdapter mBluetoothAdapter;
     Button btnEnableDisable_Discoverable;
 
-    BluetoothConnectionService mBluetoothConnection;
+    BluetoothConnectionService mBluetoothConnection = null;
 
     Button btnStartConnection;
     Button btnSend;
@@ -374,7 +374,7 @@ public class MainActivity extends AppCompatActivity {
 
                 mBTDevice = mBTDevices.get(i);
                 mBluetoothConnection = new BluetoothConnectionService(MainActivity.this);
-                startConnection();
+//                startConnection();
             }
         }
     };
