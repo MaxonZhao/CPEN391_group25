@@ -1,6 +1,7 @@
 package com.cpen391.flappybluetooth.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -15,11 +16,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.cpen391.flappybluetooth.R;
-import com.cpen391.flappybluetooth.listenner.PairedDevicesItemListener;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -29,14 +30,13 @@ import java.util.UUID;
 import timber.log.Timber;
 
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     BluetoothAdapter mBluetoothAdapter;
     Button btnEnableDisable_Discoverable;
 
     BluetoothConnectionService mBluetoothConnection;
-    PairedDevicesItemListener listen = new PairedDevicesItemListener();
 
     Button btnStartConnection;
     Button btnSend;
@@ -137,9 +137,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             if (action.equals(BluetoothDevice.ACTION_FOUND)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                Log.d(TAG, "onReceive: " + device.getName() + ": " + device.getAddress());
                 if (!mBTDevices.contains(device)) {
                     mBTDevices.add(device);
-                    Log.d(TAG, "onReceive: " + device.getName() + ": " + device.getAddress());
+
                     mDeviceListAdapter = new DeviceListAdapter(context, R.layout.device_adapter_view, mBTDevices);
                     lvNewDevices.setAdapter(mDeviceListAdapter);
                 }
@@ -161,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 //case1: bonded already
                 if (mDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
                     Log.d(TAG, "BroadcastReceiver: BOND_BONDED.");
+                    Toast.makeText(getApplicationContext(), "connected with " + mDevice.getName(), Toast.LENGTH_LONG).show();
                     //inside BroadcastReceiver4
                     mBTDevice = mDevice;
                 }
@@ -204,12 +206,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //Broadcasts when bond state changes (ie:pairing)
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
+        IntentFilter discoverDevicesIntent = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         registerReceiver(mBroadcastReceiver4, filter);
+        registerReceiver(mBroadcastReceiver3, discoverDevicesIntent);
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-        lvNewDevices.setOnItemClickListener(MainActivity.this);
-        lvPairedDevices.setOnItemClickListener(listen);
+        lvNewDevices.setOnItemClickListener(mNewDevicesClickListener);
+        lvPairedDevices.setOnItemClickListener(mPairedDevicesClickListener);
 
 
         btnONOFF.setOnClickListener(new View.OnClickListener() {
@@ -245,7 +249,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Log.d(TAG, "onReceive: " + device.getName() + ": " + device.getAddress());
             mPairedDevicesAdapter = new DeviceListAdapter(this, R.layout.device_adapter_view, mPairedBTDevices);
             lvPairedDevices.setAdapter(mPairedDevicesAdapter);
-//            mPairedDevicesAdapter.notifyDataSetChanged();
         });
     }
 
@@ -309,10 +312,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             //check BT permissions in manifest
             checkBTPermissions();
+//            mBTDevices.clear();
 
             mBluetoothAdapter.startDiscovery();
-            IntentFilter discoverDevicesIntent = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-            registerReceiver(mBroadcastReceiver3, discoverDevicesIntent);
+
+
         }
         if (!mBluetoothAdapter.isDiscovering()) {
 
@@ -345,26 +349,70 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        //first cancel discovery because its very memory intensive.
-        mBluetoothAdapter.cancelDiscovery();
 
-        Log.d(TAG, "onItemClick: You Clicked on a device.");
-        String deviceName = mBTDevices.get(i).getName();
-        String deviceAddress = mBTDevices.get(i).getAddress();
+    /**
+     * The on-click listener for all devices in the ListViews
+     */
+    private AdapterView.OnItemClickListener mNewDevicesClickListener
+            = new AdapterView.OnItemClickListener() {
+        public void onItemClick(AdapterView<?> av, View v, int i, long l) {
+            //first cancel discovery because its very memory intensive.
+            mBluetoothAdapter.cancelDiscovery();
 
-        Log.d(TAG, "onItemClick: deviceName = " + deviceName);
-        Log.d(TAG, "onItemClick: deviceAddress = " + deviceAddress);
+            Log.d(TAG, "onItemClick: You Clicked on a device.");
+            String deviceName = mBTDevices.get(i).getName();
+            String deviceAddress = mBTDevices.get(i).getAddress();
 
-        //create the bond.
-        //NOTE: Requires API 17+? I think this is JellyBean
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            Log.d(TAG, "Trying to pair with " + deviceName);
-            Timber.d("------------------------" + mBTDevices.get(i).createBond());
+            Log.d(TAG, "onItemClick: deviceName = " + deviceName);
+            Log.d(TAG, "onItemClick: deviceAddress = " + deviceAddress);
 
-            mBTDevice = mBTDevices.get(i);
-            mBluetoothConnection = new BluetoothConnectionService(MainActivity.this);
+            //create the bond.
+            //NOTE: Requires API 17+? I think this is JellyBean
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                Log.d(TAG, "Trying to pair with " + deviceName);
+                Timber.d("------------------------" + mBTDevices.get(i).createBond());
+
+                mBTDevice = mBTDevices.get(i);
+                mBluetoothConnection = new BluetoothConnectionService(MainActivity.this);
+                startConnection();
+            }
         }
-    }
+    };
+
+
+    /**
+     * The on-click listener for all devices in the ListViews
+     */
+    private AdapterView.OnItemClickListener mPairedDevicesClickListener
+            = new AdapterView.OnItemClickListener() {
+        public void onItemClick(AdapterView<?> av, View v, int i, long l) {
+            //first cancel discovery because its very memory intensive.
+            mBluetoothAdapter.cancelDiscovery();
+
+            Log.d(TAG, "onItemClick: You Clicked on a device.");
+            String deviceName = mPairedBTDevices.get(i).getName();
+            String deviceAddress = mPairedBTDevices.get(i).getAddress();
+
+            Log.d(TAG, "onItemClick: deviceName = " + deviceName);
+            Log.d(TAG, "onItemClick: deviceAddress = " + deviceAddress);
+
+            //create the bond.
+            //NOTE: Requires API 17+? I think this is JellyBean
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                Log.d(TAG, "Trying to pair with " + deviceName);
+                Timber.d("&&&&&&&&&&&&&&&&&&&&&&&&&&" + mPairedBTDevices.get(i).createBond());
+
+
+                mBTDevice = mPairedBTDevices.get(i);
+                Log.d(TAG, "LINE 406::: " + String.valueOf(mBTDevice.getBondState()));
+                mBluetoothConnection = new BluetoothConnectionService(MainActivity.this);
+                startConnection();
+            }
+        }
+    };
+
+
+
+
+
 }

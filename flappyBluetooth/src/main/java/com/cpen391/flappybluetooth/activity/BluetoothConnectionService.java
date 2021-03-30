@@ -26,9 +26,10 @@ public class BluetoothConnectionService {
 
     private AcceptThread mInsecureAcceptThread;
     private ConnectThread mConnectThread;
+    private ConnectedThread mConnectedThread;
     private BluetoothDevice mmDevice;
     private UUID deviceUUID;
-    private ConnectedThread mConnectedThread;
+
     ProgressDialog mProgressDialog;
 
     public BluetoothConnectionService(Context context) {
@@ -129,6 +130,7 @@ public class BluetoothConnectionService {
                 Log.d(TAG, "run: ConnectThread connected.");
             } catch (IOException e) {
                 // Close the socket
+                e.printStackTrace();
                 try {
                     mmSocket.close();
                     Log.d(TAG, "run: Closed Socket.");
@@ -251,6 +253,7 @@ public class BluetoothConnectionService {
             Log.d(TAG, "write: Writing to outputstream: " + text);
             try {
                 mmOutStream.write(bytes);
+                Log.d(TAG, "write: mmOutStream is " + mmOutStream.toString() + ", wrote: " + bytes);
             } catch (IOException e) {
                 Log.e(TAG, "write: Error writing to output stream. " + e.getMessage() );
             }
