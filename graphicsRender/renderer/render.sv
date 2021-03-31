@@ -267,6 +267,7 @@ module render(
                                 // Added custom bird color support
                                 if (bird_tex_q[5:0] == 'b111000)
                                     frame_buffer_data <= bird_color;
+                                else frame_buffer_data <= bird_tex_q[5:0];
                                 frame_buffer_addr <= buf_addr_save;
                                 frame_buffer_wren <= 1;
                             end

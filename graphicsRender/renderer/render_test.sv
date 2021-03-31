@@ -48,16 +48,16 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 		else begin
 			if (~KEY[1] && ~drawing) begin
 				drawing <= 1;
-				if (macro_state < 5 ) macro_state <= macro_state + 1;
-				else if (macro_state > 5) macro_state <= 0;
+				if (macro_state < 6 ) macro_state <= macro_state + 1;
+				else if (macro_state > 6) macro_state <= 0;
 				micro_state <= 0;
 				done_micro <= 31;
 			end
 
 			else if (~KEY[2] && ~drawing) begin
 				drawing <= 1;
-				if (macro_state < 6) macro_state <= 6;
-				else if (macro_state > 5 && macro_state < 7) macro_state <= macro_state + 1;
+				if (macro_state < 7) macro_state <= 7;
+				else if (macro_state > 6 && macro_state < 8) macro_state <= macro_state + 1;
 				micro_state <= 0;
 				done_micro <= 31;
 			end
@@ -357,8 +357,87 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 				endcase
 			end
 
-			// Make background green
+			// Plot 2nd bird at side of screen
 			else if (macro_state == 6 && drawing) begin
+				case (micro_state)
+					// Write texture code
+					0: begin
+						if (~slave_waitrequest && done_micro == 31) begin
+							slave_address <= 4;
+							slave_write <= 1;
+							slave_writedata <= 'b000_0001;
+							done_micro <= 0;
+						end
+						else if (done_micro == 0) begin
+							slave_write <= 0;
+							micro_state <= 1;
+						end
+					end
+
+					// Write x coordinate
+					1: begin
+						if (~slave_waitrequest && done_micro == 0) begin
+							slave_address <= 1;
+							slave_write <= 1;
+							slave_writedata <= 80;
+							done_micro <= 1;
+						end
+						else if (done_micro == 1) begin
+							slave_write <= 0;
+							micro_state <= 2;
+						end
+					end
+
+					// Write y coordinate
+					2: begin
+						if (~slave_waitrequest && done_micro == 1) begin
+							slave_address <= 2;
+							slave_write <= 1;
+							slave_writedata <= 100;
+							done_micro <= 2;
+						end
+						else if (done_micro == 2) begin
+							slave_write <= 0;
+							micro_state <= 3;
+						end
+					end
+
+					// Write bird color
+					3: begin
+						if (~slave_waitrequest && done_micro == 2) begin
+							slave_address <= 7;
+							slave_write <= 1;
+							slave_writedata <= 'b000000;
+							done_micro <= 3;
+						end
+						else if (done_micro == 3) begin
+							slave_write <= 0;
+							micro_state <= 4;
+						end
+					end
+
+					// Plot
+					4: begin
+						if (~slave_waitrequest && done_micro == 3) begin
+							slave_address <= 6;
+							slave_write <= 1;
+							done_micro <= 4;
+						end
+						else if (done_micro == 4) begin
+							slave_write <= 0;
+							micro_state <= 5;
+						end
+					end
+
+					// Done
+					5: begin
+						drawing <= 0;
+					end
+				endcase
+			end
+
+			// Make background green
+			else if (macro_state == 7 && drawing) begin
 				case (micro_state)
 					// Write texture code
 					0: begin
