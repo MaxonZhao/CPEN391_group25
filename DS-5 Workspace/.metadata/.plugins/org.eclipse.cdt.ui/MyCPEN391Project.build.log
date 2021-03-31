@@ -1,4 +1,4 @@
-18:59:28 **** Incremental Build of configuration Debug for project MyCPEN391Project ****
+09:11:27 **** Incremental Build of configuration Debug for project MyCPEN391Project ****
 make all 
 Building file: ../RS232.c
 Invoking: ARM C Compiler 5
@@ -8,21 +8,6 @@ armcc --c99 -O0 -g --md --depend_format=unix_escaped -c -o "RS232.o" "../RS232.c
           ^
 ../RS232.c: 1 warning, 0 errors
 Finished building: ../RS232.c
- 
-Building file: ../bluetooth.c
-Invoking: ARM C Compiler 5
-armcc --c99 -O0 -g --md --depend_format=unix_escaped -c -o "bluetooth.o" "../bluetooth.c"
-Finished building: ../bluetooth.c
- 
-Building file: ../main.c
-Invoking: ARM C Compiler 5
-armcc --c99 -O0 -g --md --depend_format=unix_escaped -c -o "main.o" "../main.c"
-Finished building: ../main.c
- 
-Building file: ../wifi.c
-Invoking: ARM C Compiler 5
-armcc --c99 -O0 -g --md --depend_format=unix_escaped -c -o "wifi.o" "../wifi.c"
-Finished building: ../wifi.c
  
 Building target: MyCPEN391Project.axf
 Invoking: ARM Linker 5
@@ -35,11 +20,11 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       480         12          0          0          0       4041   RS232.o
-       452        196          0          0          0        511   main.o
+       548         36          0          0          0       4073   RS232.o
+       168         64          0          0          0        555   main.o
 
     ----------------------------------------------------------------------
-       932        208         16          0      65536       4552   Object Totals
+       716        100         16          0      65536       4628   Object Totals
          0          0         16          0      65536          0   (incl. Generated)
          0          0          0          0          0          0   (incl. Padding)
 
@@ -57,6 +42,9 @@ Image component sizes
         76          0          0          0          0        108   _printf_char.o
         84          4          0          0          0         96   _printf_char_common.o
         52          4          0          0          0         80   _printf_char_file.o
+         8          0          0          0          0          0   _printf_d.o
+       180         16          0          0          0        100   _printf_dec.o
+       296          0          0          0          0        100   _printf_intcommon.o
          0          0          0          0          0          0   _printf_percent.o
          8          0          0          0          0          0   _printf_percent_end.o
          8          0          0          0          0          0   _printf_s.o
@@ -97,6 +85,7 @@ Image component sizes
         84          0          0          0          0         80   rt_memclr_w.o
          4          0          0          0          0          0   rtexit.o
         12          0          0          0          0          0   rtexit2.o
+        44          0          0          0          0         68   rtudiv10.o
        112          0          0          0          0         80   setvbuf.o
        396          4          0          0          0        164   stdio.o
          0          0          0         12        252          0   stdio_streams.o
@@ -107,17 +96,17 @@ Image component sizes
          4          0          0          0          0         68   use_no_semi.o
 
     ----------------------------------------------------------------------
-      5160        228         12         16        348       3636   Library Totals
+      5688        244         12         16        348       3904   Library Totals
          0          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
 
-      5160        228         12         16        348       3636   c_4.l
+      5688        244         12         16        348       3904   c_4.l
 
     ----------------------------------------------------------------------
-      5160        228         12         16        348       3636   Library Totals
+      5688        244         12         16        348       3904   Library Totals
 
     ----------------------------------------------------------------------
 
@@ -126,20 +115,20 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      6092        436         28         16      65884       6296   Grand Totals
-      6092        436         28         16      65884       6296   ELF Image Totals
-      6092        436         28         16          0          0   ROM Totals
+      6404        344         28         16      65884       6484   Grand Totals
+      6404        344         28         16      65884       6484   ELF Image Totals
+      6404        344         28         16          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 6120 (   5.98kB)
+    Total RO  Size (Code + RO Data)                 6432 (   6.28kB)
     Total RW  Size (RW Data + ZI Data)             65900 (  64.36kB)
-    Total ROM Size (Code + RO Data + RW Data)       6136 (   5.99kB)
+    Total ROM Size (Code + RO Data + RW Data)       6448 (   6.30kB)
 
 ==============================================================================
 
 Finished building target: MyCPEN391Project.axf
  
 
-18:59:44 Build Finished (took 15s.719ms)
+09:11:28 Build Finished (took 1s.701ms)
 

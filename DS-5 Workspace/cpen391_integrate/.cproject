@@ -26,7 +26,7 @@
 							</tool>
 							<tool id="com.arm.tool.assembler.1770990643" name="ARM Assembler 5" superClass="com.arm.tool.assembler"/>
 							<tool id="com.arm.tool.c.linker.32144059" name="ARM Linker 5" superClass="com.arm.tool.c.linker">
-								<option id="com.arm.tool.c.linker.option.scatter.1183579938" superClass="com.arm.tool.c.linker.option.scatter" value="C:\Users\zoeyli\cpen391\CPEN391_group25\DS-5 Workspace\cpen391_integrate\CPEN391ForDE1.scat" valueType="string"/>
+								<option id="com.arm.tool.c.linker.option.scatter.1183579938" name="Scatter file (--scatter)" superClass="com.arm.tool.c.linker.option.scatter" value="C:\Users\zoeyli\cpen391\CPEN391_group25\DS-5 Workspace\cpen391_integrate\CPEN391.scat" valueType="string"/>
 							</tool>
 							<tool id="com.arm.tool.librarian.1764858010" name="ARM Librarian 5" superClass="com.arm.tool.librarian"/>
 						</toolChain>

@@ -4,13 +4,34 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../ledAndSwitch.cpp 
+../Bird.cpp \
+../CPEN391.cpp \
+../Game.cpp \
+../GameState.cpp \
+../MainMenuState.cpp \
+../Pipe.cpp \
+../SplashState.cpp \
+../StateMachine.cpp 
 
 OBJS += \
-./ledAndSwitch.o 
+./Bird.o \
+./CPEN391.o \
+./Game.o \
+./GameState.o \
+./MainMenuState.o \
+./Pipe.o \
+./SplashState.o \
+./StateMachine.o 
 
 CPP_DEPS += \
-./ledAndSwitch.d 
+./Bird.d \
+./CPEN391.d \
+./Game.d \
+./GameState.d \
+./MainMenuState.d \
+./Pipe.d \
+./SplashState.d \
+./StateMachine.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

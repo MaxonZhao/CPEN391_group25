@@ -116,20 +116,17 @@ void sendMultiChar(char* message, volatile unsigned char* LineStatusReg, volatil
 
 }
 
-int receiveBuffer(char* buffer,volatile unsigned char* ReceiverFifo, volatile unsigned char* LineStatusReg)
-{
-
-	 int byteRead = 0;
-
-
-	// wait for Data Ready bit (0) of line status register to be '1'
-	while(!RS232_TestForReceivedData(LineStatusReg)){};
-
-
-	while (*LineStatusReg & 0x1){
-		buffer[byteRead] = *ReceiverFifo;
-		byteRead++;
-	}
-
-	return byteRead;
+int receiveBuffer(char * res, volatile unsigned char* LineStatusReg, volatile unsigned char* ReceiverFifo) {
+	int j;
+	int bytes_received = 0;
+	
+    for(j = 0; j < 5000000; j++) {
+        if(RS232_TestForReceivedData(LineStatusReg)) {
+        	res[bytes_received++] = (char) getcharRS232(ReceiverFifo,LineStatusReg);
+            j = 0 ; 
+        }
+    }
+	printf("Received %d bytes\n", bytes_received);
+	res[bytes_received] = '\0';
+	return bytes_received;
 }

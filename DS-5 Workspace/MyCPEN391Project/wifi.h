@@ -1,13 +1,13 @@
 /*
  * wifi.h
  *
- *  Created on: Mar 16, 2021
+ *  Created on: Mar 1, 2021
  *      Author: zoeyli
  */
 
 #ifndef WIFI_H_
 #define WIFI_H_
 
-int runLUAScript(char * message, char * res, volatile unsigned char* LineStatusReg, volatile unsigned char* TransmitterFifo, volatile unsigned char* ReceiverFifo);
+void uploadScore(char* userName, int score);
 
 #endif /* WIFI_H_ */

@@ -52,10 +52,10 @@ endif
 all: cpen391_integrate.axf
 
 # Tool invocations
-cpen391_integrate.axf: $(OBJS) C:\Users\zoeyli\cpen391\CPEN391_group25\DS-5\ Workspace\cpen391_integrate\CPEN391ForDE1.scat $(USER_OBJS) $(LIBS)
+cpen391_integrate.axf: $(OBJS) C:\Users\zoeyli\cpen391\CPEN391_group25\DS-5\ Workspace\cpen391_integrate\CPEN391.scat $(USER_OBJS) $(LIBS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: ARM Linker 5'
-	armlink --scatter="C:\Users\zoeyli\cpen391\CPEN391_group25\DS-5 Workspace\cpen391_integrate\CPEN391ForDE1.scat" --info=sizes -o "cpen391_integrate.axf" $(OBJS) $(USER_OBJS) $(LIBS)
+	armlink --scatter="C:\Users\zoeyli\cpen391\CPEN391_group25\DS-5 Workspace\cpen391_integrate\CPEN391.scat" --info=sizes -o "cpen391_integrate.axf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
