@@ -1,7 +1,6 @@
 package com.cpen391.flappybluetooth.activity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -15,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (mode) {
                     //Device is in Discoverable Mode
                     case BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE:
+                        Toast.makeText(getApplicationContext(), "Your device is discoverable!", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "mBroadcastReceiver2: Discoverability Enabled.");
                         break;
                     //Device not in discoverable mode
@@ -163,8 +164,16 @@ public class MainActivity extends AppCompatActivity {
                 if (mDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
                     Log.d(TAG, "BroadcastReceiver: BOND_BONDED.");
                     Toast.makeText(getApplicationContext(), "connected with " + mDevice.getName(), Toast.LENGTH_LONG).show();
+                    ImageView bluetoothImg = (ImageView) findViewById(R.id.bluetooth_icon);
+                    bluetoothImg.setImageResource(R.drawable.bluetooth_on_64);
                     //inside BroadcastReceiver4
                     mBTDevice = mDevice;
+
+                    lvNewDevices.setVisibility(View.GONE);
+                    lvPairedDevices.setVisibility(View.GONE);
+                    btnStartConnection.setVisibility(View.GONE);
+//                    etSend.setVisibility(View.GONE);
+//                    btnSend.setVisibility(View.GONE);
                 }
                 //case2: creating a bone
                 if (mDevice.getBondState() == BluetoothDevice.BOND_BONDING) {
@@ -194,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        getSupportActionBar().hide();
         btnONOFF = (Button) findViewById(R.id.btnONOFF);
         btnEnableDisable_Discoverable = (Button) findViewById(R.id.btnDiscoverable_on_off);
         lvNewDevices = (ListView) findViewById(R.id.lvNewDevices);
@@ -374,7 +384,6 @@ public class MainActivity extends AppCompatActivity {
 
                 mBTDevice = mBTDevices.get(i);
                 mBluetoothConnection = new BluetoothConnectionService(MainActivity.this);
-//                startConnection();
             }
         }
     };
@@ -406,7 +415,6 @@ public class MainActivity extends AppCompatActivity {
                 mBTDevice = mPairedBTDevices.get(i);
                 Log.d(TAG, "LINE 406::: " + String.valueOf(mBTDevice.getBondState()));
                 mBluetoothConnection = new BluetoothConnectionService(MainActivity.this);
-                startConnection();
             }
         }
     };
