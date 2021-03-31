@@ -96,13 +96,13 @@ module render(
 
     // Variables for plotting
     reg [6:0] tex_code;
-    reg signed [9:0] mid_x;
-    reg signed [9:0] mid_y;
+    reg signed [13:0] mid_x;
+    reg signed [13:0] mid_y;
     reg negative_coordinates;
     reg dummy;
     reg plotting;
-    reg signed [9:0] curr_x;
-    reg signed [9:0] curr_y;
+    reg signed [13:0] curr_x;
+    reg signed [13:0] curr_y;
     reg do_plot;
     reg [16:0] buf_addr_save;
 
