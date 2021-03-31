@@ -1,4 +1,10 @@
- --
+--author: Zhuoyi Li
+-- lua script that will perform a PATCH HTTP reqeust to upload user's gaming score to 
+-- cloud database. 
+-- The function uploadScore() will be called at the end of the game by the game logic C code
+-- to perform the intended operation.
+
+--
 --helper function for uploadScore()
 --
 function buildURL(user)
