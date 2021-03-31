@@ -180,7 +180,7 @@ module render(
             curr_y <= 0;
             do_plot <= 0;
             buf_addr_save <= 0;
-            bird_color <= 'b010101;
+            bird_color <= 'b111000;
 
             fill_init <= 0;
             plot_init <= 0;
@@ -265,7 +265,7 @@ module render(
                         if (tex_code[5:0] >= 1 && tex_code[5:0] <= 4) begin
                             if (do_plot && bird_tex_q[6]) begin
                                 // Added custom bird color support
-                                if (bird_tex_q[5:0] == 'b010101)
+                                if (bird_tex_q[5:0] == 'b111000)
                                     frame_buffer_data <= bird_color;
                                 frame_buffer_addr <= buf_addr_save;
                                 frame_buffer_wren <= 1;
