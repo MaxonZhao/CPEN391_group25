@@ -13,15 +13,25 @@
 
 
 #define RENDER_BASE (volatile unsigned int *)(0xFF202080)
+#define PUSHBUTTONS (volatile unsigned int *)(0xFF200010)
 
 // #define v=0x4F;
 // #define SPLASH_STATE_BACKGROUND_COLOR = 0x6A;
 
 
-#define PIPE_SPAWN_FREQUENCY 2
-#define PIPE_MOVEMENT_SPEED 200.0f
-#define PIPE_DISTANCE_WITH_CENTER 20
+#define PIPE_SPAWN_FREQUENCY 150
+//#define PIPE_MOVEMENT_SPEED 200.0f
+#define PIPE_MOVEMENT_SPEED 4.0f
+#define PIPE_DISTANCE_WITH_CENTER 105
 
+
+#define BIRD_STATE_STILL 1
+#define BIRD_STATE_FALLING 2
+#define BIRD_STATE_FLYING 3
+
+#define GRAVITY 10.0f
+#define FLYING_SPEED 20.0f
+#define FLYING_DURATION 100.0f
 
 
 enum GameStates {

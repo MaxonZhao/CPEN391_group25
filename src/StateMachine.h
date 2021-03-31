@@ -19,8 +19,8 @@ namespace GameLogic {
 	class StateMachine
 	{
 	public:
-		StateMachine(){};
-		~StateMachine(){};
+//		StateMachine(){};
+//		~StateMachine(){};
 
 		void AddState(State* newState);
 		void RemoveState();

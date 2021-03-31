@@ -10,6 +10,7 @@
 
 #include "Game.h"
 #include "Pipe.h"
+#include "Bird.h"
 #include <time.h>       /* clock_t, clock, CLOCKS_PER_SEC */
 
 
@@ -27,11 +28,14 @@ namespace GameLogic {
 
 		void Draw(float dt);
 
+		void ReDrawBackground();
+
 	private:
 		StateMachine* _data;
 		clock_t _clock;
 		int _gameState;
 		Pipe* _pipe;
+		Bird* _bird;
 	};
 }
 
