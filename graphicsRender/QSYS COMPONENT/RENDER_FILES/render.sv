@@ -188,7 +188,7 @@ module render(
         end
         else begin
             // Flush to frame buffer at set intervals
-            if ((fps_clock_count >= 100000 && ~slave_waitrequest) || flushing || (flush_now && ~plotting)) begin
+            if ((fps_clock_count >= 800000 && ~slave_waitrequest) || flushing || (flush_now && ~plotting)) begin
                 if (flushing) begin
                     if (flush_wait != 0) begin
                         flush_wait <= flush_wait - 1;
