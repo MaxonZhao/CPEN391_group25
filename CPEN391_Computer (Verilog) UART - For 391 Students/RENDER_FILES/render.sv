@@ -105,6 +105,7 @@ module render(
     reg signed [13:0] curr_y;
     reg do_plot;
     reg [16:0] buf_addr_save;
+    reg [5:0] bird_color;
 
     // Constantly write pixel data to video adapter
     reg [8:0] x_prev;
@@ -179,6 +180,7 @@ module render(
             curr_y <= 0;
             do_plot <= 0;
             buf_addr_save <= 0;
+            bird_color <= 'b111000;
 
             fill_init <= 0;
             plot_init <= 0;
@@ -262,7 +264,10 @@ module render(
                         // Plot birds
                         if (tex_code[5:0] >= 1 && tex_code[5:0] <= 4) begin
                             if (do_plot && bird_tex_q[6]) begin
-                                frame_buffer_data <= bird_tex_q[5:0];
+                                // Added custom bird color support
+                                if (bird_tex_q[5:0] == 'b111000)
+                                    frame_buffer_data <= bird_color;
+                                else frame_buffer_data <= bird_tex_q[5:0];
                                 frame_buffer_addr <= buf_addr_save;
                                 frame_buffer_wren <= 1;
                             end
@@ -504,6 +509,9 @@ module render(
                             custom_tex_addr <= 0;
                             do_plot <= 0;
                         end
+
+                        7: bird_color <= slave_writedata[5:0];
+
                         default: dummy <= ~dummy;
                     endcase
                 end
