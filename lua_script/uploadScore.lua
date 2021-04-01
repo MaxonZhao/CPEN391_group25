@@ -44,7 +44,7 @@ function uploadScore(user,score)
         if (code < 0) then
           print("HTTP request failed")
         else
-          print(code, data)
+          print(code)
         end
    end)
 end

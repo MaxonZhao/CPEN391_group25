@@ -68,6 +68,7 @@ GameState.o: C:/altera/15.0/embedded/ds-5/sw/ARMCompiler5.05u1/bin/../include/rw
 GameState.o: C:/altera/15.0/embedded/ds-5/sw/ARMCompiler5.05u1/bin/../include/rw/_ioiter.h
 GameState.o: C:/altera/15.0/embedded/ds-5/sw/ARMCompiler5.05u1/bin/../include/rw/_numeric.h
 GameState.o: C:/altera/15.0/embedded/ds-5/sw/ARMCompiler5.05u1/bin/../include/rw/_punct.h
+GameState.o: .././RS232/serial.h
 GameState.o: C:/altera/15.0/embedded/ds-5/sw/ARMCompiler5.05u1/bin/../include/deque.CC
 GameState.o: C:/altera/15.0/embedded/ds-5/sw/ARMCompiler5.05u1/bin/../include/vector.CC
 GameState.o: C:/altera/15.0/embedded/ds-5/sw/ARMCompiler5.05u1/bin/../include/string.CC

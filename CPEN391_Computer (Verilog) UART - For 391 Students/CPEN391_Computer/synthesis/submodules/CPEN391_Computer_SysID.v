@@ -36,7 +36,7 @@ module CPEN391_Computer_SysID (
 
   wire    [ 31: 0] readdata;
   //control_slave, which is an e_avalon_slave
-  assign readdata = address ? 1616636085 : 0;
+  assign readdata = address ? 1617217248 : 0;
 
 endmodule
 

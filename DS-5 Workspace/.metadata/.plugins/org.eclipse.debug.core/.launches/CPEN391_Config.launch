@@ -93,6 +93,18 @@
 <listEntry value="1"/>
 <listEntry value="formatter"/>
 <listEntry value="Hexadecimal"/>
+<listEntry value="VALUE:C:/Users/zoeyli/cpen391/CPEN391_group25/DS-5 Workspace/MyCPEN391Project/RS232.c::sendMultiChar::message"/>
+<listEntry value="1"/>
+<listEntry value="formatter"/>
+<listEntry value="Hexadecimal"/>
+<listEntry value="VALUE:C:/Users/zoeyli/cpen391/CPEN391_group25/DS-5 Workspace/MyCPEN391Project/RS232.c::sendMultiChar::LineStatusReg"/>
+<listEntry value="1"/>
+<listEntry value="formatter"/>
+<listEntry value="Hexadecimal"/>
+<listEntry value="VALUE:C:/Users/zoeyli/cpen391/CPEN391_group25/DS-5 Workspace/MyCPEN391Project/RS232.c::sendMultiChar::TransmitterFifo"/>
+<listEntry value="1"/>
+<listEntry value="formatter"/>
+<listEntry value="Hexadecimal"/>
 </listAttribute>
 <booleanAttribute key="VFS_ENABLED" value="true"/>
 <stringAttribute key="VFS_LOCAL_DIR" value="${workspace_loc}"/>

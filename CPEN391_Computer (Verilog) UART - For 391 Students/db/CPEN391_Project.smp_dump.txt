@@ -92,7 +92,25 @@ T_state.s_parity 0 0 1 0 0 1
 T_state.s_stop_bit 0 1 0 0 0 1 
 T_state.s_stop_bit2 1 0 0 0 0 1 
 
-State Machine - |MyComputer_Verilog|CPEN391_Computer:u0|CPEN391_Computer_mm_interconnect_0:mm_interconnect_0|altera_merlin_burst_adapter:pushbuttons_s1_burst_adapter|altera_merlin_burst_adapter_13_1:altera_merlin_burst_adapter_13_1.burst_adapter|state
+State Machine - |MyComputer_Verilog|OnChipSerialIO:SerialIOPorts|gh_uart_16550_wb_wrapper:inst11|gh_uart_16550:U1|gh_uart_Rx_8bit:U33|R_state
+Name R_state.break_err R_state.R_stop_bit R_state.R_parity R_state.shift_data R_state.R_start_bit R_state.idle 
+R_state.idle 0 0 0 0 0 0 
+R_state.R_start_bit 0 0 0 0 1 1 
+R_state.shift_data 0 0 0 1 0 1 
+R_state.R_parity 0 0 1 0 0 1 
+R_state.R_stop_bit 0 1 0 0 0 1 
+R_state.break_err 1 0 0 0 0 1 
+
+State Machine - |MyComputer_Verilog|OnChipSerialIO:SerialIOPorts|gh_uart_16550_wb_wrapper:inst11|gh_uart_16550:U1|gh_uart_Tx_8bit:U29|T_state
+Name T_state.s_stop_bit2 T_state.s_stop_bit T_state.s_parity T_state.shift_data T_state.s_start_bit T_state.idle 
+T_state.idle 0 0 0 0 0 0 
+T_state.s_start_bit 0 0 0 0 1 1 
+T_state.shift_data 0 0 0 1 0 1 
+T_state.s_parity 0 0 1 0 0 1 
+T_state.s_stop_bit 0 1 0 0 0 1 
+T_state.s_stop_bit2 1 0 0 0 0 1 
+
+State Machine - |MyComputer_Verilog|CPEN391_Computer:u0|CPEN391_Computer_mm_interconnect_0:mm_interconnect_0|altera_merlin_burst_adapter:hex4_5_s1_burst_adapter|altera_merlin_burst_adapter_13_1:altera_merlin_burst_adapter_13_1.burst_adapter|state
 Name state.ST_IDLE state.ST_UNCOMP_WR_SUBBURST state.ST_UNCOMP_TRANS state.ST_COMP_TRANS 
 state.ST_IDLE 0 0 0 0 
 state.ST_COMP_TRANS 1 0 0 1 
@@ -100,13 +118,6 @@ state.ST_UNCOMP_TRANS 1 0 1 0
 state.ST_UNCOMP_WR_SUBBURST 1 1 0 0 
 
 State Machine - |MyComputer_Verilog|CPEN391_Computer:u0|CPEN391_Computer_mm_interconnect_0:mm_interconnect_0|altera_merlin_burst_adapter:bit_flipper_0_avalon_slave_0_burst_adapter|altera_merlin_burst_adapter_13_1:altera_merlin_burst_adapter_13_1.burst_adapter|state
-Name state.ST_IDLE state.ST_UNCOMP_WR_SUBBURST state.ST_UNCOMP_TRANS state.ST_COMP_TRANS 
-state.ST_IDLE 0 0 0 0 
-state.ST_COMP_TRANS 1 0 0 1 
-state.ST_UNCOMP_TRANS 1 0 1 0 
-state.ST_UNCOMP_WR_SUBBURST 1 1 0 0 
-
-State Machine - |MyComputer_Verilog|CPEN391_Computer:u0|CPEN391_Computer_mm_interconnect_0:mm_interconnect_0|altera_merlin_burst_adapter:hex2_3_s1_burst_adapter|altera_merlin_burst_adapter_13_1:altera_merlin_burst_adapter_13_1.burst_adapter|state
 Name state.ST_IDLE state.ST_UNCOMP_WR_SUBBURST state.ST_UNCOMP_TRANS state.ST_COMP_TRANS 
 state.ST_IDLE 0 0 0 0 
 state.ST_COMP_TRANS 1 0 0 1 
@@ -139,7 +150,21 @@ state.ST_COMP_TRANS 1 0 0 1
 state.ST_UNCOMP_TRANS 1 0 1 0 
 state.ST_UNCOMP_WR_SUBBURST 1 1 0 0 
 
+State Machine - |MyComputer_Verilog|CPEN391_Computer:u0|CPEN391_Computer_mm_interconnect_0:mm_interconnect_0|altera_merlin_burst_adapter:hex0_1_s1_burst_adapter|altera_merlin_burst_adapter_13_1:altera_merlin_burst_adapter_13_1.burst_adapter|state
+Name state.ST_IDLE state.ST_UNCOMP_WR_SUBBURST state.ST_UNCOMP_TRANS state.ST_COMP_TRANS 
+state.ST_IDLE 0 0 0 0 
+state.ST_COMP_TRANS 1 0 0 1 
+state.ST_UNCOMP_TRANS 1 0 1 0 
+state.ST_UNCOMP_WR_SUBBURST 1 1 0 0 
+
 State Machine - |MyComputer_Verilog|CPEN391_Computer:u0|CPEN391_Computer_mm_interconnect_0:mm_interconnect_0|altera_merlin_burst_adapter:leds_s1_burst_adapter|altera_merlin_burst_adapter_13_1:altera_merlin_burst_adapter_13_1.burst_adapter|state
+Name state.ST_IDLE state.ST_UNCOMP_WR_SUBBURST state.ST_UNCOMP_TRANS state.ST_COMP_TRANS 
+state.ST_IDLE 0 0 0 0 
+state.ST_COMP_TRANS 1 0 0 1 
+state.ST_UNCOMP_TRANS 1 0 1 0 
+state.ST_UNCOMP_WR_SUBBURST 1 1 0 0 
+
+State Machine - |MyComputer_Verilog|CPEN391_Computer:u0|CPEN391_Computer_mm_interconnect_0:mm_interconnect_0|altera_merlin_burst_adapter:hex2_3_s1_burst_adapter|altera_merlin_burst_adapter_13_1:altera_merlin_burst_adapter_13_1.burst_adapter|state
 Name state.ST_IDLE state.ST_UNCOMP_WR_SUBBURST state.ST_UNCOMP_TRANS state.ST_COMP_TRANS 
 state.ST_IDLE 0 0 0 0 
 state.ST_COMP_TRANS 1 0 0 1 
@@ -164,13 +189,6 @@ T_state.s_parity 0 0 1 0 0 1
 T_state.s_stop_bit 0 1 0 0 0 1 
 T_state.s_stop_bit2 1 0 0 0 0 1 
 
-State Machine - |MyComputer_Verilog|CPEN391_Computer:u0|CPEN391_Computer_mm_interconnect_0:mm_interconnect_0|altera_merlin_burst_adapter:hex4_5_s1_burst_adapter|altera_merlin_burst_adapter_13_1:altera_merlin_burst_adapter_13_1.burst_adapter|state
-Name state.ST_IDLE state.ST_UNCOMP_WR_SUBBURST state.ST_UNCOMP_TRANS state.ST_COMP_TRANS 
-state.ST_IDLE 0 0 0 0 
-state.ST_COMP_TRANS 1 0 0 1 
-state.ST_UNCOMP_TRANS 1 0 1 0 
-state.ST_UNCOMP_WR_SUBBURST 1 1 0 0 
-
 State Machine - |MyComputer_Verilog|CPEN391_Computer:u0|CPEN391_Computer_JTAG_To_FPGA_Bridge:jtag_to_hps_bridge|altera_avalon_st_jtag_interface:jtag_phy_embedded_in_jtag_master|altera_jtag_dc_streaming:normal.jtag_dc_streaming|altera_jtag_streaming:jtag_streaming|read_state
 Name read_state.ST_HEADER read_state.ST_READ_DATA read_state.ST_PADDED 
 read_state.ST_HEADER 0 0 0 
@@ -183,31 +201,6 @@ write_state.ST_BYPASS 0 0 0 0
 write_state.ST_HEADER_1 0 0 1 1 
 write_state.ST_HEADER_2 0 1 0 1 
 write_state.ST_WRITE_DATA 1 0 0 1 
-
-State Machine - |MyComputer_Verilog|OnChipSerialIO:SerialIOPorts|gh_uart_16550_wb_wrapper:inst11|gh_uart_16550:U1|gh_uart_Rx_8bit:U33|R_state
-Name R_state.break_err R_state.R_stop_bit R_state.R_parity R_state.shift_data R_state.R_start_bit R_state.idle 
-R_state.idle 0 0 0 0 0 0 
-R_state.R_start_bit 0 0 0 0 1 1 
-R_state.shift_data 0 0 0 1 0 1 
-R_state.R_parity 0 0 1 0 0 1 
-R_state.R_stop_bit 0 1 0 0 0 1 
-R_state.break_err 1 0 0 0 0 1 
-
-State Machine - |MyComputer_Verilog|OnChipSerialIO:SerialIOPorts|gh_uart_16550_wb_wrapper:inst11|gh_uart_16550:U1|gh_uart_Tx_8bit:U29|T_state
-Name T_state.s_stop_bit2 T_state.s_stop_bit T_state.s_parity T_state.shift_data T_state.s_start_bit T_state.idle 
-T_state.idle 0 0 0 0 0 0 
-T_state.s_start_bit 0 0 0 0 1 1 
-T_state.shift_data 0 0 0 1 0 1 
-T_state.s_parity 0 0 1 0 0 1 
-T_state.s_stop_bit 0 1 0 0 0 1 
-T_state.s_stop_bit2 1 0 0 0 0 1 
-
-State Machine - |MyComputer_Verilog|CPEN391_Computer:u0|CPEN391_Computer_mm_interconnect_0:mm_interconnect_0|altera_merlin_burst_adapter:hex0_1_s1_burst_adapter|altera_merlin_burst_adapter_13_1:altera_merlin_burst_adapter_13_1.burst_adapter|state
-Name state.ST_IDLE state.ST_UNCOMP_WR_SUBBURST state.ST_UNCOMP_TRANS state.ST_COMP_TRANS 
-state.ST_IDLE 0 0 0 0 
-state.ST_COMP_TRANS 1 0 0 1 
-state.ST_UNCOMP_TRANS 1 0 1 0 
-state.ST_UNCOMP_WR_SUBBURST 1 1 0 0 
 
 State Machine - |MyComputer_Verilog|OnChipSerialIO:SerialIOPorts|gh_uart_16550_wb_wrapper:inst8|gh_uart_16550:U1|gh_uart_Rx_8bit:U33|R_state
 Name R_state.break_err R_state.R_stop_bit R_state.R_parity R_state.shift_data R_state.R_start_bit R_state.idle 
@@ -226,6 +219,13 @@ T_state.shift_data 0 0 0 1 0 1
 T_state.s_parity 0 0 1 0 0 1 
 T_state.s_stop_bit 0 1 0 0 0 1 
 T_state.s_stop_bit2 1 0 0 0 0 1 
+
+State Machine - |MyComputer_Verilog|CPEN391_Computer:u0|CPEN391_Computer_mm_interconnect_0:mm_interconnect_0|altera_merlin_burst_adapter:pushbuttons_s1_burst_adapter|altera_merlin_burst_adapter_13_1:altera_merlin_burst_adapter_13_1.burst_adapter|state
+Name state.ST_IDLE state.ST_UNCOMP_WR_SUBBURST state.ST_UNCOMP_TRANS state.ST_COMP_TRANS 
+state.ST_IDLE 0 0 0 0 
+state.ST_COMP_TRANS 1 0 0 1 
+state.ST_UNCOMP_TRANS 1 0 1 0 
+state.ST_UNCOMP_WR_SUBBURST 1 1 0 0 
 
 State Machine - |MyComputer_Verilog|CPEN391_Computer:u0|CPEN391_Computer_mm_interconnect_0:mm_interconnect_0|altera_merlin_burst_adapter:lcd_0_s1_burst_adapter|altera_merlin_burst_adapter_13_1:altera_merlin_burst_adapter_13_1.burst_adapter|state
 Name state.ST_IDLE state.ST_UNCOMP_WR_SUBBURST state.ST_UNCOMP_TRANS state.ST_COMP_TRANS 

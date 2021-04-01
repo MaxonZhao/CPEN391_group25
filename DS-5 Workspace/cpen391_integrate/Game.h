@@ -36,7 +36,7 @@ namespace GameLogic {
 
 	private:
 //		 const float dt = 1.0f / 60.0f;
-		const float dt = 1.0f/5.0f;
+		const float dt = 1.0f/30.0f;
 		clock_t _clock;
 
 		// _data is a shared pointer to type GameData

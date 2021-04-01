@@ -51,7 +51,7 @@ namespace GameLogic {
 	}
 
 	void Bird::Tap() {
-		std::cout<<"Button Pressed"<<std::endl;
+//		std::cout<<"Button Pressed"<<std::endl;
 		_movementClock = clock();
 		_birdState = BIRD_STATE_FLYING;
 	}

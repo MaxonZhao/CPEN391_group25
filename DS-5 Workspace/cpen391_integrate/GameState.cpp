@@ -7,6 +7,7 @@
 
 #include "GameState.h"
 #include <iostream>
+#include "./RS232/serial.h"
 
 namespace GameLogic {
 	GameState::GameState(StateMachine* data) {
@@ -26,10 +27,19 @@ namespace GameLogic {
 	}
 
 	void GameState::HandleInput() {
-		// do this later:
-		if(*PUSHBUTTONS == 14){
+		//check if bluetooth's input buffer has data, if yes, let the bird jump
+		int bytes_received = 0;
+		char buffer[8];
+		bytes_received = getSignal(buffer, BT_LineStatusReg, BT_ReceiverFifo);
+
+//		std::cout << "received:" << buffer<<std::endl;;
+
+		if(bytes_received != 0){
 			this->_bird->Tap();
 		}
+//		if(*PUSHBUTTONS == 14){
+//			this->_bird->Tap();
+//		}
 	}
 
 	void GameState::Update(float dt) {

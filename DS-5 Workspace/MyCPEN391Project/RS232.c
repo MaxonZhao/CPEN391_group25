@@ -2,7 +2,7 @@
  * RS232.c
  *
  *  Created on: Mar 1, 2021
- *      Author: zoeyli
+ *      Author: Zhuoyi Li
  */
 
 #include <stdio.h>
@@ -52,7 +52,8 @@ void Init_RS232(volatile unsigned char* LineControlReg, volatile unsigned char* 
 int RS232_TestForReceivedData(volatile unsigned char* LineStatusReg){
     // if BT_LineStatusReg bit 0 is set to 1
     //return TRUE, otherwise return FALSE
-	//printf("*LineStatusReg:%X\n",*LineStatusReg);
+//	printf("*LineStatusReg:%X\n",*LineStatusReg);
+//	printf("*ReceiverFifo:%X\n",*WIFI_ReceiverFifo);
     if((*LineStatusReg & 0x01)== 0x01){
         return 1;
     }
@@ -66,9 +67,10 @@ int putcharRS232(int c, volatile unsigned char* LineStatusReg,  volatile unsigne
     while((*LineStatusReg & 0x20)!= 0x20);
 //    printf("*LineStatusReg:%X\n",*LineStatusReg);
 //    printf("*TransmitterFifo:%X\n",*TransmitterFifo);
-//        printf("char:%c\n",c);
+//    printf("char:%c\n",c);
     // write character to Transmitter fifo register
     *TransmitterFifo = c;
+
     // return the character we printed
     return c;
 }
@@ -120,7 +122,7 @@ int receiveBuffer(char * res, volatile unsigned char* LineStatusReg, volatile un
 	int j;
 	int bytes_received = 0;
 	
-    for(j = 0; j < 5000000; j++) {
+    for(j = 0; j < 2000000; j++) {
         if(RS232_TestForReceivedData(LineStatusReg)) {
         	res[bytes_received++] = (char) getcharRS232(ReceiverFifo,LineStatusReg);
             j = 0 ; 
@@ -130,3 +132,18 @@ int receiveBuffer(char * res, volatile unsigned char* LineStatusReg, volatile un
 	res[bytes_received] = '\0';
 	return bytes_received;
 }
+
+int getSignal(char * res, volatile unsigned char* LineStatusReg, volatile unsigned char* ReceiverFifo) {
+	int j;
+	int bytes_received = 0;
+
+	if(RS232_TestForReceivedData(LineStatusReg)) {
+		res[bytes_received++] = (char) getcharRS232(ReceiverFifo,LineStatusReg);
+		j = 0 ;
+	}
+
+//	printf("Received %d bytes\n", bytes_received);
+	res[bytes_received] = '\0';
+	return bytes_received;
+}
+

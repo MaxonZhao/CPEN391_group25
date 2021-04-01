@@ -2,10 +2,15 @@
  * ledAndSwitch.c
  *
  *  Created on: Mar 1, 2021
- *      Author: zoeyli
+ *      Author: Zhuoyi Li
  */
-#include <stdio.h>
 
+/**
+ * This file is used to test if the built HPS system works
+ * It will read the switches and drive the LEDS and hex display
+ */
+
+#include <stdio.h>
 // ALL parallel IO ports created by QSYS have a 32 bit wide interface as far as the processor,
 // that is, it reads and writes 32 bit data to the port, even though the
 // port itself might only be configures as an 8 or 10 or even 4 bit wide port

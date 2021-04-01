@@ -67,6 +67,7 @@ CPEN391.o: C:/altera/15.0/embedded/ds-5/sw/ARMCompiler5.05u1/bin/../include/rw/_
 CPEN391.o: C:/altera/15.0/embedded/ds-5/sw/ARMCompiler5.05u1/bin/../include/rw/_ioiter.h
 CPEN391.o: C:/altera/15.0/embedded/ds-5/sw/ARMCompiler5.05u1/bin/../include/rw/_numeric.h
 CPEN391.o: C:/altera/15.0/embedded/ds-5/sw/ARMCompiler5.05u1/bin/../include/rw/_punct.h
+CPEN391.o: .././RS232/serial.h
 CPEN391.o: C:/altera/15.0/embedded/ds-5/sw/ARMCompiler5.05u1/bin/../include/deque.CC
 CPEN391.o: C:/altera/15.0/embedded/ds-5/sw/ARMCompiler5.05u1/bin/../include/vector.CC
 CPEN391.o: C:/altera/15.0/embedded/ds-5/sw/ARMCompiler5.05u1/bin/../include/string.CC

@@ -72,7 +72,7 @@ module render(
     birds bird_tex (.address(bird_tex_addr), .clock(clk), .q(bird_tex_q));
 
     // Numbers memory module
-    reg [13:0] char_tex_addr;
+    reg [12:0] char_tex_addr;
     wire [6:0] char_tex_q;
     localparam signed [5:0] CHAR_MAX_X=24;
     localparam signed [5:0] CHAR_MAX_Y=24;
@@ -96,13 +96,13 @@ module render(
 
     // Variables for plotting
     reg [6:0] tex_code;
-    reg signed [9:0] mid_x;
-    reg signed [9:0] mid_y;
+    reg signed [13:0] mid_x;
+    reg signed [13:0] mid_y;
     reg negative_coordinates;
     reg dummy;
     reg plotting;
-    reg signed [9:0] curr_x;
-    reg signed [9:0] curr_y;
+    reg signed [13:0] curr_x;
+    reg signed [13:0] curr_y;
     reg do_plot;
     reg [16:0] buf_addr_save;
 
@@ -187,10 +187,8 @@ module render(
             slave_readdata <= 0;
         end
         else begin
-            // Flush to frame buffer for 30fps display (1666666 - 320*240 - 240 = 1589626)
-            // THIS IS APPROXIMATE (should be good enough), will adjust this parameter based on performance (if change, change below as well)
-            // save: 1589865
-            if ((fps_clock_count >= 100000 && ~slave_waitrequest) || flushing || (flush_now && ~plotting)) begin
+            // Flush to frame buffer at set intervals
+            if ((fps_clock_count >= 800000 && ~slave_waitrequest) || flushing || (flush_now && ~plotting)) begin
                 if (flushing) begin
                     if (flush_wait != 0) begin
                         flush_wait <= flush_wait - 1;
@@ -234,7 +232,7 @@ module render(
                 // Plot texture
                 if (plotting) begin
                     // Flush to frame buffer after plotting this texture
-                    if (fps_clock_count == 100000) flush_now <= 1;
+                    if (fps_clock_count == 400000) flush_now <= 1;
 
                     // Plot entire frame to color specified
                     if (tex_code[6]) begin
