@@ -19,15 +19,19 @@ namespace GameLogic {
 
 		void SpawnPipe();
 
-		void MovePipes(float ft);
+		int MovePipes(float ft);
 
 		void DrawPipes();
 
 		void RandomizedPipeOffset();
 
+		bool CheckCollision(double birdYPosition);
+
+		std::vector< std::pair<int,int> > PipeLocations;
+
 	private:
 		//StateMachine* _data;
-		std::vector< std::pair<int,int> > PipeLocations;
+
 
 		int _landHeight;
 		int _pipeSpawnYOffset;

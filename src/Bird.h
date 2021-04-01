@@ -19,15 +19,16 @@ namespace GameLogic {
 
 		void Draw();
 
-//		void Animate(float dt);
+		void Animate(float dt);
 
 		void Update(float dt);
 
 		void Tap();
 
+		double birdYPosition;
+
 
 	private:
-		int birdYPosition;
 
 		unsigned int _animationIterator;
 

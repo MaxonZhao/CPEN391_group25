@@ -30,7 +30,12 @@ namespace GameLogic {
 
 		void ReDrawBackground();
 
+		void DrawScore();
+
+		void plot(int digit, int xPosition);
+
 	private:
+		int _score;
 		StateMachine* _data;
 		clock_t _clock;
 		int _gameState;

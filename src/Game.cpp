@@ -29,6 +29,8 @@ namespace GameLogic {
 		float frameTime;
 		float accumulator;
 
+		int ans = 0;
+
 		while (true) {
 			this->_data->ProcessStateChanges();
 			newTime = clock();
@@ -48,7 +50,14 @@ namespace GameLogic {
 
 				accumulator -= dt;
 			}
-
+//			this->_data->GetActiveState()->HandleInput();
+//			this->_data->GetActiveState()->Update(dt);
+//
+//			// this->_data->GetActiveState()->Draw(accumulator / dt);
+//
+//			accumulator -= dt;
+//			std::cout<<accumulator<<" "<<clock()<<std::endl;
+//			std::cout<<ans++<<std::endl;
 			this->_data->GetActiveState()->Draw(accumulator / dt);
 
 		}

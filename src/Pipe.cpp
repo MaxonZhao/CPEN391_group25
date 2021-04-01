@@ -27,48 +27,45 @@ namespace GameLogic {
 	}
 
 
-	void Pipe::MovePipes(float dt) {
-		// basically just minor 1 for every value in the vector
-//		*(RENDER_BASE + 4) = 0x6A;
-//		*(RENDER_BASE + 6) = 0x4F;
-
+	int Pipe::MovePipes(float dt) {
+		int score = 0;
 		std::vector< std::pair<int,int> >::iterator it = this->PipeLocations.begin();
 		while (it != this->PipeLocations.end()) {
-			if (it->first < 0) {
+			if (it->first < 9) {
+				score += SCORE;
 				it = this->PipeLocations.erase(it);
 			}
 			else {
 				it->first -= 10* PIPE_MOVEMENT_SPEED * dt;
-				// it->first -= 10;
-
-//				*(RENDER_BASE + 4) = 0x06; // Set texture code to pipe up
-//				*(RENDER_BASE + 1) = it->first;  // Set x-coor to center of screen
-//				*(RENDER_BASE + 2) = it->second + PIPE_DISTANCE_WITH_CENTER;  // Set y-coor to center of screen
-//				*(RENDER_BASE + 6) = 0x05;    // Plot to buffer
-//
-//				*(RENDER_BASE + 4) = 0x05; // Set texture code to pipe down
-//				*(RENDER_BASE + 1) = it->first;  // Set x-coor to center of screen
-//				*(RENDER_BASE + 2) = it->second - PIPE_DISTANCE_WITH_CENTER;  // Set y-coor to center of screen
-//				*(RENDER_BASE + 6) = 0x05;    // Plot to buffer
-
 
 				it++;
 			}
 		}
+		return score;
 	}
 
 	void Pipe::DrawPipes() {
 		// FPGA interfase:
 		for(int i = 0; i<this->PipeLocations.size(); i++) {
+			*(RENDER_BASE + 3) = 0;
 			*(RENDER_BASE + 4) = 0x06; // Set texture code to pipe up
 			*(RENDER_BASE + 1) = this->PipeLocations[i].first;  // Set x-coor to center of screen
-			*(RENDER_BASE + 2) = this->PipeLocations[i].second + PIPE_DISTANCE_WITH_CENTER;  // Set y-coor to center of screen
+			*(RENDER_BASE + 2) = this->PipeLocations[i].second + 90 + PIPE_DISTANCE_WITH_CENTER;  // Set y-coor to center of screen
 			*(RENDER_BASE + 6) = 0x05;    // Plot to buffer
+			if(this->PipeLocations[i].second - 90 - PIPE_DISTANCE_WITH_CENTER < 0){
+				*(RENDER_BASE + 4) = 0x05; // Set texture code to pipe down
+				*(RENDER_BASE + 1) = this->PipeLocations[i].first;  // Set x-coor to center of screen
+				*(RENDER_BASE + 3) = 1;
+				*(RENDER_BASE + 2) = this->PipeLocations[i].second - 90 - PIPE_DISTANCE_WITH_CENTER;  // Set y-coor to center of screen
+				*(RENDER_BASE + 6) = 0x05;    // Plot to buffer
+			}else{
+				*(RENDER_BASE + 3) = 0;
+				*(RENDER_BASE + 4) = 0x05; // Set texture code to pipe down
+				*(RENDER_BASE + 1) = this->PipeLocations[i].first;  // Set x-coor to center of screen
+				*(RENDER_BASE + 2) = this->PipeLocations[i].second - 90 - PIPE_DISTANCE_WITH_CENTER;  // Set y-coor to center of screen
+				*(RENDER_BASE + 6) = 0x05;    // Plot to buffer
+			}
 
-			*(RENDER_BASE + 4) = 0x05; // Set texture code to pipe down
-			*(RENDER_BASE + 1) = this->PipeLocations[i].first;  // Set x-coor to center of screen
-			*(RENDER_BASE + 2) = this->PipeLocations[i].second - PIPE_DISTANCE_WITH_CENTER;  // Set y-coor to center of screen
-			*(RENDER_BASE + 6) = 0x05;    // Plot to buffer
 		}
 
 	}
@@ -80,7 +77,34 @@ namespace GameLogic {
 	void Pipe::RandomizedPipeOffset() {
 		// do nothing for now
 
-		this->_pipeSpawnYOffset = std::rand() % 60 - 30;
+		this->_pipeSpawnYOffset = std::rand() % 40 - 20;
+	}
+
+
+	bool Pipe::CheckCollision(double birdYPosition){
+		for(std::pair<int,int> p: PipeLocations){
+			if(p.first > 9 && p.first < 21){
+
+//				std::cout<<birdYPosition<<"  "<<p.second-119<<std::endl;
+				if(birdYPosition+6 > p.second+PIPE_DISTANCE_WITH_CENTER || birdYPosition-6 < p.second-PIPE_DISTANCE_WITH_CENTER){
+					return true;
+				}
+			}else if(p.first >= 21) break;
+		}
+
+
+//		auto it = PipeLocations.begin();
+//		if((*it).first < 9) return 0;
+//		else if((*it).first>=9 && (*it).first < 21){
+//			if(birdYPosition+6 > (*it).second+PIPE_DISTANCE_WITH_CENTER ||
+//					birdYPosition-6 < (*it).second-PIPE_DISTANCE_WITH_CENTER){
+//				return 1;
+//			}
+//		}
+
+
+		return false;
+
 	}
 }
 

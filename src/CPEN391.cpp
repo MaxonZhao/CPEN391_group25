@@ -6,6 +6,13 @@ using namespace GameLogic;
 #include "DEFINITION.h"
 
 int main() {
+
+
+
+
+
+
+
 	std::cout<<"Begin the Game!!"<<std::endl;
 	Game game = Game();
 
