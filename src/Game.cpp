@@ -16,7 +16,7 @@ namespace GameLogic {
 		std::srand(time(NULL));
 
 		this->_data = new StateMachine();
-		this->_data->AddState(new GameState(this->_data));
+		this->_data->AddState(new MainMenuState(this->_data));
 		this->Run();
 	}
 
@@ -46,18 +46,9 @@ namespace GameLogic {
 				this->_data->GetActiveState()->HandleInput();
 				this->_data->GetActiveState()->Update(dt);
 
-				// this->_data->GetActiveState()->Draw(accumulator / dt);
-
 				accumulator -= dt;
 			}
-//			this->_data->GetActiveState()->HandleInput();
-//			this->_data->GetActiveState()->Update(dt);
-//
-//			// this->_data->GetActiveState()->Draw(accumulator / dt);
-//
-//			accumulator -= dt;
-//			std::cout<<accumulator<<" "<<clock()<<std::endl;
-//			std::cout<<ans++<<std::endl;
+
 			this->_data->GetActiveState()->Draw(accumulator / dt);
 
 		}

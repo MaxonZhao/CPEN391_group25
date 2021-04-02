@@ -35,6 +35,16 @@ namespace GameLogic {
 
 		//TODO: WE ****DON"T **** need a clock for this state, but just for the purpose of testing
 		clock_t _clock;
+
+		unsigned int _animationIterator;
+
+		int _birdColors[6] = {0, 0x30, 0x38, 0xC, 0x3C, 0x3};
+
+		unsigned int _chosenBirdColorIndex;
+
+
+		// don't need this clock later:
+		clock_t _colorChanged;
 	};
 }
 

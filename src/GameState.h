@@ -12,6 +12,7 @@
 #include "Pipe.h"
 #include "Bird.h"
 #include <time.h>       /* clock_t, clock, CLOCKS_PER_SEC */
+#include "GameOverState.hpp"
 
 
 namespace GameLogic {
@@ -41,6 +42,10 @@ namespace GameLogic {
 		int _gameState;
 		Pipe* _pipe;
 		Bird* _bird;
+
+
+		// maybe we don't need this later:
+		clock_t _waitscreenClock;
 	};
 }
 

@@ -13,6 +13,7 @@
 #include "StateMachine.h"
 #include "SplashState.h"
 #include "GameState.h"
+#include "MainMenuState.h"
 
 
 namespace GameLogic {
@@ -35,7 +36,7 @@ namespace GameLogic {
 		Game();
 
 	private:
-		 const float dt = 1.0f / 30.0f;
+		 const float dt = 1.0f / 20.0f;
 //		const float dt = 2.0f;
 		clock_t _clock;
 

@@ -50,19 +50,19 @@ namespace GameLogic {
 			*(RENDER_BASE + 3) = 0;
 			*(RENDER_BASE + 4) = 0x06; // Set texture code to pipe up
 			*(RENDER_BASE + 1) = this->PipeLocations[i].first;  // Set x-coor to center of screen
-			*(RENDER_BASE + 2) = this->PipeLocations[i].second + 90 + PIPE_DISTANCE_WITH_CENTER;  // Set y-coor to center of screen
+			*(RENDER_BASE + 2) = this->PipeLocations[i].second + PIPE_DISTANCE_WITH_CENTER;  // Set y-coor to center of screen
 			*(RENDER_BASE + 6) = 0x05;    // Plot to buffer
-			if(this->PipeLocations[i].second - 90 - PIPE_DISTANCE_WITH_CENTER < 0){
+			if(this->PipeLocations[i].second - PIPE_DISTANCE_WITH_CENTER < 0){
 				*(RENDER_BASE + 4) = 0x05; // Set texture code to pipe down
 				*(RENDER_BASE + 1) = this->PipeLocations[i].first;  // Set x-coor to center of screen
 				*(RENDER_BASE + 3) = 1;
-				*(RENDER_BASE + 2) = this->PipeLocations[i].second - 90 - PIPE_DISTANCE_WITH_CENTER;  // Set y-coor to center of screen
+				*(RENDER_BASE + 2) = - this->PipeLocations[i].second + PIPE_DISTANCE_WITH_CENTER;  // Set y-coor to center of screen
 				*(RENDER_BASE + 6) = 0x05;    // Plot to buffer
 			}else{
 				*(RENDER_BASE + 3) = 0;
 				*(RENDER_BASE + 4) = 0x05; // Set texture code to pipe down
 				*(RENDER_BASE + 1) = this->PipeLocations[i].first;  // Set x-coor to center of screen
-				*(RENDER_BASE + 2) = this->PipeLocations[i].second - 90 - PIPE_DISTANCE_WITH_CENTER;  // Set y-coor to center of screen
+				*(RENDER_BASE + 2) = this->PipeLocations[i].second - PIPE_DISTANCE_WITH_CENTER;  // Set y-coor to center of screen
 				*(RENDER_BASE + 6) = 0x05;    // Plot to buffer
 			}
 
@@ -77,7 +77,7 @@ namespace GameLogic {
 	void Pipe::RandomizedPipeOffset() {
 		// do nothing for now
 
-		this->_pipeSpawnYOffset = std::rand() % 40 - 20;
+		this->_pipeSpawnYOffset = std::rand() % 60 - 30;
 	}
 
 
@@ -86,7 +86,7 @@ namespace GameLogic {
 			if(p.first > 9 && p.first < 21){
 
 //				std::cout<<birdYPosition<<"  "<<p.second-119<<std::endl;
-				if(birdYPosition+6 > p.second+PIPE_DISTANCE_WITH_CENTER || birdYPosition-6 < p.second-PIPE_DISTANCE_WITH_CENTER){
+				if(birdYPosition+6 > p.second+PIPE_DISTANCE_WITH_CENTER-90 || birdYPosition-6 < p.second-PIPE_DISTANCE_WITH_CENTER+90){
 					return true;
 				}
 			}else if(p.first >= 21) break;

@@ -23,7 +23,7 @@ namespace GameLogic {
 		//this->_gameState = Ready;
 		this->_gameState = Playing;
 
-		this->_clock = clock();
+		this->_clock = 0;
 
 		this->_score = 0;
 	}
@@ -55,6 +55,11 @@ namespace GameLogic {
 			if(this->_bird->birdYPosition <= 12 || this->_bird->birdYPosition >= 227 ||
 					 this->_pipe->CheckCollision(this->_bird->birdYPosition)){
 				this->_gameState = GameOver;
+				this->_waitscreenClock = clock();
+			}
+		}else{
+			if(this->_waitscreenClock + WAITUNTILGAMEOVER < clock()){
+				_data->AddState(new GameOverState(_data, this->_score));
 			}
 		}
 
