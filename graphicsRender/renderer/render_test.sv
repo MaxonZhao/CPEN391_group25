@@ -60,7 +60,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 			else if (~KEY[2] && ~drawing) begin
 				drawing <= 1;
 				if (macro_state < 7) macro_state <= 7;
-				else if (macro_state >= 7 && macro_state < 27) macro_state <= macro_state + 1;
+				if (macro_state >= 7 && macro_state < 27) macro_state <= macro_state + 1;
 				micro_state <= 0;
 				done_micro <= 31;
 			end
@@ -867,7 +867,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 						if (~slave_waitrequest && done_micro == 1) begin
 							slave_address <= 2;
 							slave_write <= 1;
-							slave_writedata <= 59;
+							slave_writedata <= 65;
 							done_micro <= 2;
 						end
 						else if (done_micro == 2) begin
@@ -932,7 +932,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 						if (~slave_waitrequest && done_micro == 1) begin
 							slave_address <= 2;
 							slave_write <= 1;
-							slave_writedata <= 84;
+							slave_writedata <= 90;
 							done_micro <= 2;
 						end
 						else if (done_micro == 2) begin
@@ -997,7 +997,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 						if (~slave_waitrequest && done_micro == 1) begin
 							slave_address <= 2;
 							slave_write <= 1;
-							slave_writedata <= 109;
+							slave_writedata <= 115;
 							done_micro <= 2;
 						end
 						else if (done_micro == 2) begin
@@ -1062,7 +1062,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 						if (~slave_waitrequest && done_micro == 1) begin
 							slave_address <= 2;
 							slave_write <= 1;
-							slave_writedata <= 134;
+							slave_writedata <= 140;
 							done_micro <= 2;
 						end
 						else if (done_micro == 2) begin
@@ -1127,7 +1127,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 						if (~slave_waitrequest && done_micro == 1) begin
 							slave_address <= 2;
 							slave_write <= 1;
-							slave_writedata <= 159;
+							slave_writedata <= 165;
 							done_micro <= 2;
 						end
 						else if (done_micro == 2) begin
@@ -1192,7 +1192,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 						if (~slave_waitrequest && done_micro == 1) begin
 							slave_address <= 2;
 							slave_write <= 1;
-							slave_writedata <= 184;
+							slave_writedata <= 190;
 							done_micro <= 2;
 						end
 						else if (done_micro == 2) begin
@@ -1257,7 +1257,7 @@ module render_test (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW,
 						if (~slave_waitrequest && done_micro == 1) begin
 							slave_address <= 2;
 							slave_write <= 1;
-							slave_writedata <= 209;
+							slave_writedata <= 215;
 							done_micro <= 2;
 						end
 						else if (done_micro == 2) begin
