@@ -1,4 +1,6 @@
 `timescale 1ns / 1ns
+// THIS TESTBENCH TESTS FOR PROPER FUNCTION OF THE RENDERER
+// MOSTLY THE BASICS, OFF-BY-ONE ERRORS, PROPER WRITES TO RAM MODULES, AND PROPER OUTPUT TO VIDEO DRIVER
 module render_tb();
 
     logic clk, rst_n;
@@ -384,6 +386,89 @@ module render_tb();
 
         assert (dut.frame_out.altsyncram_component.m_default.altsyncram_inst.mem_data[0] == 'b011100) 
         else   $error("BAD OUTPUT");
+
+        #20;
+
+        //---------------------------------------------------------------------------
+        // Plot game title
+        slave_address <= 4;
+        slave_writedata <= 'b0_01_0011;     // texture code
+        #20;
+        slave_write <= 1;
+        #20;
+        slave_write <= 0;
+        #20;
+
+        assert (dut.tex_code == 'b0_01_0011) 
+        else   $error("BAD TEXTURE VALUE");
+
+        wait(~slave_waitrequest);
+        wait(clk == 0);
+
+        slave_address <= 1;
+        slave_writedata <= 200;      // midpoint x coordinate
+        slave_write <= 1;
+        #20;
+        slave_write <= 0;
+        #20;
+
+        assert (dut.mid_x == 200) 
+        else   $error("BAD X COOR VALUE");
+
+        wait(~slave_waitrequest);
+        wait(clk == 0);
+
+        slave_address <= 2;
+        slave_writedata <= 239;      // midpoint y coordinate
+        slave_write <= 1;
+        #20;
+        slave_write <= 0;
+        #20;
+
+        assert (dut.mid_y == 239) 
+        else   $error("BAD Y COOR VALUE");
+
+        wait(~slave_waitrequest);
+        wait(clk == 0);
+
+        slave_address <= 6;
+        slave_write <= 1;       // initiate plot
+        #20;
+
+        assert (dut.slave_waitrequest == 1) 
+        else   $error("BAD WAITREQUEST");
+        assert (dut.plotting == 1 && dut.plot_init == 1 && dut.fill_init == 1 && dut.bird_tex_addr == 0 && dut.pipe_tex_addr == 0 && dut.char_tex_addr == 0 && dut.custom_tex_addr == 0 && dut.do_plot == 0) 
+        else   $error("BAD INITIAL PLOT VALUES");
+
+        slave_write <= 0;
+        #20;
+
+        assert (dut.plot_init == 0 && dut.custom_tex_addr == 1568 && dut.curr_x == 200 - 67 && dut.curr_y == 239 - 15) 
+        else   $error("BAD PLOT INIT VALUES");
+
+        #20;
+
+        assert (dut.custom_tex_addr == 1569 && dut.curr_y == 239 - 11 && dut.do_plot == 1 && dut.buf_addr_save == (200 - 67) * 240 + (239 - 15)) 
+        else   $error("BAD PLOT VALUES");
+
+        #20;
+
+        assert (dut.frame_buffer_wren == 1 && dut.frame_buffer_addr == (200 - 67) * 240 + (239 - 15) && dut.frame_buffer_data == 'b111111) 
+        else   $error("BAD FRAME BUFFER VALUES");
+
+        wait(~slave_waitrequest);
+        wait(clk == 0);
+        
+        #100;
+        
+        wait(dut.flushing == 1);
+        wait(dut.flushing == 0);
+
+        assert (dut.frame_out.altsyncram_component.m_default.altsyncram_inst.mem_data[0] == 'b011100) 
+        else   $error("BAD OUTPUT");
+
+        //---------------------------------------------------------------------------
+        // Check if output to video driver is correct
 
         #20;
 
