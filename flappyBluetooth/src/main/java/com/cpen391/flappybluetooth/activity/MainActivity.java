@@ -7,15 +7,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,9 +47,13 @@ public class MainActivity extends AppCompatActivity {
     EditText etSend;
 
     Button btnONOFF;
+    Button btnDiscover;
+    ImageView jumpImg;
+    TextView available_devices_txt;
+    TextView paired_devices_txt;
 
     private static final UUID MY_UUID_INSECURE =
-            UUID.fromString(UUIDs.HC05UNIVERSALUUID);
+            UUID.fromString(UUIDs.ANDROIDDEVICEUNIVERSALUUID);
 
     BluetoothDevice mBTDevice;
 
@@ -77,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case BluetoothAdapter.STATE_ON:
                         Log.d(TAG, "mBroadcastReceiver1: STATE ON");
+                        populatePairedDevices();
                         break;
                     case BluetoothAdapter.STATE_TURNING_ON:
                         Log.d(TAG, "mBroadcastReceiver1: STATE TURNING ON");
@@ -164,16 +172,9 @@ public class MainActivity extends AppCompatActivity {
                 if (mDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
                     Log.d(TAG, "BroadcastReceiver: BOND_BONDED.");
                     Toast.makeText(getApplicationContext(), "connected with " + mDevice.getName(), Toast.LENGTH_LONG).show();
-                    ImageView bluetoothImg = (ImageView) findViewById(R.id.bluetooth_icon);
-                    bluetoothImg.setImageResource(R.drawable.bluetooth_on_64);
+
                     //inside BroadcastReceiver4
                     mBTDevice = mDevice;
-
-                    lvNewDevices.setVisibility(View.GONE);
-                    lvPairedDevices.setVisibility(View.GONE);
-                    btnStartConnection.setVisibility(View.GONE);
-//                    etSend.setVisibility(View.GONE);
-//                    btnSend.setVisibility(View.GONE);
                 }
                 //case2: creating a bone
                 if (mDevice.getBondState() == BluetoothDevice.BOND_BONDING) {
@@ -212,7 +213,11 @@ public class MainActivity extends AppCompatActivity {
 
         btnStartConnection = (Button) findViewById(R.id.btnStartConnection);
         btnSend = (Button) findViewById(R.id.btnSend);
+        btnDiscover = (Button) findViewById(R.id.btnFindUnpairedDevices);
         etSend = (EditText) findViewById(R.id.editText);
+        jumpImg = (ImageView) findViewById(R.id.btnPress);
+        available_devices_txt = (TextView) findViewById(R.id.available_devices_txt);
+        paired_devices_txt = (TextView) findViewById(R.id.paired_devices_txt);
 
         //Broadcasts when bond state changes (ie:pairing)
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
@@ -224,6 +229,14 @@ public class MainActivity extends AppCompatActivity {
 
         lvNewDevices.setOnItemClickListener(mNewDevicesClickListener);
         lvPairedDevices.setOnItemClickListener(mPairedDevicesClickListener);
+        jumpImg.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                byte[] bytes = "1".getBytes(Charset.defaultCharset());
+                if (mBluetoothConnection != null) mBluetoothConnection.write(bytes);
+            }
+        });
 
 
         btnONOFF.setOnClickListener(new View.OnClickListener() {
@@ -248,6 +261,10 @@ public class MainActivity extends AppCompatActivity {
                 if (mBluetoothConnection != null) mBluetoothConnection.write(bytes);
             }
         });
+        populatePairedDevices();
+    }
+
+    private void populatePairedDevices() {
         Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
         pairedDevices.forEach((device) -> {
             String deviceName = device.getName();
@@ -275,6 +292,19 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "startBTConnection: Initializing RFCOM Bluetooth Connection.");
 
         mBluetoothConnection.startClient(device, uuid);
+        ImageView bluetoothImg = (ImageView) findViewById(R.id.bluetooth_icon);
+        bluetoothImg.setImageResource(R.drawable.bluetooth_on_64);
+        lvNewDevices.setVisibility(View.GONE);
+        lvPairedDevices.setVisibility(View.GONE);
+        btnStartConnection.setVisibility(View.GONE);
+        btnONOFF.setVisibility(View.GONE);
+        btnEnableDisable_Discoverable.setVisibility(View.GONE);
+        available_devices_txt.setVisibility(View.INVISIBLE);
+        paired_devices_txt.setVisibility(View.INVISIBLE);
+        btnDiscover.setVisibility(View.GONE);
+        jumpImg.setVisibility(View.VISIBLE);
+        etSend.setVisibility(View.GONE);
+        btnSend.setVisibility(View.GONE);
     }
 
 
@@ -321,17 +351,15 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "btnDiscover: Canceling discovery.");
 
             //check BT permissions in manifest
-            checkBTPermissions();
+//            checkBTPermissions();
 //            mBTDevices.clear();
 
             mBluetoothAdapter.startDiscovery();
-
-
         }
         if (!mBluetoothAdapter.isDiscovering()) {
 
             //check BT permissions in manifest
-            checkBTPermissions();
+//            checkBTPermissions();
 
             mBluetoothAdapter.startDiscovery();
             IntentFilter discoverDevicesIntent = new IntentFilter(BluetoothDevice.ACTION_FOUND);
@@ -419,8 +447,24 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    public static void buttonEffect(View button){
+        button.setOnTouchListener(new View.OnTouchListener() {
 
-
-
-
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        v.getBackground().setColorFilter(0xe0f47521, PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        v.getBackground().clearColorFilter();
+                        v.invalidate();
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
+    }
 }
