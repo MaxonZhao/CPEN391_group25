@@ -1,10 +1,15 @@
 _____________________________________________________________________________________________________________________________
-HOW TO USE THE GRAPHICS RENDERER:
+INTEGRATING THE GRAPHICS RENDERER:
 
 Everything is packaged in "QSYS COMPONENT" folder!
 Copy the contents of that folder into your Quartus project directory to use it (Further instructions on adding to QSYS found inside README file in QSYS COMPONENT folder).
 You may encounter a "can't find package qsys exact 16.1 while executing "package require -exact qsys 16.1".
 This can be fixed by deleting the "package require -exact qsys 16.1" file inside renderer_hw.tcl.
+
+_____________________________________________________________________________________________________________________________
+USING THE GRAPHICS RENDERER (WITH C/C++ CODE):
+
+Documentation: https://docs.google.com/document/d/1i2ljejJEDNJpxfF0QGs3n7hxUPkz36dKPm8SNM3A4yc/edit?usp=sharing
 
 _____________________________________________________________________________________________________________________________
 SAMPLE CODE:
