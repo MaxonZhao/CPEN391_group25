@@ -207,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getSupportActionBar().hide();
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         control_type = getIntent().getBooleanExtra("control_method", true);
 
         btnONOFF = (Button) findViewById(R.id.btnONOFF);
@@ -233,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(mBroadcastReceiver4, filter);
         registerReceiver(mBroadcastReceiver3, discoverDevicesIntent);
 
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
 
         lvNewDevices.setOnItemClickListener(mNewDevicesClickListener);
         lvPairedDevices.setOnItemClickListener(mPairedDevicesClickListener);
