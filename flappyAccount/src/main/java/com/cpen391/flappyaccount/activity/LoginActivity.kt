@@ -10,6 +10,7 @@ import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyaccount.consts.*
 import com.cpen391.flappyaccount.databinding.ActivityLoginBinding
 import com.cpen391.flappyaccount.viewmodel.LoginViewModel
+import com.cpen391.flappybluetooth.activity.MainActivity
 import timber.log.Timber
 
 class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
@@ -82,7 +83,7 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
             LOGIN_SUCCEED -> {
                 Timber.d("login success")
                 Toast.makeText(applicationContext, "Login successful", Toast.LENGTH_SHORT).show()
-
+                startActivity(Intent(applicationContext, MainActivity::class.java))
                 loginViewModel.findUser(binding.username.editText!!.text.toString().trim())
             }
 

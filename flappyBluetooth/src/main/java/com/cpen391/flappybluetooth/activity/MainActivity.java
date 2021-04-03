@@ -233,8 +233,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                byte[] bytes = "1".getBytes(Charset.defaultCharset());
-                if (mBluetoothConnection != null) mBluetoothConnection.write(bytes);
+                sendMessage("1");
             }
         });
 
