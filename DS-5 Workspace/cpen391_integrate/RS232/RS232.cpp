@@ -119,6 +119,22 @@ void sendMultiChar(char* message, volatile unsigned char* LineStatusReg, volatil
 }
 
 
+int receiveBuffer(char * res, volatile unsigned char* LineStatusReg, volatile unsigned char* ReceiverFifo) {
+	int j;
+	int bytes_received = 0;
+	
+    for(j = 0; j < 50000; j++) {
+        if(RS232_TestForReceivedData(LineStatusReg)) {
+        	res[bytes_received++] = (char) getcharRS232(ReceiverFifo,LineStatusReg);
+            j = 0 ; 
+        }
+    }
+	// printf("Received %d bytes\n", bytes_received);
+	res[bytes_received] = '\0';
+	return bytes_received;
+}
+
+
 int getSignal(char * res, volatile unsigned char* LineStatusReg, volatile unsigned char* ReceiverFifo) {
 	int j;
 	int bytes_received = 0;
@@ -128,24 +144,7 @@ int getSignal(char * res, volatile unsigned char* LineStatusReg, volatile unsign
 		j = 0 ;
 	}
 
-//	printf("Received %d bytes\n", bytes_received);
+	// printf("Received %d bytes\n", bytes_received);
 	res[bytes_received] = '\0';
 	return bytes_received;
 }
-
-int receiveBuffer(char * res, volatile unsigned char* LineStatusReg, volatile unsigned char* ReceiverFifo) {
-	int j;
-	int bytes_received = 0;
-
-    for(j = 0; j < 200000; j++) {
-        if(RS232_TestForReceivedData(LineStatusReg)) {
-        	res[bytes_received++] = (char) getcharRS232(ReceiverFifo,LineStatusReg);
-            j = 0 ;
-        }
-    }
-	printf("Received %d bytes\n", bytes_received);
-	res[bytes_received] = '\0';
-	return bytes_received;
-}
-
-

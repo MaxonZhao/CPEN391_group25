@@ -19,7 +19,7 @@
  */
 int uploadScore(char* userName, int score){
 	int bytes_received = 0;
-	char buffer[8];
+	char buffer[6];
 
 	RS232_Flush(WIFI_ReceiverFifo, WIFI_LineStatusReg);
 

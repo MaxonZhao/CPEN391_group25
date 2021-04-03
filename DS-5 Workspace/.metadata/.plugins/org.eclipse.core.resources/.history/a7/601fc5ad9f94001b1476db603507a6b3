@@ -1,0 +1,99 @@
+/*
+ * MainMenuState.cpp
+ *
+ *  Created on: Mar 24, 2021
+ *      Author: patri
+ */
+
+
+#include "MainMenuState.h"
+#include "../RS232/serial.h"
+
+#include <iostream>
+
+
+namespace GameLogic {
+	MainMenuState::MainMenuState(StateMachine* data) {
+		this->_data = data;
+		std::cout<<"Hi New!"<<std::endl;
+	}
+
+	void MainMenuState::Init() {
+		// There is nothing to be initiated
+		this->_clock  = clock();
+		this->_colorChanged = clock();
+		this->_animationIterator = 0;
+		this->_chosenBirdColorIndex = 0;
+
+		//send a hello message to the Android App knows de1 is ready for accepting game setting message
+		sendMessage("hello",BT_LineStatusReg, BT_TransmitterFifo);
+	}
+
+	void MainMenuState::HandleInput() {
+//		int count = 0;
+//		int bytes_received = 0;
+//		char buffer[16];
+//		bytes_received = getSignal(buffer, BT_LineStatusReg, BT_ReceiverFifo);
+//		std::cout << "received:" << buffer <<std::endl;
+//		//change bird's color //TODO: change gaming difficulty level as well
+//		if(bytes_received == 6){
+//			// change the color of the bird
+//			if(this->_colorChanged + COLORCHANGEDDURATION < clock()){
+//				std::cout<<"changing!"<<std::endl;
+//				this->_chosenBirdColorIndex++;
+//				this->_colorChanged = clock();
+//			}
+//		}
+//		else if(bytes_received != 0 && count != 0){
+//			// start the game.
+//			_data->AddState(new GameState(_data));
+//		}
+
+		if(*PUSHBUTTONS == 14){
+			// start the game.
+			_data->AddState(new GameState(_data));
+		}else if (*PUSHBUTTONS == 13){
+			// change the color of the bird
+			if(this->_colorChanged + COLORCHANGEDDURATION < clock()){
+				std::cout<<"changing!"<<std::endl;
+				this->_chosenBirdColorIndex++;
+				this->_colorChanged = clock();
+			}
+
+		}
+
+	}
+
+	void MainMenuState::Update(float dt) {
+		// there is nothing to be update in the mainmenu state.
+//		if (this->_clock + SPLASH_STATE_SHOW_TIME < clock()) {
+//			_data->AddState(new GameState(_data));
+//		}
+		// do nothing?
+
+
+	}
+
+	void MainMenuState::Draw(float dt) {
+		// TODO:
+		// 1. draw the background
+		*(RENDER_BASE + 4) = 0x6A;
+		*(RENDER_BASE + 6) = 0x4F;
+
+
+		// 2. draw the "flappy bird" text
+
+
+		// 3. draw the bird texture:
+		*(RENDER_BASE + 3) = 0;
+		*(RENDER_BASE + 4) = (this->_animationIterator++) % 4 + 1;
+		*(RENDER_BASE + 1) = 160;
+		*(RENDER_BASE + 2) = 120;
+		*(RENDER_BASE + 7) = this->_birdColors[this->_chosenBirdColorIndex % 6];
+		*(RENDER_BASE + 6) = 0x05;
+
+
+
+	}
+}
+
