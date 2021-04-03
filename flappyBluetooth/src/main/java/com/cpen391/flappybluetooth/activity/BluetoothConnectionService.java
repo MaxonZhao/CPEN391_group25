@@ -219,6 +219,7 @@ public class BluetoothConnectionService {
             //dismiss the progressdialog when connection is established
             try{
                 mProgressDialog.dismiss();
+//                Toast.makeText(mContext, "connection established!", Toast.LENGTH_SHORT).show();
             }catch (NullPointerException e){
                 e.printStackTrace();
             }
