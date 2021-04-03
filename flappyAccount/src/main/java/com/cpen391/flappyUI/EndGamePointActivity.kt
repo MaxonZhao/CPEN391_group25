@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyaccount.databinding.ActivityEndGamePointBinding
+import com.cpen391.flappyaccount.model.api.LoggedInUser
 
 class EndGamePointActivity : MvvmActivity<ActivityEndGamePointBinding>(){
     private val context: Context = this
@@ -13,6 +14,7 @@ class EndGamePointActivity : MvvmActivity<ActivityEndGamePointBinding>(){
         super.onCreate(savedInstanceState)
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
+        binding.currentGameScore.text = LoggedInUser.user.current_score.toString()
     }
 
     override fun initView() {
