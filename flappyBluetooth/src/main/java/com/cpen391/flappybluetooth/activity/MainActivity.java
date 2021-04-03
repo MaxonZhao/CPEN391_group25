@@ -244,8 +244,10 @@ public class MainActivity extends AppCompatActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                byte[] bytes = etSend.getText().toString().getBytes(Charset.defaultCharset());
-                if (mBluetoothConnection != null) mBluetoothConnection.write(bytes);
+//                byte[] bytes = etSend.getText().toString().getBytes(Charset.defaultCharset());
+//                if (mBluetoothConnection != null) mBluetoothConnection.write(bytes);
+
+                sendMessage(etSend.getText().toString());
             }
         });
         Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
@@ -262,6 +264,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void sendMessage(String message) {
+        byte[] bytes = message.getBytes(Charset.defaultCharset());
+        if (mBluetoothConnection != null) mBluetoothConnection.write(bytes);
+    }
     //create method for starting connection
 //***remember the conncction will fail and app will crash if you haven't paired first
     public void startConnection() {
