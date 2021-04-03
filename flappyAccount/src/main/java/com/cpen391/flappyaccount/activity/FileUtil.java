@@ -2,6 +2,8 @@ package com.cpen391.flappyaccount.activity;
 
 import android.os.Environment;
 
+import com.cpen391.appbase.application.FlappyBirdApp;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -10,7 +12,7 @@ public class FileUtil {
 
     public static final String LOCAL = "SoundMeter";
 
-    public static final String LOCAL_PATH = Environment.getExternalStorageDirectory().getPath() + File.separator;
+    public static final String LOCAL_PATH = FlappyBirdApp.getApplication().getBaseContext().getFilesDir().getPath() + File.separator;
 
     /**
      * 录音文件目录
