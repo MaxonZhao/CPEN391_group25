@@ -19,7 +19,7 @@ class EndGamePointActivity : MvvmActivity<ActivityEndGamePointBinding>(){
         super.initView()
         binding.apply {
             doneBtn.setOnClickListener {
-                startActivity(Intent(context, SelectGameModeActivity::class.java))
+                startActivity(Intent(context, SingleGameStartActivity::class.java))
             }
 
 //            shareBtn.setOnClickListener {
@@ -27,7 +27,7 @@ class EndGamePointActivity : MvvmActivity<ActivityEndGamePointBinding>(){
 //            }
 
             startAgain.setOnClickListener {
-                startActivity(Intent(context, SelectGameModeActivity::class.java))
+                startActivity(Intent(context, SingleGameStartActivity::class.java))
             }
             profileIcon.setOnClickListener{
                 startActivity(Intent(context, PersonalDataActivity::class.java))

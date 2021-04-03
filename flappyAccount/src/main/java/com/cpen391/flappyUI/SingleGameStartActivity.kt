@@ -11,6 +11,7 @@ import com.cpen391.flappyaccount.R
 import com.cpen391.flappyaccount.activity.StartActivity
 import com.cpen391.flappyaccount.databinding.ActivitySingleGameStartBinding
 import com.cpen391.flappyaccount.viewmodel.VoiceControlViewModel
+import com.cpen391.flappybluetooth.activity.MainActivity
 
 class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
 
@@ -30,7 +31,7 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
                 singleGameViewModel.onRadioButtonClicked(findViewById(R.id.radio_btn))
             }
             startNo.setOnClickListener {
-                startActivity(Intent(context, SelectGameModeActivity::class.java))
+                startActivity(Intent(context, SingleGameStartActivity::class.java))
             }
             profileIcon.setOnClickListener{
                 startActivity(Intent(context, PersonalDataActivity::class.java))
@@ -49,8 +50,8 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
 
     private fun tappingOrVoice(istapped: Boolean){
         when(istapped){
-            true-> startActivity(Intent(context, StartActivity::class.java))
-            false-> startActivity(Intent(context, VoiceControlActivity::class.java))
+            true-> startActivity(Intent(context, MainActivity::class.java))
+            false-> startActivity(Intent(context, MainActivity::class.java))
         }
     }
 
