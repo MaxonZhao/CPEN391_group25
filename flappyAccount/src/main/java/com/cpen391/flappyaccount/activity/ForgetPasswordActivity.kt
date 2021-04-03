@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
+import androidx.lifecycle.observe
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyaccount.databinding.ActivityForgetPasswordBinding
 import com.cpen391.flappyaccount.viewmodel.ForgetPasswordViewModel
@@ -35,14 +36,14 @@ class ForgetPasswordActivity : MvvmActivity<ActivityForgetPasswordBinding>() {
 
     override fun initObserver() {
         val owner = this
-        forgetPasswordViewModel.userFoundByUsername.observe(owner, {
+        forgetPasswordViewModel.userFoundByUsername.observe(owner) {
             if (it!!.isNullUser()) {
                 Toast.makeText(owner, "cannot find user", Toast.LENGTH_SHORT).show()
             } else {
-//                ResetPasswordActivity.actionStart(owner, it)
+    //                ResetPasswordActivity.actionStart(owner, it)
                 VerifyOTPActivity.actionStart(owner, it!!)
             }
-        })
+        }
     }
 
     override fun bind(): ActivityForgetPasswordBinding {

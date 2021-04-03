@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
     public DeviceListAdapter mDeviceListAdapter;
     public DeviceListAdapter mPairedDevicesAdapter;
 
+    public Boolean control_type = true;
+
     ListView lvNewDevices;
     ListView lvPairedDevices;
 
@@ -205,6 +207,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getSupportActionBar().hide();
+        control_type = getIntent().getBooleanExtra("control_method", true);
+
         btnONOFF = (Button) findViewById(R.id.btnONOFF);
         btnEnableDisable_Discoverable = (Button) findViewById(R.id.btnDiscoverable_on_off);
         lvNewDevices = (ListView) findViewById(R.id.lvNewDevices);
@@ -473,5 +477,11 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public static void actionStart(Context context, Boolean control_method) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra("control_method", control_method);
+        context.startActivity(intent);
     }
 }

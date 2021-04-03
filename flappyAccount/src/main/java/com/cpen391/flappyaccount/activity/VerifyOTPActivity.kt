@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
+import androidx.lifecycle.observe
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyaccount.databinding.ActivityVerifyOTPBinding
 import com.cpen391.flappyaccount.model.bean.User
@@ -56,9 +57,9 @@ class VerifyOTPActivity : MvvmActivity<ActivityVerifyOTPBinding>() {
     override fun initObserver() {
         val owner = this
         verifyOTPViewModel.apply {
-            verificationCompleted.observe(owner, {
+            verificationCompleted.observe(owner) {
                 ResetPasswordActivity.actionStart(owner, userFound)
-            })
+            }
         }
     }
 

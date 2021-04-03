@@ -39,29 +39,29 @@ class SignUpActivity : MvvmActivity<ActivitySignupBinding>() {
     override fun initObserver() {
         val owner = this
         signUpViewModel.apply {
-            registerResult.observe(owner, {
+            registerResult.observe(owner) {
                 onRegisterResult(it)
-            })
+            }
 
-            fullNameHasError.observe(owner, {
+            fullNameHasError.observe(owner) {
                 displayFullNameErrorState(it)
-            })
+            }
 
-            usernameHasError.observe(owner,{
+            usernameHasError.observe(owner) {
                 displayUsernameErrorState(it)
-            })
+            }
 
-            emailHasError.observe(owner, {
+            emailHasError.observe(owner) {
                 displayEmailErrorState(it)
-            })
+            }
 
-            phoneNoHasError.observe(owner, {
+            phoneNoHasError.observe(owner) {
                 displayPhoneNoErrorState(it)
-            })
+            }
 
-            passwordHasError.observe(owner, {
+            passwordHasError.observe(owner) {
                 displayPasswordErrorState(it)
-            })
+            }
         }
     }
 
