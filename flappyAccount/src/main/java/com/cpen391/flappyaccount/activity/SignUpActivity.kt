@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
+import androidx.lifecycle.observe
 import com.cpen391.appbase.network.SimpleObserver
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyaccount.Injection

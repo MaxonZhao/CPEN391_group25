@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
+import androidx.lifecycle.observe
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyaccount.consts.*
 import com.cpen391.flappyaccount.databinding.ActivityLoginBinding
@@ -54,25 +55,26 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
         val owner = this
         loginViewModel.apply {
 
-            loginResult.observe(owner, {
+            loginResult.observe(owner) {
                 onLoginResult(it)
-            })
+            }
 
-            usernameHasError.observe(owner, {
+            usernameHasError.observe(owner) {
                 displayUsernameErrorState(it)
-            })
+            }
 
-            passwordHasError.observe(owner, {
+            passwordHasError.observe(owner) {
                 displayPasswordErrorState(it)
-            })
+            }
 
-            userFoundByUsername.observe(owner, {
+            userFoundByUsername.observe(owner) {
                 if (!it.isNullUser()) {
-                    val intent = Intent(owner, StartActivity::class.java)
-                    intent.putExtra("User", it)
-                    startActivity(intent)
+        //                    val intent = Intent(owner, StartActivity::class.java)
+        //                    intent.putExtra("User", it)
+        //                    startActivity(intent)
+                    startActivity(Intent(applicationContext, MainActivity::class.java))
                 }
-            })
+            }
         }
 
     }
@@ -83,7 +85,6 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
             LOGIN_SUCCEED -> {
                 Timber.d("login success")
                 Toast.makeText(applicationContext, "Login successful", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(applicationContext, MainActivity::class.java))
                 loginViewModel.findUser(binding.username.editText!!.text.toString().trim())
             }
 

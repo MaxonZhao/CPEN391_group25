@@ -356,15 +356,15 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "btnDiscover: Canceling discovery.");
 
             //check BT permissions in manifest
-//            checkBTPermissions();
-//            mBTDevices.clear();
+            checkBTPermissions();
+            mBTDevices.clear();
 
             mBluetoothAdapter.startDiscovery();
         }
         if (!mBluetoothAdapter.isDiscovering()) {
 
             //check BT permissions in manifest
-//            checkBTPermissions();
+            checkBTPermissions();
 
             mBluetoothAdapter.startDiscovery();
             IntentFilter discoverDevicesIntent = new IntentFilter(BluetoothDevice.ACTION_FOUND);
@@ -447,6 +447,8 @@ public class MainActivity extends AppCompatActivity {
 
                 mBTDevice = mPairedBTDevices.get(i);
                 Log.d(TAG, "LINE 406::: " + String.valueOf(mBTDevice.getBondState()));
+                if (mBTDevice.getBondState() == 12)
+                    Toast.makeText(MainActivity.this, "Connected with " + deviceName, Toast.LENGTH_SHORT).show();
                 mBluetoothConnection = new BluetoothConnectionService(MainActivity.this);
             }
         }

@@ -132,6 +132,7 @@ public class BluetoothConnectionService {
                 mmSocket.connect();
 
                 Log.d(TAG, "run: ConnectThread connected.");
+//                Toast.makeText(mContext, "create connection successfully!", Toast.LENGTH_LONG).show();
             } catch (IOException e) {
                 // Close the socket
                 e.printStackTrace();
@@ -142,6 +143,8 @@ public class BluetoothConnectionService {
                     Log.e(TAG, "mConnectThread: run: Unable to close connection in socket " + e1.getMessage());
                 }
                 Log.d(TAG, "run: ConnectThread: Could not connect to UUID: " + MY_UUID_INSECURE );
+//                Toast.makeText(mContext, "create connection failed!", Toast.LENGTH_LONG).show();
+
             }
 
             //will talk about this in the 3rd video
