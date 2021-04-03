@@ -1,4 +1,4 @@
-package com.cpen391.flappyaccount.activity;
+package com.cpen391.flappyVoiceRecording;
 
 import android.media.MediaRecorder;
 

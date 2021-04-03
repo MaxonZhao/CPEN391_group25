@@ -1,10 +1,11 @@
-package com.cpen391.flappyaccount.activity
+package com.cpen391.flappyUI
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
+import com.cpen391.flappyaccount.activity.StartActivity
 import com.cpen391.flappyaccount.databinding.ActivityMultipleGameStartBinding
 
 class MultipleGameStartActivity : MvvmActivity<ActivityMultipleGameStartBinding>(){

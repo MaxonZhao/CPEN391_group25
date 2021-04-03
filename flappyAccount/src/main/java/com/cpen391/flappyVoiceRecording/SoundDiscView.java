@@ -1,4 +1,4 @@
-package com.cpen391.flappyaccount.activity;
+package com.cpen391.flappyVoiceRecording;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -33,20 +33,20 @@ public class SoundDiscView extends androidx.appcompat.widget.AppCompatImageView 
         int bitmapHeight = myBitmap.getHeight();
         newWidth = getWidth();
         newHeight = getHeight();
-        scaleWidth = ((float) newWidth) /(float) bitmapWidth;  // 获取缩放比例
-        scaleHeight = ((float) newHeight) /(float) bitmapHeight;  //获取缩放比例
-        mMatrix.postScale(scaleWidth, scaleHeight);   //设置mMatrix的缩放比例
-        indicatorBitmap = Bitmap.createBitmap(myBitmap, 0, 0, bitmapWidth, bitmapHeight, mMatrix,true);  //获取同等和背景宽高的指针图的bitmap
+        scaleWidth = ((float) newWidth) /(float) bitmapWidth;
+        scaleHeight = ((float) newHeight) /(float) bitmapHeight;
+        mMatrix.postScale(scaleWidth, scaleHeight);
+        indicatorBitmap = Bitmap.createBitmap(myBitmap, 0, 0, bitmapWidth, bitmapHeight, mMatrix,true);
 
         paint = new Paint();
         paint.setTextSize(22* ScreenUtil.getDensity(getContext()));
-        paint.setAntiAlias(true);  //抗锯齿
+        paint.setAntiAlias(true);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setColor(Color.WHITE);
     }
 
     public void refresh() {
-        postInvalidateDelayed(ANIMATION_INTERVAL); //子线程刷新view
+        postInvalidateDelayed(ANIMATION_INTERVAL);
     }
 
     @Override
@@ -60,13 +60,13 @@ public class SoundDiscView extends androidx.appcompat.widget.AppCompatImageView 
         if (indicatorBitmap == null) {
             init();
         }
-        mMatrix.setRotate(getAngle(World.dbCount), newWidth / 2, newHeight * 215 / 460);   //片相对位置
+        mMatrix.setRotate(getAngle(World.dbCount), newWidth / 2, newHeight * 215 / 460);
         canvas.drawBitmap(indicatorBitmap, mMatrix, paint);
-        canvas.drawText((int)World.dbCount+" DB", newWidth/2,newHeight*36/46, paint); //图片相对位置
+        canvas.drawText((int)World.dbCount+" DB", newWidth/2,newHeight*36/46, paint);
     }
 
     private float getAngle(float db){
-        return(db-85)*5/3;  //说多了都是泪，网上找的图片。。自己不会改图，代码计算下
+        return(db-85)*5/3;
     }
 
 

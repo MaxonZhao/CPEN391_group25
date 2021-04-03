@@ -25,12 +25,12 @@
         <activity android:name=".activity.LoginActivity"
             android:windowSoftInputMode="stateHidden"
             android:launchMode="singleTop"/>
-        <activity android:name=".activity.SelectGameModeActivity" />
-        <activity android:name=".activity.SingleGameStartActivity" />
-        <activity android:name=".activity.MultipleGameStartActivity" />
-        <activity android:name=".activity.EndGamePointActivity" />
-        <activity android:name=".activity.PersonalDataActivity" />
-        <activity android:name=".activity.VoiceControlActivity" />
+        <activity android:name="com.cpen391.flappyUI.SelectGameModeActivity" />
+        <activity android:name="com.cpen391.flappyUI.SingleGameStartActivity" />
+        <activity android:name="com.cpen391.flappyUI.MultipleGameStartActivity" />
+        <activity android:name="com.cpen391.flappyUI.EndGamePointActivity" />
+        <activity android:name="com.cpen391.flappyUI.PersonalDataActivity" />
+        <activity android:name="com.cpen391.flappyVoiceRecording.VoiceControlActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
