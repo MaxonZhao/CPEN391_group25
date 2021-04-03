@@ -13,6 +13,11 @@ class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
         super.onCreate(savedInstanceState)
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
+        binding.userName.text = "a"
+        binding.userEmail.text = "b"
+        binding.top1Score.text = "b"
+        binding.top2Score.text = "b"
+        binding.top3Score.text = "b"
     }
 
     override fun initObserver() {

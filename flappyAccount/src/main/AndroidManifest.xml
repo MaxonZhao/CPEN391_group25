@@ -25,9 +25,7 @@
         <activity android:name=".activity.LoginActivity"
             android:windowSoftInputMode="stateHidden"
             android:launchMode="singleTop"/>
-        <activity android:name="com.cpen391.flappyUI.SelectGameModeActivity" />
         <activity android:name="com.cpen391.flappyUI.SingleGameStartActivity" />
-        <activity android:name="com.cpen391.flappyUI.MultipleGameStartActivity" />
         <activity android:name="com.cpen391.flappyUI.EndGamePointActivity" />
         <activity android:name="com.cpen391.flappyUI.PersonalDataActivity" />
         <activity android:name="com.cpen391.flappyVoiceRecording.VoiceControlActivity" />

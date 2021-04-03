@@ -26,6 +26,10 @@ const val PASSWORD_TOO_WEAK = "password is too weak"
 const val PASSWORD_VALID = "password is valid"
 const val PASSWORD_NOT_MATCH = "does not match with new password"
 
+//Game mode
+const val VOICE_CONTROL = false
+const val TAPPING_CONTROL = true
+
 
 
 

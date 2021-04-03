@@ -9,7 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import androidx.lifecycle.observe
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
-import com.cpen391.flappyUI.SelectGameModeActivity
+import com.cpen391.flappyUI.SingleGameStartActivity
 import com.cpen391.flappyaccount.consts.*
 import com.cpen391.flappyaccount.databinding.ActivityLoginBinding
 import com.cpen391.flappyaccount.model.api.LoggedInUser
@@ -50,7 +50,7 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
             }
 
             guestBtn.setOnClickListener {
-                startActivity(Intent(context, SelectGameModeActivity::class.java))
+                startActivity(Intent(context, SingleGameStartActivity::class.java))
             }
         }
     }
