@@ -7,6 +7,9 @@ import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
+
+import androidx.lifecycle.MutableLiveData;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,7 +22,8 @@ public class BluetoothConnectionService {
 
     private static final String appName = "BluetoothConnection";
 
-    private static final UUID MY_UUID_INSECURE = UUID.fromString(UUIDs.HC05UNIVERSALUUID);
+    private static final UUID MY_UUID_INSECURE = UUID.fromString(UUIDs.ANDROIDDEVICEUNIVERSALUUID);
+
 
     private final BluetoothAdapter mBluetoothAdapter;
     Context mContext;
@@ -253,6 +257,7 @@ public class BluetoothConnectionService {
             Log.d(TAG, "write: Writing to outputstream: " + text);
             try {
                 mmOutStream.write(bytes);
+                Toast.makeText(mContext, "Jump!", Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "write: mmOutStream is " + mmOutStream.toString() + ", wrote: " + bytes);
             } catch (IOException e) {
                 Log.e(TAG, "write: Error writing to output stream. " + e.getMessage() );
