@@ -1,4 +1,4 @@
-package com.cpen391.flappyaccount.activity;
+package com.cpen391.flappyVoiceRecording;
 
 import android.os.Environment;
 
@@ -14,16 +14,8 @@ public class FileUtil {
 
     public static final String LOCAL_PATH = FlappyBirdApp.getApplication().getBaseContext().getFilesDir().getPath() + File.separator;
 
-    /**
-     * 录音文件目录
-     */
     public static final String REC_PATH = LOCAL_PATH + LOCAL + File.separator;
 
-
-
-    /**
-     * 自动在SD卡创建相关的目录
-     */
     static {
         File dirRootFile = new File(LOCAL_PATH);
         if (!dirRootFile.exists()) {

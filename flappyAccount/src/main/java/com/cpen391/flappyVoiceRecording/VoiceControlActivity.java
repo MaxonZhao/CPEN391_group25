@@ -1,19 +1,15 @@
-package com.cpen391.flappyaccount.activity;
+package com.cpen391.flappyVoiceRecording;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Message;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.cpen391.flappyaccount.R;
 
@@ -62,10 +58,6 @@ public class VoiceControlActivity extends AppCompatActivity {
         handler.sendEmptyMessageDelayed(msgWhat, refreshTime);
     }
 
-    /**
-     * 开始记录
-     * @param fFile
-     */
     public void startRecord(File fFile){
         try{
             mRecorder.setMyRecAudioFile(fFile);

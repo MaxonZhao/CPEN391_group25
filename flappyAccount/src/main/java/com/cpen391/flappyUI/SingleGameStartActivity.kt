@@ -1,17 +1,15 @@
-package com.cpen391.flappyaccount.activity
+package com.cpen391.flappyUI
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.ImageView
-import android.widget.RadioButton
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
+import com.cpen391.flappyVoiceRecording.VoiceControlActivity
 import com.cpen391.flappyaccount.R
+import com.cpen391.flappyaccount.activity.StartActivity
 import com.cpen391.flappyaccount.databinding.ActivitySingleGameStartBinding
-import com.cpen391.flappyaccount.viewmodel.LoginViewModel
 import com.cpen391.flappyaccount.viewmodel.VoiceControlViewModel
 
 class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {

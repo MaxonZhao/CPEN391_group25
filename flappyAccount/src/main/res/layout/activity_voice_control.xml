@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cpen391.flappyaccount.activity.VoiceControlActivity">
+    tools:context="com.cpen391.flappyaccount.com.cpen391.flappyVoiceRecording.VoiceControlActivity">
 
-    <com.cpen391.flappyaccount.activity.SoundDiscView
+    <com.cpen391.flappyVoiceRecording.SoundDiscView
         android:id="@+id/soundDiscView"
         android:layout_centerInParent="true"
         android:layout_width="344dp"

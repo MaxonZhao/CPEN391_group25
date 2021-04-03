@@ -1,4 +1,4 @@
-package com.cpen391.flappyaccount.activity
+package com.cpen391.flappyUI
 
 import android.content.Context
 import android.os.Bundle
