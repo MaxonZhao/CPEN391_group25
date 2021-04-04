@@ -1,0 +1,65 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:2:1-17:12
+INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:2:1-17:12
+INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:2:1-17:12
+INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:2:1-17:12
+INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:2:1-17:12
+INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:2:1-17:12
+INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:2:1-17:12
+	package
+		ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:3:5-39
+		INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml
+		INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml
+		ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:2:1-17:12
+		INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml
+		ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:2:1-17:12
+		INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:5:5-67
+	android:name
+		ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:5:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:6:5-79
+	android:name
+		ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:6:22-76
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:7:5-76
+	android:name
+		ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:7:22-73
+uses-permission#android.permission.BLUETOOTH
+ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:11:5-67
+	android:name
+		ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:11:22-65
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:12:5-73
+	android:name
+		ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:12:22-71
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:15:5-78
+	android:name
+		ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:15:22-76
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:16:5-80
+	android:name
+		ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml:16:22-78
+uses-sdk
+INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml
+INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml
+INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml
+INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml
+		ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml
+		INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml
+		ADDED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml
+		INJECTED from D:\CPEN391\flappy_birds\CPEN391_group25\businessBase\src\main\AndroidManifest.xml
