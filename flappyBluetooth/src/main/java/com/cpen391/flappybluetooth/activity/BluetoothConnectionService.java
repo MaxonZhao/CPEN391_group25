@@ -20,6 +20,8 @@ import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.UUID;
 
+import timber.log.Timber;
+
 public class BluetoothConnectionService {
     private static final String TAG = "BluetoothConnectionServ";
 
@@ -255,6 +257,7 @@ public class BluetoothConnectionService {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
+                            Timber.d("GAME END: your score is " + incomingMessage);
 //                    Intent intent = new Intent (MainActivity.this, NewMainActivity.class);
 //                    startActivity(intent);
                         }
