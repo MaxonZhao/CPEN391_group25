@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyaccount.databinding.ActivityPersonalDataBinding
-import com.cpen391.flappyaccount.model.api.LoggedInUser
 
 class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
     private val context: Context = this

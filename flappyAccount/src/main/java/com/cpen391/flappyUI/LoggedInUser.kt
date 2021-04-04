@@ -2,14 +2,13 @@ package com.cpen391.flappyUI
 
 import com.cpen391.flappyaccount.model.bean.User
 
-class UserInfoActivity private constructor() {
-    //    private var mBitmap: Bitmap? = null
+class LoggedInUser private constructor() {
     private var userData: User? = null
 
     fun getUser() : User?{
         return userData
     }
-    fun setUser(user: User){
+    fun setUser(user: User?){
         userData = user
     }
     fun isLogin(): Boolean{
@@ -18,14 +17,14 @@ class UserInfoActivity private constructor() {
     companion object {
 
         @Volatile
-        private var mInstance: UserInfoActivity? = null
+        private var mInstance: LoggedInUser? = null
         @JvmStatic
-        val instance: UserInfoActivity?
+        val instance: LoggedInUser?
             get() {
                 if (mInstance == null) {
-                    synchronized(UserInfoActivity::class.java) {
+                    synchronized(LoggedInUser::class.java) {
                         if (mInstance == null) {
-                            mInstance = UserInfoActivity()
+                            mInstance = LoggedInUser()
                         }
                     }
                 }

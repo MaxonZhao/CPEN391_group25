@@ -3,17 +3,15 @@ package com.cpen391.flappyaccount.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import androidx.lifecycle.observe
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
+import com.cpen391.flappyUI.LoggedInUser
 import com.cpen391.flappyUI.SingleGameStartActivity
 import com.cpen391.flappyaccount.consts.*
 import com.cpen391.flappyaccount.databinding.ActivityLoginBinding
-import com.cpen391.flappyaccount.model.api.LoggedInUser
-import com.cpen391.flappyaccount.model.bean.User
 import com.cpen391.flappyaccount.viewmodel.LoginViewModel
 import com.cpen391.flappybluetooth.activity.MainActivity
 import timber.log.Timber
@@ -50,6 +48,7 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
             }
 
             guestBtn.setOnClickListener {
+                LoggedInUser.instance?.setUser(null)
                 startActivity(Intent(context, SingleGameStartActivity::class.java))
             }
         }
@@ -73,11 +72,9 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
 
             userFoundByUsername.observe(owner) {
                 if (!it.isNullUser()) {
-//                            val intent = Intent(owner, StartActivity::class.java)
-//                            intent.putExtra("User", it)
-//                            startActivity(intent)
-                    LoggedInUser.user = it
-                    Timber.d("-------------------  ${LoggedInUser.user}")
+
+                    LoggedInUser.instance?.setUser(it)
+                    Timber.d("-------------------  ${LoggedInUser.instance?.getUser()}")
                     startActivity(Intent(applicationContext, MainActivity::class.java))
                 }
             }
