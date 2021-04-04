@@ -66,6 +66,9 @@ class VerifyOTPActivity : MvvmActivity<ActivityVerifyOTPBinding>() {
     override fun initView() {
         super.initView()
         binding.hintTxt.text = "Enter one time code sent on ${userFound.phoneNo}"
+        binding.cancelBtn.setOnClickListener {
+            finish()
+        }
     }
 
     override fun bind(): ActivityVerifyOTPBinding {

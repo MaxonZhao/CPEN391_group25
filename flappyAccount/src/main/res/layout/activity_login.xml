@@ -10,12 +10,7 @@
     android:padding="20dp">
 
 
-<!--    <ImageView-->
-<!--        android:id="@+id/imageView"-->
-<!--        android:layout_width="159dp"-->
-<!--        android:layout_height="116dp"-->
-<!--        android:src="@drawable/images"-->
-<!--        />-->
+
 
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="159dp"

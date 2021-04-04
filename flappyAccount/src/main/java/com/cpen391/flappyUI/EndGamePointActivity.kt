@@ -13,7 +13,7 @@ class EndGamePointActivity : MvvmActivity<ActivityEndGamePointBinding>(){
         super.onCreate(savedInstanceState)
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
-        binding.currentGameScore.text = LoggedInUser.user.current_score.toString()
+        binding.currentGameScore.text = LoggedInUser.instance?.getUser()?.current_score.toString()
     }
 
     override fun initView() {

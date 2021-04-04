@@ -1,4 +1,4 @@
-package com.CPEN391.flappybird
+package com.cpen391.flappyaccountapp
 
 import org.junit.Test
 

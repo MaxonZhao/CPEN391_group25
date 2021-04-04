@@ -25,6 +25,7 @@ class ResetPasswordActivity : MvvmActivity<ActivityResetPasswordBinding>() {
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
         userFound = intent.getSerializableExtra("User") as User
+
     }
 
     override fun initView() {
@@ -35,6 +36,9 @@ class ResetPasswordActivity : MvvmActivity<ActivityResetPasswordBinding>() {
             if (newPassword == null) newPassword = ""
             if (confirmPassword == null) confirmPassword = ""
             resetPasswordViewModel.resetPassword(userFound, newPassword, confirmPassword)
+        }
+        binding.backBtn.setOnClickListener {
+            finish()
         }
     }
 
