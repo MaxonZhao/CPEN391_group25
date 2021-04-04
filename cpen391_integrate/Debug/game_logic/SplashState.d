@@ -1,0 +1,12 @@
+game_logic/SplashState.o: ../game_logic/SplashState.cpp
+game_logic/SplashState.o: ../game_logic/SplashState.h
+game_logic/SplashState.o: ../game_logic/Game.h
+game_logic/SplashState.o: ../game_logic/StateMachine.h
+game_logic/SplashState.o: ../game_logic/State.h
+game_logic/SplashState.o: ../game_logic/MainMenuState.h
+game_logic/SplashState.o: ../game_logic/Game.h
+game_logic/SplashState.o: ../game_logic/GameState.h
+game_logic/SplashState.o: ../game_logic/Pipe.h
+game_logic/SplashState.o: ../game_logic/DEFINITION.h
+game_logic/SplashState.o: ../game_logic/Bird.h
+game_logic/SplashState.o: ../game_logic/GameOverState.hpp

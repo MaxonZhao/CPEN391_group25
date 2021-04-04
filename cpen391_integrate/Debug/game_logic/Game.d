@@ -1,0 +1,11 @@
+game_logic/Game.o: ../game_logic/Game.cpp
+game_logic/Game.o: ../game_logic/Game.h
+game_logic/Game.o: ../game_logic/StateMachine.h
+game_logic/Game.o: ../game_logic/State.h
+game_logic/Game.o: ../game_logic/MainMenuState.h
+game_logic/Game.o: ../game_logic/Game.h
+game_logic/Game.o: ../game_logic/GameState.h
+game_logic/Game.o: ../game_logic/Pipe.h
+game_logic/Game.o: ../game_logic/DEFINITION.h
+game_logic/Game.o: ../game_logic/Bird.h
+game_logic/Game.o: ../game_logic/GameOverState.hpp
