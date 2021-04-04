@@ -303,8 +303,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // TODO: define parameter list as needed
-    private void sendSettingInfo(String msg) {
-        if (readyToSend) sendMessage(msg);
+    private void sendSettingInfo(String msg1, String msg2, String msg3, String msg4) {
+        if (readyToSend) {
+            byte[] bytes = new byte[4];
+            bytes[0] = Byte.parseByte(msg1);
+            bytes[1] = Byte.parseByte(msg2);
+            bytes[2] = Byte.parseByte(msg3);
+            bytes[3] = Byte.parseByte(msg4);
+            if (mBluetoothConnection != null) mBluetoothConnection.write(bytes);
+        } else {
+            Toast.makeText(this, "Gaming station is not set up yet!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void sendMessage(String message) {
@@ -506,6 +515,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    // TODO: probably need more user related info in order to send messages, define the parameter list as needed
     public static void actionStart(Context context, Boolean control_method) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra("control_method", control_method);
