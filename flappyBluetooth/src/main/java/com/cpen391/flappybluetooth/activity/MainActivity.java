@@ -34,6 +34,12 @@ import timber.log.Timber;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    // TODO: implement sendSettingInfo per Zoey's docs
+    // TODO: Note readyToSend and readyToStart signals are added in this class as static vars per the handshaking process, take a look at TODOs in BluetoothConnectionService to see how they work
+    // TODO: determine when to call sendSettingInfo, probably at some point during onCreate. Maybe a simple while(!readToSend) will do
+    // TODO: define the parameter list for sendSettingInfo
+
     private static final String TAG = "MainActivity";
 
     BluetoothAdapter mBluetoothAdapter;
@@ -52,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
     TextView available_devices_txt;
     TextView paired_devices_txt;
 
+    public static boolean readyToSend = false;
+    public static boolean readyToStart = false;
+    public static boolean ended = false;
     private static final UUID MY_UUID_INSECURE =
             UUID.fromString(UUIDs.ANDROIDDEVICEUNIVERSALUUID);
 
@@ -293,9 +302,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // TODO: define parameter list as needed
+    private void sendSettingInfo(String msg) {
+        if (readyToSend) sendMessage(msg);
+    }
+
     private void sendMessage(String message) {
-        byte[] bytes = message.getBytes(Charset.defaultCharset());
-        if (mBluetoothConnection != null) mBluetoothConnection.write(bytes);
+        if (readyToStart) {
+            byte[] bytes = message.getBytes(Charset.defaultCharset());
+            if (mBluetoothConnection != null) mBluetoothConnection.write(bytes);
+        } else {
+            Toast.makeText(this, "Gaming station did not receive user info yet!", Toast.LENGTH_SHORT).show();
+        }
     }
     //create method for starting connection
 //***remember the conncction will fail and app will crash if you haven't paired first

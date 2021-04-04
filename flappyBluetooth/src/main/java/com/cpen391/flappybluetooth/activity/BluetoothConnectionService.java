@@ -254,16 +254,23 @@ public class BluetoothConnectionService {
                     bytes = mmInStream.read(buffer);
                     String incomingMessage = new String(buffer, 0, bytes);
                     Log.d(TAG, "InputStream: " + incomingMessage);
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (incomingMessage != null)
-                                Timber.d("GAME END: your score is " + incomingMessage);
-//                    Intent intent = new Intent (MainActivity.this, NewMainActivity.class);
-//                    startActivity(intent);
-                        }
-                    });
 
+                    // TODO: check with Zoey's handshaking process doc
+                    if (incomingMessage.equals("hello")) MainActivity.readyToSend = true;
+                    if (incomingMessage.equals("OK")) MainActivity.readyToStart = true;
+                    try{
+                        int score = Integer.parseInt(incomingMessage);
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (incomingMessage != null)
+                                    Timber.d("GAME END: your score is " + incomingMessage);
+                                // TODO: direct to the ending activity
+            //                    Intent intent = new Intent (MainActivity.this, NewMainActivity.class);
+            //                    startActivity(intent);
+                            }
+                        });
+                    } catch (Exception e) {}
                 } catch (IOException e) {
                     Log.e(TAG, "write: Error reading Input Stream. " + e.getMessage() );
                     break;
