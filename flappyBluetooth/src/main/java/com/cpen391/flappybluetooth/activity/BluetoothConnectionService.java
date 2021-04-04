@@ -257,7 +257,8 @@ public class BluetoothConnectionService {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            Timber.d("GAME END: your score is " + incomingMessage);
+                            if (incomingMessage != null)
+                                Timber.d("GAME END: your score is " + incomingMessage);
 //                    Intent intent = new Intent (MainActivity.this, NewMainActivity.class);
 //                    startActivity(intent);
                         }
