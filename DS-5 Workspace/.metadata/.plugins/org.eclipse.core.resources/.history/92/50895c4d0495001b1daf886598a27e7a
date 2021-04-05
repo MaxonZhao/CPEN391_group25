@@ -48,9 +48,6 @@ int testUploadScore(){
 
 }
 int main(void){
-
-	testBTCommunication();
-
 	int err;
 	int errorCount = 0;
 	err = testUploadScore();
@@ -60,4 +57,6 @@ int main(void){
 	if(errorCount == 0){
 			printf("All tests for wifi are passed!\n");
 	}
+	testBTCommunication();
+
 }

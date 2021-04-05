@@ -1,4 +1,4 @@
-15:28:02 **** Incremental Build of configuration Debug for project cpen391_integrate ****
+21:47:23 **** Incremental Build of configuration Debug for project cpen391_integrate ****
 make all 
 Building file: ../game_logic/CPEN391.cpp
 Invoking: ARM C++ Compiler 5
@@ -227,6 +227,27 @@ armcc --cpp -O0 -g --md --depend_format=unix_escaped -c -o "game_logic/MainMenuS
   		     ^
 ../game_logic/MainMenuState.cpp: 17 warnings, 0 errors
 Finished building: ../game_logic/MainMenuState.cpp
+ 
+Building file: ../RS232/RS232.cpp
+Invoking: ARM C++ Compiler 5
+armcc --cpp -O0 -g --md --depend_format=unix_escaped -c -o "RS232/RS232.o" "../RS232/RS232.cpp"
+"../RS232/RS232.cpp", line 92: Warning:  #550-D: variable "unreadChar" was set but never used
+      int unreadChar;
+          ^
+"../RS232/RS232.cpp", line 139: Warning:  #550-D: variable "j" was set but never used
+  	int j;
+  	    ^
+../RS232/RS232.cpp: 2 warnings, 0 errors
+Finished building: ../RS232/RS232.cpp
+ 
+Building file: ../RS232/wifi.cpp
+Invoking: ARM C++ Compiler 5
+armcc --cpp -O0 -g --md --depend_format=unix_escaped -c -o "RS232/wifi.o" "../RS232/wifi.cpp"
+"../RS232/wifi.cpp", line 21: Warning:  #550-D: variable "bytes_received" was set but never used
+  	int bytes_received = 0;
+  	    ^
+../RS232/wifi.cpp: 1 warning, 0 errors
+Finished building: ../RS232/wifi.cpp
  
 Building target: cpen391_integrate.axf
 Invoking: ARM Linker 5

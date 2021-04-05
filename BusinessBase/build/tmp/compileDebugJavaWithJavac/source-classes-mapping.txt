@@ -1,2 +1,0 @@
-com/cpen391/businessbase/BuildConfig.java
- com.cpen391.businessbase.BuildConfig

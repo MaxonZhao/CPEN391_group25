@@ -1,2 +1,0 @@
-com/example/flappybluetoothapp/BuildConfig.java
- com.example.flappybluetoothapp.BuildConfig

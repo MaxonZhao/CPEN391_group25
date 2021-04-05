@@ -48,16 +48,15 @@ int testUploadScore(){
 
 }
 int main(void){
-
+//	int err;
+//	int errorCount = 0;
+//	err = testUploadScore();
+//	if (err){
+//		errorCount++;
+//	}
+//	if(errorCount == 0){
+//			printf("All tests for wifi are passed!\n");
+//	}
 	testBTCommunication();
 
-	int err;
-	int errorCount = 0;
-	err = testUploadScore();
-	if (err){
-		errorCount++;
-	}
-	if(errorCount == 0){
-			printf("All tests for wifi are passed!\n");
-	}
 }

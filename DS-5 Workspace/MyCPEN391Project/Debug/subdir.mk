@@ -5,21 +5,18 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../RS232.c \
-../bluetooth.c \
 ../ledAndSwitch.c \
 ../main.c \
 ../wifi.c 
 
 OBJS += \
 ./RS232.o \
-./bluetooth.o \
 ./ledAndSwitch.o \
 ./main.o \
 ./wifi.o 
 
 C_DEPS += \
 ./RS232.d \
-./bluetooth.d \
 ./ledAndSwitch.d \
 ./main.d \
 ./wifi.d 

@@ -1,4 +1,0 @@
-com/cpen391/flappyaccountapp/databinding/ActivityMainBinding.java
- com.cpen391.flappyaccountapp.databinding.ActivityMainBinding
-com/cpen391/flappyaccountapp/BuildConfig.java
- com.cpen391.flappyaccountapp.BuildConfig
