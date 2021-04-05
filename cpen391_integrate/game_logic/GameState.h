@@ -27,7 +27,7 @@ namespace GameLogic {
 
 		void Update(float dt);
 
-		void Draw(float dt);
+		void Draw();
 
 		void ReDrawBackground();
 
@@ -42,6 +42,13 @@ namespace GameLogic {
 		int _gameState;
 		Pipe* _pipe;
 		Bird* _bird;
+
+		bool isPlaying;
+
+
+		// used for rfs:
+		int bytes_received;
+		char buffer[8];
 
 
 		// maybe we don't need this later:

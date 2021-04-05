@@ -15,13 +15,13 @@
 namespace GameLogic {
 	class GameOverState: public State {
 	public:
-		GameOverState(StateMachine* data, int score);
+		GameOverState(StateMachine* data);
 
 		void Init();
 
 		void HandleInput();
 		void Update(float dt);
-		void Draw(float dt);
+		void Draw();
 
 		void DrawScore();
 

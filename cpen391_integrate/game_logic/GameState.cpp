@@ -16,40 +16,37 @@ namespace GameLogic {
 	}
 
 	void GameState::Init() {
-		// TODO: need to initiate a pipe class later:
 		this->_pipe = new Pipe();
 
 		this->_bird = new Bird();
 
-		//this->_gameState = Ready;
-		this->_gameState = Playing;
+		this->isPlaying = true;
 
 		this->_clock = 0;
 
 		this->_score = 0;
+
+		this->bytes_received = 0;
 	}
 
 	void GameState::HandleInput() {
-		//check if bluetooth's input buffer has data, if yes, let the bird jump
-		int bytes_received = 0;
-		char buffer[8];
-		bytes_received = getSignal(buffer, BT_LineStatusReg, BT_ReceiverFifo);
+////		check if bluetooth's input buffer has data, if yes, let the bird jump
+//		bytes_received = getSignal(buffer, BT_LineStatusReg, BT_ReceiverFifo);
+//
+//		if(bytes_received != 0){
+//			this->_bird->Tap();
+//		}
 
-//		std::cout << "received:" << buffer<<std::endl;;
-
-		if(bytes_received != 0){
-			this->_bird->Tap();
-		}
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 		 if(*PUSHBUTTONS == 14){
-		 	this->_bird->Tap();
+			this->_bird->Tap();
 		 }
 	}
 
 	void GameState::Update(float dt) {
-		// update the location of textures:
-		if (this->_gameState == Playing) {
+		if (this->isPlaying) {
+			this->_data->count_update ++;
+
 			this->_score += this->_pipe->MovePipes(dt);
 
 			if (this->_clock + PIPE_SPAWN_FREQUENCY < clock()) {
@@ -60,36 +57,33 @@ namespace GameLogic {
 				this->_clock = clock();
 			}
 
-//			this->_bird->Animate(dt);
 			this->_bird->Update(dt);
 
 			// collision detection:
 			if(this->_bird->birdYPosition <= 12 || this->_bird->birdYPosition >= 227 ||
 					 this->_pipe->CheckCollision(this->_bird->birdYPosition)){
-				this->_gameState = GameOver;
+				this->isPlaying = false;
+				this->_data->score = this->_score;
 				this->_waitscreenClock = clock();
 			}
 		}else{
 			if(this->_waitscreenClock + WAITUNTILGAMEOVER < clock()){
-				_data->AddState(new GameOverState(_data, this->_score));
+				_data->AddState(new GameOverState(_data));
 			}
 		}
 
 
 	}
 
-	void GameState::Draw(float dt) {
-		if(this->_gameState == GameOver) return;
+	void GameState::Draw() {
+		if(!this->isPlaying) return;
 		// draw the pipe here:
+		this->_data->count_draw++;
 		 this->ReDrawBackground();
 		 _pipe->DrawPipes();
 		 _bird->Draw();
 
-		 if(this->_score == 0){
-			 this->plot(0, 15);
-		 }else{
-			 this->DrawScore();
-		 }
+		 this->DrawScore();
 
 	}
 
@@ -99,22 +93,17 @@ namespace GameLogic {
 	}
 
 	void GameState::DrawScore(){
-		int s = this->_score;
-		std::vector<int> v;
-		while(s != 0){
-			v.push_back(s%10);
-			s/=10;
-		}
+		int score = this->_score;
+		int xPosition = 300;
+		do{
+			plot(score%10, xPosition);
+			xPosition -= WIDTH_DIGIT;
+			score /= 10;
+		}while(score != 0);
 
-		int xPosition = 15;
-		for(int i = v.size()-1; i>=0; i--){
-			plot(v[i], xPosition);
-			xPosition += WIDTH_DIGIT;
-		}
 	}
 
 	void GameState::plot(int digit, int xPosition){
-		*(RENDER_BASE + 3) = 0;
 		*(RENDER_BASE + 4) = 7+digit;
 		*(RENDER_BASE + 1) = xPosition;
 		*(RENDER_BASE + 2) = 10;

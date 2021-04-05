@@ -29,6 +29,14 @@ namespace GameLogic {
 
 		State* GetActiveState();
 
+		char userName[16];
+		bool PlayInGuestMode;
+		int score;
+
+		// debugging, will delete later:
+		int count_update = 0;
+		int count_draw = 0;
+
 	private:
 		std::stack<State*> _states;
 		State* _newState;
@@ -36,7 +44,6 @@ namespace GameLogic {
 		bool _isRemoving;
 		bool _isAdding;
 		bool _isReplacing;
-
 	};
 }
 

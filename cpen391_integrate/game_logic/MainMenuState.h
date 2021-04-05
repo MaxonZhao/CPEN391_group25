@@ -27,14 +27,10 @@ namespace GameLogic {
 
 		void Update(float ft);
 
-		void Draw(float ft);
+		void Draw();
 
 	private:
 		StateMachine* _data;
-
-
-		//TODO: WE ****DON"T **** need a clock for this state, but just for the purpose of testing
-		clock_t _clock;
 
 		unsigned int _animationIterator;
 
@@ -42,9 +38,17 @@ namespace GameLogic {
 
 		unsigned int _chosenBirdColorIndex;
 
+
+
 		int readyToStart;
+		int difficultyLevel;
 		
-		int PlayInGuestMode;
+
+
+		// using for rfs:
+		int bytes_received;
+		char buffer[16];
+
 
 		// don't need this clock later:
 		clock_t _colorChanged;

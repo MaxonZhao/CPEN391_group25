@@ -11,7 +11,6 @@ CPP_SRCS += \
 ../game_logic/GameState.cpp \
 ../game_logic/MainMenuState.cpp \
 ../game_logic/Pipe.cpp \
-../game_logic/SplashState.cpp \
 ../game_logic/StateMachine.cpp 
 
 OBJS += \
@@ -22,7 +21,6 @@ OBJS += \
 ./game_logic/GameState.o \
 ./game_logic/MainMenuState.o \
 ./game_logic/Pipe.o \
-./game_logic/SplashState.o \
 ./game_logic/StateMachine.o 
 
 CPP_DEPS += \
@@ -33,7 +31,6 @@ CPP_DEPS += \
 ./game_logic/GameState.d \
 ./game_logic/MainMenuState.d \
 ./game_logic/Pipe.d \
-./game_logic/SplashState.d \
 ./game_logic/StateMachine.d 
 
 

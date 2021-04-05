@@ -73,3 +73,4 @@ void sendMultiChar(char* ,volatile unsigned char* ,volatile unsigned char* );
 int getSignal(char * res, volatile unsigned char* LineStatusReg, volatile unsigned char* ReceiverFifo);
 int receiveBuffer(char * res, volatile unsigned char* LineStatusReg, volatile unsigned char* ReceiverFifo);
 #endif /* SERIAL_H_ */
+

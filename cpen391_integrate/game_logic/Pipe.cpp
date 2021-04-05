@@ -12,17 +12,11 @@
 
 namespace GameLogic {
 	Pipe::Pipe() {
-		//this->_data = data;
-		// this->RandomizedPipeOffset();
 		this->_pipeSpawnYOffset = 0;
 		this->_landHeight = 0;
-
-		// TODO: also needs to initiate landHeight and pipeSpawnYOffset later
 	}
 
 	void Pipe::SpawnPipe() {
-		// spawn bottom pipe:
-		// std::cout<<"Spawning new pipes!!!!!"<<std::endl;
 		this->PipeLocations.push_back(std::pair<int, int>(319, 119 + this->_pipeSpawnYOffset));
 	}
 
@@ -31,7 +25,7 @@ namespace GameLogic {
 		int score = 0;
 		std::vector< std::pair<int,int> >::iterator it = this->PipeLocations.begin();
 		while (it != this->PipeLocations.end()) {
-			if (it->first < 9) {
+			if (it->first < 5) {
 				score += SCORE;
 				it = this->PipeLocations.erase(it);
 			}
@@ -45,7 +39,6 @@ namespace GameLogic {
 	}
 
 	void Pipe::DrawPipes() {
-		// FPGA interfase:
 		for(int i = 0; i<this->PipeLocations.size(); i++) {
 			*(RENDER_BASE + 3) = 0;
 			*(RENDER_BASE + 4) = 0x06; // Set texture code to pipe up
@@ -75,8 +68,6 @@ namespace GameLogic {
 	// [0, 239]
 
 	void Pipe::RandomizedPipeOffset() {
-		// do nothing for now
-
 		this->_pipeSpawnYOffset = std::rand() % 60 - 30;
 	}
 
@@ -86,7 +77,6 @@ namespace GameLogic {
 			std::pair<int,int> p = PipeLocations[i];
 			if(p.first > 9 && p.first < 21){
 
-	//                std::cout<<birdYPosition<<"  "<<p.second-119<<std::endl;
 				if(birdYPosition+6 > p.second+PIPE_DISTANCE_WITH_CENTER-90 || birdYPosition-6 < p.second-PIPE_DISTANCE_WITH_CENTER+90){
 					return true;
 				}

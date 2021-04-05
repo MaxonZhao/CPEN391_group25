@@ -42,11 +42,6 @@
 
 #define WIDTH_DIGIT 20
 
-enum GameStates {
-	Ready,
-	Playing,
-	GameOver
-};
 
 
 #endif /* DEFINITION_H_ */

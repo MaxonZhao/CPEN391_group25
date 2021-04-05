@@ -19,6 +19,10 @@ namespace GameLogic {
 
 		// because StateRef is a unique pointer:
 		this->_newState = newState;
+
+
+		this->PlayInGuestMode = true;
+		this->score = 0;
 	}
 	void StateMachine::RemoveState() {
 		this->_isRemoving = true;

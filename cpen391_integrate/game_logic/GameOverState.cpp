@@ -12,18 +12,18 @@
 #include<cstring>  
 
 namespace GameLogic {
-	GameOverState::GameOverState(StateMachine* data, int score){
+	GameOverState::GameOverState(StateMachine* data){
 		this->_data = data;
-		this->_score = score;
+		this->_score = data->score;
 	}
 
 	void GameOverState::Init(){
 		// 1. draw the background
+		*(RENDER_BASE + 3) = 0;
 		*(RENDER_BASE + 4) = 0x6A;
 		*(RENDER_BASE + 6) = 0x4F;
 
 		// 2. displaying medal
-		*(RENDER_BASE + 3) = 0;
 		*(RENDER_BASE + 4) = 17;
 		*(RENDER_BASE + 1) = 160;
 		*(RENDER_BASE + 2) = 120;
@@ -32,8 +32,13 @@ namespace GameLogic {
 		// 3. displaying score
 		this->DrawScore();
 
+		// 4. Game Over:
+		*(RENDER_BASE + 4) = 20;
+		*(RENDER_BASE + 1) = 160;
+		*(RENDER_BASE + 2) = 60;
+		*(RENDER_BASE + 6) = 0x05;
+
 		//send score to the App as a closing signal
-		std::cout<< "this->_score: "<<this->_score <<std::endl;
 //		char score_s [8] ;
 //		std::snprintf(score_s, 8, "%d", this->_score); // covert score from int to string
 //		sendMessage(score_s,BT_LineStatusReg, BT_TransmitterFifo);
@@ -45,6 +50,8 @@ namespace GameLogic {
 //		if (!err){
 //				std::cout<< "Successfully upload score to the cloud Database."<<std::endl;
 //		}
+
+
 	}
 
 	void GameOverState::HandleInput(){
@@ -58,8 +65,8 @@ namespace GameLogic {
 
 	}
 
-	void GameOverState::Draw(float dt){
-		// I don't wanna use this function
+	void GameOverState::Draw(){
+
 	}
 
 	void GameOverState::DrawScore(){
@@ -70,7 +77,7 @@ namespace GameLogic {
 				s/=10;
 			}
 
-			int xPosition = 120;
+			int xPosition = 160;
 			for(int i = v.size()-1; i>=0; i--){
 				plot(v[i], xPosition);
 				xPosition += WIDTH_DIGIT;

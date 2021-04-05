@@ -10,7 +10,7 @@ namespace GameLogic {
 
 		this->_movementClock = clock();
 
-		this->_birdState = BIRD_STATE_FLYING;
+		this->isBirdFlying = false;
 	}
 
 	void Bird::Draw() {
@@ -23,37 +23,21 @@ namespace GameLogic {
 		_animationIterator++;
 	}
 
-	void Bird::Animate(float dt) {
-		if (clock()-this->_clock > BIRD_ANIMATION_DURATION/4) {
-			if (_animationIterator < 3) {
-				_animationIterator++;
-			}
-			else {
-				_animationIterator = 0;
-			}
-			this->Draw();
-
-			_clock = clock();
-		}
-	}
 
 	void Bird::Update(float dt) {
-		if (BIRD_STATE_FALLING == _birdState) {
+		if (!this->isBirdFlying) {
 			this->birdYPosition += GRAVITY * dt;
-		}
-		else if (BIRD_STATE_FLYING == _birdState) {
+		}else{
 			this->birdYPosition -= FLYING_SPEED * dt;
 		}
 
-		if (clock() - _movementClock > FLYING_DURATION) {
-			_movementClock = clock();
-			_birdState = BIRD_STATE_FALLING;
-		}
+		if (clock() - _movementClock > FLYING_DURATION) isBirdFlying = false;
+
 	}
 
 	void Bird::Tap() {
 		// std::cout<<"Bird jump"<<std::endl;
 		_movementClock = clock();
-		_birdState = BIRD_STATE_FLYING;
+		isBirdFlying = true;
 	}
 }

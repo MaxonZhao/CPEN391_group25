@@ -16,17 +16,6 @@
 
 namespace GameLogic {
 
-//	struct GameData {
-//		StateMachine machine;
-//	};
-
-	// typedef GameData* GameDataRef;
-	enum GameStates {
-		Ready,
-		Playing,
-		GameOver
-	};
-
 	class Game
 	{
 	public:
@@ -34,16 +23,12 @@ namespace GameLogic {
 		Game();
 
 	private:
-		 const float dt = 1.0f / 8.0f;
-//		const float dt = 2.0f;
+		// const float dt = 1.0f / 10.0f;
 		clock_t _clock;
 
-		// _data is a shared pointer to type GameData
 		StateMachine* _data;
 
 		void Run();
-
-
 	};
 }
 

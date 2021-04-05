@@ -21,36 +21,51 @@ namespace GameLogic {
 
 	void Game::Run() {
 		// the most important thing in the game logic:
-
-		float newTime;
 		float currentTime = clock();
-
 		float frameTime;
-		float accumulator;
-
-		int ans = 0;
 
 		while (true) {
 			this->_data->ProcessStateChanges();
-			newTime = clock();
-			frameTime = newTime - currentTime;
+			frameTime = clock() - currentTime;
 
 			if (frameTime > 0.25f) frameTime = 0.25f;
 
-			currentTime = newTime;
-			accumulator += frameTime;
+			currentTime = clock();
 
-			while (accumulator >= dt) {
+			this->_data->GetActiveState()->HandleInput();
+			this->_data->GetActiveState()->Update(frameTime);
 
-				this->_data->GetActiveState()->HandleInput();
-				this->_data->GetActiveState()->Update(dt);
 
-				accumulator -= dt;
-			}
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////
+			this->_data->GetActiveState()->HandleInput();
 
-			this->_data->GetActiveState()->Draw(accumulator / dt);
+			this->_data->GetActiveState()->Draw();
 
 		}
+
+//		while (true) {
+//			this->_data->ProcessStateChanges();
+//			frameTime = clock() - currentTime;
+//
+//			if (frameTime > 0.25f) frameTime = 0.25f;
+//
+//			currentTime = clock();
+//			accumulator += frameTime;
+//
+//			if(accumulator >= dt) {
+//
+//				this->_data->GetActiveState()->HandleInput();
+//				this->_data->GetActiveState()->Update(accumulator/dt * dt);
+//
+//				accumulator -= accumulator/dt * dt;
+//			}
+//
+//			///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//			this->_data->GetActiveState()->HandleInput();
+//
+//			this->_data->GetActiveState()->Draw();
+//
+//		}
 	}
 }
 

@@ -19,8 +19,6 @@ namespace GameLogic {
 
 		void Draw();
 
-		void Animate(float dt);
-
 		void Update(float dt);
 
 		void Tap();
@@ -36,7 +34,7 @@ namespace GameLogic {
 
 		clock_t _movementClock;
 
-		int _birdState;
+		bool isBirdFlying;
 	};
 }
 
