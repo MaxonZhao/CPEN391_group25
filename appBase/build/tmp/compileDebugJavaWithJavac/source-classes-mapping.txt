@@ -1,0 +1,2 @@
+com/cpen391/appbase/BuildConfig.java
+ com.cpen391.appbase.BuildConfig
