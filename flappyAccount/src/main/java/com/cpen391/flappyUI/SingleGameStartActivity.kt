@@ -30,9 +30,6 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
             startYes.setOnClickListener {
                 singleGameViewModel.onRadioButtonClicked(findViewById(R.id.radio_btn))
             }
-            startNo.setOnClickListener {
-                startActivity(Intent(context, SingleGameStartActivity::class.java))
-            }
             profileIcon.setOnClickListener{
                 startActivity(Intent(context, PersonalDataActivity::class.java))
             }
