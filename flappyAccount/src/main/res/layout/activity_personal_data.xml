@@ -15,7 +15,17 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_gravity="center"
-        android:src="@drawable/bird3" />
+        android:src="@drawable/bird_yellow" />
+    <Button
+        android:id="@+id/btn_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/bungee"
+        android:layout_margin="5dp"
+        android:background="#00000000"
+        android:elevation="0dp"
+        android:text="Share Your Score" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,7 +52,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/bungee"
-                android:textSize="25sp" />
+                android:textSize="18sp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,7 +73,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/bungee"
-                android:textSize="25sp" />
+                android:textSize="10sp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -141,7 +151,6 @@
                 android:fontFamily="@font/bungee"
                 android:textSize="25sp" />
         </LinearLayout>
-
     </LinearLayout>
 
 

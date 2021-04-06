@@ -12,7 +12,7 @@ class LoggedInUser private constructor() {
         userData = user
     }
     fun isLogin(): Boolean{
-        return (userData == null)
+        return (userData != null)
     }
     companion object {
 

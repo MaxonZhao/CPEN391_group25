@@ -19,14 +19,6 @@ class EndGamePointActivity : MvvmActivity<ActivityEndGamePointBinding>(){
     override fun initView() {
         super.initView()
         binding.apply {
-            doneBtn.setOnClickListener {
-                startActivity(Intent(context, SingleGameStartActivity::class.java))
-            }
-
-//            shareBtn.setOnClickListener {
-//                startActivity(Intent(context, ForgetPasswordActivity::class.java))
-//            }
-
             startAgain.setOnClickListener {
                 startActivity(Intent(context, SingleGameStartActivity::class.java))
             }

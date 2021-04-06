@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">flappyBird</string>
     <string name="selected_item">Selected item:</string>
+    <string-array name="bird_color">
+        <item>Red</item>
+        <item>Black</item>
+        <item>Orange</item>
+        <item>Green</item>
+        <item>Yellow</item>
+        <item>Blue</item>
+    </string-array>
 </resources>
