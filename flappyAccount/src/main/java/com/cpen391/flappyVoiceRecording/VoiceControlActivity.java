@@ -28,6 +28,7 @@ public class VoiceControlActivity extends AppCompatActivity {
     private static final int GET_RECODE_AUDIO = 1;
     private final String [] permissions = {Manifest.permission.RECORD_AUDIO};
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+    private double currentDb = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class VoiceControlActivity extends AppCompatActivity {
             }
             volume = mRecorder.getMaxAmplitude();
             if(volume > 0 && volume < 1000000) {
-                World.setDbCount(20 * (float)(Math.log10(volume)));
+                currentDb = World.setDbCount(20 * (float)(Math.log10(volume)));
                 soundDiscView.refresh();
             }
             handler.sendEmptyMessageDelayed(msgWhat, refreshTime);

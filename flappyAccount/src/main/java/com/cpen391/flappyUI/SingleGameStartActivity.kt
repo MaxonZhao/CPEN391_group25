@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
+import com.cpen391.flappyVoiceRecording.VoiceControlActivity
 import com.cpen391.flappyaccount.R
 import com.cpen391.flappyaccount.databinding.ActivitySingleGameStartBinding
 import com.cpen391.flappyaccount.viewmodel.GameSettingsViewModel
@@ -81,7 +82,7 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
         GameSettings.instance?.setControlMethod(isTapped)
         when(isTapped){
             true -> startActivity(Intent(context, EndGamePointActivity::class.java))
-            false -> startActivity(Intent(context, EndGamePointActivity::class.java))
+            false -> startActivity(Intent(context, VoiceControlActivity::class.java))
         }
     }
 
