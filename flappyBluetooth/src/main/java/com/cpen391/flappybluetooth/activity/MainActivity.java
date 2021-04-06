@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
     TextView available_devices_txt;
     TextView paired_devices_txt;
 
-    public volatile static boolean readyToSend = false;
-    public volatile static boolean readyToStart = false;
+    public volatile static boolean readyToSend = true;
+    public volatile static boolean readyToStart = true;
     public static boolean ended = false;
     private static final UUID MY_UUID_INSECURE =
             UUID.fromString(UUIDs.ANDROIDDEVICEUNIVERSALUUID);
@@ -316,10 +316,10 @@ public class MainActivity extends AppCompatActivity {
     private void sendSettingInfo(String msg1, String msg2, String msg3, String msg4) {
         if (readyToSend) {
             byte[] bytes = new byte[4];
-            bytes[0] = Byte.parseByte(msg1);
-            bytes[1] = Byte.parseByte(msg2);
-            bytes[2] = Byte.parseByte(msg3);
-            bytes[3] = Byte.parseByte(msg4);
+            bytes[0] = msg1.getBytes()[0];
+            bytes[1] = msg2.getBytes()[0];
+            bytes[2] = msg3.getBytes()[0];
+            bytes[3] = msg4.getBytes()[0];
             if (mBluetoothConnection != null) mBluetoothConnection.write(bytes);
         } else {
             Toast.makeText(this, "Gaming station is not set up yet!", Toast.LENGTH_SHORT).show();
@@ -373,7 +373,7 @@ public class MainActivity extends AppCompatActivity {
                 getIntent().getStringExtra("color0"),
                 getIntent().getStringExtra("color1"),
                 getIntent().getStringExtra("difficult_level"),
-                getIntent().getStringExtra("control_method")
+                getIntent().getStringExtra("login_mode")
         );
 
     }
@@ -543,12 +543,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     // TODO: probably need more user related info in order to send messages, define the parameter list as needed
-    public static void actionStart(Context context,  String color0, String color1, String diffLevel, Boolean control_method) {
+    public static void actionStart(Context context,  String color0, String color1, String diffLevel, String loginMode) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra("color0", color0);
         intent.putExtra("color1", color1);
         intent.putExtra("difficult_level", diffLevel);
-        intent.putExtra("control_method", control_method);
+        intent.putExtra("login_mode", loginMode);
         context.startActivity(intent);
     }
 }

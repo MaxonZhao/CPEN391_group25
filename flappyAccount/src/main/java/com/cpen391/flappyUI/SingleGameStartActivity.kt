@@ -68,6 +68,13 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
     }
 
     private fun tappingOrVoice(isTapped: Boolean){
+        var loginMode: String
+        if(LoggedInUser.instance?.isLogin() == true){
+            loginMode = "p"
+        }
+        else{
+            loginMode = "g"
+        }
         System.out.println(isTapped)
         GameSettings.instance?.setControlMethod(isTapped)
         when(isTapped){
@@ -76,14 +83,14 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
                 GameSettings.instance?.getBirdColor()?.substring(0,1),
                 GameSettings.instance?.getBirdColor()?.substring(1,2),
                 GameSettings.instance?.getDiffLevel(),
-                true
+                loginMode
             )
             false -> actionStart(
                 context,
                 GameSettings.instance?.getBirdColor()?.substring(0,1),
                 GameSettings.instance?.getBirdColor()?.substring(1,2),
                 GameSettings.instance?.getDiffLevel(),
-                false
+                loginMode
             )
         }
     }
