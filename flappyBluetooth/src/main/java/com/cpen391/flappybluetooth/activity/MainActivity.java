@@ -241,9 +241,9 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
         IntentFilter discoverDevicesIntent = new IntentFilter(BluetoothDevice.ACTION_FOUND);
 
-        Intent enableBTIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-        startActivity(enableBTIntent);
-        enableDisableBT();
+//        Intent enableBTIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+//        startActivity(enableBTIntent);
+//        enableDisableBT();
         registerReceiver(mBroadcastReceiver4, filter);
         registerReceiver(mBroadcastReceiver3, discoverDevicesIntent);
 
@@ -251,6 +251,7 @@ public class MainActivity extends AppCompatActivity {
 
         lvNewDevices.setOnItemClickListener(mNewDevicesClickListener);
         lvPairedDevices.setOnItemClickListener(mPairedDevicesClickListener);
+
         jumpImg.setOnClickListener(new View.OnClickListener() {
 
             @Override
