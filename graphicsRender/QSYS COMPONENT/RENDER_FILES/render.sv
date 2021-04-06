@@ -106,6 +106,7 @@ module render(
     reg do_plot;
     reg [16:0] buf_addr_save;
     reg [5:0] bird_color;
+    reg [5:0] box_color;
 
     // Constantly write pixel data to video adapter
     reg [8:0] x_prev;
@@ -181,6 +182,7 @@ module render(
             do_plot <= 0;
             buf_addr_save <= 0;
             bird_color <= 'b111000;
+            box_color <= 0;
 
             fill_init <= 0;
             plot_init <= 0;
@@ -479,6 +481,43 @@ module render(
                             end
                         end
 
+                        // Plot 40x40 box
+                        else if (tex_code[5:0] == 21) begin
+                            if (do_plot) begin
+                                frame_buffer_data <= box_color;
+                                frame_buffer_addr <= buf_addr_save;
+                                frame_buffer_wren <= 1;
+                            end
+                            else frame_buffer_wren <= 0;
+
+                            if (plot_init) begin
+                                plot_init <= 0;
+                                curr_x <= mid_x - 20;
+                                curr_y <= mid_y - 20;
+                            end
+                            else begin
+                                if (curr_x < mid_x + 20 && curr_y < mid_y + 20) begin
+                                    curr_y <= curr_y + 1;
+                                    if (curr_x >= 0 && curr_x < 320 && curr_y >= 0 && curr_y < 240) begin
+                                        do_plot <= 1;
+                                        buf_addr_save <= curr_x * 240 + curr_y;
+                                    end
+                                    else begin
+                                        do_plot <= 0;
+                                    end
+                                end
+                                else if (curr_x < mid_x + 20 && curr_y >= mid_y + 20) begin
+                                    curr_x <= curr_x + 1;
+                                    curr_y <= mid_y - 20;
+                                    do_plot <= 0;
+                                end
+                                else begin
+                                    plotting <= 0;
+                                    if (~flush_now) slave_waitrequest <= 0;
+                                end
+                            end
+                        end
+
                         // Do nothing if bogus texture code
                     end
                 end
@@ -511,6 +550,7 @@ module render(
                         end
 
                         7: bird_color <= slave_writedata[5:0];
+                        8: box_color <= slave_writedata[5:0];
 
                         default: dummy <= ~dummy;
                     endcase

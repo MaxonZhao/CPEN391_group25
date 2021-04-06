@@ -7,7 +7,7 @@ You may encounter a "can't find package qsys exact 16.1 while executing "package
 This can be fixed by deleting the "package require -exact qsys 16.1" file inside renderer_hw.tcl.
 
 _____________________________________________________________________________________________________________________________
-USING THE GRAPHICS RENDERER (WITH C/C++ CODE):
+USING THE GRAPHICS RENDERER WITH C/C++ CODE:
 
 Documentation: https://docs.google.com/document/d/1i2ljejJEDNJpxfF0QGs3n7hxUPkz36dKPm8SNM3A4yc/edit?usp=sharing
 

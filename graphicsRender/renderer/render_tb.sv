@@ -390,6 +390,99 @@ module render_tb();
         #20;
 
         //---------------------------------------------------------------------------
+        // Plot custom color box
+        slave_address <= 4;
+        slave_writedata <= 'b0_10_101;     // texture code
+        #20;
+        slave_write <= 1;
+        #20;
+        slave_write <= 0;
+        #20;
+
+        assert (dut.tex_code == 'b0_10_1111) 
+        else   $error("BAD TEXTURE VALUE");
+
+        wait(~slave_waitrequest);
+        wait(clk == 0);
+
+        slave_address <= 1;
+        slave_writedata <= 300;      // midpoint x coordinate
+        slave_write <= 1;
+        #20;
+        slave_write <= 0;
+        #20;
+
+        assert (dut.mid_x == 300) 
+        else   $error("BAD X COOR VALUE");
+
+        wait(~slave_waitrequest);
+        wait(clk == 0);
+
+        slave_address <= 2;
+        slave_writedata <= 100;      // midpoint y coordinate
+        slave_write <= 1;
+        #20;
+        slave_write <= 0;
+        #20;
+
+        assert (dut.mid_y == 100) 
+        else   $error("BAD Y COOR VALUE");
+
+        wait(~slave_waitrequest);
+        wait(clk == 0);
+
+        slave_address <= 8;
+        slave_writedata <= 'b101111;
+        slave_write <= 1;
+        #20;
+        slave_write <= 0;
+        #20;
+
+        assert (dut.box_color == 'b101111) 
+        else   $error("BAD BOX COLOR VALUE");
+
+        wait(~slave_waitrequest);
+        wait(clk == 0);
+
+        slave_address <= 6;
+        slave_write <= 1;       // initiate plot
+        #20;
+
+        assert (dut.slave_waitrequest == 1) 
+        else   $error("BAD WAITREQUEST");
+        assert (dut.plotting == 1 && dut.plot_init == 1 && dut.fill_init == 1 && dut.bird_tex_addr == 0 && dut.pipe_tex_addr == 0 && dut.char_tex_addr == 0 && dut.custom_tex_addr == 0 && dut.do_plot == 0) 
+        else   $error("BAD INITIAL PLOT VALUES");
+
+        slave_write <= 0;
+        #20;
+
+        assert (dut.plot_init == 0 && dut.curr_x == 300 - 20 && dut.curr_y == 100 - 20) 
+        else   $error("BAD PLOT INIT VALUES");
+
+        #20;
+
+        assert (dut.curr_y == 300 - 9 && dut.do_plot == 1 && dut.buf_addr_save == (300 - 10) * 240 + (100 - 20)) 
+        else   $error("BAD PLOT VALUES");
+
+        #20;
+
+        assert (dut.frame_buffer_wren == 1 && dut.frame_buffer_addr == (300 - 10) * 240 + (100 - 20) && dut.frame_buffer_data == 'b101111) 
+        else   $error("BAD FRAME BUFFER VALUES");
+
+        wait(~slave_waitrequest);
+        wait(clk == 0);
+        
+        #100;
+        
+        wait(dut.flushing == 1);
+        wait(dut.flushing == 0);
+
+        assert (dut.frame_out.altsyncram_component.m_default.altsyncram_inst.mem_data[0] == 'b011100) 
+        else   $error("BAD OUTPUT");
+
+        #20;
+
+        //---------------------------------------------------------------------------
         // Plot game title
         slave_address <= 4;
         slave_writedata <= 'b0_01_0011;     // texture code
