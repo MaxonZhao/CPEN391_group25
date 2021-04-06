@@ -2,9 +2,9 @@ package com.cpen391.flappyUI
 
 class GameSettings private constructor(){
     private var controlMethod: Boolean = true //tapping
-    private var birdColor: String = "ye"
-    private var diffLevel: String = "e"
-    private var gameSettingsToBlueTooth: CharArray? = null
+    private var birdColor: String = String()
+    private var diffLevel: String = String()
+    private var gameSettingsToBlueTooth: String = String()
     fun getControlMethod() : Boolean{
         return controlMethod
     }
@@ -26,10 +26,13 @@ class GameSettings private constructor(){
         this@GameSettings.diffLevel = diffLevel
     }
 
-    fun setGameSettings(color: String, diffLevel: String, playMode: String){
-        val gameSettings = charArrayOf(color[0], color[1], diffLevel[0], playMode[0])
-        gameSettingsToBlueTooth = gameSettings
-    }
+//    fun setGameSettings(color: String, diffLevel: String, playMode: String){
+//        val gameSettings = color + diffLevel + playMode
+//        gameSettingsToBlueTooth = gameSettings
+//    }
+//    fun getGameSetting() : String{
+//        return gameSettingsToBlueTooth
+//    }
 
     companion object {
         @Volatile

@@ -351,6 +351,15 @@ public class MainActivity extends AppCompatActivity {
         jumpImg.setVisibility(View.VISIBLE);
         etSend.setVisibility(View.GONE);
         btnSend.setVisibility(View.GONE);
+
+        while (!readyToSend) {}
+
+        sendSettingInfo(
+                getIntent().getStringExtra("color0"),
+                getIntent().getStringExtra("color1"),
+                getIntent().getStringExtra("difficult_level"),
+                getIntent().getStringExtra("control_method")
+        );
     }
 
 
@@ -518,8 +527,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     // TODO: probably need more user related info in order to send messages, define the parameter list as needed
-    public static void actionStart(Context context, Boolean control_method) {
+    public static void actionStart(Context context,  String color0, String color1, String diffLevel, Boolean control_method) {
         Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra("color0", color0);
+        intent.putExtra("color1", color1);
+        intent.putExtra("difficult_level", diffLevel);
         intent.putExtra("control_method", control_method);
         context.startActivity(intent);
     }

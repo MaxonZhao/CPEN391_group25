@@ -4,14 +4,15 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.appcompat.app.ActionBar
 import androidx.core.content.FileProvider
 import com.cpen391.appbase.network.SimpleObserver
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
-import com.cpen391.flappyaccount.BuildConfig
 import com.cpen391.flappyaccount.Injection
+import com.cpen391.flappyaccount.R
 import com.cpen391.flappyaccount.databinding.ActivityPersonalDataBinding
 import com.cpen391.flappyaccount.model.bean.User
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -51,6 +52,27 @@ class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
                         user = it
                     }
                 })
+        }
+        val birdImage: ImageView = findViewById(R.id.bird_image)
+        when(intent.getStringExtra("birdImage")){
+            "bird_red" -> {
+                birdImage.setImageResource(R.drawable.bird_red)
+            }
+            "bird_black" -> {
+                birdImage.setImageResource(R.drawable.bird_black)
+            }
+            "bird_orange" -> {
+                birdImage.setImageResource(R.drawable.bird_orange)
+            }
+            "bird_green" -> {
+                birdImage.setImageResource(R.drawable.bird_green)
+            }
+            "bird_yellow" -> {
+                birdImage.setImageResource(R.drawable.bird_yellow)
+            }
+            "bird_blue" -> {
+                birdImage.setImageResource(R.drawable.bird_blue)
+            }
         }
 
         binding.apply {
