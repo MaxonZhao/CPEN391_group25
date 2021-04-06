@@ -1,6 +1,8 @@
 package com.cpen391.flappybluetooth.activity;
 
 import android.Manifest;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -58,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
     TextView available_devices_txt;
     TextView paired_devices_txt;
 
-    public static boolean readyToSend = false;
-    public static boolean readyToStart = false;
+    public volatile static boolean readyToSend = false;
+    public volatile static boolean readyToStart = false;
     public static boolean ended = false;
     private static final UUID MY_UUID_INSECURE =
             UUID.fromString(UUIDs.ANDROIDDEVICEUNIVERSALUUID);
@@ -252,13 +254,20 @@ public class MainActivity extends AppCompatActivity {
         lvNewDevices.setOnItemClickListener(mNewDevicesClickListener);
         lvPairedDevices.setOnItemClickListener(mPairedDevicesClickListener);
 
-        jumpImg.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                sendMessage("1");
-            }
-        });
+        if(getIntent().getBooleanExtra("control_method",true)){
+            jumpImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sendMessage("1");
+                }
+            });
+        }
+        else{
+//            VoiceControlActivity volmectivity = new VoiceControlActivity();
+//            if(volmectivity.currentDb > 40){
+//                sendMessage("1");
+//            }
+        }
 
 
         btnONOFF.setOnClickListener(new View.OnClickListener() {
@@ -336,23 +345,29 @@ public class MainActivity extends AppCompatActivity {
      */
     public void startBTConnection(BluetoothDevice device, UUID uuid) {
         Log.d(TAG, "startBTConnection: Initializing RFCOM Bluetooth Connection.");
-
-        mBluetoothConnection.startClient(device, uuid);
-        ImageView bluetoothImg = (ImageView) findViewById(R.id.bluetooth_icon);
-        bluetoothImg.setImageResource(R.drawable.bluetooth_on_64);
-        lvNewDevices.setVisibility(View.GONE);
-        lvPairedDevices.setVisibility(View.GONE);
-        btnStartConnection.setVisibility(View.GONE);
-        btnONOFF.setVisibility(View.GONE);
-        btnEnableDisable_Discoverable.setVisibility(View.GONE);
-        available_devices_txt.setVisibility(View.INVISIBLE);
-        paired_devices_txt.setVisibility(View.INVISIBLE);
-        btnDiscover.setVisibility(View.GONE);
-        jumpImg.setVisibility(View.VISIBLE);
-        etSend.setVisibility(View.GONE);
-        btnSend.setVisibility(View.GONE);
-
-        while (!readyToSend) {}
+        try{
+            mBluetoothConnection.startClient(device, uuid);
+            ImageView bluetoothImg = (ImageView) findViewById(R.id.bluetooth_icon);
+            bluetoothImg.setImageResource(R.drawable.bluetooth_on_64);
+            lvNewDevices.setVisibility(View.GONE);
+            lvPairedDevices.setVisibility(View.GONE);
+            btnStartConnection.setVisibility(View.GONE);
+            btnONOFF.setVisibility(View.GONE);
+            btnEnableDisable_Discoverable.setVisibility(View.GONE);
+            available_devices_txt.setVisibility(View.INVISIBLE);
+            paired_devices_txt.setVisibility(View.INVISIBLE);
+            btnDiscover.setVisibility(View.GONE);
+            jumpImg.setVisibility(View.VISIBLE);
+            etSend.setVisibility(View.GONE);
+            btnSend.setVisibility(View.GONE);
+            while (!readyToSend) {
+                Timber.d("IN WHILE LOOP!!!!");
+            }
+        }
+        catch (NullPointerException e){
+            Timber.d("check your damn connection");
+            Toast.makeText(MainActivity.this, "Please check your bluetooth connection", Toast.LENGTH_SHORT).show();
+        }
 
         sendSettingInfo(
                 getIntent().getStringExtra("color0"),
@@ -360,6 +375,7 @@ public class MainActivity extends AppCompatActivity {
                 getIntent().getStringExtra("difficult_level"),
                 getIntent().getStringExtra("control_method")
         );
+
     }
 
 

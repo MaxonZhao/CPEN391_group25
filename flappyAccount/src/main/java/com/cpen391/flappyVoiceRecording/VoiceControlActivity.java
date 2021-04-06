@@ -28,7 +28,7 @@ public class VoiceControlActivity extends AppCompatActivity {
     private static final int GET_RECODE_AUDIO = 1;
     private final String [] permissions = {Manifest.permission.RECORD_AUDIO};
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
-    private double currentDb = 0.0;
+    public double currentDb = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
