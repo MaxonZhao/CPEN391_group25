@@ -3,17 +3,20 @@ package com.cpen391.flappyUI
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
-import androidx.core.content.ContextCompat
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyaccount.R
 import com.cpen391.flappyaccount.databinding.ActivitySingleGameStartBinding
 import com.cpen391.flappyaccount.viewmodel.GameSettingsViewModel
+import com.cpen391.flappybluetooth.activity.BluetoothConnectionService
+import com.cpen391.flappybluetooth.activity.MainActivity
+import timber.log.Timber
 
 class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
 
@@ -36,7 +39,7 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = adapter
         }
-        spinner.onItemSelectedListener = CustomOnItemSelectedListener()
+        spinner.onItemSelectedListener = CustomOnItemSelectedListener(binding.birdImage)
     }
 
     override fun initView() {
@@ -65,7 +68,11 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
             diffLevel.observe(owner, {
                 selectDiffLevel(it)
             })
-            GameSettings.instance?.setGameSettings(birdColor.toString(), diffLevel.toString(), isTapped.toString())
+            GameSettings.instance?.setGameSettings(
+                birdColor.toString(),
+                diffLevel.toString(),
+                isTapped.toString()
+            )
         }
     }
 
@@ -91,29 +98,30 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
     override fun bind(): ActivitySingleGameStartBinding {
         return ActivitySingleGameStartBinding.inflate(layoutInflater)
     }
-}
 
-class CustomOnItemSelectedListener : Activity(), AdapterView.OnItemSelectedListener {
-    private val context: Context = this
-    private var imageView: ImageView? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_single_game_start)
-        imageView = findViewById(R.id.bird_image)
-    }
-    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-//        imageView?.setImageResource(R.drawable.bird_red)
-        when(parent.getItemAtPosition(pos).toString()){
-            "Red" -> imageView?.setImageResource(R.drawable.bird_red)
-            "Black" -> imageView?.setImageResource(R.drawable.bird_red)
-            "Orange" -> imageView?.setImageResource(R.drawable.bird_orange)
-            "Green" -> imageView?.setImageResource(R.drawable.bird_green)
-            "Yellow" -> imageView?.setImageResource(R.drawable.bird_yellow)
-            "Blue" -> imageView?.setImageResource(R.drawable.bird_blue)
+
+
+    class CustomOnItemSelectedListener(private val img: ImageView) : Activity(), AdapterView.OnItemSelectedListener {
+        private val context: Context = this
+
+        override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+
+            when(parent.getItemAtPosition(pos).toString()){
+
+                "Red" -> img?.setImageResource(R.drawable.bird_red)
+                "Black" -> img?.setImageResource(R.drawable.bird_red)
+                "Orange" -> img?.setImageResource(R.drawable.bird_orange)
+                "Green" -> img?.setImageResource(R.drawable.bird_green)
+                "Yellow" -> img?.setImageResource(R.drawable.bird_yellow)
+                "Blue" -> img?.setImageResource(R.drawable.bird_blue)
+            }
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>) {
         }
     }
 
-    override fun onNothingSelected(parent: AdapterView<*>) {
-    }
+
 }
+
 
