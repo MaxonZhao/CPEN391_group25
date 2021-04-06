@@ -13,6 +13,7 @@ import com.cpen391.flappyaccount.R
 class GameSettingsViewModel: BaseViewModel() {
     var isTapped: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     var diffLevel: MutableLiveData<String> = MutableLiveData<String>()
+    var birdColor: MutableLiveData<String> = MutableLiveData<String>()
 
     fun onRadioButtonClicked(view: View) {
         if (view is RadioGroup) {
@@ -27,6 +28,21 @@ class GameSettingsViewModel: BaseViewModel() {
         }
     }
 
+    fun onColorRadioButtonClicked(view: View) {
+        if (view is Spinner) {
+            val color_button_name = view.selectedItem
+            when (color_button_name) {
+                "Red" -> birdColor.value = "re"
+                "Black" -> birdColor.value = "bk"
+                "Orange" -> birdColor.value = "or"
+                "Green" -> birdColor.value = "gr"
+                "Yellow" -> birdColor.value = "ye"
+                "Blue" -> birdColor.value = "bu"
+            }
+        }
+    }
+
+
     fun onDiffLevelRadioButtonClicked(view: View) {
         if (view is RadioGroup) {
             // Is the button now checked?
@@ -39,16 +55,5 @@ class GameSettingsViewModel: BaseViewModel() {
                 R.id.hard_mode -> diffLevel.value = "h"
             }
         }
-    }
-}
-
-class SpinnerActivity : Activity(), AdapterView.OnItemSelectedListener {
-
-    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-        val bird_color = parent.getItemAtPosition(pos)
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>) {
-        // Another interface callback
     }
 }

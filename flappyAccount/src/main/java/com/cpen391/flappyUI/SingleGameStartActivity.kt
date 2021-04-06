@@ -36,7 +36,6 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = adapter
         }
-        birdColor = colorBit(spinner.selectedItem.toString())
         spinner.onItemSelectedListener = CustomOnItemSelectedListener()
     }
 
@@ -45,6 +44,7 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
         binding.apply {
             startYes.setOnClickListener {
                 gameSettingaViewModel.onRadioButtonClicked(findViewById(R.id.radio_btn))
+                gameSettingaViewModel.onColorRadioButtonClicked(findViewById(R.id.select_bird_color))
                 gameSettingaViewModel.onDiffLevelRadioButtonClicked(findViewById(R.id.diff_level_radio_btn))
             }
             profileIcon.setOnClickListener{
@@ -59,39 +59,33 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
             isTapped.observe(owner, {
                 tappingOrVoice(it)
             })
-            diffLevel.observe(owner, {
-                diffLevelData(it)
+            birdColor.observe(owner, {
+                selectBirdColor(it)
             })
+            diffLevel.observe(owner, {
+                selectDiffLevel(it)
+            })
+            GameSettings.instance?.setGameSettings(birdColor.toString(), diffLevel.toString(), isTapped.toString())
         }
     }
 
     private fun tappingOrVoice(isTapped: Boolean){
+        System.out.println(isTapped)
+        GameSettings.instance?.setControlMethod(isTapped)
         when(isTapped){
             true -> startActivity(Intent(context, EndGamePointActivity::class.java))
             false -> startActivity(Intent(context, EndGamePointActivity::class.java))
         }
     }
 
-    fun colorBit(color: String): String {
-        val color_button_name = color
-        var colorBit: String = "ye"
-        when (color_button_name) {
-            "Red" -> colorBit = "re"
-            "Black" -> colorBit = "bk"
-            "Orange" -> colorBit = "or"
-            "Green" -> colorBit = "gr"
-            "Yellow" -> colorBit = "ye"
-            "Blue" -> colorBit = "bu"
-        }
-        return colorBit
+    private fun selectBirdColor(color: String){
+        System.out.println(color)
+        GameSettings.instance?.setBirdColor(color)
     }
 
-    private fun diffLevelData(diffLevel: String){
-        when(diffLevel){
-//            "e"-> startActivity(Intent(context, EndGamePointActivity::class.java))
-//            "m"-> startActivity(Intent(context, EndGamePointActivity::class.java))
-//            "h"-> startActivity(Intent(context, EndGamePointActivity::class.java))
-        }
+    private fun selectDiffLevel(diffLevel: String){
+        System.out.println(diffLevel)
+        GameSettings.instance?.setDiffLevel(diffLevel)
     }
 
     override fun bind(): ActivitySingleGameStartBinding {
