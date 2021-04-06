@@ -112,7 +112,7 @@ class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
                 }
             }
             btnShare.setOnClickListener {
-                val dst = File(dstString, "userScoreData")
+                val dst = File(dstString, "userScoreData.csv")
                 val emailAddress = LoggedInUser.instance?.getUser()?.email.toString()
                 sendEmail(dst, currentActivity, emailAddress, "userScoreData")
             }
@@ -126,7 +126,6 @@ class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
         currentScore: Long,
         top3Score: List<Long>
     ){
-        bw.newLine()
         bw.write("userName")
         bw.write(",")
         bw.write(userName)
@@ -183,7 +182,7 @@ class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
         emailIntent.putExtra(Intent.EXTRA_TEXT, message)
         emailIntent.putExtra(
             Intent.EXTRA_STREAM, FileProvider.getUriForFile(
-                this, BuildConfig.LIBRARY_PACKAGE_NAME + ".provider",
+                this, "com.cpen391.flappyUI" + ".provider",
                 fileToSend
             )
         )

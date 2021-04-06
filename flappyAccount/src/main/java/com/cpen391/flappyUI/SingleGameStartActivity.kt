@@ -110,7 +110,7 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
             when(parent.getItemAtPosition(pos).toString()){
 
                 "Red" -> img?.setImageResource(R.drawable.bird_red)
-                "Black" -> img?.setImageResource(R.drawable.bird_red)
+                "Black" -> img?.setImageResource(R.drawable.bird_black)
                 "Orange" -> img?.setImageResource(R.drawable.bird_orange)
                 "Green" -> img?.setImageResource(R.drawable.bird_green)
                 "Yellow" -> img?.setImageResource(R.drawable.bird_yellow)

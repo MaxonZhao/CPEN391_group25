@@ -16,8 +16,9 @@
         android:layout_height="120dp"
         android:layout_gravity="center"
         android:src="@drawable/bird_yellow" />
-    <Button
+    <TextView
         android:id="@+id/btn_share"
+        android:clickable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
