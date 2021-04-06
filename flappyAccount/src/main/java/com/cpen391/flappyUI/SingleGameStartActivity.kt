@@ -83,14 +83,16 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
                 GameSettings.instance?.getBirdColor()?.substring(0,1),
                 GameSettings.instance?.getBirdColor()?.substring(1,2),
                 GameSettings.instance?.getDiffLevel(),
-                loginMode
+                loginMode,
+                true
             )
             false -> actionStart(
                 context,
                 GameSettings.instance?.getBirdColor()?.substring(0,1),
                 GameSettings.instance?.getBirdColor()?.substring(1,2),
                 GameSettings.instance?.getDiffLevel(),
-                loginMode
+                loginMode,
+                false
             )
         }
     }
