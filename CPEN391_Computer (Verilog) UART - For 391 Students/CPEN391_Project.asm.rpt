@@ -1,5 +1,5 @@
 Assembler report for CPEN391_Project
-Wed Mar 31 21:37:14 2021
+Tue Apr 06 23:11:34 2021
 Quartus II 64-Bit Version 15.0.0 Build 145 04/22/2015 SJ Web Edition
 
 
@@ -39,7 +39,7 @@ agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Wed Mar 31 21:37:14 2021 ;
+; Assembler Status      ; Successful - Tue Apr 06 23:11:34 2021 ;
 ; Revision Name         ; CPEN391_Project                       ;
 ; Top-level Entity Name ; MyComputer_Verilog                    ;
 ; Family                ; Cyclone V                             ;
@@ -79,8 +79,8 @@ agreement for further details.
 ; Option         ; Setting                                                                                                                 ;
 +----------------+-------------------------------------------------------------------------------------------------------------------------+
 ; Device         ; 5CSEMA5F31C6                                                                                                            ;
-; JTAG usercode  ; 0x047B20A9                                                                                                              ;
-; Checksum       ; 0x047B20A9                                                                                                              ;
+; JTAG usercode  ; 0x047CE81C                                                                                                              ;
+; Checksum       ; 0x047CE81C                                                                                                              ;
 +----------------+-------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -90,14 +90,14 @@ agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Assembler
     Info: Version 15.0.0 Build 145 04/22/2015 SJ Web Edition
-    Info: Processing started: Wed Mar 31 21:36:40 2021
+    Info: Processing started: Tue Apr 06 23:11:04 2021
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off CPEN391_Project -c CPEN391_Project
 Info (115030): Assembler is generating device programming files
 Info (11878): Hard Processor Subsystem configuration has not changed and a Preloader software update is not required
 Info: Quartus II 64-Bit Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 5082 megabytes
-    Info: Processing ended: Wed Mar 31 21:37:15 2021
-    Info: Elapsed time: 00:00:35
-    Info: Total CPU time (on all processors): 00:00:29
+    Info: Peak virtual memory: 5084 megabytes
+    Info: Processing ended: Tue Apr 06 23:11:35 2021
+    Info: Elapsed time: 00:00:31
+    Info: Total CPU time (on all processors): 00:00:28
 
 
