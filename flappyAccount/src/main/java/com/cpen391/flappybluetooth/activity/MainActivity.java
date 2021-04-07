@@ -22,9 +22,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import com.cpen391.flappyUI.GameSettings;
+import com.cpen391.flappyUI.LoggedInUser;
 import com.cpen391.flappyUI.TappingActivity;
 import com.cpen391.flappyVoiceRecording.VoiceControlActivity;
 import com.cpen391.flappyaccount.R;
+import com.cpen391.flappyaccount.model.bean.User;
 import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil;
 
 import java.util.ArrayList;
@@ -304,6 +306,9 @@ public class MainActivity extends AppCompatActivity {
                 Timber.d("You are good to start the game!");
             }
         });
+        if(LoggedInUser.getInstance().isLogin()){
+            BluetoothConnectionUtil.getInstance().sendMessage(MainActivity.this, LoggedInUser.getInstance().getUser().getUserName());
+        }
     }
 
     private void populatePairedDevices() {
