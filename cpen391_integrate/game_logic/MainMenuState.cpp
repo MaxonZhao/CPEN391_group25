@@ -38,81 +38,82 @@ namespace GameLogic {
 	}
 
 	void MainMenuState::HandleInput() {
+		this->_data->pipe_spawn_frequency = PIPE_SPAWN_FREQUENCY_1;
 
-//			bytes_received = receiveBuffer(buffer, BT_LineStatusReg, BT_ReceiverFifo);
-//
-//			if(bytes_received != 0 && !this->readyToStart){
-//
-//				switch(buffer[0]){
-//					case 'g':
-//						this->_data->PlayInGuestMode = true; //guest mode, no need to upload Score to Database later
-//						break;
-//					case 'p':
-//						this->_data->PlayInGuestMode = false; //played as a login player, need to upload Score to Database later
-//						break;
-//					default:
-//						return;
-//				}
-//
-//				switch(buffer[1]){
-//					case 'e':
-//						difficultyLevel = 0; // easy
-//						break;
-//					case 'm':
-//						difficultyLevel = 1; // medium
-//						break;
-//					case 'h':
-//						difficultyLevel = 2; // hard
-//						break;
-//					default:
-//						return;
-//
-//				}
-//
-//				char inputColor[3];
-//				std::memcpy( inputColor, &buffer[2], 2 );
-//				inputColor[2] = '\0';
-//
-//				if(std::strcmp(inputColor,"bk")==0){
-//					this->_chosenBirdColorIndex = 0;
-//				}else if(std::strcmp(inputColor,"re")==0){
-//					this->_chosenBirdColorIndex = 1;
-//				}else if(std::strcmp(inputColor,"or")==0){
-//					this->_chosenBirdColorIndex = 2;
-//				}else if(std::strcmp(inputColor,"gr")==0){
-//					this->_chosenBirdColorIndex = 3;
-//				}else if(std::strcmp(inputColor,"ye")==0){
-//					this->_chosenBirdColorIndex = 4;
-//				}else if(std::strcmp(inputColor,"bu")==0){
-//					this->_chosenBirdColorIndex = 5;
-//				}else{
-//					return;
-//				}
-//
-//				this->readyToStart = 1;
-//
-//				//send an acknowledgement to the Android App
-//				sendMessage("OK",BT_LineStatusReg, BT_TransmitterFifo);
-//
-//			}else if(bytes_received != 0 && this->readyToStart){
-//
-//				std::memcpy(this->_data->userName, &buffer, 16);
-//				_data->AddState(new GameState(_data));
-//			}
+			bytes_received = receiveBuffer(buffer, BT_LineStatusReg, BT_ReceiverFifo);
+
+			if(bytes_received != 0 && !this->readyToStart){
+
+				switch(buffer[0]){
+					case 'g':
+						this->_data->PlayInGuestMode = true; //guest mode, no need to upload Score to Database later
+						break;
+					case 'p':
+						this->_data->PlayInGuestMode = false; //played as a login player, need to upload Score to Database later
+						break;
+					default:
+						return;
+				}
+
+				switch(buffer[1]){
+					case 'e':
+						difficultyLevel = 0; // easy
+						break;
+					case 'm':
+						difficultyLevel = 1; // medium
+						break;
+					case 'h':
+						difficultyLevel = 2; // hard
+						break;
+					default:
+						return;
+
+				}
+
+				char inputColor[3];
+				std::memcpy( inputColor, &buffer[2], 2 );
+				inputColor[2] = '\0';
+
+				if(std::strcmp(inputColor,"bk")==0){
+					this->_chosenBirdColorIndex = 0;
+				}else if(std::strcmp(inputColor,"re")==0){
+					this->_chosenBirdColorIndex = 1;
+				}else if(std::strcmp(inputColor,"or")==0){
+					this->_chosenBirdColorIndex = 2;
+				}else if(std::strcmp(inputColor,"gr")==0){
+					this->_chosenBirdColorIndex = 3;
+				}else if(std::strcmp(inputColor,"ye")==0){
+					this->_chosenBirdColorIndex = 4;
+				}else if(std::strcmp(inputColor,"bu")==0){
+					this->_chosenBirdColorIndex = 5;
+				}else{
+					return;
+				}
+
+				this->readyToStart = 1;
+
+				//send an acknowledgement to the Android App
+				sendMessage("OK",BT_LineStatusReg, BT_TransmitterFifo);
+
+			}else if(bytes_received != 0 && this->readyToStart){
+
+				std::memcpy(this->_data->userName, &buffer, 16);
+				_data->AddState(new GameState(_data));
+			}
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-			if(*PUSHBUTTONS == 14){
-				// start the game.
-				_data->AddState(new GameState(_data));
-			}else if (*PUSHBUTTONS == 13){
-				// change the color of the bird
-				if(this->_colorChanged + COLORCHANGEDDURATION < clock()){
-					this->_chosenBirdColorIndex++;
-					this->_colorChanged = clock();
-				}
-
-			}
+//			if(*PUSHBUTTONS == 14){
+//				// start the game.
+//				_data->AddState(new GameState(_data));
+//			}else if (*PUSHBUTTONS == 13){
+//				// change the color of the bird
+//				if(this->_colorChanged + COLORCHANGEDDURATION < clock()){
+//					this->_chosenBirdColorIndex++;
+//					this->_colorChanged = clock();
+//				}
+//
+//			}
 
 	}
 

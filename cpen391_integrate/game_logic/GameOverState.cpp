@@ -24,10 +24,18 @@ namespace GameLogic {
 		*(RENDER_BASE + 6) = 0x4F;
 
 		// 2. displaying medal
-		*(RENDER_BASE + 4) = 17;
-		*(RENDER_BASE + 1) = 160;
-		*(RENDER_BASE + 2) = 120;
-		*(RENDER_BASE + 6) = 0x05;
+		if(this->_score < 10){
+			*(RENDER_BASE + 4) = 18;
+			*(RENDER_BASE + 1) = 160;
+			*(RENDER_BASE + 2) = 120;
+			*(RENDER_BASE + 6) = 0x05;
+		}else{
+			*(RENDER_BASE + 4) = 17;
+			*(RENDER_BASE + 1) = 160;
+			*(RENDER_BASE + 2) = 120;
+			*(RENDER_BASE + 6) = 0x05;
+		}
+
 
 		// 3. displaying score
 		this->DrawScore();
@@ -39,17 +47,17 @@ namespace GameLogic {
 		*(RENDER_BASE + 6) = 0x05;
 
 		//send score to the App as a closing signal
-//		char score_s [8] ;
-//		std::snprintf(score_s, 8, "%d", this->_score); // covert score from int to string
-//		sendMessage(score_s,BT_LineStatusReg, BT_TransmitterFifo);
-//
-//		//upload score to the cloud Database
-//		//TODO: replace username "test" with prestored username.
-//		//Only upload if not PlayInGuestMode
-//		int err = uploadScore("test", this->_score);
-//		if (!err){
-//				std::cout<< "Successfully upload score to the cloud Database."<<std::endl;
-//		}
+		char score_s [8] ;
+		std::snprintf(score_s, 8, "%d", this->_score); // covert score from int to string
+		sendMessage(score_s,BT_LineStatusReg, BT_TransmitterFifo);
+
+		//upload score to the cloud Database
+		//TODO: replace username "test" with prestored username.
+		//Only upload if not PlayInGuestMode
+		int err = uploadScore("test", this->_score);
+		if (!err){
+				std::cout<< "Successfully upload score to the cloud Database."<<std::endl;
+		}
 
 
 	}

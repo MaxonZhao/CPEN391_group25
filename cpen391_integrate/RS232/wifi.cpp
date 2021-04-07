@@ -34,6 +34,10 @@ int uploadScore(char* userName, int score){
 	printf("Starting send command to wifi dongle\n");
 
 	//send command to let the wifi dongle run the file containing uploadScore() function
+//	sendMessage("dofile(\"init.lua\")",WIFI_LineStatusReg, WIFI_TransmitterFifo);
+//	RS232_Flush(WIFI_ReceiverFifo, WIFI_LineStatusReg);
+//	for(int i=0;i<7000000;i++){};
+
 	sendMessage("dofile(\"uploadScore.lua\")",WIFI_LineStatusReg, WIFI_TransmitterFifo);
 	RS232_Flush(WIFI_ReceiverFifo, WIFI_LineStatusReg);
 

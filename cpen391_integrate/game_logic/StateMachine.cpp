@@ -24,9 +24,6 @@ namespace GameLogic {
 		this->PlayInGuestMode = true;
 		this->score = 0;
 	}
-	void StateMachine::RemoveState() {
-		this->_isRemoving = true;
-	}
 
 	void StateMachine::ProcessStateChanges() {
 		if (this->_isRemoving && !this->_states.empty()) {

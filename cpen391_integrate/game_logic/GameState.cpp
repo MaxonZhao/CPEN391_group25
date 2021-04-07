@@ -30,17 +30,17 @@ namespace GameLogic {
 	}
 
 	void GameState::HandleInput() {
-////		check if bluetooth's input buffer has data, if yes, let the bird jump
-//		bytes_received = getSignal(buffer, BT_LineStatusReg, BT_ReceiverFifo);
-//
-//		if(bytes_received != 0){
-//			this->_bird->Tap();
-//		}
+//		check if bluetooth's input buffer has data, if yes, let the bird jump
+		bytes_received = getSignal(buffer, BT_LineStatusReg, BT_ReceiverFifo);
+
+		if(bytes_received != 0){
+			this->_bird->Tap();
+		}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-		 if(*PUSHBUTTONS == 14){
-			this->_bird->Tap();
-		 }
+//		 if(*PUSHBUTTONS == 14){
+//			this->_bird->Tap();
+//		 }
 	}
 
 	void GameState::Update(float dt) {
@@ -49,7 +49,7 @@ namespace GameLogic {
 
 			this->_score += this->_pipe->MovePipes(dt);
 
-			if (this->_clock + PIPE_SPAWN_FREQUENCY < clock()) {
+			if (this->_clock + this->_data->pipe_spawn_frequency < clock()) {
 				// generate pipe:
 				this->_pipe->RandomizedPipeOffset();
 				this->_pipe->SpawnPipe();

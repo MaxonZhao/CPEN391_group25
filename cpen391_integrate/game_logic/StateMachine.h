@@ -23,7 +23,6 @@ namespace GameLogic {
 //		~StateMachine(){};
 
 		void AddState(State* newState);
-		void RemoveState();
 
 		void ProcessStateChanges();
 
@@ -36,6 +35,8 @@ namespace GameLogic {
 		// debugging, will delete later:
 		int count_update = 0;
 		int count_draw = 0;
+		int pipe_spawn_frequency = 300;
+
 
 	private:
 		std::stack<State*> _states;
