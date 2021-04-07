@@ -77,6 +77,7 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
         }
         System.out.println(isTapped)
         GameSettings.instance?.setControlMethod(isTapped)
+        val birdColor = GameSettings.instance?.getBirdColor()
         when(isTapped){
             true -> actionStart(
                 context,
@@ -84,7 +85,8 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
                 GameSettings.instance?.getBirdColor()?.substring(1,2),
                 GameSettings.instance?.getDiffLevel(),
                 loginMode,
-                true
+                true,
+                birdColor
             )
             false -> actionStart(
                 context,
@@ -92,7 +94,8 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
                 GameSettings.instance?.getBirdColor()?.substring(1,2),
                 GameSettings.instance?.getDiffLevel(),
                 loginMode,
-                false
+                false,
+                birdColor
             )
         }
     }
