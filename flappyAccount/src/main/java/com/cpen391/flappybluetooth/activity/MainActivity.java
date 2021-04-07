@@ -24,6 +24,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.cpen391.flappybluetooth.R;
+import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -45,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     BluetoothAdapter mBluetoothAdapter;
     Button btnEnableDisable_Discoverable;
 
-    BluetoothConnectionService mBluetoothConnection = null;
 
     Button btnStartConnection;
     Button btnSend;
@@ -58,8 +58,6 @@ public class MainActivity extends AppCompatActivity {
     TextView available_devices_txt;
     TextView paired_devices_txt;
 
-    public volatile static boolean readyToSend = true;
-    public volatile static boolean readyToStart = true;
     public static boolean ended = false;
     private static final UUID MY_UUID_INSECURE =
             UUID.fromString(UUIDs.ANDROIDDEVICEUNIVERSALUUID);
@@ -255,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
         jumpImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendMessage("1");
+                BluetoothConnectionUtil.getInstance().sendMessage(MainActivity.this, "1");
             }
         });
 
@@ -275,15 +273,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                byte[] bytes = etSend.getText().toString().getBytes(Charset.defaultCharset());
-//                if (mBluetoothConnection != null) mBluetoothConnection.write(bytes);
-
-                sendMessage(etSend.getText().toString());
-            }
-        });
         populatePairedDevices();
     }
 
@@ -302,30 +291,31 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // TODO: define parameter list as needed
-    private void sendSettingInfo(String msg1, String msg2, String msg3, String msg4) {
-        if (readyToSend) {
-            byte[] bytes = new byte[4];
-            bytes[0] = msg1.getBytes()[0];
-            bytes[1] = msg2.getBytes()[0];
-            bytes[2] = msg3.getBytes()[0];
-            bytes[3] = msg4.getBytes()[0];
-            if (mBluetoothConnection != null) mBluetoothConnection.write(bytes);
-        } else {
-            Toast.makeText(this, "Gaming station is not set up yet!", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    // TODO: define parameter list as needed
+//    private void sendSettingInfo(String msg1, String msg2, String msg3, String msg4) {
+//        if (BluetoothConnectionUtil.readyToSend) {
+//            byte[] bytes = new byte[4];
+//            bytes[0] = msg1.getBytes()[0];
+//            bytes[1] = msg2.getBytes()[0];
+//            bytes[2] = msg3.getBytes()[0];
+//            bytes[3] = msg4.getBytes()[0];
+//            if (BluetoothConnectionUtil.getInstance().getBluetoothConnection() != null) BluetoothConnectionUtil.getInstance().getBluetoothConnection().write(bytes);
+//        } else {
+//            Toast.makeText(this, "Gaming station is not set up yet!", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
-    private void sendMessage(String message) {
-        if (readyToStart) {
-            byte[] bytes = message.getBytes(Charset.defaultCharset());
-            if (mBluetoothConnection != null) mBluetoothConnection.write(bytes);
-        } else {
-            Toast.makeText(this, "Gaming station did not receive user info yet!", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    private void sendMessage(String message) {
+//        if (BluetoothConnectionUtil.readyToStart) {
+//            byte[] bytes = message.getBytes(Charset.defaultCharset());
+//            if (BluetoothConnectionUtil.getInstance().getBluetoothConnection() != null) BluetoothConnectionUtil.getInstance().getBluetoothConnection().write(bytes);
+//        } else {
+//            Toast.makeText(this, "Gaming station did not receive user info yet!", Toast.LENGTH_SHORT).show();
+//        }
+//    }
+
     //create method for starting connection
-//***remember the conncction will fail and app will crash if you haven't paired first
+    //***remember the connection will fail and app will crash if you haven't paired first
     public void startConnection() {
         startBTConnection(mBTDevice, MY_UUID_INSECURE);
     }
@@ -336,7 +326,11 @@ public class MainActivity extends AppCompatActivity {
     public void startBTConnection(BluetoothDevice device, UUID uuid) {
         Log.d(TAG, "startBTConnection: Initializing RFCOM Bluetooth Connection.");
         try{
-            mBluetoothConnection.startClient(device, uuid);
+            BluetoothConnectionUtil.getInstance().getBluetoothConnection().startClient(device, uuid);
+            // wait until connection is established
+            while (!BluetoothConnectionUtil.readyToSend) {
+                Timber.d("IN WHILE LOOP!!!!");
+            }
             ImageView bluetoothImg = (ImageView) findViewById(R.id.bluetooth_icon);
             bluetoothImg.setImageResource(R.drawable.bluetooth_on_64);
             lvNewDevices.setVisibility(View.GONE);
@@ -350,16 +344,13 @@ public class MainActivity extends AppCompatActivity {
             jumpImg.setVisibility(View.VISIBLE);
             etSend.setVisibility(View.GONE);
             btnSend.setVisibility(View.GONE);
-            while (!readyToSend) {
-                Timber.d("IN WHILE LOOP!!!!");
-            }
         }
         catch (NullPointerException e){
             Timber.d("check your damn connection");
             Toast.makeText(MainActivity.this, "Please check your bluetooth connection", Toast.LENGTH_SHORT).show();
         }
 
-        sendSettingInfo(
+        BluetoothConnectionUtil.getInstance().sendSettingInfo( MainActivity.this,
                 getIntent().getStringExtra("color0"),
                 getIntent().getStringExtra("color1"),
                 getIntent().getStringExtra("difficult_level"),
@@ -474,7 +465,7 @@ public class MainActivity extends AppCompatActivity {
                 Timber.d("------------------------" + mBTDevices.get(i).createBond());
 
                 mBTDevice = mBTDevices.get(i);
-                mBluetoothConnection = new BluetoothConnectionService(MainActivity.this);
+                BluetoothConnectionUtil.getInstance().setBluetoothConnection(new BluetoothConnectionService(MainActivity.this));
             }
         }
     };
@@ -507,7 +498,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "LINE 406::: " + String.valueOf(mBTDevice.getBondState()));
                 if (mBTDevice.getBondState() == 12)
                     Toast.makeText(MainActivity.this, "Connected with " + deviceName, Toast.LENGTH_SHORT).show();
-                mBluetoothConnection = new BluetoothConnectionService(MainActivity.this);
+                BluetoothConnectionUtil.getInstance().setBluetoothConnection(new BluetoothConnectionService(MainActivity.this));
             }
         }
     };

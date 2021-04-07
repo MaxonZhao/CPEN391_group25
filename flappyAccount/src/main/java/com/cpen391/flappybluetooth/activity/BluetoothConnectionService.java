@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.lifecycle.MutableLiveData;
 
 import com.cpen391.flappyUI.EndGamePointActivity;
+import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -139,7 +140,7 @@ public class BluetoothConnectionService {
                 mmSocket.connect();
 
                 Log.d(TAG, "run: ConnectThread connected.");
-//                Toast.makeText(mContext, "create connection successfully!", Toast.LENGTH_LONG).show();
+
             } catch (IOException e) {
                 // Close the socket
                 e.printStackTrace();
@@ -150,11 +151,9 @@ public class BluetoothConnectionService {
                     Log.e(TAG, "mConnectThread: run: Unable to close connection in socket " + e1.getMessage());
                 }
                 Log.d(TAG, "run: ConnectThread: Could not connect to UUID: " + MY_UUID_INSECURE );
-//                Toast.makeText(mContext, "create connection failed!", Toast.LENGTH_LONG).show();
 
             }
 
-            //will talk about this in the 3rd video
             connected(mmSocket,mmDevice);
         }
 
@@ -258,19 +257,19 @@ public class BluetoothConnectionService {
                     Log.d(TAG, "InputStream: " + incomingMessage);
 
                     // TODO: check with Zoey's handshaking process doc
-                    if (incomingMessage.equals("hello")) MainActivity.readyToSend = true;
-                    if (incomingMessage.equals("OK")) MainActivity.readyToStart = true;
+                    if (incomingMessage.equals("hello")) BluetoothConnectionUtil.readyToSend = true;
+                    if (incomingMessage.equals("OK")) BluetoothConnectionUtil.readyToStart = true;
                     try{
                         int score = Integer.parseInt(incomingMessage);
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                if (incomingMessage != null)
+                                if (incomingMessage != null) {
                                     Timber.d("GAME END: your score is " + incomingMessage);
-                                // TODO: direct to the ending activity
-                                Intent intent = new Intent (mContext, EndGamePointActivity.class);
-                                intent.putExtra("currentScore", incomingMessage);
-                                mContext.startActivity(intent);
+                                    Intent intent = new Intent(mContext, EndGamePointActivity.class);
+                                    intent.putExtra("currentScore", incomingMessage);
+                                    mContext.startActivity(intent);
+                                }
                             }
                         });
                     } catch (Exception e) {}
