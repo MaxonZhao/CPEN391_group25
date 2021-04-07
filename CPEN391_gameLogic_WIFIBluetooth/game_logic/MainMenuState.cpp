@@ -48,12 +48,15 @@ namespace GameLogic {
 	}
 
 	void MainMenuState::HandleInput() {
+			//send a hello message to the App to indicate de1 is ready for receiving game setting message
+			sendMessage("hello",BT_LineStatusReg, BT_TransmitterFifo);
 
 			bytes_received = receiveBuffer(buffer, BT_LineStatusReg, BT_ReceiverFifo);
 
 			if(bytes_received != 0 && !this->readyToStart){
+				std::cout<<buffer<<std::endl;
 
-				switch(buffer[0]){
+				switch(buffer[3]){
 					case 'g':
 						this->_data->PlayInGuestMode = true; //guest mode, no need to upload Score to Database later
 						break;
@@ -64,7 +67,7 @@ namespace GameLogic {
 						return;
 				}
 
-				switch(buffer[1]){
+				switch(buffer[2]){
 					case 'e':
 						this->_data->pipe_spawn_frequency = 400;
 						break;
@@ -80,7 +83,7 @@ namespace GameLogic {
 				}
 
 				char inputColor[3];
-				std::memcpy( inputColor, &buffer[2], 2 );
+				std::memcpy( inputColor, &buffer[0], 2 );
 				inputColor[2] = '\0';
 
 

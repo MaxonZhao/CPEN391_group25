@@ -54,6 +54,7 @@ namespace GameLogic {
 		//upload score to the cloud Database
 		//TODO: replace username "test" with prestored username.
 		//Only upload if not PlayInGuestMode
+		if(this->_data->PlayInGuestMode) return;
 		int err = uploadScore(this->_data->userName, this->_score);
 		if (!err){
 				std::cout<< "Successfully upload score to the cloud Database."<<std::endl;
