@@ -14,9 +14,9 @@ public class BluetoothConnectionUtil
 {
     // private instance, so that it can be
     // accessed by only by getInstance() method
-    public volatile static boolean readyToSend = true;
-    public volatile static boolean readyToStart = true;
-    public volatile static boolean ended = true;
+    public volatile static boolean readyToSend = false;
+    public volatile static boolean readyToStart = false;
+    public volatile static boolean ended = false;
     public static int current_score = 0;
     private BluetoothConnectionService mBluetoothConnection = null;
     private static BluetoothConnectionUtil instance;
@@ -77,5 +77,11 @@ public class BluetoothConnectionUtil
         return instance;
     }
 
+    public void resetFlags() {
+        readyToSend = false;
+        readyToStart = false;
+        ended = false;
+
+    }
 
 }

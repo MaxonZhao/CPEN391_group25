@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static boolean ended = false;
     private static final UUID MY_UUID_INSECURE =
-            UUID.fromString(UUIDs.ANDROIDDEVICEUNIVERSALUUID);
+            UUID.fromString(UUIDs.HC05UNIVERSALUUID);
 
     BluetoothDevice mBTDevice;
 

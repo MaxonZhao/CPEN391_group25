@@ -30,7 +30,7 @@ public class BluetoothConnectionService {
 
     private static final String appName = "BluetoothConnection";
 
-    private static final UUID MY_UUID_INSECURE = UUID.fromString(UUIDs.ANDROIDDEVICEUNIVERSALUUID);
+    private static final UUID MY_UUID_INSECURE = UUID.fromString(UUIDs.HC05UNIVERSALUUID);
 
 
     private final BluetoothAdapter mBluetoothAdapter;
