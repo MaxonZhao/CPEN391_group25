@@ -6,8 +6,10 @@
 --connect to Access Point 
 wifi.setmode(wifi.STATION)
 station_cfg={}
-station_cfg.ssid="TELUS5905"
-station_cfg.pwd="7xtjr8njb3"
+--station_cfg.ssid="TELUS5905"
+--station_cfg.pwd="7xtjr8njb3"
+station_cfg.ssid="SHAW-FDDD90"
+station_cfg.pwd="25115B046334"
 station_cfg.save=true --set to true means save config to flash
 wifi.sta.config(station_cfg)
 wifi.sta.autoconnect(1)
