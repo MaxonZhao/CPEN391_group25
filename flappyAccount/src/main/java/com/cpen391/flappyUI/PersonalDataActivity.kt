@@ -11,7 +11,6 @@ import androidx.appcompat.app.ActionBar
 import androidx.core.content.FileProvider
 import com.cpen391.appbase.network.SimpleObserver
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
-import com.cpen391.flappyaccount.ActivityHolder
 import com.cpen391.flappyaccount.Injection
 import com.cpen391.flappyaccount.R
 import com.cpen391.flappyaccount.databinding.ActivityPersonalDataBinding
@@ -32,7 +31,6 @@ class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
         super.onCreate(savedInstanceState)
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
-        ActivityHolder.addActivity(this)
 
         lateinit var user: User
 

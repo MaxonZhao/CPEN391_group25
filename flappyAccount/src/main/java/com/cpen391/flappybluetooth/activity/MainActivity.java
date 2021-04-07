@@ -1,23 +1,19 @@
 package com.cpen391.flappybluetooth.activity;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,11 +24,9 @@ import androidx.lifecycle.Observer;
 import com.cpen391.flappyUI.GameSettings;
 import com.cpen391.flappyUI.TappingActivity;
 import com.cpen391.flappyVoiceRecording.VoiceControlActivity;
-import com.cpen391.flappyaccount.ActivityHolder;
 import com.cpen391.flappyaccount.R;
 import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
@@ -223,7 +217,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getSupportActionBar().hide();
-        ActivityHolder.addActivity(this);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         control_type = getIntent().getBooleanExtra("control_method", true);
 
@@ -292,11 +285,8 @@ public class MainActivity extends AppCompatActivity {
                         getIntent().getStringExtra("difficult_level"),
                         getIntent().getStringExtra("login_mode")
                 );
-            }
-        });
-        BluetoothConnectionService.getReadyToStart.observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
+
+
                 if(getIntent().getBooleanExtra("control_mode", true)){
                     Intent tapping = new Intent(getApplicationContext(), TappingActivity.class);
                     tapping.putExtra("bird_color", GameSettings.getInstance().getBirdColor());
@@ -306,6 +296,12 @@ public class MainActivity extends AppCompatActivity {
                     Intent record = new Intent(getApplicationContext(), VoiceControlActivity.class);
                     startActivity(record);
                 }
+            }
+        });
+        BluetoothConnectionService.getReadyToStart.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Timber.d("You are good to start the game!");
             }
         });
     }

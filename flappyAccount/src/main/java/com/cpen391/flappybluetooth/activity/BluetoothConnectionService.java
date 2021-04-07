@@ -76,7 +76,7 @@ public class BluetoothConnectionService {
 
             BluetoothSocket socket = null;
 
-            try{
+            try {
                 // This is a blocking call and will only return on a
                 // successful connection or an exception
                 Log.d(TAG, "run: RFCOM server socket start.....");
@@ -85,13 +85,13 @@ public class BluetoothConnectionService {
 
                 Log.d(TAG, "run: RFCOM server socket accepted connection.");
 
-            }catch (IOException e){
-                Log.e(TAG, "AcceptThread: IOException: " + e.getMessage() );
+            } catch (IOException e) {
+                Log.e(TAG, "AcceptThread: IOException: " + e.getMessage());
             }
 
             //talk about this is in the 3rd
-            if(socket != null){
-                connected(socket,mmDevice);
+            if (socket != null) {
+                connected(socket, mmDevice);
             }
 
             Log.i(TAG, "END mAcceptThread ");
@@ -124,7 +124,7 @@ public class BluetoothConnectionService {
             // given BluetoothDevice
             try {
                 Log.d(TAG, "ConnectThread: Trying to create InsecureRfcommSocket using UUID: "
-                        +MY_UUID_INSECURE );
+                        + MY_UUID_INSECURE);
                 tmp = mmDevice.createRfcommSocketToServiceRecord(deviceUUID);
             } catch (IOException e) {
                 Log.e(TAG, "ConnectThread: Could not create InsecureRfcommSocket " + e.getMessage());
@@ -154,11 +154,11 @@ public class BluetoothConnectionService {
                 } catch (IOException e1) {
                     Log.e(TAG, "mConnectThread: run: Unable to close connection in socket " + e1.getMessage());
                 }
-                Log.d(TAG, "run: ConnectThread: Could not connect to UUID: " + MY_UUID_INSECURE );
+                Log.d(TAG, "run: ConnectThread: Could not connect to UUID: " + MY_UUID_INSECURE);
 
             }
 
-            connected(mmSocket,mmDevice);
+            connected(mmSocket, mmDevice);
         }
 
         public void cancel() {
@@ -170,7 +170,6 @@ public class BluetoothConnectionService {
             }
         }
     }
-
 
 
     /**
@@ -193,17 +192,16 @@ public class BluetoothConnectionService {
 
 
     /**
-
-     AcceptThread starts and sits waiting for a connection.
-     Then ConnectThread starts and attempts to make a connection with the other devices AcceptThread.
+     * AcceptThread starts and sits waiting for a connection.
+     * Then ConnectThread starts and attempts to make a connection with the other devices AcceptThread.
      **/
 
-    public void startClient(BluetoothDevice device,UUID uuid){
+    public void startClient(BluetoothDevice device, UUID uuid) {
         Log.d(TAG, "startClient: Started.");
 
         //initprogress dialog
-        mProgressDialog = ProgressDialog.show(mContext,"Connecting Bluetooth"
-                ,"Please Wait...",true);
+        mProgressDialog = ProgressDialog.show(mContext, "Connecting Bluetooth"
+                , "Please Wait...", true);
 
         mConnectThread = new ConnectThread(device, uuid);
         mConnectThread.start();
@@ -211,8 +209,8 @@ public class BluetoothConnectionService {
 
 
     /**
-     Finally the ConnectedThread which is responsible for maintaining the BTConnection, Sending the data, and
-     receiving incoming data through input/output streams respectively.
+     * Finally the ConnectedThread which is responsible for maintaining the BTConnection, Sending the data, and
+     * receiving incoming data through input/output streams respectively.
      **/
     private class ConnectedThread extends Thread {
         private final BluetoothSocket mmSocket;
@@ -227,10 +225,10 @@ public class BluetoothConnectionService {
             OutputStream tmpOut = null;
 
             //dismiss the progressdialog when connection is established
-            try{
+            try {
                 mProgressDialog.dismiss();
 //                Toast.makeText(mContext, "connection established!", Toast.LENGTH_SHORT).show();
-            }catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 e.printStackTrace();
             }
 
@@ -246,7 +244,7 @@ public class BluetoothConnectionService {
             mmOutStream = tmpOut;
         }
 
-        public void run(){
+        public void run() {
             byte[] buffer = new byte[1024];  // buffer store for the stream
 
             int bytes; // bytes returned from read()
@@ -259,34 +257,28 @@ public class BluetoothConnectionService {
                     bytes = mmInStream.read(buffer);
                     String incomingMessage = new String(buffer, 0, bytes);
 
-                    if (incomingMessage.endsWith("\r\n")) {
+                    if (incomingMessage.contains("hello"))
+                        readyToSend.postValue(true);
+                    if (incomingMessage.contains("OK"))
+                        getReadyToStart.postValue(true);
 
-                        String msg = sb.toString();
-                        if (msg.equals("hello"))
-                            readyToSend.postValue(true);
-                        if (msg.equals("OK"))
-                            getReadyToStart.postValue(true);
-
-                        try{
-                            int score = Integer.parseInt(msg);
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (msg != null) {
-                                        Timber.d("GAME END: your score is " + msg);
-                                        ended.postValue(score);
-                                    }
+                    try {
+                        int score = Integer.parseInt(incomingMessage);
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (incomingMessage != null) {
+                                    Timber.d("GAME END: your score is " + incomingMessage);
+                                    ended.postValue(score);
                                 }
-                            });
-                        } catch (Exception e) {}
+                            }
+                        });
+                    } catch (Exception e) { }
 
-                        Log.d(TAG, "InputStream: " + incomingMessage);
-                    } else {
-                        sb.append(incomingMessage);
-                    }
+                    Log.d(TAG, "InputStream: " + incomingMessage);
 
                 } catch (IOException e) {
-                    Log.e(TAG, "write: Error reading Input Stream. " + e.getMessage() );
+                    Log.e(TAG, "write: Error reading Input Stream. " + e.getMessage());
                     break;
                 }
             }
@@ -301,7 +293,7 @@ public class BluetoothConnectionService {
                 Toast.makeText(mContext, "Jump!", Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "write: mmOutStream is " + mmOutStream.toString() + ", wrote: " + bytes);
             } catch (IOException e) {
-                Log.e(TAG, "write: Error writing to output stream. " + e.getMessage() );
+                Log.e(TAG, "write: Error writing to output stream. " + e.getMessage());
             }
         }
 
@@ -309,7 +301,8 @@ public class BluetoothConnectionService {
         public void cancel() {
             try {
                 mmSocket.close();
-            } catch (IOException e) { }
+            } catch (IOException e) {
+            }
         }
     }
 

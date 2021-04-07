@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
-import com.cpen391.flappyaccount.ActivityHolder
 import com.cpen391.flappyaccount.R
 import com.cpen391.flappyaccount.databinding.ActivityTappingBinding
 import com.cpen391.flappybluetooth.activity.BluetoothConnectionService
@@ -18,7 +17,6 @@ class TappingActivity : MvvmActivity<ActivityTappingBinding>() {
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
         ActivityHolder.addActivity(this)
-
         binding.btnsPress.setOnClickListener {
             BluetoothConnectionUtil.getInstance().sendMessage(context, "1")
             Timber.d("++++++++++++")
