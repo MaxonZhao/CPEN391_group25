@@ -35,6 +35,16 @@ namespace GameLogic {
 
 		//send a hello message to the App to indicate de1 is ready for receiving game setting message
 		sendMessage("hello",BT_LineStatusReg, BT_TransmitterFifo);
+
+		// 1. draw the background
+		*(RENDER_BASE + 4) = 0x5F;
+		*(RENDER_BASE + 6) = 0x4F;
+
+		// 2. draw the "flappy bird" text
+		*(RENDER_BASE + 4) = 19;
+		*(RENDER_BASE + 1) = 160;
+		*(RENDER_BASE + 2) = 60;
+		*(RENDER_BASE + 6) = 0x05;
 	}
 
 	void MainMenuState::HandleInput() {
@@ -126,17 +136,15 @@ namespace GameLogic {
 	void MainMenuState::Draw() {
 		// TODO:
 		// 1. draw the background
-		*(RENDER_BASE + 4) = 0x5F;
+		*(RENDER_BASE + 8) = 0x1F;
+		*(RENDER_BASE + 4) = 21;
+		*(RENDER_BASE + 1) = 160;
+		*(RENDER_BASE + 2) = 120;
 		*(RENDER_BASE + 6) = 0x4F;
 
 
-		// 2. draw the "flappy bird" text
-		*(RENDER_BASE + 4) = 19;
-		*(RENDER_BASE + 1) = 160;
-		*(RENDER_BASE + 2) = 60;
-		*(RENDER_BASE + 6) = 0x05;
 
-		// 3. draw the bird texture:
+		// 2. draw the bird texture:
 		int a = (this->_animationIterator++) % 4 + 1;
 		int b = this->_birdColors[this->_chosenBirdColorIndex % 6];
 		*(RENDER_BASE + 4) = a;
