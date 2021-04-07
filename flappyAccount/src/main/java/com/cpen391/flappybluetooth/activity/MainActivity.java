@@ -28,6 +28,7 @@ import androidx.lifecycle.Observer;
 import com.cpen391.flappyUI.GameSettings;
 import com.cpen391.flappyUI.TappingActivity;
 import com.cpen391.flappyVoiceRecording.VoiceControlActivity;
+import com.cpen391.flappyaccount.ActivityHolder;
 import com.cpen391.flappyaccount.R;
 import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil;
 
@@ -184,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                 //case1: bonded already
                 if (mDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
                     Log.d(TAG, "BroadcastReceiver: BOND_BONDED.");
-                    Toast.makeText(getApplicationContext(), "connected with " + mDevice.getName(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "paired with " + mDevice.getName(), Toast.LENGTH_LONG).show();
 
                     //inside BroadcastReceiver4
                     mBTDevice = mDevice;
@@ -222,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getSupportActionBar().hide();
+        ActivityHolder.addActivity(this);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         control_type = getIntent().getBooleanExtra("control_method", true);
 
@@ -290,7 +292,11 @@ public class MainActivity extends AppCompatActivity {
                         getIntent().getStringExtra("difficult_level"),
                         getIntent().getStringExtra("login_mode")
                 );
-
+            }
+        });
+        BluetoothConnectionService.getReadyToStart.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
                 if(getIntent().getBooleanExtra("control_mode", true)){
                     Intent tapping = new Intent(getApplicationContext(), TappingActivity.class);
                     tapping.putExtra("bird_color", GameSettings.getInstance().getBirdColor());
@@ -302,8 +308,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     private void populatePairedDevices() {
@@ -507,7 +511,7 @@ public class MainActivity extends AppCompatActivity {
                 mBTDevice = mPairedBTDevices.get(i);
                 Log.d(TAG, "LINE 406::: " + String.valueOf(mBTDevice.getBondState()));
                 if (mBTDevice.getBondState() == 12)
-                    Toast.makeText(MainActivity.this, "Connected with " + deviceName, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "paired with " + deviceName, Toast.LENGTH_SHORT).show();
                 BluetoothConnectionUtil.getInstance().setBluetoothConnection(new BluetoothConnectionService(MainActivity.this));
             }
         }

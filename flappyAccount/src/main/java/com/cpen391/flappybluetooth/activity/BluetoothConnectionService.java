@@ -251,30 +251,40 @@ public class BluetoothConnectionService {
 
             int bytes; // bytes returned from read()
             Handler handler = new Handler(Looper.getMainLooper());
-
+            StringBuilder sb = new StringBuilder();
             // Keep listening to the InputStream until an exception occurs
             while (true) {
                 // Read from the InputStream
                 try {
                     bytes = mmInStream.read(buffer);
                     String incomingMessage = new String(buffer, 0, bytes);
-                    Log.d(TAG, "InputStream: " + incomingMessage);
 
-                    // TODO: check with Zoey's handshaking process doc
-                    if (incomingMessage.equals("hello")) readyToSend.postValue(true);
-                    if (incomingMessage.equals("OK")) getReadyToStart.postValue(true);
-                    try{
-                        int score = Integer.parseInt(incomingMessage);
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (incomingMessage != null) {
-                                    Timber.d("GAME END: your score is " + incomingMessage);
-                                    ended.postValue(score);
+                    if (incomingMessage.endsWith("\r\n")) {
+
+                        String msg = sb.toString();
+                        if (msg.equals("hello"))
+                            readyToSend.postValue(true);
+                        if (msg.equals("OK"))
+                            getReadyToStart.postValue(true);
+
+                        try{
+                            int score = Integer.parseInt(msg);
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (msg != null) {
+                                        Timber.d("GAME END: your score is " + msg);
+                                        ended.postValue(score);
+                                    }
                                 }
-                            }
-                        });
-                    } catch (Exception e) {}
+                            });
+                        } catch (Exception e) {}
+
+                        Log.d(TAG, "InputStream: " + incomingMessage);
+                    } else {
+                        sb.append(incomingMessage);
+                    }
+
                 } catch (IOException e) {
                     Log.e(TAG, "write: Error reading Input Stream. " + e.getMessage() );
                     break;

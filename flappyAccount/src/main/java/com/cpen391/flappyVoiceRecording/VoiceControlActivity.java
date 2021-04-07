@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.Observer;
 
 import com.cpen391.flappyUI.EndGamePointActivity;
+import com.cpen391.flappyaccount.ActivityHolder;
 import com.cpen391.flappyaccount.R;
 import com.cpen391.flappybluetooth.activity.BluetoothConnectionService;
 import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil;
@@ -40,6 +41,7 @@ public class VoiceControlActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voice_control);
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
+        ActivityHolder.addActivity(this);
         mRecorder = new MyMediaRecorder();
         initObserver();
     }
@@ -67,7 +69,7 @@ public class VoiceControlActivity extends AppCompatActivity {
             volume = mRecorder.getMaxAmplitude();
             if (volume > 0 && volume < 1000000) {
                 currentDb = World.setDbCount(20 * (float) (Math.log10(volume)));
-                if (currentDb > 60) {
+                if (currentDb > 70) {
                     BluetoothConnectionUtil.getInstance().sendMessage(context, "1");
                     Timber.d("++++++++++++");
                     Timber.d("1");
