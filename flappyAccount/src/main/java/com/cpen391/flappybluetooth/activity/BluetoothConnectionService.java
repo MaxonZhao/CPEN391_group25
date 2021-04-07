@@ -266,9 +266,8 @@ public class BluetoothConnectionService {
                             public void run() {
                                 if (incomingMessage != null) {
                                     Timber.d("GAME END: your score is " + incomingMessage);
-                                    Intent intent = new Intent(mContext, EndGamePointActivity.class);
-                                    intent.putExtra("currentScore", incomingMessage);
-                                    mContext.startActivity(intent);
+                                    BluetoothConnectionUtil.ended = true;
+                                    BluetoothConnectionUtil.current_score = score;
                                 }
                             }
                         });
@@ -323,7 +322,11 @@ public class BluetoothConnectionService {
         // Synchronize a copy of the ConnectedThread
         Log.d(TAG, "write: Write Called.");
         //perform the write
-        mConnectedThread.write(out);
+        try {
+            mConnectedThread.write(out);
+        } catch (Exception e) {
+            Toast.makeText(mContext, "please check your connection!", Toast.LENGTH_LONG).show();
+        }
     }
 
 }

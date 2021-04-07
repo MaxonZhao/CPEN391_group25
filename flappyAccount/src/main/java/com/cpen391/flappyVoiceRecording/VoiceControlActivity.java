@@ -3,6 +3,7 @@ package com.cpen391.flappyVoiceRecording;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.os.Handler;
@@ -11,7 +12,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.cpen391.flappyUI.EndGamePointActivity;
 import com.cpen391.flappyaccount.R;
+import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil;
 
 import java.io.File;
 
@@ -49,6 +52,17 @@ public class VoiceControlActivity extends AppCompatActivity {
             volume = mRecorder.getMaxAmplitude();
             if(volume > 0 && volume < 1000000) {
                 currentDb = World.setDbCount(20 * (float)(Math.log10(volume)));
+                if(currentDb > 60){
+                    BluetoothConnectionUtil.getInstance().sendMessage(context, "1");
+                    Timber.d("++++++++++++");
+                    Timber.d("1");
+                    Timber.d("++++++++++++");
+                    if(BluetoothConnectionUtil.ended){
+                        Intent endGame = new Intent(context, EndGamePointActivity.class);
+                        endGame.putExtra("game_score", BluetoothConnectionUtil.current_score);
+                        startActivity(endGame);
+                    }
+                }
                 soundDiscView.refresh();
             }
             handler.sendEmptyMessageDelayed(msgWhat, refreshTime);

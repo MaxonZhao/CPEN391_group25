@@ -32,6 +32,7 @@
         <activity android:name="com.cpen391.flappyUI.EndGamePointActivity" />
         <activity android:name="com.cpen391.flappyUI.PersonalDataActivity" />
         <activity android:name="com.cpen391.flappyVoiceRecording.VoiceControlActivity" />
+        <activity android:name="com.cpen391.flappyUI.TappingActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

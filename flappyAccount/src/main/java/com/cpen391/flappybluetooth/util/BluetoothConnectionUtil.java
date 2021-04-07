@@ -16,6 +16,8 @@ public class BluetoothConnectionUtil
     // accessed by only by getInstance() method
     public volatile static boolean readyToSend = true;
     public volatile static boolean readyToStart = true;
+    public volatile static boolean ended = true;
+    public static int current_score = 0;
     private BluetoothConnectionService mBluetoothConnection = null;
     private static BluetoothConnectionUtil instance;
 

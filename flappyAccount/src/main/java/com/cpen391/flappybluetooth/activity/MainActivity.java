@@ -23,8 +23,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cpen391.flappyUI.GameSettings;
+import com.cpen391.flappyUI.TappingActivity;
+import com.cpen391.flappyVoiceRecording.VoiceControlActivity;
 import com.cpen391.flappyaccount.R;
-import com.cpen391.flappybluetooth.R;
 import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil;
 
 import java.nio.charset.Charset;
@@ -55,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnONOFF;
     Button btnDiscover;
-    ImageView jumpImg;
     TextView available_devices_txt;
     TextView paired_devices_txt;
 
@@ -233,42 +234,6 @@ public class MainActivity extends AppCompatActivity {
         btnDiscover = (Button) findViewById(R.id.btnFindUnpairedDevices);
         etSend = (EditText) findViewById(R.id.editText);
 
-
-        jumpImg = (ImageView) findViewById(R.id.btnPress);
-
-        switch(getIntent().getStringExtra("bird_color")){
-            case "re": {
-                jumpImg.setImageResource(R.drawable.bird_red);
-                break;
-            }
-            case "bk": {
-                jumpImg.setImageResource(R.drawable.bird_black);
-                break;
-            }
-            case "or": {
-                jumpImg.setImageResource(R.drawable.bird_orange);
-                break;
-            }
-            case "gr": {
-                jumpImg.setImageResource(R.drawable.bird_green);
-                break;
-            }
-            case "ye": {
-                jumpImg.setImageResource(R.drawable.bird_yellow);
-                break;
-            }
-            case "bu": {
-                jumpImg.setImageResource(R.drawable.bird_blue);
-                break;
-            }
-            default:{
-                jumpImg.setImageResource(R.drawable.bird_red);
-                break;
-            }
-        }
-
-
-
         available_devices_txt = (TextView) findViewById(R.id.available_devices_txt);
         paired_devices_txt = (TextView) findViewById(R.id.paired_devices_txt);
 
@@ -286,14 +251,6 @@ public class MainActivity extends AppCompatActivity {
 
         lvNewDevices.setOnItemClickListener(mNewDevicesClickListener);
         lvPairedDevices.setOnItemClickListener(mPairedDevicesClickListener);
-
-        jumpImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BluetoothConnectionUtil.getInstance().sendMessage(MainActivity.this, "1");
-            }
-        });
-
 
         btnONOFF.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -368,34 +325,29 @@ public class MainActivity extends AppCompatActivity {
             while (!BluetoothConnectionUtil.readyToSend) {
                 Timber.d("IN WHILE LOOP!!!!");
             }
-            ImageView bluetoothImg = (ImageView) findViewById(R.id.bluetooth_icon);
-            bluetoothImg.setImageResource(R.drawable.bluetooth_on_64);
-            lvNewDevices.setVisibility(View.GONE);
-            lvPairedDevices.setVisibility(View.GONE);
-            btnStartConnection.setVisibility(View.GONE);
-            btnONOFF.setVisibility(View.GONE);
-            btnEnableDisable_Discoverable.setVisibility(View.GONE);
-            available_devices_txt.setVisibility(View.INVISIBLE);
-            paired_devices_txt.setVisibility(View.INVISIBLE);
-            btnDiscover.setVisibility(View.GONE);
-            jumpImg.setVisibility(View.VISIBLE);
-            etSend.setVisibility(View.GONE);
-            btnSend.setVisibility(View.GONE);
+
+            BluetoothConnectionUtil.getInstance().sendSettingInfo( MainActivity.this,
+                    getIntent().getStringExtra("color0"),
+                    getIntent().getStringExtra("color1"),
+                    getIntent().getStringExtra("difficult_level"),
+                    getIntent().getStringExtra("login_mode")
+            );
+
+            if(getIntent().getBooleanExtra("control_mode", true)){
+                Intent tapping = new Intent(this, TappingActivity.class);
+                tapping.putExtra("bird_color", GameSettings.getInstance().getBirdColor());
+                startActivity(tapping);
+            }
+            else{
+                Intent record = new Intent(this, VoiceControlActivity.class);
+                startActivity(record);
+            }
+
         }
         catch (NullPointerException e){
             Timber.d("check your damn connection");
             Toast.makeText(MainActivity.this, "Please check your bluetooth connection", Toast.LENGTH_SHORT).show();
         }
-
-        BluetoothConnectionUtil.getInstance().sendSettingInfo( MainActivity.this,
-                getIntent().getStringExtra("color0"),
-                getIntent().getStringExtra("color1"),
-                getIntent().getStringExtra("difficult_level"),
-                getIntent().getStringExtra("login_mode")
-        );
-
-        //TODO: use getIntent().getStringExtra("control_method") in if(){...} else{...}
-
     }
 
 
@@ -539,28 +491,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-
-    public static void buttonEffect(View button){
-        button.setOnTouchListener(new View.OnTouchListener() {
-
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        v.getBackground().setColorFilter(0xe0f47521, PorterDuff.Mode.SRC_ATOP);
-                        v.invalidate();
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP: {
-                        v.getBackground().clearColorFilter();
-                        v.invalidate();
-                        break;
-                    }
-                }
-                return false;
-            }
-        });
-    }
-
 
     // TODO: probably need more user related info in order to send messages, define the parameter list as needed
     public static void actionStart(Context context,
