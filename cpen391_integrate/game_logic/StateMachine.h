@@ -14,13 +14,10 @@
 #include "State.h"
 
 namespace GameLogic {
-	// typedef std::unique_ptr<State> StateRef;
 
 	class StateMachine
 	{
 	public:
-//		StateMachine(){};
-//		~StateMachine(){};
 
 		void AddState(State* newState);
 
@@ -29,22 +26,17 @@ namespace GameLogic {
 		State* GetActiveState();
 
 		char userName[16];
-		bool PlayInGuestMode;
-		int score;
+		bool PlayInGuestMode = true;
+		int score = 0;
 
-		// debugging, will delete later:
-		int count_update = 0;
-		int count_draw = 0;
+
 		int pipe_spawn_frequency = 300;
 
 
 	private:
-		std::stack<State*> _states;
+		State* _states;
 		State* _newState;
-
-		bool _isRemoving;
 		bool _isAdding;
-		bool _isReplacing;
 	};
 }
 

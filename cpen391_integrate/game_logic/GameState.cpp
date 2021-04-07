@@ -45,7 +45,6 @@ namespace GameLogic {
 
 	void GameState::Update(float dt) {
 		if (this->isPlaying) {
-			this->_data->count_update ++;
 
 			this->_score += this->_pipe->MovePipes(dt);
 
@@ -78,7 +77,6 @@ namespace GameLogic {
 	void GameState::Draw() {
 		if(!this->isPlaying) return;
 		// draw the pipe here:
-		this->_data->count_draw++;
 		 this->ReDrawBackground();
 		 _pipe->DrawPipes();
 		 _bird->Draw();
