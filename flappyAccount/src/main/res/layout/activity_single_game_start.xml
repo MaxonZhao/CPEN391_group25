@@ -33,25 +33,29 @@
         android:text="Select control way:"
         android:textSize="20dp" />
 
-    <RadioGroup
-        android:id="@+id/radio_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/voice_control_btn"
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioGroup
+            android:id="@+id/radio_btn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
-            android:text="Voice Control" />
+            android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/tapping_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tapping" />
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/voice_control_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:text="Voice Control" />
+
+            <RadioButton
+                android:id="@+id/tapping_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tapping" />
+        </RadioGroup>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txtView1"

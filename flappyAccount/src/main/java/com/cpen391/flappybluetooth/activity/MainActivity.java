@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cpen391.flappyaccount.R;
 import com.cpen391.flappybluetooth.R;
 import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil;
 
@@ -231,7 +232,43 @@ public class MainActivity extends AppCompatActivity {
         btnSend = (Button) findViewById(R.id.btnSend);
         btnDiscover = (Button) findViewById(R.id.btnFindUnpairedDevices);
         etSend = (EditText) findViewById(R.id.editText);
+
+
         jumpImg = (ImageView) findViewById(R.id.btnPress);
+
+        switch(getIntent().getStringExtra("bird_color")){
+            case "re": {
+                jumpImg.setImageResource(R.drawable.bird_red);
+                break;
+            }
+            case "bk": {
+                jumpImg.setImageResource(R.drawable.bird_black);
+                break;
+            }
+            case "or": {
+                jumpImg.setImageResource(R.drawable.bird_orange);
+                break;
+            }
+            case "gr": {
+                jumpImg.setImageResource(R.drawable.bird_green);
+                break;
+            }
+            case "ye": {
+                jumpImg.setImageResource(R.drawable.bird_yellow);
+                break;
+            }
+            case "bu": {
+                jumpImg.setImageResource(R.drawable.bird_blue);
+                break;
+            }
+            default:{
+                jumpImg.setImageResource(R.drawable.bird_red);
+                break;
+            }
+        }
+
+
+
         available_devices_txt = (TextView) findViewById(R.id.available_devices_txt);
         paired_devices_txt = (TextView) findViewById(R.id.paired_devices_txt);
 
@@ -526,13 +563,20 @@ public class MainActivity extends AppCompatActivity {
 
 
     // TODO: probably need more user related info in order to send messages, define the parameter list as needed
-    public static void actionStart(Context context,  String color0, String color1, String diffLevel, String loginMode, Boolean controlMode) {
+    public static void actionStart(Context context,
+                                   String color0,
+                                   String color1,
+                                   String diffLevel,
+                                   String loginMode,
+                                   Boolean controlMode,
+                                   String birdColor) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra("color0", color0);
         intent.putExtra("color1", color1);
         intent.putExtra("difficult_level", diffLevel);
         intent.putExtra("login_mode", loginMode);
         intent.putExtra("control_mode", controlMode);
+        intent.putExtra("bird_color", birdColor);
         context.startActivity(intent);
     }
 }
