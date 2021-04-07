@@ -1,0 +1,13 @@
+game_logic/GameState.o: ../game_logic/GameState.cpp
+game_logic/GameState.o: ../game_logic/GameState.h
+game_logic/GameState.o: ../game_logic/Game.h
+game_logic/GameState.o: ../game_logic/StateMachine.h
+game_logic/GameState.o: ../game_logic/State.h
+game_logic/GameState.o: ../game_logic/MainMenuState.h
+game_logic/GameState.o: ../game_logic/Game.h
+game_logic/GameState.o: ../game_logic/GameState.h
+game_logic/GameState.o: ../game_logic/DEFINITION.h
+game_logic/GameState.o: ../game_logic/Pipe.h
+game_logic/GameState.o: ../game_logic/Bird.h
+game_logic/GameState.o: ../game_logic/GameOverState.hpp
+game_logic/GameState.o: ../game_logic/../RS232/serial.h

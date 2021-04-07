@@ -1,0 +1,2 @@
+RS232/RS232.o: ../RS232/RS232.cpp
+RS232/RS232.o: ../RS232/serial.h
