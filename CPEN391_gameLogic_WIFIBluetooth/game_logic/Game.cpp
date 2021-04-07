@@ -36,9 +36,6 @@ namespace GameLogic {
 			this->_data->GetActiveState()->Update(frameTime);
 
 
-			///////////////////////////////////////////////////////////////////////////////////////////////////////////
-			this->_data->GetActiveState()->HandleInput();
-
 			this->_data->GetActiveState()->Draw();
 
 		}

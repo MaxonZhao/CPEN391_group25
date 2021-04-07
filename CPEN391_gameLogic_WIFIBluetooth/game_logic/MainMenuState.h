@@ -34,16 +34,16 @@ namespace GameLogic {
 
 		unsigned int _animationIterator;
 
-		int _birdColors[6];
+		//int _birdColors[6];
 
-		unsigned int _chosenBirdColorIndex;
+		//unsigned int _chosenBirdColorIndex;
+
+		int _birdColor = 0x38;
 
 
 
 		int readyToStart;
-		int difficultyLevel;
 		
-
 
 		// using for rfs:
 		int bytes_received;
@@ -51,7 +51,7 @@ namespace GameLogic {
 
 
 		// don't need this clock later:
-		clock_t _colorChanged;
+//		clock_t _colorChanged;
 	};
 
 }

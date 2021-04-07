@@ -20,16 +20,16 @@ namespace GameLogic {
 
 	void MainMenuState::Init() {
 		// There is nothing to be initiated
-		this->_colorChanged = clock();
+//		this->_colorChanged = clock();
 		this->_animationIterator = 0;
-		this->_chosenBirdColorIndex = 0;
+		// this->_chosenBirdColorIndex = 0;
 
-		this->_birdColors[0] = 0; 		//black
-		this->_birdColors[1] = 0x30;	//red
-		this->_birdColors[2] = 0x38;	//orange
-		this->_birdColors[3] = 0xC;		//green
-		this->_birdColors[4] = 0x3C;	//yellow
-		this->_birdColors[5] = 0x3;		//blue
+//		this->_birdColors[0] = 0; 		//black
+//		this->_birdColors[1] = 0x30;	//red
+//		this->_birdColors[2] = 0x38;	//orange
+//		this->_birdColors[3] = 0xC;		//green
+//		this->_birdColors[4] = 0x3C;	//yellow
+//		this->_birdColors[5] = 0x3;		//blue
 
 		this->readyToStart = 0;
 
@@ -66,16 +66,13 @@ namespace GameLogic {
 
 				switch(buffer[1]){
 					case 'e':
-						difficultyLevel = 0; // easy
-						this->_data->pipe_spawn_frequency = 300;
+						this->_data->pipe_spawn_frequency = 400;
 						break;
 					case 'm':
-						difficultyLevel = 1; // medium
-						this->_data->pipe_spawn_frequency = 220;
+						this->_data->pipe_spawn_frequency = 300;
 						break;
 					case 'h':
-						difficultyLevel = 2; // hard
-						this->_data->pipe_spawn_frequency = 150;
+						this->_data->pipe_spawn_frequency = 200;
 						break;
 					default:
 						return;
@@ -86,18 +83,19 @@ namespace GameLogic {
 				std::memcpy( inputColor, &buffer[2], 2 );
 				inputColor[2] = '\0';
 
+
 				if(std::strcmp(inputColor,"bk")==0){
-					this->_chosenBirdColorIndex = 0;
+					this->_birdColor = 0;
 				}else if(std::strcmp(inputColor,"re")==0){
-					this->_chosenBirdColorIndex = 1;
+					this->_birdColor = 0x30;
 				}else if(std::strcmp(inputColor,"or")==0){
-					this->_chosenBirdColorIndex = 2;
+					this->_birdColor = 0x38;
 				}else if(std::strcmp(inputColor,"gr")==0){
-					this->_chosenBirdColorIndex = 3;
+					this->_birdColor = 0xC;
 				}else if(std::strcmp(inputColor,"ye")==0){
-					this->_chosenBirdColorIndex = 4;
+					this->_birdColor = 0x3C;
 				}else if(std::strcmp(inputColor,"bu")==0){
-					this->_chosenBirdColorIndex = 5;
+					this->_birdColor = 0x3;
 				}else{
 					return;
 				}
@@ -146,11 +144,10 @@ namespace GameLogic {
 
 		// 2. draw the bird texture:
 		int a = (this->_animationIterator++) % 4 + 1;
-		int b = this->_birdColors[this->_chosenBirdColorIndex % 6];
 		*(RENDER_BASE + 4) = a;
 		*(RENDER_BASE + 1) = 160;
 		*(RENDER_BASE + 2) = 120;
-		*(RENDER_BASE + 7) = b;
+		*(RENDER_BASE + 7) = this->_birdColor;
 		*(RENDER_BASE + 6) = 0x05;
 	}
 }
