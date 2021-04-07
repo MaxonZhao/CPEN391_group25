@@ -263,7 +263,11 @@ public class BluetoothConnectionService {
                         getReadyToStart.postValue(true);
 
                     try {
-                        int score = Integer.parseInt(incomingMessage);
+                        if(incomingMessage.charAt(0) != 'e' ||
+                                incomingMessage.charAt(1) != 'n' ||
+                                incomingMessage.charAt(2) != 'd')  continue;
+                        int score = incomingMessage.charAt(3);
+
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
