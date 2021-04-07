@@ -45,6 +45,9 @@ namespace GameLogic {
 
 		bool isPlaying;
 
+		//to increase the hardness of game
+		int next_pipe_spawn_frequency;
+
 
 		// used for rfs:
 		int bytes_received;

@@ -30,7 +30,7 @@ namespace GameLogic {
 		int score = 0;
 
 
-		int pipe_spawn_frequency = 300;
+		int pipe_spawn_frequency = 0;
 
 
 	private:

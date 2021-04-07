@@ -35,6 +35,8 @@ namespace GameLogic {
 
 		int _landHeight;
 		int _pipeSpawnYOffset;
+
+		int pipe_spawn_frequency = 0;
 	};
 }
 

@@ -38,7 +38,6 @@ namespace GameLogic {
 	}
 
 	void MainMenuState::HandleInput() {
-		this->_data->pipe_spawn_frequency = PIPE_SPAWN_FREQUENCY_1;
 
 			bytes_received = receiveBuffer(buffer, BT_LineStatusReg, BT_ReceiverFifo);
 
@@ -58,12 +57,15 @@ namespace GameLogic {
 				switch(buffer[1]){
 					case 'e':
 						difficultyLevel = 0; // easy
+						this->_data->pipe_spawn_frequency = 300;
 						break;
 					case 'm':
 						difficultyLevel = 1; // medium
+						this->_data->pipe_spawn_frequency = 220;
 						break;
 					case 'h':
 						difficultyLevel = 2; // hard
+						this->_data->pipe_spawn_frequency = 150;
 						break;
 					default:
 						return;

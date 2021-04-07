@@ -27,6 +27,8 @@ namespace GameLogic {
 		this->_score = 0;
 
 		this->bytes_received = 0;
+
+		this->next_pipe_spawn_frequency = this->_data->pipe_spawn_frequency;
 	}
 
 	void GameState::HandleInput() {
@@ -48,12 +50,14 @@ namespace GameLogic {
 
 			this->_score += this->_pipe->MovePipes(dt);
 
-			if (this->_clock + this->_data->pipe_spawn_frequency < clock()) {
+			if (this->_clock + this->next_pipe_spawn_frequency < clock()) {
 				// generate pipe:
 				this->_pipe->RandomizedPipeOffset();
 				this->_pipe->SpawnPipe();
 
 				this->_clock = clock();
+
+				this->next_pipe_spawn_frequency = this->_data->pipe_spawn_frequency + std::rand()%100 - 50;
 			}
 
 			this->_bird->Update(dt);
