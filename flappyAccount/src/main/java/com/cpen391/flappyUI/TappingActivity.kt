@@ -6,26 +6,24 @@ import androidx.appcompat.app.ActionBar
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyaccount.R
 import com.cpen391.flappyaccount.databinding.ActivityTappingBinding
+import com.cpen391.flappybluetooth.activity.BluetoothConnectionService
 import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil
 import timber.log.Timber
 
-class TappingActivity: MvvmActivity<ActivityTappingBinding>() {
+class TappingActivity : MvvmActivity<ActivityTappingBinding>() {
     val context = this
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
 
-        binding.btnsPress.setOnClickListener{
+        binding.btnsPress.setOnClickListener {
             BluetoothConnectionUtil.getInstance().sendMessage(context, "1")
             Timber.d("++++++++++++")
             Timber.d("1")
             Timber.d("++++++++++++")
-            if (BluetoothConnectionUtil.ended) {
-                val endGame = Intent(context, EndGamePointActivity::class.java)
-                endGame.putExtra("game_score", BluetoothConnectionUtil.current_score)
-                startActivity(endGame)
-            }
+
+
         }
         when (intent.getStringExtra("bird_color")) {
             "re" -> {
@@ -51,7 +49,14 @@ class TappingActivity: MvvmActivity<ActivityTappingBinding>() {
             }
         }
     }
+
     override fun initObserver() {
+
+        BluetoothConnectionService.ended.observe(this) {
+            val endGame = Intent(context, EndGamePointActivity::class.java)
+            endGame.putExtra("game_score", BluetoothConnectionService.ended.value)
+            startActivity(endGame)
+        }
     }
 
     override fun bind(): ActivityTappingBinding {

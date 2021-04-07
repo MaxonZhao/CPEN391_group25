@@ -11,9 +11,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.Observer;
 
 import com.cpen391.flappyUI.EndGamePointActivity;
 import com.cpen391.flappyaccount.R;
+import com.cpen391.flappybluetooth.activity.BluetoothConnectionService;
 import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil;
 
 import java.io.File;
@@ -29,7 +31,7 @@ public class VoiceControlActivity extends AppCompatActivity {
     private static final int refreshTime = 100;
     private final Context context = this;
     private static final int GET_RECODE_AUDIO = 1;
-    private final String [] permissions = {Manifest.permission.RECORD_AUDIO};
+    private final String[] permissions = {Manifest.permission.RECORD_AUDIO};
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
     public double currentDb = 0.0;
 
@@ -39,7 +41,20 @@ public class VoiceControlActivity extends AppCompatActivity {
         setContentView(R.layout.activity_voice_control);
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
         mRecorder = new MyMediaRecorder();
+        initObserver();
     }
+
+    private void initObserver() {
+        BluetoothConnectionService.ended.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                Intent endGame = new Intent(context, EndGamePointActivity.class);
+                endGame.putExtra("game_score", BluetoothConnectionService.ended.getValue());
+                startActivity(endGame);
+            }
+        });
+    }
+
 
     @SuppressLint("HandlerLeak")
     private final Handler handler = new Handler() {
@@ -50,18 +65,13 @@ public class VoiceControlActivity extends AppCompatActivity {
                 return;
             }
             volume = mRecorder.getMaxAmplitude();
-            if(volume > 0 && volume < 1000000) {
-                currentDb = World.setDbCount(20 * (float)(Math.log10(volume)));
-                if(currentDb > 60){
+            if (volume > 0 && volume < 1000000) {
+                currentDb = World.setDbCount(20 * (float) (Math.log10(volume)));
+                if (currentDb > 60) {
                     BluetoothConnectionUtil.getInstance().sendMessage(context, "1");
                     Timber.d("++++++++++++");
                     Timber.d("1");
                     Timber.d("++++++++++++");
-                    if(BluetoothConnectionUtil.ended){
-                        Intent endGame = new Intent(context, EndGamePointActivity.class);
-                        endGame.putExtra("game_score", BluetoothConnectionUtil.current_score);
-                        startActivity(endGame);
-                    }
                 }
                 soundDiscView.refresh();
             }
@@ -73,15 +83,15 @@ public class VoiceControlActivity extends AppCompatActivity {
         handler.sendEmptyMessageDelayed(msgWhat, refreshTime);
     }
 
-    public void startRecord(File fFile){
-        try{
+    public void startRecord(File fFile) {
+        try {
             mRecorder.setMyRecAudioFile(fFile);
             if (mRecorder.startRecorder()) {
                 startListenAudio();
-            }else{
+            } else {
                 Toast.makeText(this, "Fail to record", Toast.LENGTH_SHORT).show();
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             Toast.makeText(this, "permission denied", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }

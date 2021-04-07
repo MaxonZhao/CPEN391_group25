@@ -31,7 +31,10 @@ public class BluetoothConnectionService {
     private static final String appName = "BluetoothConnection";
 
     private static final UUID MY_UUID_INSECURE = UUID.fromString(UUIDs.HC05UNIVERSALUUID);
-
+    public static MutableLiveData<Boolean> connected = new MutableLiveData<>();
+    public static MutableLiveData<Boolean> readyToSend = new MutableLiveData<>();
+    public static MutableLiveData<Boolean> getReadyToStart = new MutableLiveData<>();
+    public static MutableLiveData<Integer> ended = new MutableLiveData<>();
 
     private final BluetoothAdapter mBluetoothAdapter;
     Context mContext;
@@ -140,6 +143,7 @@ public class BluetoothConnectionService {
                 mmSocket.connect();
 
                 Log.d(TAG, "run: ConnectThread connected.");
+                connected.postValue(true);
 
             } catch (IOException e) {
                 // Close the socket
@@ -257,8 +261,8 @@ public class BluetoothConnectionService {
                     Log.d(TAG, "InputStream: " + incomingMessage);
 
                     // TODO: check with Zoey's handshaking process doc
-                    if (incomingMessage.equals("hello")) BluetoothConnectionUtil.readyToSend = true;
-                    if (incomingMessage.equals("OK")) BluetoothConnectionUtil.readyToStart = true;
+                    if (incomingMessage.equals("hello")) readyToSend.postValue(true);
+                    if (incomingMessage.equals("OK")) getReadyToStart.postValue(true);
                     try{
                         int score = Integer.parseInt(incomingMessage);
                         handler.post(new Runnable() {
@@ -266,8 +270,7 @@ public class BluetoothConnectionService {
                             public void run() {
                                 if (incomingMessage != null) {
                                     Timber.d("GAME END: your score is " + incomingMessage);
-                                    BluetoothConnectionUtil.ended = true;
-                                    BluetoothConnectionUtil.current_score = score;
+                                    ended.postValue(score);
                                 }
                             }
                         });

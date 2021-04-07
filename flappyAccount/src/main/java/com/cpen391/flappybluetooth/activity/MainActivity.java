@@ -1,6 +1,7 @@
 package com.cpen391.flappybluetooth.activity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import com.cpen391.flappyUI.GameSettings;
 import com.cpen391.flappyUI.TappingActivity;
@@ -247,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(mBroadcastReceiver4, filter);
         registerReceiver(mBroadcastReceiver3, discoverDevicesIntent);
 
-
+        initObserver();
 
         lvNewDevices.setOnItemClickListener(mNewDevicesClickListener);
         lvPairedDevices.setOnItemClickListener(mPairedDevicesClickListener);
@@ -268,6 +270,40 @@ public class MainActivity extends AppCompatActivity {
         });
 
         populatePairedDevices();
+    }
+
+    private void initObserver() {
+
+        BluetoothConnectionService.connected.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Toast.makeText(getApplicationContext(), "connection established!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        BluetoothConnectionService.readyToSend.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                BluetoothConnectionUtil.getInstance().sendSettingInfo( MainActivity.this,
+                        getIntent().getStringExtra("color0"),
+                        getIntent().getStringExtra("color1"),
+                        getIntent().getStringExtra("difficult_level"),
+                        getIntent().getStringExtra("login_mode")
+                );
+
+                if(getIntent().getBooleanExtra("control_mode", true)){
+                    Intent tapping = new Intent(getApplicationContext(), TappingActivity.class);
+                    tapping.putExtra("bird_color", GameSettings.getInstance().getBirdColor());
+                    startActivity(tapping);
+                }
+                else{
+                    Intent record = new Intent(getApplicationContext(), VoiceControlActivity.class);
+                    startActivity(record);
+                }
+            }
+        });
+
+
     }
 
     private void populatePairedDevices() {
@@ -321,27 +357,11 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "startBTConnection: Initializing RFCOM Bluetooth Connection.");
         try{
             BluetoothConnectionUtil.getInstance().getBluetoothConnection().startClient(device, uuid);
-            // wait until connection is established
-            while (!BluetoothConnectionUtil.readyToSend) {
-                Timber.d("IN WHILE LOOP!!!!");
-            }
+//            ProgressDialog pd = new ProgressDialog(MainActivity.this);
+//            pd.setMessage("Connecting your device to the sever...");
+//            pd.setCancelable(false);
+//            pd.show();
 
-            BluetoothConnectionUtil.getInstance().sendSettingInfo( MainActivity.this,
-                    getIntent().getStringExtra("color0"),
-                    getIntent().getStringExtra("color1"),
-                    getIntent().getStringExtra("difficult_level"),
-                    getIntent().getStringExtra("login_mode")
-            );
-
-            if(getIntent().getBooleanExtra("control_mode", true)){
-                Intent tapping = new Intent(this, TappingActivity.class);
-                tapping.putExtra("bird_color", GameSettings.getInstance().getBirdColor());
-                startActivity(tapping);
-            }
-            else{
-                Intent record = new Intent(this, VoiceControlActivity.class);
-                startActivity(record);
-            }
 
         }
         catch (NullPointerException e){
@@ -458,6 +478,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
 
 
     /**
