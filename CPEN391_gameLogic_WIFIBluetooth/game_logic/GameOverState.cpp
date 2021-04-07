@@ -20,8 +20,8 @@ namespace GameLogic {
 	void GameOverState::Init(){
 		// 1. draw the background
 		*(RENDER_BASE + 3) = 0;
-		*(RENDER_BASE + 4) = 0x6A;
-		*(RENDER_BASE + 6) = 0x4F;
+		*(RENDER_BASE + 4) = 0x5F;
+		*(RENDER_BASE + 6) = 0x1F;
 
 		// 2. displaying medal
 		if(this->_score < 10){

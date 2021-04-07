@@ -126,7 +126,7 @@ namespace GameLogic {
 	void MainMenuState::Draw() {
 		// TODO:
 		// 1. draw the background
-		*(RENDER_BASE + 4) = 0x6A;
+		*(RENDER_BASE + 4) = 0x5F;
 		*(RENDER_BASE + 6) = 0x4F;
 
 
