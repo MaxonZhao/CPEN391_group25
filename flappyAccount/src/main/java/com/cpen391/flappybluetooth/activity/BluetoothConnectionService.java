@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.cpen391.flappyUI.EndGamePointActivity;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -266,8 +268,9 @@ public class BluetoothConnectionService {
                                 if (incomingMessage != null)
                                     Timber.d("GAME END: your score is " + incomingMessage);
                                 // TODO: direct to the ending activity
-            //                    Intent intent = new Intent (MainActivity.this, NewMainActivity.class);
-            //                    startActivity(intent);
+                                Intent intent = new Intent (mContext, EndGamePointActivity.class);
+                                intent.putExtra("currentScore", incomingMessage);
+                                mContext.startActivity(intent);
                             }
                         });
                     } catch (Exception e) {}

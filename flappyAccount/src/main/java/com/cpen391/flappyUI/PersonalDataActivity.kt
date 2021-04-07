@@ -80,6 +80,7 @@ class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
                 val user_Name = LoggedInUser.instance?.getUser()?.fullName
                 val user_Email = LoggedInUser.instance?.getUser()?.email
                 val topThreeScore = LoggedInUser.instance?.getUser()?.top_three_scores
+                topThreeScore?.sorted()
                 userName.text =  user_Name
                 userEmail.text = user_Email
                 if (topThreeScore != null) {

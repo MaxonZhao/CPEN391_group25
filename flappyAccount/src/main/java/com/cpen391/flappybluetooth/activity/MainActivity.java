@@ -1,8 +1,6 @@
 package com.cpen391.flappybluetooth.activity;
 
 import android.Manifest;
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -254,20 +252,12 @@ public class MainActivity extends AppCompatActivity {
         lvNewDevices.setOnItemClickListener(mNewDevicesClickListener);
         lvPairedDevices.setOnItemClickListener(mPairedDevicesClickListener);
 
-        if(getIntent().getBooleanExtra("control_method",true)){
-            jumpImg.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    sendMessage("1");
-                }
-            });
-        }
-        else{
-//            VoiceControlActivity volmectivity = new VoiceControlActivity();
-//            if(volmectivity.currentDb > 40){
-//                sendMessage("1");
-//            }
-        }
+        jumpImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendMessage("1");
+            }
+        });
 
 
         btnONOFF.setOnClickListener(new View.OnClickListener() {
@@ -375,6 +365,8 @@ public class MainActivity extends AppCompatActivity {
                 getIntent().getStringExtra("difficult_level"),
                 getIntent().getStringExtra("login_mode")
         );
+
+        //TODO: use getIntent().getStringExtra("control_method") in if(){...} else{...}
 
     }
 
@@ -543,12 +535,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     // TODO: probably need more user related info in order to send messages, define the parameter list as needed
-    public static void actionStart(Context context,  String color0, String color1, String diffLevel, String loginMode) {
+    public static void actionStart(Context context,  String color0, String color1, String diffLevel, String loginMode, Boolean controlMode) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra("color0", color0);
         intent.putExtra("color1", color1);
         intent.putExtra("difficult_level", diffLevel);
         intent.putExtra("login_mode", loginMode);
+        intent.putExtra("control_mode", controlMode);
         context.startActivity(intent);
     }
 }
