@@ -7,6 +7,7 @@ import androidx.appcompat.app.ActionBar
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyaccount.ActivityHolder
 import com.cpen391.flappyaccount.databinding.ActivityEndGamePointBinding
+import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil
 
 class EndGamePointActivity : MvvmActivity<ActivityEndGamePointBinding>(){
     private val context: Context = this
@@ -22,6 +23,7 @@ class EndGamePointActivity : MvvmActivity<ActivityEndGamePointBinding>(){
         super.initView()
         binding.apply {
             startAgain.setOnClickListener {
+                BluetoothConnectionUtil.getInstance().sendMessage(context, "1")
                 ActivityHolder.destroyAllActivities()
                 startActivity(Intent(context, SingleGameStartActivity::class.java))
             }
