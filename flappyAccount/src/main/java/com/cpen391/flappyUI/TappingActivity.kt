@@ -16,7 +16,6 @@ class TappingActivity : MvvmActivity<ActivityTappingBinding>() {
         super.onCreate(savedInstanceState)
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
-        ActivityHolder.addActivity(this)
         binding.btnsPress.setOnClickListener {
             BluetoothConnectionUtil.getInstance().sendMessage(context, "1")
             Timber.d("++++++++++++")
