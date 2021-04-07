@@ -307,7 +307,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         if(LoggedInUser.getInstance().isLogin()){
-            BluetoothConnectionUtil.getInstance().sendMessage(MainActivity.this, LoggedInUser.getInstance().getUser().getUserName());
+            for (int i = 0; i <= 10; ++i) {
+                BluetoothConnectionUtil.getInstance().sendMessage(MainActivity.this, LoggedInUser.getInstance().getUser().getUserName());
+            }
         }
     }
 
