@@ -28,10 +28,12 @@
         <activity android:name=".activity.LoginActivity"
             android:windowSoftInputMode="stateHidden"
             android:launchMode="singleTop"/>
-        <activity android:name="com.cpen391.flappyUI.SingleGameStartActivity" />
+        <activity android:name="com.cpen391.flappyUI.SingleGameStartActivity"
+            android:launchMode="singleTask"/>
         <activity android:name="com.cpen391.flappyUI.EndGamePointActivity" />
         <activity android:name="com.cpen391.flappyUI.PersonalDataActivity" />
         <activity android:name="com.cpen391.flappyVoiceRecording.VoiceControlActivity" />
+        <activity android:name="com.cpen391.flappyUI.TappingActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

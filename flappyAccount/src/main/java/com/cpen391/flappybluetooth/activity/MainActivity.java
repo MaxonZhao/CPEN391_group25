@@ -7,26 +7,27 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
+import com.cpen391.flappyUI.GameSettings;
+import com.cpen391.flappyUI.LoggedInUser;
+import com.cpen391.flappyUI.TappingActivity;
+import com.cpen391.flappyVoiceRecording.VoiceControlActivity;
 import com.cpen391.flappyaccount.R;
 import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
@@ -54,13 +55,12 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnONOFF;
     Button btnDiscover;
-    ImageView jumpImg;
     TextView available_devices_txt;
     TextView paired_devices_txt;
 
     public static boolean ended = false;
     private static final UUID MY_UUID_INSECURE =
-            UUID.fromString(UUIDs.ANDROIDDEVICEUNIVERSALUUID);
+            UUID.fromString(UUIDs.HC05UNIVERSALUUID);
 
     BluetoothDevice mBTDevice;
 
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
                 //case1: bonded already
                 if (mDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
                     Log.d(TAG, "BroadcastReceiver: BOND_BONDED.");
-                    Toast.makeText(getApplicationContext(), "connected with " + mDevice.getName(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "paired with " + mDevice.getName(), Toast.LENGTH_LONG).show();
 
                     //inside BroadcastReceiver4
                     mBTDevice = mDevice;
@@ -232,42 +232,6 @@ public class MainActivity extends AppCompatActivity {
         btnDiscover = (Button) findViewById(R.id.btnFindUnpairedDevices);
         etSend = (EditText) findViewById(R.id.editText);
 
-
-        jumpImg = (ImageView) findViewById(R.id.btnPress);
-
-        switch(getIntent().getStringExtra("bird_color")){
-            case "re": {
-                jumpImg.setImageResource(R.drawable.bird_red);
-                break;
-            }
-            case "bk": {
-                jumpImg.setImageResource(R.drawable.bird_black);
-                break;
-            }
-            case "or": {
-                jumpImg.setImageResource(R.drawable.bird_orange);
-                break;
-            }
-            case "gr": {
-                jumpImg.setImageResource(R.drawable.bird_green);
-                break;
-            }
-            case "ye": {
-                jumpImg.setImageResource(R.drawable.bird_yellow);
-                break;
-            }
-            case "bu": {
-                jumpImg.setImageResource(R.drawable.bird_blue);
-                break;
-            }
-            default:{
-                jumpImg.setImageResource(R.drawable.bird_red);
-                break;
-            }
-        }
-
-
-
         available_devices_txt = (TextView) findViewById(R.id.available_devices_txt);
         paired_devices_txt = (TextView) findViewById(R.id.paired_devices_txt);
 
@@ -281,18 +245,10 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(mBroadcastReceiver4, filter);
         registerReceiver(mBroadcastReceiver3, discoverDevicesIntent);
 
-
+        initObserver();
 
         lvNewDevices.setOnItemClickListener(mNewDevicesClickListener);
         lvPairedDevices.setOnItemClickListener(mPairedDevicesClickListener);
-
-        jumpImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BluetoothConnectionUtil.getInstance().sendMessage(MainActivity.this, "1");
-            }
-        });
-
 
         btnONOFF.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -310,6 +266,50 @@ public class MainActivity extends AppCompatActivity {
         });
 
         populatePairedDevices();
+    }
+
+    private void initObserver() {
+
+        BluetoothConnectionService.connected.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Toast.makeText(getApplicationContext(), "connection established!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        BluetoothConnectionService.readyToSend.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                BluetoothConnectionUtil.getInstance().sendSettingInfo( MainActivity.this,
+                        getIntent().getStringExtra("color0"),
+                        getIntent().getStringExtra("color1"),
+                        getIntent().getStringExtra("difficult_level"),
+                        getIntent().getStringExtra("login_mode")
+                );
+
+
+                if(getIntent().getBooleanExtra("control_mode", true)){
+                    Intent tapping = new Intent(getApplicationContext(), TappingActivity.class);
+                    tapping.putExtra("bird_color", GameSettings.getInstance().getBirdColor());
+                    startActivity(tapping);
+                }
+                else{
+                    Intent record = new Intent(getApplicationContext(), VoiceControlActivity.class);
+                    startActivity(record);
+                }
+            }
+        });
+        BluetoothConnectionService.getReadyToStart.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Timber.d("You are good to start the game!");
+            }
+        });
+        if(LoggedInUser.getInstance().isLogin()){
+            for (int i = 0; i <= 10; ++i) {
+                BluetoothConnectionUtil.getInstance().sendMessage(MainActivity.this, LoggedInUser.getInstance().getUser().getUserName());
+            }
+        }
     }
 
     private void populatePairedDevices() {
@@ -363,38 +363,17 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "startBTConnection: Initializing RFCOM Bluetooth Connection.");
         try{
             BluetoothConnectionUtil.getInstance().getBluetoothConnection().startClient(device, uuid);
-            // wait until connection is established
-            while (!BluetoothConnectionUtil.readyToSend) {
-                Timber.d("IN WHILE LOOP!!!!");
-            }
-            ImageView bluetoothImg = (ImageView) findViewById(R.id.bluetooth_icon);
-            bluetoothImg.setImageResource(R.drawable.bluetooth_on_64);
-            lvNewDevices.setVisibility(View.GONE);
-            lvPairedDevices.setVisibility(View.GONE);
-            btnStartConnection.setVisibility(View.GONE);
-            btnONOFF.setVisibility(View.GONE);
-            btnEnableDisable_Discoverable.setVisibility(View.GONE);
-            available_devices_txt.setVisibility(View.INVISIBLE);
-            paired_devices_txt.setVisibility(View.INVISIBLE);
-            btnDiscover.setVisibility(View.GONE);
-            jumpImg.setVisibility(View.VISIBLE);
-            etSend.setVisibility(View.GONE);
-            btnSend.setVisibility(View.GONE);
+//            ProgressDialog pd = new ProgressDialog(MainActivity.this);
+//            pd.setMessage("Connecting your device to the sever...");
+//            pd.setCancelable(false);
+//            pd.show();
+
+
         }
         catch (NullPointerException e){
             Timber.d("check your damn connection");
             Toast.makeText(MainActivity.this, "Please check your bluetooth connection", Toast.LENGTH_SHORT).show();
         }
-
-        BluetoothConnectionUtil.getInstance().sendSettingInfo( MainActivity.this,
-                getIntent().getStringExtra("color0"),
-                getIntent().getStringExtra("color1"),
-                getIntent().getStringExtra("difficult_level"),
-                getIntent().getStringExtra("login_mode")
-        );
-
-        //TODO: use getIntent().getStringExtra("control_method") in if(){...} else{...}
-
     }
 
 
@@ -507,6 +486,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
+
     /**
      * The on-click listener for all devices in the ListViews
      */
@@ -533,33 +513,11 @@ public class MainActivity extends AppCompatActivity {
                 mBTDevice = mPairedBTDevices.get(i);
                 Log.d(TAG, "LINE 406::: " + String.valueOf(mBTDevice.getBondState()));
                 if (mBTDevice.getBondState() == 12)
-                    Toast.makeText(MainActivity.this, "Connected with " + deviceName, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "paired with " + deviceName, Toast.LENGTH_SHORT).show();
                 BluetoothConnectionUtil.getInstance().setBluetoothConnection(new BluetoothConnectionService(MainActivity.this));
             }
         }
     };
-
-    public static void buttonEffect(View button){
-        button.setOnTouchListener(new View.OnTouchListener() {
-
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        v.getBackground().setColorFilter(0xe0f47521, PorterDuff.Mode.SRC_ATOP);
-                        v.invalidate();
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP: {
-                        v.getBackground().clearColorFilter();
-                        v.invalidate();
-                        break;
-                    }
-                }
-                return false;
-            }
-        });
-    }
-
 
     // TODO: probably need more user related info in order to send messages, define the parameter list as needed
     public static void actionStart(Context context,

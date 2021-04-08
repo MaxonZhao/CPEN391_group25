@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyaccount.databinding.ActivityEndGamePointBinding
+import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil
 
 class EndGamePointActivity : MvvmActivity<ActivityEndGamePointBinding>(){
     private val context: Context = this
@@ -13,13 +14,14 @@ class EndGamePointActivity : MvvmActivity<ActivityEndGamePointBinding>(){
         super.onCreate(savedInstanceState)
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
-        binding.currentGameScore.text = intent.getStringExtra("currentScore")
+        binding.currentGameScore.text = intent.getIntExtra("game_score", 0).toString()
     }
 
     override fun initView() {
         super.initView()
         binding.apply {
             startAgain.setOnClickListener {
+                BluetoothConnectionUtil.getInstance().sendMessage(context, "1")
                 startActivity(Intent(context, SingleGameStartActivity::class.java))
             }
             profileIcon.setOnClickListener{
