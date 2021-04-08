@@ -12,4 +12,6 @@ interface UserDataSource {
     fun findUser(username: String) : Observable<User>
 
     fun resetPassword(user: User, newPassword: String) : Observable<Boolean>
+
+    fun updateTopThreeScore(user: User, scores: List<Long>) : Observable<Boolean>
 }

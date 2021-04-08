@@ -13,6 +13,7 @@ import com.cpen391.appbase.network.SimpleObserver
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyaccount.Injection
 import com.cpen391.flappyaccount.R
+import com.cpen391.flappyaccount.consts.LoginStatus
 import com.cpen391.flappyaccount.databinding.ActivityPersonalDataBinding
 import com.cpen391.flappyaccount.model.api.UserAPI
 import com.cpen391.flappyaccount.model.bean.User
@@ -92,7 +93,22 @@ class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
                     historyScore.add(currentScore)
                 }
                 historyScore.sorted()
-                UserAPI.updateTopThreeScore(user, historyScore.subList(0,3))
+
+                Injection.provideUserRepository().updateTopThreeScore(user, historyScore.subList(0,3))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(object : SimpleObserver<Boolean>() {
+                        override fun whenSuccess(t: Boolean) {
+                            Timber.d("top 3 scores are updated!")
+                        }
+
+                        override fun onError(e: Throwable) {
+                            Timber.d("please connect to network")
+                        }
+
+                        override fun onSubscribe(d: Disposable) {
+                        }
+                    })
 
                 userName.text =  user_Name
                 userEmail.text = user_Email

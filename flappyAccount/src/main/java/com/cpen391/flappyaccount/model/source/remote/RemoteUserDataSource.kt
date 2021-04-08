@@ -28,4 +28,8 @@ class RemoteUserDataSource : UserDataSource {
     override fun resetPassword(user: User, newPassword: String): Observable<Boolean> {
         return UserAPI.resetPassword(user, newPassword)
     }
+
+    override fun updateTopThreeScore(user: User, scores: List<Long>): Observable<Boolean> {
+        return UserAPI.updateTopThreeScore(user, scores)
+    }
 }

@@ -111,7 +111,8 @@ object UserAPI {
         return registerUser(user)
     }
 
-    fun updateTopThreeScore(user: User, topThreeScore: List<Long>){ //: Observable<Boolean>
+    fun updateTopThreeScore(user: User, topThreeScore: List<Long>): Observable<Boolean> {
         user.top_three_scores = topThreeScore
+        return registerUser(user);
     }
 }
