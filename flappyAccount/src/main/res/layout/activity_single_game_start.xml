@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingStart="60dp"
-    android:paddingEnd="60dp"
-    android:paddingTop="60dp"
+    android:paddingEnd="40dp"
+    android:paddingTop="40dp"
     android:paddingBottom="20dp"
     tools:context=".activity.SignUpActivity">
 
@@ -35,7 +35,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <RadioGroup
             android:id="@+id/radio_btn"
             android:layout_width="wrap_content"
@@ -44,14 +45,16 @@
 
             <RadioButton
                 android:id="@+id/voice_control_btn"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="30dp"
+                android:layout_weight="1"
                 android:text="Voice Control" />
 
             <RadioButton
                 android:id="@+id/tapping_btn"
-                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tapping" />
         </RadioGroup>
@@ -128,9 +131,10 @@
                 android:id="@+id/hard_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:layout_weight="1"
                 android:text="Hard" />
         </RadioGroup>
+    </LinearLayout>
 
         <TextView
             android:id="@+id/textView"
@@ -151,8 +155,6 @@
             android:elevation="0dp"
             android:text="YES"
             android:textColor="#fff" />
-
-    </LinearLayout>
 
 
 
