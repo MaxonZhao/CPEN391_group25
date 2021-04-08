@@ -271,8 +271,10 @@ public class BluetoothConnectionService {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                if (incomingMessage != null) {
+                                int temp = -1;
+                                if (incomingMessage != null && score != temp) {
                                     Timber.d("GAME END: your score is " + incomingMessage);
+                                    temp = score;
                                     ended.postValue(score);
                                 }
                             }

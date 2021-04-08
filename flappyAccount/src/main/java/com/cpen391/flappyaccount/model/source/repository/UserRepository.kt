@@ -29,6 +29,10 @@ class UserRepository private constructor(
         return remoteUserDataSource.resetPassword(user, newPassword)
     }
 
+    override fun updateTopThreeScore(user: User, scores: List<Long>): Observable<Boolean> {
+        return remoteUserDataSource.updateTopThreeScore(user, scores);
+    }
+
     companion object {
         private lateinit var INSTANCE: UserRepository
 
