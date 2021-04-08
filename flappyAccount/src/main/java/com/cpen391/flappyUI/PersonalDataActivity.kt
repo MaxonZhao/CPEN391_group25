@@ -32,27 +32,9 @@ class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
 
-        lateinit var user: User
 
-        LoggedInUser.instance?.getUser()?.let {
-            Injection.provideUserRepository()
-                .findUser(it.userName)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : SimpleObserver<User>() {
+        val user = LoggedInUser.instance?.getUser()
 
-                    override fun onError(e: Throwable) {
-                        Timber.d("please connect to network")
-                    }
-
-                    override fun onSubscribe(d: Disposable) {
-                    }
-
-                    override fun whenSuccess(t: User) {
-                        user = it
-                    }
-                })
-        }
         val birdImage: ImageView = findViewById(R.id.bird_image)
         when(intent.getStringExtra("birdImage")){
             "bird_red" -> {
@@ -92,21 +74,24 @@ class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
                 }
                 historyScore.sorted()
 
-                Injection.provideUserRepository().updateTopThreeScore(user, historyScore.subList(0,3))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : SimpleObserver<Boolean>() {
-                        override fun whenSuccess(t: Boolean) {
-                            Timber.d("top 3 scores are updated!")
-                        }
+                user?.let {
+                    Injection.provideUserRepository()
+                        .updateTopThreeScore(it, historyScore.subList(0, 3))
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(object : SimpleObserver<Boolean>() {
+                            override fun whenSuccess(t: Boolean) {
+                                Timber.d("top 3 scores are updated!")
+                            }
 
-                        override fun onError(e: Throwable) {
-                            Timber.d("please connect to network")
-                        }
+                            override fun onError(e: Throwable) {
+                                Timber.d("please connect to network")
+                            }
 
-                        override fun onSubscribe(d: Disposable) {
-                        }
-                    })
+                            override fun onSubscribe(d: Disposable) {
+                            }
+                        })
+                }
 
                 userName.text =  user_Name
                 userEmail.text = user_Email
