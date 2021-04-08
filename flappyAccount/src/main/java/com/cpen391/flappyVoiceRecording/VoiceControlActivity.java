@@ -51,6 +51,7 @@ public class VoiceControlActivity extends AppCompatActivity {
                 Intent endGame = new Intent(context, EndGamePointActivity.class);
                 endGame.putExtra("game_score", BluetoothConnectionService.ended.getValue());
                 startActivity(endGame);
+                finish();
             }
         });
     }

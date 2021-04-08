@@ -55,6 +55,7 @@ class TappingActivity : MvvmActivity<ActivityTappingBinding>() {
             val endGame = Intent(context, EndGamePointActivity::class.java)
             endGame.putExtra("game_score", BluetoothConnectionService.ended.value)
             startActivity(endGame)
+            finish()
         }
     }
 

@@ -299,17 +299,25 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
         BluetoothConnectionService.getReadyToStart.observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
                 Timber.d("You are good to start the game!");
+                if(LoggedInUser.getInstance().isLogin()){
+                    for (int i = 0; i <= 10; ++i) {
+                        BluetoothConnectionUtil.getInstance().sendMessage(MainActivity.this, LoggedInUser.getInstance().getUser().getUserName());
+                    }
+                }
             }
         });
-        if(LoggedInUser.getInstance().isLogin()){
-            for (int i = 0; i <= 10; ++i) {
-                BluetoothConnectionUtil.getInstance().sendMessage(MainActivity.this, LoggedInUser.getInstance().getUser().getUserName());
+
+        BluetoothConnectionService.ended.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                finish();
             }
-        }
+        });
     }
 
     private void populatePairedDevices() {
