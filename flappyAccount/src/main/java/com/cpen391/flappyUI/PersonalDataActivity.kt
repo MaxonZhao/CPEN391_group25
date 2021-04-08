@@ -13,9 +13,7 @@ import com.cpen391.appbase.network.SimpleObserver
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyaccount.Injection
 import com.cpen391.flappyaccount.R
-import com.cpen391.flappyaccount.consts.LoginStatus
 import com.cpen391.flappyaccount.databinding.ActivityPersonalDataBinding
-import com.cpen391.flappyaccount.model.api.UserAPI
 import com.cpen391.flappyaccount.model.bean.User
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable

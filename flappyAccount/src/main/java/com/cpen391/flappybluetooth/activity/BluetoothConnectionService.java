@@ -146,6 +146,8 @@ public class BluetoothConnectionService {
                 connected.postValue(true);
 
             } catch (IOException e) {
+
+                connected.postValue(false);
                 // Close the socket
                 e.printStackTrace();
                 try {
@@ -227,7 +229,6 @@ public class BluetoothConnectionService {
             //dismiss the progressdialog when connection is established
             try {
                 mProgressDialog.dismiss();
-//                Toast.makeText(mContext, "connection established!", Toast.LENGTH_SHORT).show();
             } catch (NullPointerException e) {
                 e.printStackTrace();
             }
@@ -249,7 +250,6 @@ public class BluetoothConnectionService {
 
             int bytes; // bytes returned from read()
             Handler handler = new Handler(Looper.getMainLooper());
-            StringBuilder sb = new StringBuilder();
             // Keep listening to the InputStream until an exception occurs
             while (true) {
                 // Read from the InputStream

@@ -36,7 +36,7 @@ import timber.log.Timber;
 
 
 public class MainActivity extends AppCompatActivity {
-    
+
     private static final String TAG = "MainActivity";
 
     BluetoothAdapter mBluetoothAdapter;
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
             if (action.equals(BluetoothDevice.ACTION_FOUND)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 Log.d(TAG, "onReceive: " + device.getName() + ": " + device.getAddress());
-                if (!mBTDevices.contains(device)) {
+                if (!mBTDevices.contains(device) && device.getName() != null && !device.getName().equals("") && !mPairedBTDevices.isEmpty() && !mPairedBTDevices.contains(device)) {
                     mBTDevices.add(device);
 
                     mDeviceListAdapter = new DeviceListAdapter(context, R.layout.device_adapter_view, mBTDevices);
@@ -265,14 +265,16 @@ public class MainActivity extends AppCompatActivity {
         BluetoothConnectionService.connected.observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                Toast.makeText(getApplicationContext(), "connection established!", Toast.LENGTH_SHORT).show();
+                if (BluetoothConnectionService.connected.getValue() == true)
+                    Toast.makeText(getApplicationContext(), "connection established!", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(getApplicationContext(), "connection failed!", Toast.LENGTH_SHORT).show();
             }
         });
 
         BluetoothConnectionService.readyToSend.observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                BluetoothConnectionUtil.getInstance().sendSettingInfo( MainActivity.this,
+                BluetoothConnectionUtil.getInstance().sendSettingInfo(MainActivity.this,
                         getIntent().getStringExtra("color0"),
                         getIntent().getStringExtra("color1"),
                         getIntent().getStringExtra("difficult_level"),
@@ -280,12 +282,11 @@ public class MainActivity extends AppCompatActivity {
                 );
 
 
-                if(getIntent().getBooleanExtra("control_mode", true)){
+                if (getIntent().getBooleanExtra("control_mode", true)) {
                     Intent tapping = new Intent(getApplicationContext(), TappingActivity.class);
                     tapping.putExtra("bird_color", GameSettings.getInstance().getBirdColor());
                     startActivity(tapping);
-                }
-                else{
+                } else {
                     Intent record = new Intent(getApplicationContext(), VoiceControlActivity.class);
                     startActivity(record);
                 }
@@ -296,7 +297,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(Boolean aBoolean) {
                 Timber.d("You are good to start the game!");
-                if(LoggedInUser.getInstance().isLogin()){
+                if (LoggedInUser.getInstance().isLogin()) {
                     for (int i = 0; i <= 10; ++i) {
                         BluetoothConnectionUtil.getInstance().sendMessage(MainActivity.this, LoggedInUser.getInstance().getUser().getUserName());
                     }
@@ -339,10 +340,9 @@ public class MainActivity extends AppCompatActivity {
      */
     public void startBTConnection(BluetoothDevice device, UUID uuid) {
         Log.d(TAG, "startBTConnection: Initializing RFCOM Bluetooth Connection.");
-        try{
+        try {
             BluetoothConnectionUtil.getInstance().getBluetoothConnection().startClient(device, uuid);
-        }
-        catch (NullPointerException e){
+        } catch (NullPointerException e) {
             Timber.d("check your damn connection");
             Toast.makeText(MainActivity.this, "Please check your bluetooth connection", Toast.LENGTH_SHORT).show();
         }
@@ -456,7 +456,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-
 
 
     /**
