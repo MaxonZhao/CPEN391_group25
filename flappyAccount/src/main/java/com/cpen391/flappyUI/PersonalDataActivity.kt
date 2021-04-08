@@ -14,6 +14,7 @@ import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyaccount.Injection
 import com.cpen391.flappyaccount.R
 import com.cpen391.flappyaccount.databinding.ActivityPersonalDataBinding
+import com.cpen391.flappyaccount.model.api.UserAPI
 import com.cpen391.flappyaccount.model.bean.User
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -90,14 +91,14 @@ class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
                 if (currentScore != null) {
                     historyScore.add(currentScore)
                 }
-                topThreeScore?.sorted()
+                historyScore.sorted()
+                UserAPI.updateTopThreeScore(user, historyScore.subList(0,3))
+
                 userName.text =  user_Name
                 userEmail.text = user_Email
-                if (topThreeScore != null) {
-                    top1Score.text = topThreeScore[0].toString()
-                    top2Score.text = topThreeScore[1].toString()
-                    top3Score.text = topThreeScore[2].toString()
-                }
+                top1Score.text = historyScore[0].toString()
+                top2Score.text = historyScore[1].toString()
+                top3Score.text = historyScore[2].toString()
             }
             else{
                 userName.text =  "Guest"
