@@ -113,6 +113,7 @@ object UserAPI {
 
     fun updateTopThreeScore(user: User, topThreeScore: List<Long>): Observable<Boolean> {
         user.top_three_scores = topThreeScore
+        Timber.d("The top three scores of user ${user.userName} is $topThreeScore")
         return registerUser(user);
     }
 }

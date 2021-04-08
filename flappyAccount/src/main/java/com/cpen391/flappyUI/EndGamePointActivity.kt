@@ -23,6 +23,7 @@ class EndGamePointActivity : MvvmActivity<ActivityEndGamePointBinding>(){
             startAgain.setOnClickListener {
                 BluetoothConnectionUtil.getInstance().sendMessage(context, "1")
                 startActivity(Intent(context, SingleGameStartActivity::class.java))
+                finish()
             }
             profileIcon.setOnClickListener{
                 startActivity(Intent(context, PersonalDataActivity::class.java))

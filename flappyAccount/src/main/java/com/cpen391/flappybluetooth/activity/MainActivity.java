@@ -36,12 +36,7 @@ import timber.log.Timber;
 
 
 public class MainActivity extends AppCompatActivity {
-
-    // TODO: implement sendSettingInfo per Zoey's docs
-    // TODO: Note readyToSend and readyToStart signals are added in this class as static vars per the handshaking process, take a look at TODOs in BluetoothConnectionService to see how they work
-    // TODO: determine when to call sendSettingInfo, probably at some point during onCreate. Maybe a simple while(!readToSend) will do
-    // TODO: define the parameter list for sendSettingInfo
-
+    
     private static final String TAG = "MainActivity";
 
     BluetoothAdapter mBluetoothAdapter;
@@ -239,9 +234,6 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
         IntentFilter discoverDevicesIntent = new IntentFilter(BluetoothDevice.ACTION_FOUND);
 
-//        Intent enableBTIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-//        startActivity(enableBTIntent);
-//        enableDisableBT();
         registerReceiver(mBroadcastReceiver4, filter);
         registerReceiver(mBroadcastReceiver3, discoverDevicesIntent);
 
@@ -335,28 +327,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-//    // TODO: define parameter list as needed
-//    private void sendSettingInfo(String msg1, String msg2, String msg3, String msg4) {
-//        if (BluetoothConnectionUtil.readyToSend) {
-//            byte[] bytes = new byte[4];
-//            bytes[0] = msg1.getBytes()[0];
-//            bytes[1] = msg2.getBytes()[0];
-//            bytes[2] = msg3.getBytes()[0];
-//            bytes[3] = msg4.getBytes()[0];
-//            if (BluetoothConnectionUtil.getInstance().getBluetoothConnection() != null) BluetoothConnectionUtil.getInstance().getBluetoothConnection().write(bytes);
-//        } else {
-//            Toast.makeText(this, "Gaming station is not set up yet!", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
-//    private void sendMessage(String message) {
-//        if (BluetoothConnectionUtil.readyToStart) {
-//            byte[] bytes = message.getBytes(Charset.defaultCharset());
-//            if (BluetoothConnectionUtil.getInstance().getBluetoothConnection() != null) BluetoothConnectionUtil.getInstance().getBluetoothConnection().write(bytes);
-//        } else {
-//            Toast.makeText(this, "Gaming station did not receive user info yet!", Toast.LENGTH_SHORT).show();
-//        }
-//    }
 
     //create method for starting connection
     //***remember the connection will fail and app will crash if you haven't paired first
@@ -371,12 +341,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "startBTConnection: Initializing RFCOM Bluetooth Connection.");
         try{
             BluetoothConnectionUtil.getInstance().getBluetoothConnection().startClient(device, uuid);
-//            ProgressDialog pd = new ProgressDialog(MainActivity.this);
-//            pd.setMessage("Connecting your device to the sever...");
-//            pd.setCancelable(false);
-//            pd.show();
-
-
         }
         catch (NullPointerException e){
             Timber.d("check your damn connection");
