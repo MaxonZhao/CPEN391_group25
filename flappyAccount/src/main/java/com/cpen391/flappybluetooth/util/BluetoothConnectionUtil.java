@@ -18,7 +18,6 @@ public class BluetoothConnectionUtil
     public volatile static boolean readyToStart = true;
     private BluetoothConnectionService mBluetoothConnection = null;
     private static BluetoothConnectionUtil instance;
-
     private BluetoothConnectionUtil()
     {
         // private constructor

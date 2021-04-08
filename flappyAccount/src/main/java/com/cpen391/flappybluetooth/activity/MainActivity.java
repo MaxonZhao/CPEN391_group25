@@ -24,7 +24,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.cpen391.flappyaccount.R;
-import com.cpen391.flappybluetooth.R;
 import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil;
 
 import java.nio.charset.Charset;
