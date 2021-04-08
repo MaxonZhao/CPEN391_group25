@@ -79,7 +79,17 @@ class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
             if(LoggedInUser.instance?.isLogin() == true){
                 val user_Name = LoggedInUser.instance?.getUser()?.fullName
                 val user_Email = LoggedInUser.instance?.getUser()?.email
+                val currentScore = LoggedInUser.instance?.getUser()?.current_score
                 val topThreeScore = LoggedInUser.instance?.getUser()?.top_three_scores
+                val historyScore = mutableListOf<Long>()
+                if (topThreeScore != null) {
+                    for(i in topThreeScore.indices){
+                        historyScore.add(topThreeScore[i])
+                    }
+                }
+                if (currentScore != null) {
+                    historyScore.add(currentScore)
+                }
                 topThreeScore?.sorted()
                 userName.text =  user_Name
                 userEmail.text = user_Email

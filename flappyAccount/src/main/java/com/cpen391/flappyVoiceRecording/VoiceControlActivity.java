@@ -67,7 +67,7 @@ public class VoiceControlActivity extends AppCompatActivity {
             volume = mRecorder.getMaxAmplitude();
             if (volume > 0 && volume < 1000000) {
                 currentDb = World.setDbCount(20 * (float) (Math.log10(volume)));
-                if (currentDb > 70) {
+                if (currentDb > 60) {
                     BluetoothConnectionUtil.getInstance().sendMessage(context, "1");
                     Timber.d("++++++++++++");
                     Timber.d("1");
