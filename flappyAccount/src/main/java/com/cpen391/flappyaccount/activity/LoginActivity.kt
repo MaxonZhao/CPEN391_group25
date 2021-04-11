@@ -10,6 +10,7 @@ import androidx.lifecycle.observe
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyUI.LoggedInUser
 import com.cpen391.flappyUI.SingleGameStartActivity
+import com.cpen391.flappyaccount.Injection
 import com.cpen391.flappyaccount.consts.*
 import com.cpen391.flappyaccount.databinding.ActivityLoginBinding
 import com.cpen391.flappyaccount.viewmodel.LoginViewModel
@@ -27,9 +28,7 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
         actionBar.hide()
     }
 
-    /*
-      init buttons for directing pages
-     */
+    //init buttons for directing pages
     override fun initView() {
         super.initView()
         binding.apply {
@@ -54,6 +53,8 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
         }
     }
 
+
+    // initialize observers for livedata
     override fun initObserver() {
         val owner = this
         loginViewModel.apply {

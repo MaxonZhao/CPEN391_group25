@@ -3,6 +3,7 @@ package com.cpen391.flappyaccount.activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.ActionBar
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyUI.EndGamePointActivity
@@ -13,7 +14,7 @@ class StartActivity : MvvmActivity<ActivityStartBinding>() {
         super.onCreate(savedInstanceState)
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
-        Handler().postDelayed(Runnable { startActivity(Intent(this, EndGamePointActivity :: class.java))}, 3000);
+        Handler(Looper.getMainLooper()).postDelayed(Runnable { startActivity(Intent(this, EndGamePointActivity :: class.java))}, 3000);
         
     }
 

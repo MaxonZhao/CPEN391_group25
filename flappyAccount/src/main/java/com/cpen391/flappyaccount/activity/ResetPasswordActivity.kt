@@ -25,7 +25,6 @@ class ResetPasswordActivity : MvvmActivity<ActivityResetPasswordBinding>() {
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
         userFound = intent.getSerializableExtra("User") as User
-
     }
 
     override fun initView() {
@@ -98,6 +97,7 @@ class ResetPasswordActivity : MvvmActivity<ActivityResetPasswordBinding>() {
     }
 
 
+    // static method to start the activity, this formality makes clear parameters needed for this activity
     companion object {
         fun actionStart(context: Context, data1: User) {
             val intent = Intent(context, ResetPasswordActivity::class.java)

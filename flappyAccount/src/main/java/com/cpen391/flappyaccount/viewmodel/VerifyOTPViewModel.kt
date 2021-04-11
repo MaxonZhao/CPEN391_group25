@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit
 class VerifyOTPViewModel : BaseViewModel() {
 
     val verificationCompleted: MutableLiveData<Boolean> = MutableLiveData()
-    private lateinit var auth: FirebaseAuth
     private val TIMEOUT = 60L
     var mCallback: PhoneAuthProvider.OnVerificationStateChangedCallbacks? = null
 
@@ -38,10 +37,10 @@ class VerifyOTPViewModel : BaseViewModel() {
     }
     fun sendVerificationCodeToUser(phoneNo: String, context: Context) {
         val options = PhoneAuthOptions.newBuilder(FirebaseAuth.getInstance())
-            .setPhoneNumber(phoneNo)       // Phone number to verify
-            .setTimeout(TIMEOUT, TimeUnit.SECONDS) // Timeout and unit
-            .setActivity(context as Activity)                 // Activity (for callback binding)
-            .setCallbacks(mCallback)          // OnVerificationStateChangedCallbacks
+            .setPhoneNumber(phoneNo)                    // Phone number to verify
+            .setTimeout(TIMEOUT, TimeUnit.SECONDS)      // Timeout and unit
+            .setActivity(context as Activity)           // Activity (for callback binding)
+            .setCallbacks(mCallback)                    // OnVerificationStateChangedCallbacks
             .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
