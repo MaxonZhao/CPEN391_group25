@@ -19,7 +19,9 @@ using namespace std;
 **
 **  Refer to UARTdata sheet for details of registers and programming
 ***************************************************************************/
-
+/**
+* Initialize serial communication channel. Call this function before any read/write operations.
+*/
 void Init_RS232(volatile unsigned char* LineControlReg, volatile unsigned char* DivisorLatchLSB,
 		volatile unsigned char* DivisorLatchMSB, volatile unsigned char* FifoControlReg){
     // set bit 7 of Line Control Register to 1, to gain access to the baud rate registers
@@ -45,9 +47,9 @@ void Init_RS232(volatile unsigned char* LineControlReg, volatile unsigned char* 
 
 }
 
-// the following function polls the UART to determine if any character
-// has been received. It doesn't wait for one,or read it, it simply tests
-// to see if one is available to read from the FIFO
+/**
+* simply tests to see if one is available to read from the FIFO
+*/
 int RS232_TestForReceivedData(volatile unsigned char* LineStatusReg){
     // if BT_LineStatusReg bit 0 is set to 1
     //return TRUE, otherwise return FALSE
@@ -58,6 +60,9 @@ int RS232_TestForReceivedData(volatile unsigned char* LineStatusReg){
 
 }
 
+/**
+* write 1 character to the transmitter FIFO register.
+*/
 int putcharRS232(int c, volatile unsigned char* LineStatusReg,  volatile unsigned char* TransmitterFifo){
     // wait for Transmitter Holding Register bit (5) of line status register to be '1'
     // indicating we can write to the device
@@ -69,6 +74,9 @@ int putcharRS232(int c, volatile unsigned char* LineStatusReg,  volatile unsigne
     return c;
 }
 
+/**
+* read 1 character from the receiver FIFO register.
+*/
 int getcharRS232(volatile unsigned char* ReceiverFifo, volatile unsigned char* LineStatusReg){
 	int data;
     // wait for Data Ready bit (0) of line status register to be '1'
@@ -79,9 +87,10 @@ int getcharRS232(volatile unsigned char* ReceiverFifo, volatile unsigned char* L
     return data;
 }
 
-//
-// Remove/flush the UART receiver buffer by removing any unread characters
-//
+
+/**
+* Remove/flush the UART receiver buffer by removing any unread characters
+*/
 void RS232_Flush(volatile unsigned char* ReceiverFifo, volatile unsigned char* LineStatusReg){
     int unreadChar;
     // while bit 0 of Line Status Register == "1"
@@ -94,7 +103,9 @@ void RS232_Flush(volatile unsigned char* ReceiverFifo, volatile unsigned char* L
 
 }
 
-
+/**
+* Write a message to the transmitter FIFO buffer. Message is ended with CRLF.
+*/
 void sendMessage(char* message, volatile unsigned char* LineStatusReg, volatile unsigned char* TransmitterFifo){
 	printf("send:%s\n",message);
 		for(int i = 0; i < strlen(message); i++){
@@ -104,6 +115,9 @@ void sendMessage(char* message, volatile unsigned char* LineStatusReg, volatile 
 	putcharRS232('\n', LineStatusReg,TransmitterFifo);
 }
 
+/**
+* Write a message to the transmitter FIFO buffer. Message is without CRLF ending.
+*/
 void sendMultiChar(char* message, volatile unsigned char* LineStatusReg, volatile unsigned char* TransmitterFifo){
 	printf("send:%s\n",message);
 	for(int i = 0; i < strlen(message); i ++){
@@ -112,7 +126,9 @@ void sendMultiChar(char* message, volatile unsigned char* LineStatusReg, volatil
 
 }
 
-
+/**
+* Read an incoming message from the receiver FIFO buffer with waiting.
+*/
 int receiveBuffer(char * res, volatile unsigned char* LineStatusReg, volatile unsigned char* ReceiverFifo) {
 	int j;
 	int bytes_received = 0;
@@ -128,7 +144,9 @@ int receiveBuffer(char * res, volatile unsigned char* LineStatusReg, volatile un
 	return bytes_received;
 }
 
-
+/**
+* Read an incoming message from the receiver FIFO buffer without waiting.
+*/
 int getSignal(char * res, volatile unsigned char* LineStatusReg, volatile unsigned char* ReceiverFifo) {
 	int j;
 	int bytes_received = 0;
