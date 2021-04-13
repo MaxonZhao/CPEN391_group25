@@ -6,12 +6,6 @@ module render(
            input logic [3:0] slave_address,
            input logic slave_read, output logic [31:0] slave_readdata,
            input logic slave_write, input logic [31:0] slave_writedata,
-
-        //    // master (memory-facing) (REMOVE IF NOT USED AT THE END)
-        //    input logic master_waitrequest,
-        //    output logic [31:0] master_address,
-        //    output logic master_read, input logic [31:0] master_readdata, input logic master_readdatavalid,
-        //    output logic master_write, output logic [31:0] master_writedata
            
            // VGA pins
             output logic [7:0] VGA_R, output logic [7:0] VGA_G,  output logic [7:0] VGA_B,   
@@ -24,7 +18,6 @@ module render(
     wire [8:0] y;
     reg [7:0] red_out, green_out, blue_out;
 
-    // TODO: Set proper color ouptut: multiply X_out by 85 (255/3 = 85)
 
     // The video driver has active high reset!
     video_driver #(.WIDTH(320), .HEIGHT(240))
