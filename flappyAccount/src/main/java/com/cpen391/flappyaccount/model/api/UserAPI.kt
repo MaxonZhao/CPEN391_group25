@@ -11,19 +11,34 @@ import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import timber.log.Timber
 
+/**
+    Backend API class to interact with cloud database in Firebase
+
+    @note: object in kotlin is the same as having as many static methods in a class in java
+    @author Yuefeng Zhao
+ */
 object UserAPI {
+
+    /**
+     *  @params:
+     *      String username: name of the user, it should be unique and contains no white space
+     *      String password: password of the user, contains a special character
+     *  @return:
+     *      an Observable object wrapped with LoginStatus(see Const.kt). This is a standard
+     *      usage of RxJava to perform asynchronous task
+     */
     fun login(username: String, password: String): Observable<LoginStatus> {
-        return Observable.create<LoginStatus> { emitter: ObservableEmitter<LoginStatus> ->
+        return Observable.create { emitter: ObservableEmitter<LoginStatus> ->
 
             val checkUser: Query = UserEntity.mUserRef.orderByChild("userName").equalTo(username)
 
+            // firebase api listening to remote data resource
             checkUser.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         val passwordFromDB = snapshot.child(username).child("password").value
 
-                        Timber.d("fetched password is: " + passwordFromDB)
-                        if (passwordFromDB!!.equals(password)) {
+                        if (passwordFromDB!! == password) {
                             Timber.d("login success")
                             emitter.onNext(LoginStatus(LOGIN_SUCCEED))
                         } else {
@@ -46,6 +61,12 @@ object UserAPI {
         }
     }
 
+    /**
+     *  @params:
+     *      User user: an user object to register to the remote database
+     *  @return:
+     *      an Observable object wrapped with Boolean(see Const.kt) to signify if registration is successful
+     */
     fun registerUser(user: User): Observable<Boolean> {
         return Observable.create<Boolean> { emitter: ObservableEmitter<Boolean> ->
             UserEntity.mUserRef.child(user.userName).setValue(user).apply {
@@ -67,6 +88,12 @@ object UserAPI {
     }
 
 
+    /**
+     *  @params:
+     *      User user: an user object to register to the remote database
+     *  @return:
+     *      an Observable object wrapped with Boolean(see Const.kt) to signify if registration is successful
+     */
     fun findUser(username: String): Observable<User> {
         var user: User?
         return Observable.create { emitter: ObservableEmitter<User> ->
@@ -118,7 +145,6 @@ object UserAPI {
 
     fun updateTopThreeScore(user: User, topThreeScore: List<Long>): Observable<Boolean> {
         user.top_three_scores = topThreeScore
-        Timber.d("The top three scores of user ${user.userName} is $topThreeScore")
         return registerUser(user);
     }
 }

@@ -73,9 +73,7 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
 
             userFoundByUsername.observe(owner) {
                 if (!it.isNullUser()) {
-
                     LoggedInUser.instance?.setUser(it)
-                    Timber.d("-------------------  ${LoggedInUser.instance?.getUser()}")
                     startActivity(Intent(applicationContext, SingleGameStartActivity::class.java))
                 }
             }

@@ -22,9 +22,7 @@
         <activity
             android:name=".activity.ForgetPasswordActivity"
             android:launchMode="singleTop" />
-        <activity
-            android:name=".activity.StartActivity"
-            android:launchMode="singleTask" />
+
         <activity
             android:name=".activity.ResetPasswordActivity"
             android:launchMode="singleTop" />
