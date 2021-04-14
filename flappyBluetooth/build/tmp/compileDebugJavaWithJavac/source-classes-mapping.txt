@@ -1,0 +1,18 @@
+com/cpen391/flappybluetooth/DataBindingTriggerClass.java
+ com.cpen391.flappybluetooth.DataBindingTriggerClass
+com/cpen391/flappybluetooth/BR.java
+ com.cpen391.flappybluetooth.BR
+com/cpen391/flappybluetooth/DataBinderMapperImpl.java
+ com.cpen391.flappybluetooth.DataBinderMapperImpl
+ com.cpen391.flappybluetooth.DataBinderMapperImpl$InnerBrLookup
+ com.cpen391.flappybluetooth.DataBinderMapperImpl$InnerLayoutIdLookup
+com/cpen391/flappybluetooth/databinding/DeviceAdapterViewBinding.java
+ com.cpen391.flappybluetooth.databinding.DeviceAdapterViewBinding
+androidx/databinding/library/baseAdapters/BR.java
+ androidx.databinding.library.baseAdapters.BR
+com/cpen391/flappybluetooth/BuildConfig.java
+ com.cpen391.flappybluetooth.BuildConfig
+androidx/databinding/DataBindingComponent.java
+ androidx.databinding.DataBindingComponent
+com/cpen391/flappybluetooth/databinding/ActivityHomeBinding.java
+ com.cpen391.flappybluetooth.databinding.ActivityHomeBinding

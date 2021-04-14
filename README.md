@@ -12,7 +12,7 @@ This repo is our term project for CPEN 391 hardware/software integration project
 
 **Semantic Commit Messages**  <br />
     See how a minor change to your commit message style can make you a better programmer.  <br />
-
+    
     Format: <type>(<scope>): <subject>       
 
     <scope> is optional
@@ -33,3 +33,4 @@ This repo is our term project for CPEN 391 hardware/software integration project
     refactor: (refactoring production code, eg. renaming a variable)     
     test: (adding missing tests, refactoring tests; no production code change)   
     chore: (updating grunt tasks etc; no production code change)    
+

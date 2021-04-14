@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="60dp">
+
+    <ImageView
+        android:id="@+id/bluetooth_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bluetooth_on_64" />
+
+    <ImageView
+        android:layout_marginTop="30dp"
+        android:id="@+id/btnsPress"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:src="@drawable/bird_red" />
+
+</LinearLayout>

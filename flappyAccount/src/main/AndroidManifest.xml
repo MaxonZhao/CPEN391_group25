@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cpen391.flappyaccount">
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!--    permission to access user's location-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application>
+        <activity
+            android:name=".activity.VerifyOTPActivity"
+            android:launchMode="singleTop">
+
+        </activity>
+        <activity
+            android:name=".activity.ResetPasswordSuccessActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.ForgetPasswordActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".activity.ResetPasswordActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.SignUpActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:launchMode="singleTop" />
+        <activity
+            android:name="com.cpen391.flappyUI.SingleGameStartActivity"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name="com.cpen391.flappybluetooth.activity.MainActivity"
+            android:launchMode="singleTask" />
+
+        <activity android:name="com.cpen391.flappyUI.EndGamePointActivity" />
+        <activity android:name="com.cpen391.flappyUI.PersonalDataActivity" />
+        <activity android:name="com.cpen391.flappyVoiceRecording.VoiceControlActivity" />
+        <activity android:name="com.cpen391.flappyUI.TappingActivity" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.cpen391.flappyUI.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+    </application>
+
+</manifest>

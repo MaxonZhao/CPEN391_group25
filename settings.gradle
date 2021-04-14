@@ -1,0 +1,5 @@
+rootProject.name = "flappyBird"
+include ':flappyAccount'
+include ':businessBase'
+include ':appBase'
+include ':app'
