@@ -4,7 +4,6 @@ import com.cpen391.flappyaccount.consts.LoginStatus
 import com.cpen391.flappyaccount.model.api.UserAPI
 import com.cpen391.flappyaccount.model.bean.User
 import com.cpen391.flappyaccount.model.source.UserDataSource
-import com.cpen391.flappyaccount.model.source.repository.UserRepository
 import io.reactivex.Observable
 
 class RemoteUserDataSource : UserDataSource {

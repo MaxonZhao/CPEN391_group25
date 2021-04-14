@@ -1,28 +1,31 @@
 package com.cpen391.flappyUI
 
-class GameSettings private constructor(){
+class GameSettings private constructor() {
     private var controlMethod: Boolean = true //tapping
     private var birdColor: String = String()
     private var diffLevel: String = String()
     private var gameSettingsToBlueTooth: String = String()
-    fun getControlMethod() : Boolean{
+    fun getControlMethod(): Boolean {
         return controlMethod
     }
-    fun setControlMethod(controlMethod: Boolean){
+
+    fun setControlMethod(controlMethod: Boolean) {
         this@GameSettings.controlMethod = controlMethod
     }
 
-    fun getBirdColor() : String{
+    fun getBirdColor(): String {
         return birdColor
     }
-    fun setBirdColor(color: String){
+
+    fun setBirdColor(color: String) {
         birdColor = color
     }
 
-    fun getDiffLevel() : String{
+    fun getDiffLevel(): String {
         return diffLevel
     }
-    fun setDiffLevel(diffLevel: String){
+
+    fun setDiffLevel(diffLevel: String) {
         this@GameSettings.diffLevel = diffLevel
     }
 
@@ -37,6 +40,7 @@ class GameSettings private constructor(){
     companion object {
         @Volatile
         private var mInstance: GameSettings? = null
+
         @JvmStatic
         val instance: GameSettings?
             get() {

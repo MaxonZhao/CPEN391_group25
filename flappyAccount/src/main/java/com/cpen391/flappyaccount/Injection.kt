@@ -7,9 +7,9 @@ import com.cpen391.flappyaccount.model.source.repository.UserRepository
 object Injection {
 
     fun provideUserRepository(): UserRepository {
-        return UserRepository.getInstance (
-                    RemoteUserDataSource.INSTANCE,
-                    LocalUserDataSource.INSTANCE
+        return UserRepository.getInstance(
+            RemoteUserDataSource.INSTANCE,
+            LocalUserDataSource.INSTANCE
         )
     }
 }

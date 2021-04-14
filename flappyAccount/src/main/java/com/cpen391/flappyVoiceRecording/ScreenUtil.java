@@ -8,7 +8,8 @@ import android.view.WindowManager;
 public class ScreenUtil {
     private ScreenUtil() {
     }
-    public static float getDensity(Context context){
+
+    public static float getDensity(Context context) {
         if (context instanceof Activity) {
             context = context.getApplicationContext();
         }

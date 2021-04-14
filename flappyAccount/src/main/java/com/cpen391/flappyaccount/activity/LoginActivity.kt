@@ -10,10 +10,11 @@ import androidx.lifecycle.observe
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyUI.LoggedInUser
 import com.cpen391.flappyUI.SingleGameStartActivity
-import com.cpen391.flappyaccount.consts.*
+import com.cpen391.flappyaccount.consts.LOGIN_INCORRECT_PASSWORD
+import com.cpen391.flappyaccount.consts.LOGIN_SUCCEED
+import com.cpen391.flappyaccount.consts.LOGIN_USERNOTFOUND
 import com.cpen391.flappyaccount.databinding.ActivityLoginBinding
 import com.cpen391.flappyaccount.viewmodel.LoginViewModel
-import com.cpen391.flappybluetooth.activity.MainActivity
 import timber.log.Timber
 
 class LoginActivity : MvvmActivity<ActivityLoginBinding>() {

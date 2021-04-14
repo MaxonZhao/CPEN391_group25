@@ -1,6 +1,5 @@
 package com.cpen391.flappyaccount.viewmodel
 
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.cpen391.appbase.network.SimpleObserver
 import com.cpen391.appbase.ui.mvvm.BaseViewModel
@@ -19,12 +18,14 @@ class SignUpViewModel : BaseViewModel() {
     val phoneNoHasError: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val passwordHasError: MutableLiveData<String> = MutableLiveData<String>()
 
-    fun registerUser(fullName: String,
-                     username: String,
-                     email: String,
-                     phoneNo: String,
-                     password: String,
-                     countryCode: String) {
+    fun registerUser(
+        fullName: String,
+        username: String,
+        email: String,
+        phoneNo: String,
+        password: String,
+        countryCode: String
+    ) {
 
         val user: User = User(
             fullName,
@@ -35,9 +36,9 @@ class SignUpViewModel : BaseViewModel() {
         )
 
         val isValidated: Boolean =
-            validateFullName(fullName)    &&
-                    validateUserName(username)    &&
-                    validateEmail(email)       &&
+            validateFullName(fullName) &&
+                    validateUserName(username) &&
+                    validateEmail(email) &&
                     validatePhoneNumber(phoneNo) &&
                     validatePassword(password)
 
@@ -130,7 +131,7 @@ class SignUpViewModel : BaseViewModel() {
 //                REGEX_AT_LEAST_1_UPPERCASE +                // at least 1 upper case letter
                 REGEX_ANY_FOUR_OR_MORE_LETTERS +          // any 4 or more letter
                 REGEX_AT_LEAST_ONE_SPECIAL_CHARACTER +    // at least 1 special character
-                REGEX_NO_WHITE_SPACE   +                  // no white space
+                REGEX_NO_WHITE_SPACE +                  // no white space
                 REGEX_END
 
         val regex: Regex = Regex(passwordVal)

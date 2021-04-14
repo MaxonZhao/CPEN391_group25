@@ -15,7 +15,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         ndk {
-            ndk.abiFilters 'armeabi-v7a','arm64-v8a', 'x86'
+            ndk.abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86'
         }
 
     }
@@ -52,7 +52,7 @@ android {
 
 repositories {
     flatDir {
-        dirs 'libs', '../../businessBase/libs','../../appBase/libs', '../../moduleDemo/libs'
+        dirs 'libs', '../../businessBase/libs', '../../appBase/libs', '../../moduleDemo/libs'
     }
 }
 

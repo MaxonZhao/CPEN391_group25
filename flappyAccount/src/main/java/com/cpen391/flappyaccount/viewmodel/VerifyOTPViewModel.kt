@@ -36,6 +36,7 @@ class VerifyOTPViewModel : BaseViewModel() {
             }
         }
     }
+
     fun sendVerificationCodeToUser(phoneNo: String, context: Context) {
         val options = PhoneAuthOptions.newBuilder(FirebaseAuth.getInstance())
             .setPhoneNumber(phoneNo)       // Phone number to verify
@@ -47,19 +48,20 @@ class VerifyOTPViewModel : BaseViewModel() {
     }
 
     fun signInWithPhoneAuthCredential(context: Context, code: String) {
-        val credential: PhoneAuthCredential = PhoneAuthProvider.getCredential(VerifyOTPActivity.verificationId, code)
+        val credential: PhoneAuthCredential =
+            PhoneAuthProvider.getCredential(VerifyOTPActivity.verificationId, code)
         FirebaseAuth.getInstance().signInWithCredential(credential)
             .addOnCompleteListener(context as Activity) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Timber.d( "signInWithCredential:success")
+                    Timber.d("signInWithCredential:success")
 
                     val user = task.result?.user
                     Timber.d("verification success --" + user.toString())
                     verificationCompleted.value = true
                 } else {
                     // Sign in failed, display a message and update the UI
-                    Timber.d( task.exception)
+                    Timber.d(task.exception)
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         // The verification code entered was invalid
                     }

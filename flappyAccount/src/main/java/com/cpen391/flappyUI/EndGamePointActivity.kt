@@ -8,7 +8,7 @@ import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyaccount.databinding.ActivityEndGamePointBinding
 import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil
 
-class EndGamePointActivity : MvvmActivity<ActivityEndGamePointBinding>(){
+class EndGamePointActivity : MvvmActivity<ActivityEndGamePointBinding>() {
     private val context: Context = this
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +25,7 @@ class EndGamePointActivity : MvvmActivity<ActivityEndGamePointBinding>(){
                 startActivity(Intent(context, SingleGameStartActivity::class.java))
                 finish()
             }
-            profileIcon.setOnClickListener{
+            profileIcon.setOnClickListener {
                 startActivity(Intent(context, PersonalDataActivity::class.java))
             }
         }

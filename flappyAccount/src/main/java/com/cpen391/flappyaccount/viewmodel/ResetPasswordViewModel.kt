@@ -12,13 +12,17 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 class ResetPasswordViewModel : BaseViewModel() {
-    val newPasswordHasError : MutableLiveData<String> = MutableLiveData()
+    val newPasswordHasError: MutableLiveData<String> = MutableLiveData()
     val confirmPasswordHasError: MutableLiveData<String> = MutableLiveData()
     val resetPasswordResult: MutableLiveData<Boolean> = MutableLiveData()
 
 
-    fun resetPassword(user:User, newPassword: String, confirmPassword: String) {
-        if (validateNewPassword(newPassword) && validateConfirmPassword(newPassword, confirmPassword)) {
+    fun resetPassword(user: User, newPassword: String, confirmPassword: String) {
+        if (validateNewPassword(newPassword) && validateConfirmPassword(
+                newPassword,
+                confirmPassword
+            )
+        ) {
             Injection.provideUserRepository().resetPassword(user, newPassword)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -38,7 +42,7 @@ class ResetPasswordViewModel : BaseViewModel() {
     }
 
 
-    private fun validateNewPassword(password: String): Boolean{
+    private fun validateNewPassword(password: String): Boolean {
 
         val passwordVal: String = REGEX_START +
 //                REGEX_AT_LEAST_1_DIGIT +                    // at least 1 digit
@@ -46,7 +50,7 @@ class ResetPasswordViewModel : BaseViewModel() {
 //                REGEX_AT_LEAST_1_UPPERCASE +                // at least 1 upper case letter
                 REGEX_ANY_FOUR_OR_MORE_LETTERS +          // any 4 or more letter
                 REGEX_AT_LEAST_ONE_SPECIAL_CHARACTER +    // at least 1 special character
-                REGEX_NO_WHITE_SPACE   +                  // no white space
+                REGEX_NO_WHITE_SPACE +                  // no white space
                 REGEX_END
 
         val regex: Regex = Regex(passwordVal)

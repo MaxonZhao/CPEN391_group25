@@ -267,7 +267,8 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(Boolean aBoolean) {
                 if (BluetoothConnectionService.connected.getValue() == true)
                     Toast.makeText(getApplicationContext(), "connection established!", Toast.LENGTH_SHORT).show();
-                else Toast.makeText(getApplicationContext(), "connection failed!", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(getApplicationContext(), "connection failed!", Toast.LENGTH_SHORT).show();
             }
         });
 

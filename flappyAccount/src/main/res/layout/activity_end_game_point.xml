@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".activity.SignUpActivity"
     android:padding="60dp">
+
     <ImageView
         android:clickable="true"
         android:id="@+id/profile_icon"
@@ -19,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/good_job"
-        android:layout_gravity ="center"
+        android:layout_gravity="center"
         android:fontFamily="@font/bungee"
         android:textSize="35sp" />
 
@@ -28,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/you_got"
-        android:layout_gravity ="center"
+        android:layout_gravity="center"
         android:fontFamily="@font/bungee"
         android:textSize="25sp" />
 
@@ -36,7 +37,7 @@
         android:id="@+id/currentGameScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity ="center"
+        android:layout_gravity="center"
         android:fontFamily="@font/bungee"
         android:textSize="25sp" />
 
@@ -45,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/points"
-        android:layout_gravity ="center"
+        android:layout_gravity="center"
         android:fontFamily="@font/bungee"
         android:textSize="25sp" />
 

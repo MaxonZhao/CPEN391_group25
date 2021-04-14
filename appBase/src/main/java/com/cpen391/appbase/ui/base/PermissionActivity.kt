@@ -13,7 +13,7 @@ import androidx.viewbinding.ViewBinding
 import com.cpen391.appbase.permissions.PermissionsInterface
 import com.cpen391.appbase.ui.binding.BaseBindingActivity
 import timber.log.Timber
-import java.util.ArrayList
+import java.util.*
 
 abstract class PermissionActivity<T : ViewBinding> : BaseBindingActivity<T>(),
     PermissionsInterface {
@@ -69,7 +69,7 @@ abstract class PermissionActivity<T : ViewBinding> : BaseBindingActivity<T>(),
         if (permissions.isNullOrEmpty()) {
             return null
         }
-        val needRequestPermissionList: MutableList< String> =
+        val needRequestPermissionList: MutableList<String> =
             ArrayList()
         for (permission in permissions) {
             Timber.i(

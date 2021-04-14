@@ -54,7 +54,7 @@ android {
 
 repositories {
     flatDir {
-        dirs 'libs', '../../businessBase/libs','../../appBase/libs', '../../flappyAccount/libs'
+        dirs 'libs', '../../businessBase/libs', '../../appBase/libs', '../../flappyAccount/libs'
     }
 }
 

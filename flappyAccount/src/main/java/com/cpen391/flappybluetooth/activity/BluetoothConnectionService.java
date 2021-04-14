@@ -6,16 +6,12 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
-
-import com.cpen391.flappyUI.EndGamePointActivity;
-import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -263,9 +259,9 @@ public class BluetoothConnectionService {
                         getReadyToStart.postValue(true);
 
                     try {
-                        if(incomingMessage.charAt(0) != 'e' ||
+                        if (incomingMessage.charAt(0) != 'e' ||
                                 incomingMessage.charAt(1) != 'n' ||
-                                incomingMessage.charAt(2) != 'd')  continue;
+                                incomingMessage.charAt(2) != 'd') continue;
                         int score = incomingMessage.charAt(3);
 
                         handler.post(new Runnable() {
@@ -281,7 +277,8 @@ public class BluetoothConnectionService {
                         });
                         break;
 
-                    } catch (Exception e) { }
+                    } catch (Exception e) {
+                    }
 
                     Log.d(TAG, "InputStream: " + incomingMessage);
 

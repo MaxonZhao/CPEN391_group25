@@ -17,12 +17,12 @@ import com.cpen391.flappyaccount.databinding.ActivitySingleGameStartBinding
 import com.cpen391.flappyaccount.viewmodel.GameSettingsViewModel
 import com.cpen391.flappybluetooth.activity.MainActivity.actionStart
 
-class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
+class SingleGameStartActivity : MvvmActivity<ActivitySingleGameStartBinding>() {
 
     private val context: Context = this
     private val gameSettingaViewModel by viewModels<GameSettingsViewModel>()
-    private lateinit var spinner : Spinner
-    private lateinit var myIntent:Intent
+    private lateinit var spinner: Spinner
+    private lateinit var myIntent: Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +49,7 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
                 gameSettingaViewModel.onDiffLevelRadioButtonClicked(findViewById(R.id.diff_level_radio_btn))
                 gameSettingaViewModel.onRadioButtonClicked(findViewById(R.id.radio_btn))
             }
-            profileIcon.setOnClickListener{
+            profileIcon.setOnClickListener {
                 startActivity(myIntent)
             }
         }
@@ -70,22 +70,21 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
         }
     }
 
-    private fun tappingOrVoice(isTapped: Boolean){
+    private fun tappingOrVoice(isTapped: Boolean) {
         var loginMode: String
-        if(LoggedInUser.instance?.isLogin() == true){
+        if (LoggedInUser.instance?.isLogin() == true) {
             loginMode = "p"
-        }
-        else{
+        } else {
             loginMode = "g"
         }
         System.out.println(isTapped)
         GameSettings.instance?.setControlMethod(isTapped)
         val birdColor = GameSettings.instance?.getBirdColor()
-        when(isTapped){
+        when (isTapped) {
             true -> actionStart(
                 context,
-                GameSettings.instance?.getBirdColor()?.substring(0,1),
-                GameSettings.instance?.getBirdColor()?.substring(1,2),
+                GameSettings.instance?.getBirdColor()?.substring(0, 1),
+                GameSettings.instance?.getBirdColor()?.substring(1, 2),
                 GameSettings.instance?.getDiffLevel(),
                 loginMode,
                 true,
@@ -93,8 +92,8 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
             )
             false -> actionStart(
                 context,
-                GameSettings.instance?.getBirdColor()?.substring(0,1),
-                GameSettings.instance?.getBirdColor()?.substring(1,2),
+                GameSettings.instance?.getBirdColor()?.substring(0, 1),
+                GameSettings.instance?.getBirdColor()?.substring(1, 2),
                 GameSettings.instance?.getDiffLevel(),
                 loginMode,
                 false,
@@ -108,10 +107,12 @@ class SingleGameStartActivity: MvvmActivity<ActivitySingleGameStartBinding>() {
     }
 
 
-
-    class CustomOnItemSelectedListener(private val imageIntent: Intent, private val img: ImageView) : Activity(), AdapterView.OnItemSelectedListener {
+    class CustomOnItemSelectedListener(
+        private val imageIntent: Intent,
+        private val img: ImageView
+    ) : Activity(), AdapterView.OnItemSelectedListener {
         override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-            when(parent.getItemAtPosition(pos).toString()){
+            when (parent.getItemAtPosition(pos).toString()) {
 
                 "Red" -> {
                     img.setImageResource(R.drawable.bird_red)

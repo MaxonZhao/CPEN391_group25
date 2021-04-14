@@ -10,7 +10,7 @@ buildscript {
         minSdkVersion = 26
         targetSdkVersion = 28
         versionCode = 1
-        
+
         versionName = "1.0.0"
         androidPluginVersion = '4.1.2'
         kotlinVersion = '1.4.21'
@@ -30,12 +30,12 @@ buildscript {
         supportVersion = "1.0.0"
         recyclerviewVersion = "1.1.0"
         retrofitVersion = "2.9.0"
-        okhttpVersion="4.8.1"
-        gsonVersion="2.8.6"
-        rxjavaVersion="2.2.19"
-        rxandroidVersion="2.1.1"
-        lifecycleVersion="2.2.0"
-        stethoVersion="1.5.1"
+        okhttpVersion = "4.8.1"
+        gsonVersion = "2.8.6"
+        rxjavaVersion = "2.2.19"
+        rxandroidVersion = "2.1.1"
+        lifecycleVersion = "2.2.0"
+        stethoVersion = "1.5.1"
         leakcanaryVersion = "2.4"
         arouterVersion = "1.5.1"
         arouterRegisterVersion = "1.0.2"

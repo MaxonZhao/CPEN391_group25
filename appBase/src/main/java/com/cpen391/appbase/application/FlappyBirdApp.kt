@@ -4,7 +4,7 @@ import android.app.Application
 import android.util.Log
 import timber.log.Timber
 
-open class FlappyBirdApp: Application() {
+open class FlappyBirdApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -20,7 +20,7 @@ open class FlappyBirdApp: Application() {
         }
     }
 
-    private class ReleaseTree: Timber.DebugTree() {
+    private class ReleaseTree : Timber.DebugTree() {
         override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
             if (priority == Log.VERBOSE || priority == Log.DEBUG) return
             super.log(priority, tag, message, t)

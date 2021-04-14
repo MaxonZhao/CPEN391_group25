@@ -19,7 +19,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         ndk {
-            ndk.abiFilters 'armeabi-v7a','arm64-v8a', 'x86'
+            ndk.abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86'
         }
     }
 
@@ -72,7 +72,6 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
     implementation 'com.google.firebase:firebase-auth:20.0.3'
     implementation "androidx.browser:browser:1.2.0"
-
 
 
     testImplementation "junit:junit:$junitVersion"

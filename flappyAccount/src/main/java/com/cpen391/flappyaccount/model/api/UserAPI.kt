@@ -1,9 +1,6 @@
 package com.cpen391.flappyaccount.model.api
 
-import android.content.Intent
-import android.widget.Toast
 import com.cpen391.businessbase.network.remoteEntity.UserEntity
-import com.cpen391.flappyaccount.activity.StartActivity
 import com.cpen391.flappyaccount.consts.*
 import com.cpen391.flappyaccount.model.bean.User
 import com.google.firebase.database.DataSnapshot
@@ -13,15 +10,14 @@ import com.google.firebase.database.ValueEventListener
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import timber.log.Timber
-import java.util.*
 
 object UserAPI {
-    fun login(username: String, password: String) : Observable<LoginStatus> {
+    fun login(username: String, password: String): Observable<LoginStatus> {
         return Observable.create<LoginStatus> { emitter: ObservableEmitter<LoginStatus> ->
 
             val checkUser: Query = UserEntity.mUserRef.orderByChild("userName").equalTo(username)
 
-            checkUser.addListenerForSingleValueEvent (object: ValueEventListener {
+            checkUser.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         val passwordFromDB = snapshot.child(username).child("password").value
@@ -50,9 +46,9 @@ object UserAPI {
         }
     }
 
-    fun registerUser(user: User) : Observable<Boolean> {
+    fun registerUser(user: User): Observable<Boolean> {
         return Observable.create<Boolean> { emitter: ObservableEmitter<Boolean> ->
-            UserEntity.mUserRef.child(user.userName).setValue(user).apply{
+            UserEntity.mUserRef.child(user.userName).setValue(user).apply {
                 addOnSuccessListener {
                     emitter.apply {
                         onNext(true)
@@ -71,11 +67,11 @@ object UserAPI {
     }
 
 
-    fun findUser(username: String) : Observable<User> {
+    fun findUser(username: String): Observable<User> {
         var user: User? = null
         return Observable.create { emitter: ObservableEmitter<User> ->
             val checkUser: Query = UserEntity.mUserRef.orderByChild("userName").equalTo(username)
-            checkUser.addListenerForSingleValueEvent (object: ValueEventListener {
+            checkUser.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
 
@@ -85,8 +81,17 @@ object UserAPI {
                             val password = child("password").value as String
                             val phoneNo = child("phoneNo").value as String
                             val currentScore: Long = child("current_score").value as Long
-                            val topThreeScores: List<Long> = child("top_three_scores").value as List<Long>
-                            user = User(fullName, username, email, phoneNo, password, currentScore, topThreeScores)
+                            val topThreeScores: List<Long> =
+                                child("top_three_scores").value as List<Long>
+                            user = User(
+                                fullName,
+                                username,
+                                email,
+                                phoneNo,
+                                password,
+                                currentScore,
+                                topThreeScores
+                            )
                             emitter.onNext(user!!)
                         }
                     } else {

@@ -10,8 +10,6 @@
     android:padding="20dp">
 
 
-
-
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="159dp"
         android:layout_height="116dp"
@@ -78,8 +76,7 @@
             android:elevation="0dp"
             android:textColor="#9F9B9B"
             android:textSize="12sp"
-            android:text="@string/forget_password_q"
-            />
+            android:text="@string/forget_password_q" />
 
         <Button
             android:id="@+id/login_btn"
@@ -93,7 +90,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/guest_btn"

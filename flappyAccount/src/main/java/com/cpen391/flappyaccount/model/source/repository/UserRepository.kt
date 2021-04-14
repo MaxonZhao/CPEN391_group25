@@ -36,10 +36,10 @@ class UserRepository private constructor(
     companion object {
         private lateinit var INSTANCE: UserRepository
 
-        fun getInstance (
+        fun getInstance(
             remoteUserDataSource: RemoteUserDataSource,
             localUserDataSource: LocalUserDataSource
-        ) : UserRepository {
+        ): UserRepository {
             if (!::INSTANCE.isInitialized) {
                 INSTANCE = UserRepository(remoteUserDataSource, localUserDataSource)
             }

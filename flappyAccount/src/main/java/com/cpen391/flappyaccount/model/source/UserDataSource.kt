@@ -5,13 +5,13 @@ import com.cpen391.flappyaccount.model.bean.User
 import io.reactivex.Observable
 
 interface UserDataSource {
-    fun login(username: String, password: String) : Observable<LoginStatus>
+    fun login(username: String, password: String): Observable<LoginStatus>
 
-    fun registerUser(user: User) : Observable<Boolean>
+    fun registerUser(user: User): Observable<Boolean>
 
-    fun findUser(username: String) : Observable<User>
+    fun findUser(username: String): Observable<User>
 
-    fun resetPassword(user: User, newPassword: String) : Observable<Boolean>
+    fun resetPassword(user: User, newPassword: String): Observable<Boolean>
 
-    fun updateTopThreeScore(user: User, scores: List<Long>) : Observable<Boolean>
+    fun updateTopThreeScore(user: User, scores: List<Long>): Observable<Boolean>
 }

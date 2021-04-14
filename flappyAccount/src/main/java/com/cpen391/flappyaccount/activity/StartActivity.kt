@@ -13,11 +13,18 @@ class StartActivity : MvvmActivity<ActivityStartBinding>() {
         super.onCreate(savedInstanceState)
         val actionBar: ActionBar = supportActionBar!!
         actionBar.hide()
-        Handler().postDelayed(Runnable { startActivity(Intent(this, EndGamePointActivity :: class.java))}, 3000);
-        
+        Handler().postDelayed(Runnable {
+            startActivity(
+                Intent(
+                    this,
+                    EndGamePointActivity::class.java
+                )
+            )
+        }, 3000);
+
     }
 
-     override fun initObserver() {
+    override fun initObserver() {
 
     }
 

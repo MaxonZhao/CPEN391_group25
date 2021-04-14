@@ -14,7 +14,6 @@ import com.cpen391.flappyaccount.consts.PASSWORD_VALID
 import com.cpen391.flappyaccount.databinding.ActivityResetPasswordBinding
 import com.cpen391.flappyaccount.model.bean.User
 import com.cpen391.flappyaccount.viewmodel.ResetPasswordViewModel
-import com.cpen391.flappyaccount.viewmodel.VerifyOTPViewModel
 
 class ResetPasswordActivity : MvvmActivity<ActivityResetPasswordBinding>() {
 
@@ -62,7 +61,6 @@ class ResetPasswordActivity : MvvmActivity<ActivityResetPasswordBinding>() {
     override fun bind(): ActivityResetPasswordBinding {
         return ActivityResetPasswordBinding.inflate(layoutInflater)
     }
-
 
 
     private fun displayNewPasswordErrorState(error: String) {

@@ -1,14 +1,13 @@
 package com.cpen391.appbase.ui.base
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import timber.log.Timber
-import androidx.annotation.LayoutRes as LayoutRes
 
-abstract class BaseActivity: AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.d("${this.javaClass.name} onCreate")

@@ -40,7 +40,7 @@ class ForgetPasswordActivity : MvvmActivity<ActivityForgetPasswordBinding>() {
             if (it!!.isNullUser()) {
                 Toast.makeText(owner, "cannot find user", Toast.LENGTH_SHORT).show()
             } else {
-    //                ResetPasswordActivity.actionStart(owner, it)
+                //                ResetPasswordActivity.actionStart(owner, it)
                 VerifyOTPActivity.actionStart(owner, it!!)
             }
         }

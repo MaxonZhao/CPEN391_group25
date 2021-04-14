@@ -17,7 +17,6 @@ public class BluetoothConnectionUtil {
     }
 
 
-
     public BluetoothConnectionService getBluetoothConnection() {
         return mBluetoothConnection;
     }
