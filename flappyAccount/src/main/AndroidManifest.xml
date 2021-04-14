@@ -38,6 +38,11 @@
         <activity
             android:name="com.cpen391.flappyUI.SingleGameStartActivity"
             android:launchMode="singleTask" />
+
+        <activity
+            android:name="com.cpen391.flappybluetooth.activity.MainActivity"
+            android:launchMode="singleTask" />
+
         <activity android:name="com.cpen391.flappyUI.EndGamePointActivity" />
         <activity android:name="com.cpen391.flappyUI.PersonalDataActivity" />
         <activity android:name="com.cpen391.flappyVoiceRecording.VoiceControlActivity" />
