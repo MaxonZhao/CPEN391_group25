@@ -14,7 +14,7 @@ buildscript {
         versionName = "1.0.0"
         androidPluginVersion = '4.1.2'
         kotlinVersion = '1.4.21'
-        espressoVersion = "3.3.0"
+        espressoVersion = "3.1.0"
         junitVersion = "4.13.1"
         junitAndroidVersion = "1.1.2"
         arouterCompilerVersion = "1.2.2"

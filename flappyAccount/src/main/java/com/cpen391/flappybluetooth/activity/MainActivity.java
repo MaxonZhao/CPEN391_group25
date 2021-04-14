@@ -249,6 +249,13 @@ public class MainActivity extends AppCompatActivity {
         populatePairedDevices();
     }
 
+
+    /**
+     *  initialize observers to deal with state changes of the game, this includes:
+     *  1. notify user when a connection is established
+     *  2. send setting info to the RFS board when it's ready to send
+     *  3. direct to game control page depending on the control method (voice / tap)
+     */
     private void initObserver() {
 
         BluetoothConnectionService.connected.observe(this, new Observer<Boolean>() {
@@ -260,6 +267,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "connection failed!", Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
         BluetoothConnectionService.readyToSend.observe(this, new Observer<Boolean>() {
             @Override
@@ -295,6 +304,9 @@ public class MainActivity extends AppCompatActivity {
         BluetoothConnectionService.ended.observe(this, integer -> finish());
     }
 
+    /**
+     *  find and populate paired devices for bluetooth
+     */
     private void populatePairedDevices() {
         Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
         pairedDevices.forEach((device) -> {
@@ -369,6 +381,8 @@ public class MainActivity extends AppCompatActivity {
     public void btnDiscover(View view) {
         Timber.d("btnDiscover: Looking for unpaired devices.");
 
+
+        // if the device is in the discovery process, cancel it
         if (mBluetoothAdapter.isDiscovering()) {
             mBluetoothAdapter.cancelDiscovery();
             Timber.d("btnDiscover: Canceling discovery.");
@@ -462,6 +476,9 @@ public class MainActivity extends AppCompatActivity {
             BluetoothConnectionUtil.getInstance().setBluetoothConnection(new BluetoothConnectionService(MainActivity.this));
         }
     };
+
+
+    // static method to start the activity, it makes clear what parameters are needed for this activity
 
     public static void actionStart(Context context,
                                    String color0,

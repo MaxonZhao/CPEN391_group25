@@ -26,6 +26,8 @@ public class BluetoothConnectionService {
     private static final String appName = "BluetoothConnection";
 
     private static final UUID MY_UUID_INSECURE = UUID.fromString(UUIDs.HC05UNIVERSALUUID);
+
+    // Finite state representations to signify the current state of the game
     public static MutableLiveData<Boolean> connected = new MutableLiveData<>();
     public static MutableLiveData<Boolean> readyToSend = new MutableLiveData<>();
     public static MutableLiveData<Boolean> getReadyToStart = new MutableLiveData<>();
@@ -34,9 +36,11 @@ public class BluetoothConnectionService {
     private final BluetoothAdapter mBluetoothAdapter;
     Context mContext;
 
+    // threads for device working as server, client, and a connection manager thread
     private AcceptThread mInsecureAcceptThread;
     private ConnectThread mConnectThread;
     private ConnectedThread mConnectedThread;
+
     private BluetoothDevice mmDevice;
     private UUID deviceUUID;
 
@@ -84,7 +88,7 @@ public class BluetoothConnectionService {
                 Timber.e("AcceptThread: IOException: %s", e.getMessage());
             }
 
-            //talk about this is in the 3rd
+            // push the current connection to the connection manager thread
             if (socket != null) {
                 connected(socket, mmDevice);
             }
@@ -251,12 +255,15 @@ public class BluetoothConnectionService {
                     bytes = mmInStream.read(buffer);
                     String incomingMessage = new String(buffer, 0, bytes);
 
+                    // test against the incoming messages to signify state changes of the game
                     if (incomingMessage.contains("hello"))
                         readyToSend.postValue(true);
                     if (incomingMessage.contains("OK"))
                         getReadyToStart.postValue(true);
 
                     try {
+
+                        // when a message ends "end", it signifies a complete message is sent
                         if (incomingMessage.charAt(0) != 'e' ||
                                 incomingMessage.charAt(1) != 'n' ||
                                 incomingMessage.charAt(2) != 'd') continue;

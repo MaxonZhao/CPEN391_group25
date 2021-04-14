@@ -15,6 +15,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+/**
+ * DeviceListAdapter
+ * an adapter for the list view in bluetooth UI page, it contains
+ * an array of devices available/paired along with its name
+ * @author Yuefeng Zhao
+ */
 public class DeviceListAdapter extends ArrayAdapter<BluetoothDevice> {
 
     private final LayoutInflater mLayoutInflater;
