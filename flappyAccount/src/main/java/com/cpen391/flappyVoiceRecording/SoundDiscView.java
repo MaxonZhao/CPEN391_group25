@@ -17,7 +17,7 @@ public class SoundDiscView extends androidx.appcompat.widget.AppCompatImageView 
     private Matrix mMatrix = new Matrix();
     private Bitmap indicatorBitmap;
     private Paint paint = new Paint();
-    static final long  ANIMATION_INTERVAL = 20;
+    static final long ANIMATION_INTERVAL = 20;
 
     public SoundDiscView(Context context) {
         super(context);
@@ -33,13 +33,13 @@ public class SoundDiscView extends androidx.appcompat.widget.AppCompatImageView 
         int bitmapHeight = myBitmap.getHeight();
         newWidth = getWidth();
         newHeight = getHeight();
-        scaleWidth = ((float) newWidth) /(float) bitmapWidth;
-        scaleHeight = ((float) newHeight) /(float) bitmapHeight;
+        scaleWidth = ((float) newWidth) / (float) bitmapWidth;
+        scaleHeight = ((float) newHeight) / (float) bitmapHeight;
         mMatrix.postScale(scaleWidth, scaleHeight);
-        indicatorBitmap = Bitmap.createBitmap(myBitmap, 0, 0, bitmapWidth, bitmapHeight, mMatrix,true);
+        indicatorBitmap = Bitmap.createBitmap(myBitmap, 0, 0, bitmapWidth, bitmapHeight, mMatrix, true);
 
         paint = new Paint();
-        paint.setTextSize(22* ScreenUtil.getDensity(getContext()));
+        paint.setTextSize(22 * ScreenUtil.getDensity(getContext()));
         paint.setAntiAlias(true);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setColor(Color.WHITE);
@@ -62,11 +62,11 @@ public class SoundDiscView extends androidx.appcompat.widget.AppCompatImageView 
         }
         mMatrix.setRotate(getAngle(World.dbCount), newWidth / 2, newHeight * 215 / 460);
         canvas.drawBitmap(indicatorBitmap, mMatrix, paint);
-        canvas.drawText((int)World.dbCount+" DB", newWidth/2,newHeight*36/46, paint);
+        canvas.drawText((int) World.dbCount + " DB", newWidth / 2, newHeight * 36 / 46, paint);
     }
 
-    private float getAngle(float db){
-        return(db-85)*5/3;
+    private float getAngle(float db) {
+        return (db - 85) * 5 / 3;
     }
 
 

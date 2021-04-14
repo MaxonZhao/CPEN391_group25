@@ -19,7 +19,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         ndk {
-            ndk.abiFilters 'armeabi-v7a','arm64-v8a', 'x86'
+            ndk.abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86'
         }
     }
 
@@ -74,7 +74,6 @@ dependencies {
     implementation "androidx.browser:browser:1.2.0"
 
 
-
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$junitAndroidVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
@@ -87,6 +86,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-database-ktx'
 
     api project(':businessBase')
-    api project(':flappyBluetooth')
 
 }

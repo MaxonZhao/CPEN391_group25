@@ -10,11 +10,13 @@ import androidx.lifecycle.observe
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyUI.LoggedInUser
 import com.cpen391.flappyUI.SingleGameStartActivity
+import com.cpen391.flappyaccount.consts.LOGIN_INCORRECT_PASSWORD
+import com.cpen391.flappyaccount.consts.LOGIN_SUCCEED
+import com.cpen391.flappyaccount.consts.LOGIN_USERNOTFOUND
 import com.cpen391.flappyaccount.Injection
 import com.cpen391.flappyaccount.consts.*
 import com.cpen391.flappyaccount.databinding.ActivityLoginBinding
 import com.cpen391.flappyaccount.viewmodel.LoginViewModel
-import com.cpen391.flappybluetooth.activity.MainActivity
 import timber.log.Timber
 
 class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
@@ -73,9 +75,7 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
 
             userFoundByUsername.observe(owner) {
                 if (!it.isNullUser()) {
-
                     LoggedInUser.instance?.setUser(it)
-                    Timber.d("-------------------  ${LoggedInUser.instance?.getUser()}")
                     startActivity(Intent(applicationContext, SingleGameStartActivity::class.java))
                 }
             }
@@ -101,7 +101,7 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
 
             LOGIN_USERNOTFOUND -> {
                 binding.apply {
-                    username?.error = "Incorrect username"
+                    username.error = "Incorrect username"
                     username.requestFocus()
                 }
             }
@@ -111,20 +111,20 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
 
     private fun displayUsernameErrorState(error: Boolean) {
         when (error) {
-            true -> binding.username?.error = "Field cannot be Empty"
+            true -> binding.username.error = "Field cannot be Empty"
             false -> {
-                binding.username?.error = null
-                binding.username?.isErrorEnabled = false
+                binding.username.error = null
+                binding.username.isErrorEnabled = false
             }
         }
     }
 
     private fun displayPasswordErrorState(error: Boolean) {
         when (error) {
-            true -> binding.password?.error = "Field cannot be Empty"
+            true -> binding.password.error = "Field cannot be Empty"
             false -> {
-                binding.password?.error = null
-                binding.password?.isErrorEnabled = false
+                binding.password.error = null
+                binding.password.isErrorEnabled = false
             }
         }
     }

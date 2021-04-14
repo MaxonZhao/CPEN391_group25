@@ -1,6 +1,5 @@
 package com.cpen391.flappyaccount.viewmodel
 
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.cpen391.appbase.network.SimpleObserver
 import com.cpen391.appbase.ui.mvvm.BaseViewModel
@@ -11,6 +10,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
+/**
+ *  SignUpViewModel
+ *  contains logic operations separated form view
+ *
+ *  @note: asynchronous call to find user from remote database, implemented using RxJava
+ *
+ *
+ *  @autho Yuefeng Zhao
+ */
 class SignUpViewModel : BaseViewModel() {
     val registerResult: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val fullNameHasError: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
@@ -19,14 +27,16 @@ class SignUpViewModel : BaseViewModel() {
     val phoneNoHasError: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val passwordHasError: MutableLiveData<String> = MutableLiveData<String>()
 
-    fun registerUser(fullName: String,
-                     username: String,
-                     email: String,
-                     phoneNo: String,
-                     password: String,
-                     countryCode: String) {
+    fun registerUser(
+        fullName: String,
+        username: String,
+        email: String,
+        phoneNo: String,
+        password: String,
+        countryCode: String
+    ) {
 
-        val user: User = User(
+        val user = User(
             fullName,
             username,
             email,
@@ -35,9 +45,9 @@ class SignUpViewModel : BaseViewModel() {
         )
 
         val isValidated: Boolean =
-            validateFullName(fullName)    &&
-                    validateUserName(username)    &&
-                    validateEmail(email)       &&
+            validateFullName(fullName) &&
+                    validateUserName(username) &&
+                    validateEmail(email) &&
                     validatePhoneNumber(phoneNo) &&
                     validatePassword(password)
 
@@ -68,7 +78,7 @@ class SignUpViewModel : BaseViewModel() {
 
     private fun validateFullName(fullName: String): Boolean {
 
-        return if (fullName == null || fullName.isEmpty()) {
+        return if (fullName.isEmpty()) {
             fullNameHasError.value = true
             false
         } else {
@@ -79,10 +89,10 @@ class SignUpViewModel : BaseViewModel() {
 
 
     private fun validateUserName(username: String): Boolean {
-        val noWhitSpace: String = "^([a-zA-Z0-9!@#\$%^&*()-_=+;:'\"|~`<>?/{}]{1,16})\$"
-        val regex: Regex = Regex(noWhitSpace)
+        val noWhitSpace = "^([a-zA-Z0-9!@#\$%^&*()-_=+;:'\"|~`<>?/{}]{1,16})\$"
+        val regex = Regex(noWhitSpace)
 
-        return if (username == null || username.isEmpty()) {
+        return if (username.isEmpty()) {
             usernameHasError.value = USERNAME_EMPTY
             false
         } else if (username.length >= 15) {
@@ -98,10 +108,10 @@ class SignUpViewModel : BaseViewModel() {
     }
 
     private fun validateEmail(emailAddr: String): Boolean {
-        val emailPattern: String = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
-        val regex: Regex = Regex(emailPattern)
+        val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+        val regex = Regex(emailPattern)
 
-        return if (emailAddr == null || emailAddr.isEmpty()) {
+        return if (emailAddr.isEmpty()) {
             emailHasError.value = EMAIL_EMPTY
             false
         } else if (!emailAddr.matches(regex)) {
@@ -114,8 +124,7 @@ class SignUpViewModel : BaseViewModel() {
     }
 
     private fun validatePhoneNumber(phoneNo: String): Boolean {
-        // todo: validate phone number according to country code
-        return if (phoneNo == null || phoneNo.isEmpty()) {
+        return if (phoneNo.isEmpty()) {
             phoneNoHasError.value = true
             false
         } else {
@@ -131,13 +140,13 @@ class SignUpViewModel : BaseViewModel() {
 //                REGEX_AT_LEAST_1_UPPERCASE +                // at least 1 upper case letter
                 REGEX_ANY_FOUR_OR_MORE_LETTERS +          // any 4 or more letter
                 REGEX_AT_LEAST_ONE_SPECIAL_CHARACTER +    // at least 1 special character
-                REGEX_NO_WHITE_SPACE   +                  // no white space
+                REGEX_NO_WHITE_SPACE +                  // no white space
                 REGEX_END
 
-        val regex: Regex = Regex(passwordVal)
+        val regex = Regex(passwordVal)
 
 
-        return if (password == null || password.isEmpty()) {
+        return if (password.isEmpty()) {
             passwordHasError.value = PASSWORD_EMPTY
             false
         } else if (!password.matches(regex)) {

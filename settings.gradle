@@ -1,12 +1,5 @@
-include ':flappyBluetooth'
-include ':flappyBluetooth'
-include ':moduleApp:flappyBluetoothApp'
-include ':moduleApp:flappyAccountApp'
-include ':flappyAccount'
-include ':moduleDemo'
-include ':moduleApp:moduleDemoApp'
-include ':moduleApp'
 rootProject.name = "flappyBird"
+include ':flappyAccount'
 include ':businessBase'
 include ':appBase'
 include ':app'

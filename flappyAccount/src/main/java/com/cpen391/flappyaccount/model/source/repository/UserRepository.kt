@@ -7,6 +7,15 @@ import com.cpen391.flappyaccount.model.source.local.LocalUserDataSource
 import com.cpen391.flappyaccount.model.source.remote.RemoteUserDataSource
 import io.reactivex.Observable
 
+/**
+ *  RemoteUserDataSource
+ *  @note: standard implementation of MVVM architecture to access remote database
+ *  and backend api service
+ *
+ *  @singleton design: only one database is needed in the context of this project
+ *  @autho Yuefeng Zhao
+ */
+
 class UserRepository private constructor(
     private val remoteUserDataSource: RemoteUserDataSource,
     private val localUserDataSource: LocalUserDataSource
@@ -36,10 +45,10 @@ class UserRepository private constructor(
     companion object {
         private lateinit var INSTANCE: UserRepository
 
-        fun getInstance (
+        fun getInstance(
             remoteUserDataSource: RemoteUserDataSource,
             localUserDataSource: LocalUserDataSource
-        ) : UserRepository {
+        ): UserRepository {
             if (!::INSTANCE.isInitialized) {
                 INSTANCE = UserRepository(remoteUserDataSource, localUserDataSource)
             }

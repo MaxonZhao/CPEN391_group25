@@ -6,9 +6,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class MyMediaRecorder {
-    public File myRecAudioFile ;
-    private MediaRecorder mMediaRecorder ;
-    public boolean isRecording = false ;
+    public File myRecAudioFile;
+    private MediaRecorder mMediaRecorder;
+    public boolean isRecording = false;
 
     public float getMaxAmplitude() {
         if (mMediaRecorder != null) {
@@ -31,7 +31,7 @@ public class MyMediaRecorder {
         this.myRecAudioFile = myRecAudioFile;
     }
 
-    public boolean startRecorder(){
+    public boolean startRecorder() {
         if (myRecAudioFile == null) {
             return false;
         }
@@ -47,33 +47,33 @@ public class MyMediaRecorder {
             mMediaRecorder.start();
             isRecording = true;
             return true;
-        } catch(IOException exception) {
+        } catch (IOException exception) {
             mMediaRecorder.reset();
             mMediaRecorder.release();
             mMediaRecorder = null;
-            isRecording = false ;
+            isRecording = false;
             exception.printStackTrace();
             exception.printStackTrace();
-        }catch(IllegalStateException e){
+        } catch (IllegalStateException e) {
             stopRecording();
             e.printStackTrace();
-            isRecording = false ;
+            isRecording = false;
         }
         return false;
     }
 
     public void stopRecording() {
-        if (mMediaRecorder != null){
-            if(isRecording){
-                try{
+        if (mMediaRecorder != null) {
+            if (isRecording) {
+                try {
                     mMediaRecorder.stop();
                     mMediaRecorder.release();
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
             mMediaRecorder = null;
-            isRecording = false ;
+            isRecording = false;
         }
     }
 

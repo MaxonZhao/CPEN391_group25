@@ -14,7 +14,6 @@ import com.cpen391.flappyaccount.consts.PASSWORD_VALID
 import com.cpen391.flappyaccount.databinding.ActivityResetPasswordBinding
 import com.cpen391.flappyaccount.model.bean.User
 import com.cpen391.flappyaccount.viewmodel.ResetPasswordViewModel
-import com.cpen391.flappyaccount.viewmodel.VerifyOTPViewModel
 
 class ResetPasswordActivity : MvvmActivity<ActivityResetPasswordBinding>() {
 
@@ -30,10 +29,8 @@ class ResetPasswordActivity : MvvmActivity<ActivityResetPasswordBinding>() {
     override fun initView() {
         super.initView()
         binding.resetBtn.setOnClickListener {
-            var newPassword: String = binding.newPassword.editText?.text.toString()
-            var confirmPassword: String = binding.confirmPassword.editText?.text.toString()
-            if (newPassword == null) newPassword = ""
-            if (confirmPassword == null) confirmPassword = ""
+            val newPassword: String = binding.newPassword.editText?.text.toString()
+            val confirmPassword: String = binding.confirmPassword.editText?.text.toString()
             resetPasswordViewModel.resetPassword(userFound, newPassword, confirmPassword)
         }
         binding.backBtn.setOnClickListener {
@@ -63,7 +60,6 @@ class ResetPasswordActivity : MvvmActivity<ActivityResetPasswordBinding>() {
     }
 
 
-
     private fun displayNewPasswordErrorState(error: String) {
         when (error) {
             PASSWORD_EMPTY -> binding.newPassword.error = "Field cannot be Empty"
@@ -78,11 +74,11 @@ class ResetPasswordActivity : MvvmActivity<ActivityResetPasswordBinding>() {
 
     private fun displayConfirmPasswordErrorState(error: String) {
         when (error) {
-            PASSWORD_EMPTY -> binding.confirmPassword?.error = "Field cannot be Empty"
-            PASSWORD_NOT_MATCH -> binding.confirmPassword?.error = "Password do not match"
+            PASSWORD_EMPTY -> binding.confirmPassword.error = "Field cannot be Empty"
+            PASSWORD_NOT_MATCH -> binding.confirmPassword.error = "Password do not match"
             PASSWORD_VALID -> {
-                binding.confirmPassword?.error = null
-                binding.confirmPassword?.isErrorEnabled = false
+                binding.confirmPassword.error = null
+                binding.confirmPassword.isErrorEnabled = false
             }
         }
     }

@@ -11,5 +11,5 @@ abstract class BaseBindingFragment<T : ViewBinding> : BaseFragment() {
     protected abstract fun bind(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ) : T
+    ): T
 }

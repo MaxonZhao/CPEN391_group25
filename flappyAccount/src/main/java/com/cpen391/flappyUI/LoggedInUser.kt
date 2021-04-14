@@ -5,19 +5,23 @@ import com.cpen391.flappyaccount.model.bean.User
 class LoggedInUser private constructor() {
     private var userData: User? = null
 
-    fun getUser() : User?{
+    fun getUser(): User? {
         return userData
     }
-    fun setUser(user: User?){
+
+    fun setUser(user: User?) {
         userData = user
     }
-    fun isLogin(): Boolean{
+
+    fun isLogin(): Boolean {
         return (userData != null)
     }
+
     companion object {
 
         @Volatile
         private var mInstance: LoggedInUser? = null
+
         @JvmStatic
         val instance: LoggedInUser?
             get() {

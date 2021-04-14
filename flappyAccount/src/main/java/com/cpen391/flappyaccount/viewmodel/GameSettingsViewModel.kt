@@ -1,16 +1,14 @@
 package com.cpen391.flappyaccount.viewmodel
 
-import android.app.Activity
 import android.view.View
-import android.widget.AdapterView
-import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Spinner
 import androidx.lifecycle.MutableLiveData
 import com.cpen391.appbase.ui.mvvm.BaseViewModel
 import com.cpen391.flappyaccount.R
 
-class GameSettingsViewModel: BaseViewModel() {
+
+class GameSettingsViewModel : BaseViewModel() {
     var isTapped: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     var diffLevel: MutableLiveData<String> = MutableLiveData<String>()
     var birdColor: MutableLiveData<String> = MutableLiveData<String>()

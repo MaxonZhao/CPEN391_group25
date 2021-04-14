@@ -11,14 +11,28 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
+/**
+ *  ResetPasswordViewModel
+ *  contains logic operations separated form view
+ *
+ *  @note: asynchronous call to find user from remote database, implemented using RxJava
+ *
+ *
+ *  @autho Yuefeng Zhao
+ */
+
 class ResetPasswordViewModel : BaseViewModel() {
-    val newPasswordHasError : MutableLiveData<String> = MutableLiveData()
+    val newPasswordHasError: MutableLiveData<String> = MutableLiveData()
     val confirmPasswordHasError: MutableLiveData<String> = MutableLiveData()
     val resetPasswordResult: MutableLiveData<Boolean> = MutableLiveData()
 
 
-    fun resetPassword(user:User, newPassword: String, confirmPassword: String) {
-        if (validateNewPassword(newPassword) && validateConfirmPassword(newPassword, confirmPassword)) {
+    fun resetPassword(user: User, newPassword: String, confirmPassword: String) {
+        if (validateNewPassword(newPassword) && validateConfirmPassword(
+                newPassword,
+                confirmPassword
+            )
+        ) {
             Injection.provideUserRepository().resetPassword(user, newPassword)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -38,7 +52,7 @@ class ResetPasswordViewModel : BaseViewModel() {
     }
 
 
-    private fun validateNewPassword(password: String): Boolean{
+    private fun validateNewPassword(password: String): Boolean {
 
         val passwordVal: String = REGEX_START +
 //                REGEX_AT_LEAST_1_DIGIT +                    // at least 1 digit
@@ -46,13 +60,13 @@ class ResetPasswordViewModel : BaseViewModel() {
 //                REGEX_AT_LEAST_1_UPPERCASE +                // at least 1 upper case letter
                 REGEX_ANY_FOUR_OR_MORE_LETTERS +          // any 4 or more letter
                 REGEX_AT_LEAST_ONE_SPECIAL_CHARACTER +    // at least 1 special character
-                REGEX_NO_WHITE_SPACE   +                  // no white space
+                REGEX_NO_WHITE_SPACE +                  // no white space
                 REGEX_END
 
-        val regex: Regex = Regex(passwordVal)
+        val regex = Regex(passwordVal)
 
 
-        return if (password == null || password.isEmpty()) {
+        return if (password.isEmpty()) {
             newPasswordHasError.value = PASSWORD_EMPTY
             false
         } else if (!password.matches(regex)) {
@@ -65,15 +79,19 @@ class ResetPasswordViewModel : BaseViewModel() {
     }
 
     private fun validateConfirmPassword(password: String, newPassword: String): Boolean {
-        return if (password == null || password.isEmpty()) {
-            confirmPasswordHasError.value = PASSWORD_EMPTY
-            false
-        } else if (password != newPassword) {
-            confirmPasswordHasError.value = PASSWORD_NOT_MATCH
-            false
-        } else {
-            confirmPasswordHasError.value = PASSWORD_VALID
-            true
+        return when {
+            password.isEmpty() -> {
+                confirmPasswordHasError.value = PASSWORD_EMPTY
+                false
+            }
+            password != newPassword -> {
+                confirmPasswordHasError.value = PASSWORD_NOT_MATCH
+                false
+            }
+            else -> {
+                confirmPasswordHasError.value = PASSWORD_VALID
+                true
+            }
         }
     }
 }

@@ -5,18 +5,10 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import androidx.lifecycle.observe
-import com.cpen391.appbase.network.SimpleObserver
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
-import com.cpen391.flappyaccount.Injection
 import com.cpen391.flappyaccount.consts.*
 import com.cpen391.flappyaccount.databinding.ActivitySignupBinding
-import com.cpen391.flappyaccount.model.bean.User
 import com.cpen391.flappyaccount.viewmodel.SignUpViewModel
-import com.google.firebase.database.*
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
 
 
 class SignUpActivity : MvvmActivity<ActivitySignupBinding>() {
@@ -31,7 +23,7 @@ class SignUpActivity : MvvmActivity<ActivitySignupBinding>() {
 
     override fun initView() {
         super.initView()
-        binding.registerButton.setOnClickListener{
+        binding.registerButton.setOnClickListener {
             registerUser()
         }
     }
@@ -82,17 +74,16 @@ class SignUpActivity : MvvmActivity<ActivitySignupBinding>() {
         val password = binding.password.editText!!.text.toString()
         val countryCode = binding.countryCode.fullNumber
         val phoneNo = binding.phoneNo.editText!!.text.toString()
-        signUpViewModel.registerUser(fullName,  username, email, phoneNo, password, countryCode)
+        signUpViewModel.registerUser(fullName, username, email, phoneNo, password, countryCode)
     }
-
 
 
     private fun displayFullNameErrorState(error: Boolean) {
         when (error) {
-            true -> binding.fullName?.error = "Field cannot be Empty"
+            true -> binding.fullName.error = "Field cannot be Empty"
             false -> {
-                binding.fullName?.error = null
-                binding.fullName?.isErrorEnabled = false
+                binding.fullName.error = null
+                binding.fullName.isErrorEnabled = false
             }
         }
     }
@@ -103,8 +94,8 @@ class SignUpActivity : MvvmActivity<ActivitySignupBinding>() {
             USERNAME_TOO_LONG -> binding.username.error = "Username too long"
             USERNAME_HAS_WHITE_SPACE -> binding.username.error = "Username has white space"
             USERNAME_VALID -> {
-                binding.username?.error = null
-                binding.username?.isErrorEnabled = false
+                binding.username.error = null
+                binding.username.isErrorEnabled = false
             }
         }
     }

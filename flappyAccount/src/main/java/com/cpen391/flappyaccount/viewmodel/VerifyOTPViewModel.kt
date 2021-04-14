@@ -12,13 +12,23 @@ import com.google.firebase.auth.*
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
+/**
+ *  VerifyOTPViewModel
+ *  contains logic operations separated form view
+ *
+ *  @note: asynchronous call to find user from remote database, implemented using RxJava
+ *
+ *
+ *  @autho Yuefeng Zhao
+ */
+
 class VerifyOTPViewModel : BaseViewModel() {
 
     val verificationCompleted: MutableLiveData<Boolean> = MutableLiveData()
     private val TIMEOUT = 60L
-    var mCallback: PhoneAuthProvider.OnVerificationStateChangedCallbacks? = null
+    private var mCallback: PhoneAuthProvider.OnVerificationStateChangedCallbacks? = null
 
-    fun init(context: Context) {
+    fun init() {
 
         mCallback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(p0: PhoneAuthCredential) {
@@ -35,6 +45,7 @@ class VerifyOTPViewModel : BaseViewModel() {
             }
         }
     }
+
     fun sendVerificationCodeToUser(phoneNo: String, context: Context) {
         val options = PhoneAuthOptions.newBuilder(FirebaseAuth.getInstance())
             .setPhoneNumber(phoneNo)                    // Phone number to verify
@@ -46,22 +57,18 @@ class VerifyOTPViewModel : BaseViewModel() {
     }
 
     fun signInWithPhoneAuthCredential(context: Context, code: String) {
-        val credential: PhoneAuthCredential = PhoneAuthProvider.getCredential(VerifyOTPActivity.verificationId, code)
+        val credential: PhoneAuthCredential =
+            PhoneAuthProvider.getCredential(VerifyOTPActivity.verificationId, code)
         FirebaseAuth.getInstance().signInWithCredential(credential)
             .addOnCompleteListener(context as Activity) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Timber.d( "signInWithCredential:success")
+                    Timber.d("signInWithCredential:success")
 
-                    val user = task.result?.user
-                    Timber.d("verification success --" + user.toString())
                     verificationCompleted.value = true
                 } else {
                     // Sign in failed, display a message and update the UI
-                    Timber.d( task.exception)
-                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        // The verification code entered was invalid
-                    }
+                    Timber.d(task.exception)
                     verificationCompleted.value = false
                 }
             }

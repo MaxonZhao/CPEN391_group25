@@ -14,7 +14,6 @@ import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyaccount.Injection
 import com.cpen391.flappyaccount.R
 import com.cpen391.flappyaccount.databinding.ActivityPersonalDataBinding
-import com.cpen391.flappyaccount.model.bean.User
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -23,7 +22,7 @@ import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
 
-class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
+class PersonalDataActivity : MvvmActivity<ActivityPersonalDataBinding>() {
     private val context: Context = this
     private val currentActivity: PersonalDataActivity = this
 
@@ -36,7 +35,7 @@ class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
         val user = LoggedInUser.instance?.getUser()
 
         val birdImage: ImageView = findViewById(R.id.bird_image)
-        when(intent.getStringExtra("birdImage")){
+        when (intent.getStringExtra("birdImage")) {
             "bird_red" -> {
                 birdImage.setImageResource(R.drawable.bird_red)
             }
@@ -58,14 +57,14 @@ class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
         }
 
         binding.apply {
-            if(LoggedInUser.instance?.isLogin() == true){
+            if (LoggedInUser.instance?.isLogin() == true) {
                 val user_Name = LoggedInUser.instance?.getUser()?.fullName
                 val user_Email = LoggedInUser.instance?.getUser()?.email
                 val currentScore = LoggedInUser.instance?.getUser()?.current_score
                 val topThreeScore = LoggedInUser.instance?.getUser()?.top_three_scores
                 val historyScore = mutableListOf<Long>()
                 if (topThreeScore != null) {
-                    for(i in topThreeScore.indices){
+                    for (i in topThreeScore.indices) {
                         historyScore.add(topThreeScore[i])
                     }
                 }
@@ -93,14 +92,13 @@ class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
                         })
                 }
 
-                userName.text =  user_Name
+                userName.text = user_Name
                 userEmail.text = user_Email
                 top1Score.text = historyScore[0].toString()
                 top2Score.text = historyScore[1].toString()
                 top3Score.text = historyScore[2].toString()
-            }
-            else{
-                userName.text =  "Guest"
+            } else {
+                userName.text = "Guest"
                 userEmail.text = ""
                 top1Score.text = ""
                 top2Score.text = ""
@@ -138,8 +136,7 @@ class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
             val top3Score = LoggedInUser.instance?.getUser()?.top_three_scores
             if (userName != null && userEmail != null && currentScore != null && top3Score != null) {
                 writeBw(bw, userName, userEmail, currentScore, top3Score)
-            }
-            else{
+            } else {
                 if (currentScore != null) {
                     writeBw(bw, "Guest", "", currentScore, listOf())
                 }
@@ -158,7 +155,7 @@ class PersonalDataActivity  : MvvmActivity<ActivityPersonalDataBinding>() {
         userEmail: String,
         currentScore: Long,
         top3Score: List<Long>
-    ){
+    ) {
         bw.write("userName")
         bw.write(",")
         bw.write(userName)

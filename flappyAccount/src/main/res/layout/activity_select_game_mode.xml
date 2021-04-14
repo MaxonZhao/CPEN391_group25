@@ -30,7 +30,7 @@
         android:layout_marginTop="10dp"
         android:background="#000"
         android:elevation="0dp"
-        android:text="SINGLE MODE"
+        android:text="@string/single_mode"
         android:textColor="#fff" />
 
     <ImageView
@@ -50,7 +50,7 @@
         android:layout_marginTop="10dp"
         android:background="#000"
         android:elevation="0dp"
-        android:text="MUTIPLE MODE"
+        android:text="@string/mutiple_mode"
         android:textColor="#fff" />
 
 

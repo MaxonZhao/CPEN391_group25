@@ -30,7 +30,7 @@ class ServiceCreator private constructor() {
     }
 
     init {
-        check(!TextUtils.isEmpty(BASE_URL)) {"initBaseUrl() must be called for initialization"}
+        check(!TextUtils.isEmpty(BASE_URL)) { "initBaseUrl() must be called for initialization" }
         mRetrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // support RxJava

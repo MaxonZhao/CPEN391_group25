@@ -7,13 +7,14 @@ public class World {
     private static float lastDbCount = dbCount;
     private static float min = 0.5f;
     private static float value = 0;
+
     public static double setDbCount(float dbValue) {
         if (dbValue > lastDbCount) {
             value = dbValue - lastDbCount > min ? dbValue - lastDbCount : min;
-        }else{
+        } else {
             value = dbValue - lastDbCount < -min ? dbValue - lastDbCount : -min;
         }
-        dbCount = lastDbCount + value * 0.2f ;
+        dbCount = lastDbCount + value * 0.2f;
         lastDbCount = dbCount;
         return lastDbCount;
     }

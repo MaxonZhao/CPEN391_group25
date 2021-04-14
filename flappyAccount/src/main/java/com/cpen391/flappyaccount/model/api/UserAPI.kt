@@ -1,9 +1,6 @@
 package com.cpen391.flappyaccount.model.api
 
-import android.content.Intent
-import android.widget.Toast
 import com.cpen391.businessbase.network.remoteEntity.UserEntity
-import com.cpen391.flappyaccount.activity.StartActivity
 import com.cpen391.flappyaccount.consts.*
 import com.cpen391.flappyaccount.model.bean.User
 import com.google.firebase.database.DataSnapshot
@@ -13,21 +10,35 @@ import com.google.firebase.database.ValueEventListener
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import timber.log.Timber
-import java.util.*
 
+/**
+    Backend API class to interact with cloud database in Firebase
+
+    @note: object in kotlin is the same as having as many static methods in a class in java
+    @author Yuefeng Zhao
+ */
 object UserAPI {
-    fun login(username: String, password: String) : Observable<LoginStatus> {
-        return Observable.create<LoginStatus> { emitter: ObservableEmitter<LoginStatus> ->
+
+    /**
+     *  @params:
+     *      String username: name of the user, it should be unique and contains no white space
+     *      String password: password of the user, contains a special character
+     *  @return:
+     *      an Observable object wrapped with LoginStatus(see Const.kt). This is a standard
+     *      usage of RxJava to perform asynchronous task
+     */
+    fun login(username: String, password: String): Observable<LoginStatus> {
+        return Observable.create { emitter: ObservableEmitter<LoginStatus> ->
 
             val checkUser: Query = UserEntity.mUserRef.orderByChild("userName").equalTo(username)
 
-            checkUser.addListenerForSingleValueEvent (object: ValueEventListener {
+            // firebase api listening to remote data resource
+            checkUser.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         val passwordFromDB = snapshot.child(username).child("password").value
 
-                        Timber.d("fetched password is: " + passwordFromDB)
-                        if (passwordFromDB!!.equals(password)) {
+                        if (passwordFromDB!! == password) {
                             Timber.d("login success")
                             emitter.onNext(LoginStatus(LOGIN_SUCCEED))
                         } else {
@@ -50,9 +61,15 @@ object UserAPI {
         }
     }
 
-    fun registerUser(user: User) : Observable<Boolean> {
+    /**
+     *  @params:
+     *      User user: an user object to register to the remote database
+     *  @return:
+     *      an Observable object wrapped with Boolean(see Const.kt) to signify if registration is successful
+     */
+    fun registerUser(user: User): Observable<Boolean> {
         return Observable.create<Boolean> { emitter: ObservableEmitter<Boolean> ->
-            UserEntity.mUserRef.child(user.userName).setValue(user).apply{
+            UserEntity.mUserRef.child(user.userName).setValue(user).apply {
                 addOnSuccessListener {
                     emitter.apply {
                         onNext(true)
@@ -71,11 +88,17 @@ object UserAPI {
     }
 
 
-    fun findUser(username: String) : Observable<User> {
-        var user: User? = null
+    /**
+     *  @params:
+     *      User user: an user object to register to the remote database
+     *  @return:
+     *      an Observable object wrapped with Boolean(see Const.kt) to signify if registration is successful
+     */
+    fun findUser(username: String): Observable<User> {
+        var user: User?
         return Observable.create { emitter: ObservableEmitter<User> ->
             val checkUser: Query = UserEntity.mUserRef.orderByChild("userName").equalTo(username)
-            checkUser.addListenerForSingleValueEvent (object: ValueEventListener {
+            checkUser.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
 
@@ -85,8 +108,17 @@ object UserAPI {
                             val password = child("password").value as String
                             val phoneNo = child("phoneNo").value as String
                             val currentScore: Long = child("current_score").value as Long
-                            val topThreeScores: List<Long> = child("top_three_scores").value as List<Long>
-                            user = User(fullName, username, email, phoneNo, password, currentScore, topThreeScores)
+                            val topThreeScores: List<Long> =
+                                child("top_three_scores").value as List<Long>
+                            user = User(
+                                fullName,
+                                username,
+                                email,
+                                phoneNo,
+                                password,
+                                currentScore,
+                                topThreeScores
+                            )
                             emitter.onNext(user!!)
                         }
                     } else {
@@ -113,7 +145,6 @@ object UserAPI {
 
     fun updateTopThreeScore(user: User, topThreeScore: List<Long>): Observable<Boolean> {
         user.top_three_scores = topThreeScore
-        Timber.d("The top three scores of user ${user.userName} is $topThreeScore")
         return registerUser(user);
     }
 }

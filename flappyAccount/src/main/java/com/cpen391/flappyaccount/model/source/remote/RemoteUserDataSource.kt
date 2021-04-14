@@ -4,8 +4,16 @@ import com.cpen391.flappyaccount.consts.LoginStatus
 import com.cpen391.flappyaccount.model.api.UserAPI
 import com.cpen391.flappyaccount.model.bean.User
 import com.cpen391.flappyaccount.model.source.UserDataSource
-import com.cpen391.flappyaccount.model.source.repository.UserRepository
 import io.reactivex.Observable
+
+/**
+ *  RemoteUserDataSource
+ *  @note: standard implementation of MVVM architecture to access remote database
+ *  and backend api service
+ *
+ *  @singleton design: only one database is needed in the context of this project
+ *  @autho Yuefeng Zhao
+ */
 
 class RemoteUserDataSource : UserDataSource {
 
