@@ -8,7 +8,6 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
@@ -17,12 +16,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.UUID;
 
 import timber.log.Timber;
 
 public class BluetoothConnectionService {
-    private static final String TAG = "BluetoothConnectionServ";
 
     private static final String appName = "BluetoothConnection";
 
@@ -59,7 +58,7 @@ public class BluetoothConnectionService {
             try {
                 tmp = mBluetoothAdapter.listenUsingInsecureRfcommWithServiceRecord(appName, MY_UUID_INSECURE);
 
-                Log.d(TAG, "AcceptThread: Setting up server using: " + MY_UUID_INSECURE);
+                Timber.d("AcceptThread: Setting up server using: %s", MY_UUID_INSECURE);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -68,21 +67,21 @@ public class BluetoothConnectionService {
         }
 
         public void run() {
-            Log.d(TAG, "run: AcceptThread Running.");
+            Timber.d("run: AcceptThread Running.");
 
             BluetoothSocket socket = null;
 
             try {
                 // This is a blocking call and will only return on a
                 // successful connection or an exception
-                Log.d(TAG, "run: RFCOM server socket start.....");
+                Timber.d("run: RFCOM server socket start.....");
 
                 socket = mmServerSocket.accept();
 
-                Log.d(TAG, "run: RFCOM server socket accepted connection.");
+                Timber.d("run: RFCOM server socket accepted connection.");
 
             } catch (IOException e) {
-                Log.e(TAG, "AcceptThread: IOException: " + e.getMessage());
+                Timber.e("AcceptThread: IOException: %s", e.getMessage());
             }
 
             //talk about this is in the 3rd
@@ -90,15 +89,15 @@ public class BluetoothConnectionService {
                 connected(socket, mmDevice);
             }
 
-            Log.i(TAG, "END mAcceptThread ");
+            Timber.i("END mAcceptThread ");
         }
 
         public void cancel() {
-            Log.d(TAG, "cancel: Cancelling AcceptThread.");
+            Timber.d("cancel: Cancelling AcceptThread.");
             try {
                 mmServerSocket.close();
             } catch (IOException e) {
-                Log.e(TAG, "cancel: Close of AcceptThread ServerSocket failed. " + e.getMessage());
+                Timber.e("cancel: Close of AcceptThread ServerSocket failed. %s", e.getMessage());
             }
         }
     }
@@ -107,23 +106,22 @@ public class BluetoothConnectionService {
         private BluetoothSocket mmSocket;
 
         public ConnectThread(BluetoothDevice device, UUID uuid) {
-            Log.d(TAG, "ConnectThread: started");
+            Timber.d("ConnectThread: started");
             mmDevice = device;
             deviceUUID = uuid;
         }
 
         public void run() {
             BluetoothSocket tmp = null;
-            Log.i(TAG, "RUN mConnectThread ");
+            Timber.i("RUN mConnectThread ");
 
             // Get a BluetoothSocket for a connection with the
             // given BluetoothDevice
             try {
-                Log.d(TAG, "ConnectThread: Trying to create InsecureRfcommSocket using UUID: "
-                        + MY_UUID_INSECURE);
+                Timber.d("ConnectThread: Trying to create InsecureRfcommSocket using UUID: %s", MY_UUID_INSECURE);
                 tmp = mmDevice.createRfcommSocketToServiceRecord(deviceUUID);
             } catch (IOException e) {
-                Log.e(TAG, "ConnectThread: Could not create InsecureRfcommSocket " + e.getMessage());
+                Timber.e("ConnectThread: Could not create InsecureRfcommSocket %s", e.getMessage());
             }
 
             mmSocket = tmp;
@@ -138,7 +136,7 @@ public class BluetoothConnectionService {
                 // successful connection or an exception
                 mmSocket.connect();
 
-                Log.d(TAG, "run: ConnectThread connected.");
+                Timber.d("run: ConnectThread connected.");
                 connected.postValue(true);
 
             } catch (IOException e) {
@@ -148,11 +146,11 @@ public class BluetoothConnectionService {
                 e.printStackTrace();
                 try {
                     mmSocket.close();
-                    Log.d(TAG, "run: Closed Socket.");
+                    Timber.d("run: Closed Socket.");
                 } catch (IOException e1) {
-                    Log.e(TAG, "mConnectThread: run: Unable to close connection in socket " + e1.getMessage());
+                    Timber.e("mConnectThread: run: Unable to close connection in socket %s", e1.getMessage());
                 }
-                Log.d(TAG, "run: ConnectThread: Could not connect to UUID: " + MY_UUID_INSECURE);
+                Timber.d("run: ConnectThread: Could not connect to UUID: %s", MY_UUID_INSECURE);
 
             }
 
@@ -161,10 +159,10 @@ public class BluetoothConnectionService {
 
         public void cancel() {
             try {
-                Log.d(TAG, "cancel: Closing Client Socket.");
+                Timber.d("cancel: Closing Client Socket.");
                 mmSocket.close();
             } catch (IOException e) {
-                Log.e(TAG, "cancel: close() of mmSocket in Connectthread failed. " + e.getMessage());
+                Timber.e("cancel: close() of mmSocket in Connectthread failed. %s", e.getMessage());
             }
         }
     }
@@ -175,7 +173,7 @@ public class BluetoothConnectionService {
      * session in listening (server) mode. Called by the Activity onResume()
      */
     public synchronized void start() {
-        Log.d(TAG, "start");
+        Timber.d("start");
 
         // Cancel any thread attempting to make a connection
         if (mConnectThread != null) {
@@ -195,9 +193,9 @@ public class BluetoothConnectionService {
      **/
 
     public void startClient(BluetoothDevice device, UUID uuid) {
-        Log.d(TAG, "startClient: Started.");
+        Timber.d("startClient: Started.");
 
-        //initprogress dialog
+        //initialize progress dialog
         mProgressDialog = ProgressDialog.show(mContext, "Connecting Bluetooth"
                 , "Please Wait...", true);
 
@@ -216,7 +214,7 @@ public class BluetoothConnectionService {
         private final OutputStream mmOutStream;
 
         public ConnectedThread(BluetoothSocket socket) {
-            Log.d(TAG, "ConnectedThread: Starting.");
+            Timber.d("ConnectedThread: Starting.");
 
             mmSocket = socket;
             InputStream tmpIn = null;
@@ -264,26 +262,21 @@ public class BluetoothConnectionService {
                                 incomingMessage.charAt(2) != 'd') continue;
                         int score = incomingMessage.charAt(3);
 
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
+                        handler.post(() -> {
 
-                                if (incomingMessage != null) {
-                                    Timber.d("GAME END: your score is " + incomingMessage);
-                                    ended.postValue(score);
+                            Timber.d("GAME END: your score is %s", incomingMessage);
+                            ended.postValue(score);
 
-                                }
-                            }
                         });
                         break;
 
-                    } catch (Exception e) {
+                    } catch (Exception ignored) {
                     }
 
-                    Log.d(TAG, "InputStream: " + incomingMessage);
+                    Timber.d("InputStream: %s", incomingMessage);
 
                 } catch (IOException e) {
-                    Log.e(TAG, "write: Error reading Input Stream. " + e.getMessage());
+                    Timber.e("write: Error reading Input Stream. %s", e.getMessage());
                     break;
                 }
             }
@@ -292,13 +285,13 @@ public class BluetoothConnectionService {
         //Call this from the main activity to send data to the remote device
         public void write(byte[] bytes) {
             String text = new String(bytes, Charset.defaultCharset());
-            Log.d(TAG, "write: Writing to outputstream: " + text);
+            Timber.d("write: Writing to outputstream: %s", text);
             try {
                 mmOutStream.write(bytes);
                 Toast.makeText(mContext, "Jump!", Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "write: mmOutStream is " + mmOutStream.toString() + ", wrote: " + bytes);
+                Timber.d("write: mmOutStream is " + mmOutStream.toString() + ", wrote: " + Arrays.toString(bytes));
             } catch (IOException e) {
-                Log.e(TAG, "write: Error writing to output stream. " + e.getMessage());
+                Timber.e("write: Error writing to output stream. %s", e.getMessage());
             }
         }
 
@@ -306,14 +299,14 @@ public class BluetoothConnectionService {
         public void cancel() {
             try {
                 mmSocket.close();
-            } catch (IOException e) {
+            } catch (IOException ignored) {
             }
         }
     }
 
 
     private void connected(BluetoothSocket mmSocket, BluetoothDevice mmDevice) {
-        Log.d(TAG, "connected: Starting.");
+        Timber.d("connected: Starting.");
 
         // Start the thread to manage the connection and perform transmissions
         mConnectedThread = new ConnectedThread(mmSocket);
@@ -331,7 +324,7 @@ public class BluetoothConnectionService {
         ConnectedThread r;
 
         // Synchronize a copy of the ConnectedThread
-        Log.d(TAG, "write: Write Called.");
+        Timber.d("write: Write Called.");
         //perform the write
         try {
             mConnectedThread.write(out);

@@ -10,6 +10,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
+/**
+ *  SignUpViewModel
+ *  contains logic operations separated form view
+ *
+ *  @note: asynchronous call to find user from remote database, implemented using RxJava
+ *
+ *
+ *  @autho Yuefeng Zhao
+ */
 class SignUpViewModel : BaseViewModel() {
     val registerResult: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val fullNameHasError: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
@@ -27,7 +36,7 @@ class SignUpViewModel : BaseViewModel() {
         countryCode: String
     ) {
 
-        val user: User = User(
+        val user = User(
             fullName,
             username,
             email,
@@ -80,8 +89,8 @@ class SignUpViewModel : BaseViewModel() {
 
 
     private fun validateUserName(username: String): Boolean {
-        val noWhitSpace: String = "^([a-zA-Z0-9!@#\$%^&*()-_=+;:'\"|~`<>?/{}]{1,16})\$"
-        val regex: Regex = Regex(noWhitSpace)
+        val noWhitSpace = "^([a-zA-Z0-9!@#\$%^&*()-_=+;:'\"|~`<>?/{}]{1,16})\$"
+        val regex = Regex(noWhitSpace)
 
         return if (username.isEmpty()) {
             usernameHasError.value = USERNAME_EMPTY
@@ -99,8 +108,8 @@ class SignUpViewModel : BaseViewModel() {
     }
 
     private fun validateEmail(emailAddr: String): Boolean {
-        val emailPattern: String = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
-        val regex: Regex = Regex(emailPattern)
+        val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+        val regex = Regex(emailPattern)
 
         return if (emailAddr.isEmpty()) {
             emailHasError.value = EMAIL_EMPTY
@@ -134,7 +143,7 @@ class SignUpViewModel : BaseViewModel() {
                 REGEX_NO_WHITE_SPACE +                  // no white space
                 REGEX_END
 
-        val regex: Regex = Regex(passwordVal)
+        val regex = Regex(passwordVal)
 
 
         return if (password.isEmpty()) {

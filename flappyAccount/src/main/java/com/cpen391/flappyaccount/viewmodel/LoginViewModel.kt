@@ -11,6 +11,15 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
+/**
+ *  LoginViewModel
+ *  contains logic operations separated form view
+ *
+ *  @note: asynchronous call to find user from remote database, implemented using RxJava
+ *
+ *
+ *  @autho Yuefeng Zhao
+ */
 class LoginViewModel : BaseViewModel() {
     val loginResult: MutableLiveData<String> = MutableLiveData<String>()
     val usernameHasError: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
@@ -66,12 +75,12 @@ class LoginViewModel : BaseViewModel() {
 
     private fun validateUsername(username: String): Boolean {
         usernameHasError.value = false || username.isEmpty()
-        return !(username.isEmpty())
+        return username.isNotEmpty()
     }
 
     private fun validatePassword(password: String): Boolean {
         passwordHasError.value = false || password.isEmpty()
-        return !(password.isEmpty())
+        return password.isNotEmpty()
     }
 
 }

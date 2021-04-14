@@ -11,6 +11,16 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
+/**
+ *  ResetPasswordViewModel
+ *  contains logic operations separated form view
+ *
+ *  @note: asynchronous call to find user from remote database, implemented using RxJava
+ *
+ *
+ *  @autho Yuefeng Zhao
+ */
+
 class ResetPasswordViewModel : BaseViewModel() {
     val newPasswordHasError: MutableLiveData<String> = MutableLiveData()
     val confirmPasswordHasError: MutableLiveData<String> = MutableLiveData()
@@ -53,7 +63,7 @@ class ResetPasswordViewModel : BaseViewModel() {
                 REGEX_NO_WHITE_SPACE +                  // no white space
                 REGEX_END
 
-        val regex: Regex = Regex(passwordVal)
+        val regex = Regex(passwordVal)
 
 
         return if (password.isEmpty()) {
@@ -69,15 +79,19 @@ class ResetPasswordViewModel : BaseViewModel() {
     }
 
     private fun validateConfirmPassword(password: String, newPassword: String): Boolean {
-        return if (password.isEmpty()) {
-            confirmPasswordHasError.value = PASSWORD_EMPTY
-            false
-        } else if (password != newPassword) {
-            confirmPasswordHasError.value = PASSWORD_NOT_MATCH
-            false
-        } else {
-            confirmPasswordHasError.value = PASSWORD_VALID
-            true
+        return when {
+            password.isEmpty() -> {
+                confirmPasswordHasError.value = PASSWORD_EMPTY
+                false
+            }
+            password != newPassword -> {
+                confirmPasswordHasError.value = PASSWORD_NOT_MATCH
+                false
+            }
+            else -> {
+                confirmPasswordHasError.value = PASSWORD_VALID
+                true
+            }
         }
     }
 }
