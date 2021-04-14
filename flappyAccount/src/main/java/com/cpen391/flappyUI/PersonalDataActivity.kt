@@ -11,6 +11,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.core.content.FileProvider
 import com.cpen391.appbase.network.SimpleObserver
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
+import com.cpen391.flappyUI.util.LoggedInUserUtil
 import com.cpen391.flappyaccount.Injection
 import com.cpen391.flappyaccount.R
 import com.cpen391.flappyaccount.databinding.ActivityPersonalDataBinding
@@ -21,7 +22,15 @@ import timber.log.Timber
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
-
+/**
+ *  PersonalDataActivity
+ *
+ *  @note: Change bird's color based on user's choice on UI
+ *  Display game data including current score, top 3 score, userName, email on UI
+ *  Share user's game data via social media
+ *
+ *  @author Robin Lai
+ */
 class PersonalDataActivity : MvvmActivity<ActivityPersonalDataBinding>() {
     private val context: Context = this
     private val currentActivity: PersonalDataActivity = this
@@ -32,7 +41,7 @@ class PersonalDataActivity : MvvmActivity<ActivityPersonalDataBinding>() {
         actionBar.hide()
 
 
-        val user = LoggedInUser.instance?.getUser()
+        val user = LoggedInUserUtil.instance?.getUser()
 
         val birdImage: ImageView = findViewById(R.id.bird_image)
         when (intent.getStringExtra("birdImage")) {
@@ -57,11 +66,11 @@ class PersonalDataActivity : MvvmActivity<ActivityPersonalDataBinding>() {
         }
 
         binding.apply {
-            if (LoggedInUser.instance?.isLogin() == true) {
-                val user_Name = LoggedInUser.instance?.getUser()?.fullName
-                val user_Email = LoggedInUser.instance?.getUser()?.email
-                val currentScore = LoggedInUser.instance?.getUser()?.current_score
-                val topThreeScore = LoggedInUser.instance?.getUser()?.top_three_scores
+            if (LoggedInUserUtil.instance?.isLogin() == true) {
+                val user_Name = LoggedInUserUtil.instance?.getUser()?.fullName
+                val user_Email = LoggedInUserUtil.instance?.getUser()?.email
+                val currentScore = LoggedInUserUtil.instance?.getUser()?.current_score
+                val topThreeScore = LoggedInUserUtil.instance?.getUser()?.top_three_scores
                 val historyScore = mutableListOf<Long>()
                 if (topThreeScore != null) {
                     for (i in topThreeScore.indices) {
@@ -130,10 +139,10 @@ class PersonalDataActivity : MvvmActivity<ActivityPersonalDataBinding>() {
             val dstString = File(context.filesDir.toString() + "/score/")
             val file = createBackupFile(dstString, "userScoreData.csv")
             val bw = BufferedWriter(FileWriter(file, true))
-            val userName = LoggedInUser.instance?.getUser()?.userName
-            val userEmail = LoggedInUser.instance?.getUser()?.email
-            val currentScore = LoggedInUser.instance?.getUser()?.current_score
-            val top3Score = LoggedInUser.instance?.getUser()?.top_three_scores
+            val userName = LoggedInUserUtil.instance?.getUser()?.userName
+            val userEmail = LoggedInUserUtil.instance?.getUser()?.email
+            val currentScore = LoggedInUserUtil.instance?.getUser()?.current_score
+            val top3Score = LoggedInUserUtil.instance?.getUser()?.top_three_scores
             if (userName != null && userEmail != null && currentScore != null && top3Score != null) {
                 writeBw(bw, userName, userEmail, currentScore, top3Score)
             } else {
@@ -143,7 +152,7 @@ class PersonalDataActivity : MvvmActivity<ActivityPersonalDataBinding>() {
             }
             btnShare.setOnClickListener {
                 val dst = File(dstString, "userScoreData.csv")
-                val emailAddress = LoggedInUser.instance?.getUser()?.email.toString()
+                val emailAddress = LoggedInUserUtil.instance?.getUser()?.email.toString()
                 sendEmail(dst, currentActivity, emailAddress, "userScoreData")
             }
         }

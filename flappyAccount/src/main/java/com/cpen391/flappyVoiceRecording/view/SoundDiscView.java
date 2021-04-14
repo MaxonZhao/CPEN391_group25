@@ -1,4 +1,4 @@
-package com.cpen391.flappyVoiceRecording;
+package com.cpen391.flappyVoiceRecording.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,6 +9,8 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 
+import com.cpen391.flappyVoiceRecording.util.ScreenUtil;
+import com.cpen391.flappyVoiceRecording.util.World;
 import com.cpen391.flappyaccount.R;
 
 public class SoundDiscView extends androidx.appcompat.widget.AppCompatImageView {

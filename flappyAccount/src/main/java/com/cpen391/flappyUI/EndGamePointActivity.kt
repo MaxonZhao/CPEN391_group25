@@ -7,7 +7,14 @@ import androidx.appcompat.app.ActionBar
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
 import com.cpen391.flappyaccount.databinding.ActivityEndGamePointBinding
 import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil
-
+/**
+ *  EndGamePointActivity
+ *
+ *  @note: display final game score on UI, user is able to re-start game,
+ *  or go check personal data list
+ *
+ *  @author Robin Lai
+ */
 class EndGamePointActivity : MvvmActivity<ActivityEndGamePointBinding>() {
     private val context: Context = this
     override fun onCreate(savedInstanceState: Bundle?) {

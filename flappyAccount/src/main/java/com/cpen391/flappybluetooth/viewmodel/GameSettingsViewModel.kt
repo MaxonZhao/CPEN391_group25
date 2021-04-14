@@ -1,4 +1,4 @@
-package com.cpen391.flappyaccount.viewmodel
+package com.cpen391.flappybluetooth.viewmodel
 
 import android.view.View
 import android.widget.RadioGroup
@@ -7,6 +7,14 @@ import androidx.lifecycle.MutableLiveData
 import com.cpen391.appbase.ui.mvvm.BaseViewModel
 import com.cpen391.flappyaccount.R
 
+/**
+ *  GameSettingsViewModel
+ *
+ *  @note: asynchronous call to change the bird's color based on the
+ *  user's choice in UI
+ *
+ *  @author Robin Lai
+ */
 
 class GameSettingsViewModel : BaseViewModel() {
     var isTapped: MutableLiveData<Boolean> = MutableLiveData<Boolean>()

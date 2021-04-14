@@ -14,6 +14,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.Observer;
 
 import com.cpen391.flappyUI.EndGamePointActivity;
+import com.cpen391.flappyVoiceRecording.util.FileUtil;
+import com.cpen391.flappyVoiceRecording.util.World;
+import com.cpen391.flappyVoiceRecording.view.SoundDiscView;
 import com.cpen391.flappyaccount.R;
 import com.cpen391.flappybluetooth.activity.BluetoothConnectionService;
 import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil;
@@ -22,7 +25,14 @@ import java.io.File;
 
 import timber.log.Timber;
 
-
+/**
+ *  VoiceControlActivity
+ *
+ *  @note: Main logic of voice control, send JUMP("1") message to RFS board
+ *  when db is greater than threshold value
+ *
+ *  @author Robin Lai
+ */
 public class VoiceControlActivity extends AppCompatActivity {
     float volume = 10000;
     private SoundDiscView soundDiscView;
@@ -34,6 +44,7 @@ public class VoiceControlActivity extends AppCompatActivity {
     private final String[] permissions = {Manifest.permission.RECORD_AUDIO};
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
     public double currentDb = 0.0;
+    public double threshold = 60.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +79,7 @@ public class VoiceControlActivity extends AppCompatActivity {
             volume = mRecorder.getMaxAmplitude();
             if (volume > 0 && volume < 1000000) {
                 currentDb = World.setDbCount(20 * (float) (Math.log10(volume)));
-                if (currentDb > 60) {
+                if (currentDb > threshold) {
                     BluetoothConnectionUtil.getInstance().sendMessage(context, "1");
                     Timber.d("++++++++++++");
                     Timber.d("1");

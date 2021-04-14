@@ -5,6 +5,14 @@ import android.media.MediaRecorder;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ *  MyMediaRecorder
+ *
+ *  @note: Recording logic settings and configuration
+ *
+ *  @author Robin Lai
+ */
+
 public class MyMediaRecorder {
     public File myRecAudioFile;
     private MediaRecorder mMediaRecorder;

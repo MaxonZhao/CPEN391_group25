@@ -1,8 +1,14 @@
-package com.cpen391.flappyUI
+package com.cpen391.flappyUI.util
 
 import com.cpen391.flappyaccount.model.bean.User
-
-class LoggedInUser private constructor() {
+/**
+ *  LoggedInUser
+ *
+ *  @note: Util file, provide User data to activities
+ *
+ *  @author Robin Lai
+ */
+class LoggedInUserUtil private constructor() {
     private var userData: User? = null
 
     fun getUser(): User? {
@@ -20,15 +26,15 @@ class LoggedInUser private constructor() {
     companion object {
 
         @Volatile
-        private var mInstance: LoggedInUser? = null
+        private var mInstance: LoggedInUserUtil? = null
 
         @JvmStatic
-        val instance: LoggedInUser?
+        val instance: LoggedInUserUtil?
             get() {
                 if (mInstance == null) {
-                    synchronized(LoggedInUser::class.java) {
+                    synchronized(LoggedInUserUtil::class.java) {
                         if (mInstance == null) {
-                            mInstance = LoggedInUser()
+                            mInstance = LoggedInUserUtil()
                         }
                     }
                 }

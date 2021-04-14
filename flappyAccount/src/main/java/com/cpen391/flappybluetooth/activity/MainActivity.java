@@ -19,8 +19,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
-import com.cpen391.flappyUI.GameSettings;
-import com.cpen391.flappyUI.LoggedInUser;
+import com.cpen391.flappyUI.util.GameSettingsUtil;
+import com.cpen391.flappyUI.util.LoggedInUserUtil;
 import com.cpen391.flappyUI.TappingActivity;
 import com.cpen391.flappyVoiceRecording.VoiceControlActivity;
 import com.cpen391.flappyaccount.R;
@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (getIntent().getBooleanExtra("control_mode", true)) {
                     Intent tapping = new Intent(getApplicationContext(), TappingActivity.class);
-                    tapping.putExtra("bird_color", Objects.requireNonNull(GameSettings.getInstance()).getBirdColor());
+                    tapping.putExtra("bird_color", Objects.requireNonNull(GameSettingsUtil.getInstance()).getBirdColor());
                     startActivity(tapping);
                 } else {
                     Intent record = new Intent(getApplicationContext(), VoiceControlActivity.class);
@@ -294,9 +294,9 @@ public class MainActivity extends AppCompatActivity {
 
         BluetoothConnectionService.getReadyToStart.observe(this, aBoolean -> {
             Timber.d("You are good to start the game!");
-            if (Objects.requireNonNull(LoggedInUser.getInstance()).isLogin()) {
+            if (Objects.requireNonNull(LoggedInUserUtil.getInstance()).isLogin()) {
                 for (int i = 0; i <= 10; ++i) {
-                    BluetoothConnectionUtil.getInstance().sendMessage(MainActivity.this, Objects.requireNonNull(LoggedInUser.getInstance().getUser()).getUserName());
+                    BluetoothConnectionUtil.getInstance().sendMessage(MainActivity.this, Objects.requireNonNull(LoggedInUserUtil.getInstance().getUser()).getUserName());
                 }
             }
         });

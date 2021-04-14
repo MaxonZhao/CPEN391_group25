@@ -8,13 +8,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import androidx.lifecycle.observe
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
-import com.cpen391.flappyUI.LoggedInUser
+import com.cpen391.flappyUI.util.LoggedInUserUtil
 import com.cpen391.flappyUI.SingleGameStartActivity
 import com.cpen391.flappyaccount.consts.LOGIN_INCORRECT_PASSWORD
 import com.cpen391.flappyaccount.consts.LOGIN_SUCCEED
 import com.cpen391.flappyaccount.consts.LOGIN_USERNOTFOUND
-import com.cpen391.flappyaccount.Injection
-import com.cpen391.flappyaccount.consts.*
 import com.cpen391.flappyaccount.databinding.ActivityLoginBinding
 import com.cpen391.flappyaccount.viewmodel.LoginViewModel
 import timber.log.Timber
@@ -49,7 +47,7 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
             }
 
             guestBtn.setOnClickListener {
-                LoggedInUser.instance?.setUser(null)
+                LoggedInUserUtil.instance?.setUser(null)
                 startActivity(Intent(context, SingleGameStartActivity::class.java))
             }
         }
@@ -75,7 +73,7 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
 
             userFoundByUsername.observe(owner) {
                 if (!it.isNullUser()) {
-                    LoggedInUser.instance?.setUser(it)
+                    LoggedInUserUtil.instance?.setUser(it)
                     startActivity(Intent(applicationContext, SingleGameStartActivity::class.java))
                 }
             }

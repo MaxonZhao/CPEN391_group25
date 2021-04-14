@@ -1,4 +1,4 @@
-package com.cpen391.flappyVoiceRecording;
+package com.cpen391.flappyVoiceRecording.util;
 
 public class World {
 

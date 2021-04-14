@@ -1,6 +1,12 @@
-package com.cpen391.flappyUI
-
-class GameSettings private constructor() {
+package com.cpen391.flappyUI.util
+/**
+ *  GameSettings
+ *
+ *  @note: Util file, provide game settings method to activities
+ *
+ *  @author Robin Lai
+ */
+class GameSettingsUtil private constructor() {
     private var controlMethod: Boolean = true //tapping
     private var birdColor: String = String()
     private var diffLevel: String = String()
@@ -10,7 +16,7 @@ class GameSettings private constructor() {
     }
 
     fun setControlMethod(controlMethod: Boolean) {
-        this@GameSettings.controlMethod = controlMethod
+        this@GameSettingsUtil.controlMethod = controlMethod
     }
 
     fun getBirdColor(): String {
@@ -26,7 +32,7 @@ class GameSettings private constructor() {
     }
 
     fun setDiffLevel(diffLevel: String) {
-        this@GameSettings.diffLevel = diffLevel
+        this@GameSettingsUtil.diffLevel = diffLevel
     }
 
 //    fun setGameSettings(color: String, diffLevel: String, playMode: String){
@@ -39,15 +45,15 @@ class GameSettings private constructor() {
 
     companion object {
         @Volatile
-        private var mInstance: GameSettings? = null
+        private var mInstance: GameSettingsUtil? = null
 
         @JvmStatic
-        val instance: GameSettings?
+        val instance: GameSettingsUtil?
             get() {
                 if (mInstance == null) {
-                    synchronized(GameSettings::class.java) {
+                    synchronized(GameSettingsUtil::class.java) {
                         if (mInstance == null) {
-                            mInstance = GameSettings()
+                            mInstance = GameSettingsUtil()
                         }
                     }
                 }

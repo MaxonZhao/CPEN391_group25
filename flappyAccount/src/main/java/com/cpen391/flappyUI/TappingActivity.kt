@@ -9,7 +9,13 @@ import com.cpen391.flappyaccount.databinding.ActivityTappingBinding
 import com.cpen391.flappybluetooth.activity.BluetoothConnectionService
 import com.cpen391.flappybluetooth.util.BluetoothConnectionUtil
 import timber.log.Timber
-
+/**
+ *  TappingActivity
+ *
+ *  @note: Main logic of tapping control, send JUMP("1") message to RFS board
+ *
+ *  @author Robin Lai
+ */
 class TappingActivity : MvvmActivity<ActivityTappingBinding>() {
     val context = this
     override fun onCreate(savedInstanceState: Bundle?) {

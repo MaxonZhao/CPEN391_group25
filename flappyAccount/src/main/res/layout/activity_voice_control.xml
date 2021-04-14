@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.cpen391.flappyVoiceRecording.VoiceControlActivity">
 
-    <com.cpen391.flappyVoiceRecording.SoundDiscView
+    <com.cpen391.flappyVoiceRecording.view.SoundDiscView
         android:id="@+id/soundDiscView"
         android:layout_centerInParent="true"
         android:layout_width="344dp"

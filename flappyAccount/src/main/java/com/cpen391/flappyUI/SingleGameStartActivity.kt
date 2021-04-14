@@ -12,11 +12,20 @@ import android.widget.Spinner
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import com.cpen391.appbase.ui.mvvm.MvvmActivity
+import com.cpen391.flappyUI.util.GameSettingsUtil
+import com.cpen391.flappyUI.util.LoggedInUserUtil
 import com.cpen391.flappyaccount.R
 import com.cpen391.flappyaccount.databinding.ActivitySingleGameStartBinding
-import com.cpen391.flappyaccount.viewmodel.GameSettingsViewModel
+import com.cpen391.flappybluetooth.viewmodel.GameSettingsViewModel
 import com.cpen391.flappybluetooth.activity.MainActivity.actionStart
-
+/**
+ *  SingleGameStartActivity
+ *
+ *  @note: Load game setting including bird's color, difficult level, and
+ *  control mode(voice or tapping) here
+ *
+ *  @author Robin Lai
+ */
 class SingleGameStartActivity : MvvmActivity<ActivitySingleGameStartBinding>() {
 
     private val context: Context = this
@@ -59,10 +68,10 @@ class SingleGameStartActivity : MvvmActivity<ActivitySingleGameStartBinding>() {
         val owner = this
         gameSettingaViewModel.apply {
             birdColor.observe(owner, {
-                GameSettings.instance?.setBirdColor(it)
+                GameSettingsUtil.instance?.setBirdColor(it)
             })
             diffLevel.observe(owner, {
-                GameSettings.instance?.setDiffLevel(it)
+                GameSettingsUtil.instance?.setDiffLevel(it)
             })
             isTapped.observe(owner, {
                 tappingOrVoice(it)
@@ -72,29 +81,29 @@ class SingleGameStartActivity : MvvmActivity<ActivitySingleGameStartBinding>() {
 
     private fun tappingOrVoice(isTapped: Boolean) {
         var loginMode: String
-        if (LoggedInUser.instance?.isLogin() == true) {
+        if (LoggedInUserUtil.instance?.isLogin() == true) {
             loginMode = "p"
         } else {
             loginMode = "g"
         }
         System.out.println(isTapped)
-        GameSettings.instance?.setControlMethod(isTapped)
-        val birdColor = GameSettings.instance?.getBirdColor()
+        GameSettingsUtil.instance?.setControlMethod(isTapped)
+        val birdColor = GameSettingsUtil.instance?.getBirdColor()
         when (isTapped) {
             true -> actionStart(
                 context,
-                GameSettings.instance?.getBirdColor()?.substring(0, 1),
-                GameSettings.instance?.getBirdColor()?.substring(1, 2),
-                GameSettings.instance?.getDiffLevel(),
+                GameSettingsUtil.instance?.getBirdColor()?.substring(0, 1),
+                GameSettingsUtil.instance?.getBirdColor()?.substring(1, 2),
+                GameSettingsUtil.instance?.getDiffLevel(),
                 loginMode,
                 true,
                 birdColor
             )
             false -> actionStart(
                 context,
-                GameSettings.instance?.getBirdColor()?.substring(0, 1),
-                GameSettings.instance?.getBirdColor()?.substring(1, 2),
-                GameSettings.instance?.getDiffLevel(),
+                GameSettingsUtil.instance?.getBirdColor()?.substring(0, 1),
+                GameSettingsUtil.instance?.getBirdColor()?.substring(1, 2),
+                GameSettingsUtil.instance?.getDiffLevel(),
                 loginMode,
                 false,
                 birdColor
