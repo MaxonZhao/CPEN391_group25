@@ -26,8 +26,6 @@ public class BluetoothConnectionUtil {
         this.mBluetoothConnection = mBluetoothConnection;
     }
 
-
-    // TODO: define parameter list as needed
     public void sendSettingInfo(Context context, String msg1, String msg2, String msg3, String msg4) {
         byte[] bytes = new byte[4];
         bytes[0] = msg1.getBytes()[0];

@@ -490,7 +490,6 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    // TODO: probably need more user related info in order to send messages, define the parameter list as needed
     public static void actionStart(Context context,
                                    String color0,
                                    String color1,

@@ -114,7 +114,6 @@ class SignUpViewModel : BaseViewModel() {
     }
 
     private fun validatePhoneNumber(phoneNo: String): Boolean {
-        // todo: validate phone number according to country code
         return if (phoneNo == null || phoneNo.isEmpty()) {
             phoneNoHasError.value = true
             false
