@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Good Job!"
+        android:text="@string/good_job"
         android:layout_gravity ="center"
         android:fontFamily="@font/bungee"
         android:textSize="35sp" />
@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="You got"
+        android:text="@string/you_got"
         android:layout_gravity ="center"
         android:fontFamily="@font/bungee"
         android:textSize="25sp" />
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Points!"
+        android:text="@string/points"
         android:layout_gravity ="center"
         android:fontFamily="@font/bungee"
         android:textSize="25sp" />
@@ -55,6 +55,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:background="#000"
-        android:text="Start Again!"
+        android:text="@string/start_again"
         android:textColor="#fff" />
 </LinearLayout>

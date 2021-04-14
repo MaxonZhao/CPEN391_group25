@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Co\nde"
+            android:text="@string/co_nde"
             android:textSize="100sp"
             android:textColor="#000"
             android:fontFamily="@font/muli_black"
@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Verification"
+            android:text="@string/verification"
             android:textSize="24sp"
             android:textColor="#000"
             android:fontFamily="@font/muli_black"
@@ -46,7 +46,7 @@
             android:id="@+id/hint_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enter one time code sent on +8615618219971"
+            android:text="@string/enter_one_time_code_sent_on_8615618219971"
             android:textSize="16sp"
             android:textColor="#000"
             android:fontFamily="@font/muli"
@@ -76,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#000"
-            android:text="Verify Code"
+            android:text="@string/verify_code"
             android:layout_marginTop="30dp"
             android:textColor="#fff" />
 

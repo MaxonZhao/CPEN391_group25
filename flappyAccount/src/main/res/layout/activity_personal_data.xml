@@ -26,7 +26,7 @@
         android:layout_margin="5dp"
         android:background="#00000000"
         android:elevation="0dp"
-        android:text="Share Your Score" />
+        android:text="@string/share_your_score" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/bungee"
-                android:text="Name:"
+                android:text="@string/name"
                 android:textSize="25sp" />
 
             <TextView
@@ -65,7 +65,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/bungee"
-                android:text="Email:"
+                android:text="@string/email"
                 android:textSize="25sp" />
             <TextView
                 android:id="@+id/userEmail"
@@ -86,7 +86,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="My Records:"
+            android:text="@string/my_records"
             android:fontFamily="@font/bungee"
             android:textSize="25sp" />
         <LinearLayout
@@ -99,7 +99,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/bungee"
-                android:text="#1:"
+                android:text="@string/_1"
                 android:textSize="25sp" />
             <TextView
                 android:id="@+id/top1Score"
@@ -120,7 +120,7 @@
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/bungee"
-                android:text="#2:"
+                android:text="@string/_2"
                 android:textSize="25sp" />
             <TextView
                 android:id="@+id/top2Score"
@@ -141,7 +141,7 @@
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/bungee"
-                android:text="#3:"
+                android:text="@string/_3"
                 android:textSize="25sp" />
             <TextView
                 android:id="@+id/top3Score"

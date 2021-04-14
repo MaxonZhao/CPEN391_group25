@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello there, Welcome Back"
+        android:text="@string/hello_there_welcome_back"
         android:fontFamily="@font/bungee"
         android:textSize="35sp" />
 
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="Sign in to continue"
+        android:text="@string/sign_in_to_continue"
         android:textSize="18sp" />
 
     <LinearLayout
@@ -44,7 +44,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username">
+            android:hint="@string/username">
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -58,7 +58,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="@string/password"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -78,7 +78,7 @@
             android:elevation="0dp"
             android:textColor="#9F9B9B"
             android:textSize="12sp"
-            android:text="Forget Password?"
+            android:text="@string/forget_password_q"
             />
 
         <Button
@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="#000"
-            android:text="GO"
+            android:text="@string/go"
             android:textColor="#fff" />
 
         <LinearLayout
@@ -104,7 +104,7 @@
                 android:layout_margin="5dp"
                 android:background="#00000000"
                 android:elevation="0dp"
-                android:text="Guest Mode"
+                android:text="@string/guest_mode"
                 android:textColor="#000" />
 
 
@@ -117,7 +117,7 @@
                 android:layout_margin="5dp"
                 android:background="#00000000"
                 android:elevation="0dp"
-                android:text="SIGN UP"
+                android:text="@string/sign_up"
                 android:textColor="#000" />
 
 

@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Welcome"
+        android:text="@string/welcome"
 
         android:fontFamily="@font/bungee"
         android:textSize="35sp" />
@@ -45,7 +45,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Full Name">
+            android:hint="@string/full_name">
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -60,7 +60,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
+            android:hint="@string/username"
             app:counterEnabled="true"
             app:counterMaxLength="15">
 
@@ -110,7 +110,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:hint="Phone No">
+                android:hint="@string/phone_no">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -126,7 +126,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="@string/password"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -147,7 +147,7 @@
         android:layout_marginTop="15dp"
         android:background="#000"
         android:elevation="0dp"
-        android:text="REGISTER"
+        android:text="@string/register"
         android:textColor="#fff" />
 
 </LinearLayout>
