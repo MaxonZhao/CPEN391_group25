@@ -19,7 +19,7 @@ class VerifyOTPViewModel : BaseViewModel() {
     private val TIMEOUT = 60L
     var mCallback: PhoneAuthProvider.OnVerificationStateChangedCallbacks? = null
 
-    fun init(context: Context) {
+    fun init() {
 
         mCallback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(p0: PhoneAuthCredential) {

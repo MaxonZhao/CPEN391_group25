@@ -68,7 +68,7 @@ object UserAPI {
 
 
     fun findUser(username: String): Observable<User> {
-        var user: User? = null
+        var user: User?
         return Observable.create { emitter: ObservableEmitter<User> ->
             val checkUser: Query = UserEntity.mUserRef.orderByChild("userName").equalTo(username)
             checkUser.addListenerForSingleValueEvent(object : ValueEventListener {

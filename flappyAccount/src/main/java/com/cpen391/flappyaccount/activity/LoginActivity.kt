@@ -101,7 +101,7 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
 
             LOGIN_USERNOTFOUND -> {
                 binding.apply {
-                    username?.error = "Incorrect username"
+                    username.error = "Incorrect username"
                     username.requestFocus()
                 }
             }
@@ -111,20 +111,20 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding>() {
 
     private fun displayUsernameErrorState(error: Boolean) {
         when (error) {
-            true -> binding.username?.error = "Field cannot be Empty"
+            true -> binding.username.error = "Field cannot be Empty"
             false -> {
-                binding.username?.error = null
-                binding.username?.isErrorEnabled = false
+                binding.username.error = null
+                binding.username.isErrorEnabled = false
             }
         }
     }
 
     private fun displayPasswordErrorState(error: Boolean) {
         when (error) {
-            true -> binding.password?.error = "Field cannot be Empty"
+            true -> binding.password.error = "Field cannot be Empty"
             false -> {
-                binding.password?.error = null
-                binding.password?.isErrorEnabled = false
+                binding.password.error = null
+                binding.password.isErrorEnabled = false
             }
         }
     }

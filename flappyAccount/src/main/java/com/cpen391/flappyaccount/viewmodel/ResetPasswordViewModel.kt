@@ -56,7 +56,7 @@ class ResetPasswordViewModel : BaseViewModel() {
         val regex: Regex = Regex(passwordVal)
 
 
-        return if (password == null || password.isEmpty()) {
+        return if (password.isEmpty()) {
             newPasswordHasError.value = PASSWORD_EMPTY
             false
         } else if (!password.matches(regex)) {
@@ -69,7 +69,7 @@ class ResetPasswordViewModel : BaseViewModel() {
     }
 
     private fun validateConfirmPassword(password: String, newPassword: String): Boolean {
-        return if (password == null || password.isEmpty()) {
+        return if (password.isEmpty()) {
             confirmPasswordHasError.value = PASSWORD_EMPTY
             false
         } else if (password != newPassword) {

@@ -80,10 +80,10 @@ class SignUpActivity : MvvmActivity<ActivitySignupBinding>() {
 
     private fun displayFullNameErrorState(error: Boolean) {
         when (error) {
-            true -> binding.fullName?.error = "Field cannot be Empty"
+            true -> binding.fullName.error = "Field cannot be Empty"
             false -> {
-                binding.fullName?.error = null
-                binding.fullName?.isErrorEnabled = false
+                binding.fullName.error = null
+                binding.fullName.isErrorEnabled = false
             }
         }
     }
@@ -94,8 +94,8 @@ class SignUpActivity : MvvmActivity<ActivitySignupBinding>() {
             USERNAME_TOO_LONG -> binding.username.error = "Username too long"
             USERNAME_HAS_WHITE_SPACE -> binding.username.error = "Username has white space"
             USERNAME_VALID -> {
-                binding.username?.error = null
-                binding.username?.isErrorEnabled = false
+                binding.username.error = null
+                binding.username.isErrorEnabled = false
             }
         }
     }

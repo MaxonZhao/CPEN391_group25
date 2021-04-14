@@ -131,10 +131,10 @@ abstract class PermissionActivity<T : ViewBinding> : BaseBindingActivity<T>(),
      */
     protected fun showSettingDialog() {
         AlertDialog.Builder(this).setTitle("reminder")
-            .setMessage("Current application needs" + settingDialogTipPart + ", this functionality cannot be applied. Please click OK to go setting")
-            .setNegativeButton("Cancel") { dialog: DialogInterface?, which: Int ->
+            .setMessage("Current application needs$settingDialogTipPart, this functionality cannot be applied. Please click OK to go setting")
+            .setNegativeButton("Cancel") { _: DialogInterface?, _: Int ->
                 finish()
-            }.setPositiveButton("OK") { dialog: DialogInterface?, which: Int ->
+            }.setPositiveButton("OK") { _: DialogInterface?, _: Int ->
                 startAppSettings()
                 isNeedCheckPermission = true
             }.show()

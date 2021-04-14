@@ -29,7 +29,7 @@ class VerifyOTPActivity : MvvmActivity<ActivityVerifyOTPBinding>() {
             onRestoreInstanceState(savedInstanceState);
         }
 
-        verifyOTPViewModel.init(this)
+        verifyOTPViewModel.init()
         verifyOTPViewModel.sendVerificationCodeToUser(userFound.phoneNo, this)
 
         binding.verifyBtn.setOnClickListener {

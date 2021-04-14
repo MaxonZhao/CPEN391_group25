@@ -69,7 +69,7 @@ class SignUpViewModel : BaseViewModel() {
 
     private fun validateFullName(fullName: String): Boolean {
 
-        return if (fullName == null || fullName.isEmpty()) {
+        return if (fullName.isEmpty()) {
             fullNameHasError.value = true
             false
         } else {
@@ -83,7 +83,7 @@ class SignUpViewModel : BaseViewModel() {
         val noWhitSpace: String = "^([a-zA-Z0-9!@#\$%^&*()-_=+;:'\"|~`<>?/{}]{1,16})\$"
         val regex: Regex = Regex(noWhitSpace)
 
-        return if (username == null || username.isEmpty()) {
+        return if (username.isEmpty()) {
             usernameHasError.value = USERNAME_EMPTY
             false
         } else if (username.length >= 15) {
@@ -102,7 +102,7 @@ class SignUpViewModel : BaseViewModel() {
         val emailPattern: String = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
         val regex: Regex = Regex(emailPattern)
 
-        return if (emailAddr == null || emailAddr.isEmpty()) {
+        return if (emailAddr.isEmpty()) {
             emailHasError.value = EMAIL_EMPTY
             false
         } else if (!emailAddr.matches(regex)) {
@@ -115,7 +115,7 @@ class SignUpViewModel : BaseViewModel() {
     }
 
     private fun validatePhoneNumber(phoneNo: String): Boolean {
-        return if (phoneNo == null || phoneNo.isEmpty()) {
+        return if (phoneNo.isEmpty()) {
             phoneNoHasError.value = true
             false
         } else {
@@ -137,7 +137,7 @@ class SignUpViewModel : BaseViewModel() {
         val regex: Regex = Regex(passwordVal)
 
 
-        return if (password == null || password.isEmpty()) {
+        return if (password.isEmpty()) {
             passwordHasError.value = PASSWORD_EMPTY
             false
         } else if (!password.matches(regex)) {
