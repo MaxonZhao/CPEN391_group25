@@ -7,15 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.lifecycle.Observer;
 
 import com.cpen391.flappyUI.EndGamePointActivity;
 import com.cpen391.flappyVoiceRecording.util.FileUtil;
-import com.cpen391.flappyVoiceRecording.util.World;
+import com.cpen391.flappyVoiceRecording.util.DbUtil;
 import com.cpen391.flappyVoiceRecording.view.SoundDiscView;
 import com.cpen391.flappyaccount.R;
 import com.cpen391.flappybluetooth.activity.BluetoothConnectionService;
@@ -34,36 +32,30 @@ import timber.log.Timber;
  *  @author Robin Lai
  */
 public class VoiceControlActivity extends AppCompatActivity {
-    float volume = 10000;
-    private SoundDiscView soundDiscView;
-    private MyMediaRecorder mRecorder;
-    private static final int msgWhat = 0x1001;
-    private static final int refreshTime = 100;
     private final Context context = this;
-    private static final int GET_RECODE_AUDIO = 1;
-    private final String[] permissions = {Manifest.permission.RECORD_AUDIO};
-    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
-    public double currentDb = 0.0;
+    float volume = 0;
+    private SoundDiscView soundDiscView;
+    private MyMediaRecorder recorder;
+    private static final int myMsg = 0x1001;
+    private static final int refreshTime = 100;
     public double threshold = 60.0;
+    public double currentDb = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voice_control);
-        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
-        mRecorder = new MyMediaRecorder();
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 200);
+        recorder = new MyMediaRecorder();
         initObserver();
     }
 
     private void initObserver() {
-        BluetoothConnectionService.ended.observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                Intent endGame = new Intent(context, EndGamePointActivity.class);
-                endGame.putExtra("game_score", BluetoothConnectionService.ended.getValue());
-                startActivity(endGame);
-                finish();
-            }
+        BluetoothConnectionService.ended.observe(this, integer -> {
+            Intent endGame = new Intent(context, EndGamePointActivity.class);
+            endGame.putExtra("game_score", BluetoothConnectionService.ended.getValue());
+            startActivity(endGame);
+            finish();
         });
     }
 
@@ -73,12 +65,12 @@ public class VoiceControlActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (this.hasMessages(msgWhat)) {
+            if (this.hasMessages(myMsg)) {
                 return;
             }
-            volume = mRecorder.getMaxAmplitude();
+            volume = recorder.getMaxAmplitude();
             if (volume > 0 && volume < 1000000) {
-                currentDb = World.setDbCount(20 * (float) (Math.log10(volume)));
+                currentDb = DbUtil.setDbCount(20 * (float) (Math.log10(volume)));
                 if (currentDb > threshold) {
                     BluetoothConnectionUtil.getInstance().sendMessage(context, "1");
                     Timber.d("++++++++++++");
@@ -87,24 +79,21 @@ public class VoiceControlActivity extends AppCompatActivity {
                 }
                 soundDiscView.refresh();
             }
-            handler.sendEmptyMessageDelayed(msgWhat, refreshTime);
+            handler.sendEmptyMessageDelayed(myMsg, refreshTime);
         }
     };
 
     private void startListenAudio() {
-        handler.sendEmptyMessageDelayed(msgWhat, refreshTime);
+        handler.sendEmptyMessageDelayed(myMsg, refreshTime);
     }
 
-    public void startRecord(File fFile) {
+    public void startRecord(File file) {
         try {
-            mRecorder.setMyRecAudioFile(fFile);
-            if (mRecorder.startRecorder()) {
+            recorder.setAudioFile(file);
+            if (recorder.startRecorder()) {
                 startListenAudio();
-            } else {
-                Toast.makeText(this, "Fail to record", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
-            Toast.makeText(this, "permission denied", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
@@ -113,27 +102,24 @@ public class VoiceControlActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        soundDiscView = (SoundDiscView) findViewById(R.id.soundDiscView);
+        soundDiscView = findViewById(R.id.soundDiscView);
         File file = FileUtil.createFile("temp.amr");
         if (file != null) {
-            Timber.tag("file").v("file =%s", file.getAbsolutePath());
             startRecord(file);
-        } else {
-            Toast.makeText(getApplicationContext(), "Fail to create new folder", Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mRecorder.delete();
-        handler.removeMessages(msgWhat);
+        recorder.delete();
+        handler.removeMessages(myMsg);
     }
 
     @Override
     protected void onDestroy() {
-        handler.removeMessages(msgWhat);
-        mRecorder.delete();
+        handler.removeMessages(myMsg);
+        recorder.delete();
         super.onDestroy();
     }
 }

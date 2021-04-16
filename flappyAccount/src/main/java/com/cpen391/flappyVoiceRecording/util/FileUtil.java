@@ -1,57 +1,37 @@
 package com.cpen391.flappyVoiceRecording.util;
 
-import android.os.Environment;
-
 import com.cpen391.appbase.application.FlappyBirdApp;
 
 import java.io.File;
 import java.io.IOException;
 
 public class FileUtil {
-    private static final String TAG = "FileUtil";
-
-    public static final String LOCAL = "SoundMeter";
-
-    public static final String LOCAL_PATH = FlappyBirdApp.getApplication().getBaseContext().getFilesDir().getPath() + File.separator;
-
-    public static final String REC_PATH = LOCAL_PATH + LOCAL + File.separator;
+    public static final String filePath = FlappyBirdApp.getApplication().getBaseContext().getFilesDir().getPath() + File.separator;
+    public static final String path = filePath + "SoundMeter" + File.separator;
 
     static {
-        File dirRootFile = new File(LOCAL_PATH);
+        File dirRootFile = new File(filePath);
         if (!dirRootFile.exists()) {
             dirRootFile.mkdirs();
         }
-        File recFile = new File(REC_PATH);
+        File recFile = new File(path);
         if (!recFile.exists()) {
             recFile.mkdirs();
         }
     }
 
-    private FileUtil() {
-    }
-
-    public static boolean isExitSDCard() {
-        return Environment.getExternalStorageState().equals(
-                Environment.MEDIA_MOUNTED);
-    }
-
-    private static boolean hasFile(String fileName) {
-        File f = createFile(fileName);
-        return null != f && f.exists();
-    }
-
     public static File createFile(String fileName) {
 
-        File myCaptureFile = new File(REC_PATH + fileName);
-        if (myCaptureFile.exists()) {
-            myCaptureFile.delete();
+        File file = new File(path + fileName);
+        if (file.exists()) {
+            file.delete();
         }
         try {
-            myCaptureFile.createNewFile();
+            file.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return myCaptureFile;
+        return file;
     }
 
 

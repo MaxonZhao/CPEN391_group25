@@ -14,14 +14,14 @@ import java.io.IOException;
  */
 
 public class MyMediaRecorder {
-    public File myRecAudioFile;
-    private MediaRecorder mMediaRecorder;
+    public File audioFile;
+    private MediaRecorder recorder;
     public boolean isRecording = false;
 
     public float getMaxAmplitude() {
-        if (mMediaRecorder != null) {
+        if (recorder != null) {
             try {
-                return mMediaRecorder.getMaxAmplitude();
+                return recorder.getMaxAmplitude();
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
                 return 0;
@@ -31,34 +31,28 @@ public class MyMediaRecorder {
         }
     }
 
-    public File getMyRecAudioFile() {
-        return myRecAudioFile;
-    }
-
-    public void setMyRecAudioFile(File myRecAudioFile) {
-        this.myRecAudioFile = myRecAudioFile;
+    public void setAudioFile(File audioFile) {
+        this.audioFile = audioFile;
     }
 
     public boolean startRecorder() {
-        if (myRecAudioFile == null) {
+        if (audioFile == null) {
             return false;
         }
         try {
-            mMediaRecorder = new MediaRecorder();
-
-            mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-            mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-            mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-            mMediaRecorder.setOutputFile(myRecAudioFile.getAbsolutePath());
-
-            mMediaRecorder.prepare();
-            mMediaRecorder.start();
+            recorder = new MediaRecorder();
+            recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            recorder.setOutputFile(audioFile.getAbsolutePath());
+            recorder.prepare();
+            recorder.start();
             isRecording = true;
             return true;
         } catch (IOException exception) {
-            mMediaRecorder.reset();
-            mMediaRecorder.release();
-            mMediaRecorder = null;
+            recorder.reset();
+            recorder.release();
+            recorder = null;
             isRecording = false;
             exception.printStackTrace();
             exception.printStackTrace();
@@ -71,25 +65,25 @@ public class MyMediaRecorder {
     }
 
     public void stopRecording() {
-        if (mMediaRecorder != null) {
+        if (recorder != null) {
             if (isRecording) {
                 try {
-                    mMediaRecorder.stop();
-                    mMediaRecorder.release();
+                    recorder.stop();
+                    recorder.release();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-            mMediaRecorder = null;
+            recorder = null;
             isRecording = false;
         }
     }
 
     public void delete() {
         stopRecording();
-        if (myRecAudioFile != null) {
-            myRecAudioFile.delete();
-            myRecAudioFile = null;
+        if (audioFile != null) {
+            audioFile.delete();
+            audioFile = null;
         }
     }
 }
