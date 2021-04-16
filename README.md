@@ -1,20 +1,20 @@
 # CPEN391_group25
 
-**Intro**  <br />
+## Intro
 This repo is our term project for CPEN 391 hardware/software integration project course at the University of British Columbia. In this project, we decided to make a system for a 2D classic video game -- flappy bird. We'll be building the hardware system around DE1-Soc and software systerm around Android Studio
 
-**Contents**  <br />
-We divided the system into five subsystems: Android APP, Server, Game Logic, Serial Communication, Graphics Rendering:
-Android App: // TO DO
-Server: // To DO
-Game Logic: in CPEN391_gameLogic_WIFIBluetooth folder
-Serial Communication: in CPEN391_gameLogic_WIFIBluetooth folder
-Graphics Rendering: in graphicsRender folder
-scrum meeting records: in scrum folder
+## Contents
+We divided the system into five subsystems: Android APP, Server, Game Logic, Serial Communication, Graphics Rendering: <br />
+Android App: // TO DO <br />
+Server: // To DO <br />
+Game Logic: in CPEN391_gameLogic_WIFIBluetooth folder <br />
+Serial Communication: in CPEN391_gameLogic_WIFIBluetooth folder <br />
+Graphics Rendering: in graphicsRender folder <br />
+scrum meeting records: in scrum folder <br />
 
 
 
-**Additional Resources**  <br />
+## Additional Resources
 **User and Market Identification / Requirements** : https://docs.google.com/document/d/1CRTjfYoFU6QCdAgMC4xa2jlrsJbFYTVXUVGYWTVS8T0/edit#heading=h.rbc5tuolvkpq <br />
 **Project proposal** : https://docs.google.com/document/d/1gVvW9zaobuA3PuE6qjYUZc527RUlL7IK8UYBDAM2uTE/edit?usp=sharing  <br />
 **Module 1 presentation**: https://docs.google.com/presentation/d/1N-KbHIBOo025mihlCebthLW5nnXklokRk4PkHTm-4xo/edit#slide=id.gb99e425958_1_5  <br />
