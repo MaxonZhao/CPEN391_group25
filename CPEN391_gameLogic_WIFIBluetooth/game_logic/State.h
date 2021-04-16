@@ -2,7 +2,8 @@
  * State.h
  *
  *  Created on: Mar 24, 2021
- *      Author: patri
+ *  Author: patrick
+ *  Purpose: this is the template state for all states.
  */
 
 #ifndef STATE_H_

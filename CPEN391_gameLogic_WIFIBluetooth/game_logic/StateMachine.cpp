@@ -2,7 +2,8 @@
  * StateMachine.cpp
  *
  *  Created on: Mar 24, 2021
- *      Author: patri
+ *  Author: patrick
+ *  Purpose: to handle everything related to statemachine.
  */
 
 
