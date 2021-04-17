@@ -5,8 +5,8 @@ This repo is our term project for CPEN 391 hardware/software integration project
 
 ## Contents
 We divided the system into five subsystems: Android APP, Server, Game Logic, Serial Communication, Graphics Rendering: <br />
-Android App: // in CPEN391_AndroidCodeBase folder <br />
-Server: // in CPEN391_AndroidCodeBase folder. It's in class UserAPI under flappyAccount <br />
+Android App: in CPEN391_AndroidCodeBase folder <br />
+Server: in CPEN391_AndroidCodeBase folder. It's in class UserAPI under flappyAccount <br />
 Game Logic: in CPEN391_gameLogic_WIFIBluetooth folder <br />
 Serial Communication: in CPEN391_gameLogic_WIFIBluetooth folder <br />
 Graphics Rendering: in graphicsRender folder <br />
