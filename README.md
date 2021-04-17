@@ -5,8 +5,8 @@ This repo is our term project for CPEN 391 hardware/software integration project
 
 ## Contents
 We divided the system into five subsystems: Android APP, Server, Game Logic, Serial Communication, Graphics Rendering: <br />
-Android App: // TO DO <br />
-Server: // To DO <br />
+Android App: // in CPEN391_AndroidCodeBase folder <br />
+Server: // in CPEN391_AndroidCodeBase folder. It's in class UserAPI under flappyAccount <br />
 Game Logic: in CPEN391_gameLogic_WIFIBluetooth folder <br />
 Serial Communication: in CPEN391_gameLogic_WIFIBluetooth folder <br />
 Graphics Rendering: in graphicsRender folder <br />
@@ -18,8 +18,9 @@ scrum meeting records: in scrum folder <br />
 **User and Market Identification / Requirements** : https://docs.google.com/document/d/1CRTjfYoFU6QCdAgMC4xa2jlrsJbFYTVXUVGYWTVS8T0/edit#heading=h.rbc5tuolvkpq <br />
 **Project proposal** : https://docs.google.com/document/d/1gVvW9zaobuA3PuE6qjYUZc527RUlL7IK8UYBDAM2uTE/edit?usp=sharing  <br />
 **Module 1 presentation**: https://docs.google.com/presentation/d/1N-KbHIBOo025mihlCebthLW5nnXklokRk4PkHTm-4xo/edit#slide=id.gb99e425958_1_5  <br />
-**Proposed deadline/milestone**: https://docs.google.com/document/d/17961GYNaB43AgVEKN6IgE4RatUANeCZU1hv-a5ca1v8/edit
-**Final Report**: https://docs.google.com/document/d/1VLn-KQo4FKrjqi0e25L64AFYtDs2ppghIbcwRrSL6Es/edit?ts=6077e82b&pli=1#
+**Proposed deadline/milestone**: https://docs.google.com/document/d/17961GYNaB43AgVEKN6IgE4RatUANeCZU1hv-a5ca1v8/edit <br />
+**Final Report**: https://docs.google.com/document/d/1VLn-KQo4FKrjqi0e25L64AFYtDs2ppghIbcwRrSL6Es/edit?ts=6077e82b&pli=1# <br />
+**Video Demo**: https://www.youtube.com/watch?v=EHXmKqgt5Ds <br />
 
 
 
